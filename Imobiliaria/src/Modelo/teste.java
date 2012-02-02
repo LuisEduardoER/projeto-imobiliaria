@@ -9,5 +9,5 @@ package Modelo;
  * @author junyvr
  */
 public class teste {
-    bruno viado 
+    int viado = 10; 
 }
