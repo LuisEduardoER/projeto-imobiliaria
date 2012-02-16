@@ -266,7 +266,7 @@ public class CadastroEmbutidos extends javax.swing.JFrame {
          */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /*
-         * If Nimbus (introduced in Java SE 6) is not available, stay with the
+         * If Windows (introduced in Java SE 6) is not available, stay with the
          * default look and feel. For details see
          * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
@@ -364,12 +364,16 @@ public class CadastroEmbutidos extends javax.swing.JFrame {
 
     public void acoesBotoes() {
 
-        KeyStroke pressionada = KeyStroke.getKeyStroke("F2");
+        final KeyStroke pressionada = KeyStroke.getKeyStroke("F2");
 
         Action actionListener = new AbstractAction() {
 
             public void actionPerformed(ActionEvent actionEvent) {
-                JOptionPane.showMessageDialog(null, "apertou F2");
+                if (pressionada.equals("F2")) {
+                    mensagem.jopAviso("foi o F2");
+                } else {
+                    mensagem.jopAviso("não foi o F2"); 
+                }
             }
         };
         InputMap inputMap = rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
