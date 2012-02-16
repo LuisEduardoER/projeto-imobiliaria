@@ -6,7 +6,6 @@ package Controlador;
 
 import Modelo.Embutido;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 /**
