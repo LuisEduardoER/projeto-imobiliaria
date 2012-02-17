@@ -16,7 +16,6 @@ import Controlador.Mensagens;
 import Controlador.Pesquisas;
 import Modelo.Embutido;
 import java.awt.event.ActionEvent;
-import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.DefaultComboBoxModel;
@@ -213,17 +212,11 @@ public class CadastroEmbutidos extends javax.swing.JFrame {
     }//GEN-LAST:event_jbConcluirActionPerformed
 
     private void jbCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbCancelarActionPerformed
-        int x = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja cancelar? Todos os dados em edição serão perdidos!", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        if (x == JOptionPane.YES_OPTION) {
-            this.dispose();
-        }
+        acaoSair("cancelar");
     }//GEN-LAST:event_jbCancelarActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        int x = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja fechar? Todos os dados em edição serão perdidos!", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
-        if (x == JOptionPane.YES_OPTION) {
-            this.dispose();
-        }
+        acaoSair("fechar");
     }//GEN-LAST:event_formWindowClosing
 
     private void jbPesquisarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbPesquisarActionPerformed
@@ -231,30 +224,7 @@ public class CadastroEmbutidos extends javax.swing.JFrame {
     }//GEN-LAST:event_jbPesquisarActionPerformed
 
     private void jbRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbRemoverActionPerformed
-        ControladorRemoverBanco controladorRemover = new ControladorRemoverBanco();
-        Embutido embutido = new Embutido();
-        String descricao;
-        try {
-            descricao = jcbNome.getSelectedItem().toString();
-        } catch (ClassCastException ex) {
-            mensagem.jopError("Primeiro pesquise e informe um embutido cadastrado para ser excluído!\n" + ex);
-            descricao = null;
-        }
-
-        if (descricao != null) {
-            embutido = (Embutido) (jcbNome.getSelectedItem());
-
-            int x = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja apagar este cadastro?", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            if (x == JOptionPane.YES_OPTION) {
-                if (controladorRemover.removerEmbutido(embutido)) {
-                    mensagem.jopAviso("Embutido " + embutido.getDescricao().toString() + " foi removido!");
-                    jcbNome.removeAllItems();
-                    carregaDescricao();
-                }
-            }
-        }
-        jcbNome.requestFocus();
-        jcbNome.updateUI();
+        acaoRemover();
     }//GEN-LAST:event_jbRemoverActionPerformed
 
     /**
@@ -311,6 +281,13 @@ public class CadastroEmbutidos extends javax.swing.JFrame {
     private javax.swing.JPanel jpNome;
     // End of variables declaration//GEN-END:variables
 
+    public void carregaDescricao() {
+        e.setDescricao("%");
+        jcbNome.setModel(pesquisa.carregaTelaPesq(e));
+        jcbNome.setSelectedIndex(-1);
+        jcbNome.updateUI();
+    }
+
     public void acaoGravar() {
         ControladorIncluirBanco controladorIncluir = new ControladorIncluirBanco();
         Pesquisas pesquisaE = new Pesquisas();
@@ -362,6 +339,33 @@ public class CadastroEmbutidos extends javax.swing.JFrame {
         }
     }
 
+    public void acaoRemover() {
+        ControladorRemoverBanco controladorRemover = new ControladorRemoverBanco();
+        Embutido embutido = new Embutido();
+        String descricao;
+        try {
+            descricao = jcbNome.getSelectedItem().toString();
+        } catch (ClassCastException ex) {
+            mensagem.jopError("Primeiro pesquise e informe um embutido cadastrado para ser excluído!\n" + ex);
+            descricao = null;
+        }
+
+        if (descricao != null) {
+            embutido = (Embutido) (jcbNome.getSelectedItem());
+
+            int x = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja apagar este cadastro?", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if (x == JOptionPane.YES_OPTION) {
+                if (controladorRemover.removerEmbutido(embutido)) {
+                    mensagem.jopAviso("Embutido " + embutido.getDescricao().toString() + " foi removido!");
+                    jcbNome.removeAllItems();
+                    carregaDescricao();
+                }
+            }
+        }
+        jcbNome.requestFocus();
+        jcbNome.updateUI();
+    }
+
     public void acoesBotoes() {
 
         final KeyStroke pressionada = KeyStroke.getKeyStroke("ESCAPE");
@@ -375,7 +379,7 @@ public class CadastroEmbutidos extends javax.swing.JFrame {
                 } else if (pressionada.toString().contains("F3")) {
                     acaoGravar();
                 } else if (pressionada.toString().contains("F5")) {
-//                    acaoRemover();
+                    acaoRemover();
                 } else if (pressionada.toString().contains("ESCAPE")) {
 //                    acaoSair();
                 }
@@ -386,11 +390,11 @@ public class CadastroEmbutidos extends javax.swing.JFrame {
         inputMap.put(pressionada, "null");
         rootPane.getActionMap().put("null", actionListener);
     }
-
-    public void carregaDescricao() {
-        e.setDescricao("%");
-        jcbNome.setModel(pesquisa.carregaTelaPesq(e));
-        jcbNome.setSelectedIndex(-1);
-        jcbNome.updateUI();
+    
+    public void acaoSair(String acao){
+        int x = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja "+acao+"? Todos os dados em edição serão perdidos!", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        if (x == JOptionPane.YES_OPTION) {
+            this.dispose();
+        }
     }
 }
