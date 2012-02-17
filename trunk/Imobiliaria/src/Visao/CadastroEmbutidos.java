@@ -16,6 +16,7 @@ import Controlador.Mensagens;
 import Controlador.Pesquisas;
 import Modelo.Embutido;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.DefaultComboBoxModel;
@@ -26,11 +27,10 @@ import javax.swing.KeyStroke;
 
 /**
  *
- * @author Bruno
- * Esta classe e a tela de cadastro de embutidos, atraves dela sao inseridos
- * dados que farao parte do cadastro de imovel
- * -> um embutido nao pode ser removido se este e usado em algum cadastro!
- * 
+ * @author Bruno Esta classe e a tela de cadastro de embutidos, atraves dela sao
+ * inseridos dados que farao parte do cadastro de imovel -> um embutido nao pode
+ * ser removido se este e usado em algum cadastro!
+ *
  */
 public class CadastroEmbutidos extends javax.swing.JFrame {
 
@@ -122,7 +122,7 @@ public class CadastroEmbutidos extends javax.swing.JFrame {
                     .addGroup(jpNomeLayout.createSequentialGroup()
                         .addComponent(jlNome)
                         .addGap(18, 18, 18)
-                        .addComponent(jcbNome, 0, 347, Short.MAX_VALUE)))
+                        .addComponent(jcbNome, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jpNomeLayout.setVerticalGroup(
@@ -340,8 +340,8 @@ public class CadastroEmbutidos extends javax.swing.JFrame {
 
         try {
             s = (String) (jcbNome.getSelectedItem().toString());
-        } catch (ClassCastException ex) {
-            mensagem.jopAlerta("Informe pelo menos uma letra para pesquisar!\n" + ex);
+        } catch (NullPointerException ex) {
+            mensagem.jopAlerta("Informe pelo menos uma letra para pesquisar!\nErro 0001" + ex);//Erro 0001: 
             s = null;
         }
 
@@ -364,28 +364,33 @@ public class CadastroEmbutidos extends javax.swing.JFrame {
 
     public void acoesBotoes() {
 
-        final KeyStroke pressionada = KeyStroke.getKeyStroke("F2");
+        final KeyStroke pressionada = KeyStroke.getKeyStroke("ESCAPE");
 
         Action actionListener = new AbstractAction() {
 
             public void actionPerformed(ActionEvent actionEvent) {
-                if (pressionada.equals("F2")) {
-                    mensagem.jopAviso("foi o F2");
-                } else {
-                    mensagem.jopAviso("não foi o F2"); 
+
+                if (pressionada.toString().contains("F2")) {
+                    acaoPesquisar();
+                } else if (pressionada.toString().contains("F3")) {
+                    acaoGravar();
+                } else if (pressionada.toString().contains("F5")) {
+//                    acaoRemover();
+                } else if (pressionada.toString().contains("ESCAPE")) {
+//                    acaoSair();
                 }
             }
         };
+
         InputMap inputMap = rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         inputMap.put(pressionada, "null");
         rootPane.getActionMap().put("null", actionListener);
     }
-    
-    public void carregaDescricao(){
+
+    public void carregaDescricao() {
         e.setDescricao("%");
         jcbNome.setModel(pesquisa.carregaTelaPesq(e));
         jcbNome.setSelectedIndex(-1);
         jcbNome.updateUI();
     }
-    
 }
