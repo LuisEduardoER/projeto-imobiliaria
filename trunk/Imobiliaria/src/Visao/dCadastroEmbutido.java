@@ -289,6 +289,7 @@ public class dCadastroEmbutido extends javax.swing.JDialog {
         jcbNome.setModel(tmp);
         jcbNome.updateUI();
         jcbNome.updateUI();
+        jcbNome.setSelectedIndex(-1);
     }
 
     public void acaoPesquisar() {
@@ -372,7 +373,7 @@ public class dCadastroEmbutido extends javax.swing.JDialog {
     }
 
     public void acaoSair(String acao) {
-        int x = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja " + acao + "? Todos os dados em edi��o ser�o perdidos!", "Aten��o", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+        int x = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja " + acao + "? Todos os dados em edição serão perdidos!", "Atençao", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (x == JOptionPane.YES_OPTION) {
             this.dispose();
         }
