@@ -14,8 +14,9 @@ import javax.swing.*;
 
 /**
  *
- * @author Bruno Esta classe e a tela de cadastro de embutidos que extend um JDialog, para não criar outro icone na barra de tarefas ;),
- * atraves dela sao inseridos dados que farao parte do cadastro de imovel -> um embutido nao pode
+ * @author Bruno Esta classe e a tela de cadastro de embutidos que extend um
+ * JDialog, para não criar outro icone na barra de tarefas ;), atraves dela sao
+ * inseridos dados que farao parte do cadastro de imovel -> um embutido nao pode
  * ser removido se este e usado em algum cadastro!
  */
 public class dCadastroEmbutido extends javax.swing.JDialog {
@@ -27,12 +28,15 @@ public class dCadastroEmbutido extends javax.swing.JDialog {
     public dCadastroEmbutido(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        acoesBotoes();
+        carregaDescricao();
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
-	
+
         jpCadastroEmbutidos = new javax.swing.JPanel();
         jbCancelar = new javax.swing.JButton();
         jbConcluir = new javax.swing.JButton();
@@ -44,7 +48,7 @@ public class dCadastroEmbutido extends javax.swing.JDialog {
         jbPesquisar = new javax.swing.JButton();
         jbRemover = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Novo Embutido");
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -77,7 +81,7 @@ public class dCadastroEmbutido extends javax.swing.JDialog {
 
         jlNome.setText("Nome:");
 
-        jlIdRef.setText("ID de Refer�ncia:");
+        jlIdRef.setText("ID de Referência:");
 
         jlId.setText("(nenhum item selecionado)");
         jlId.setEnabled(false);
@@ -125,7 +129,7 @@ public class dCadastroEmbutido extends javax.swing.JDialog {
 
         jbRemover.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/delete_16x16.png"))); // NOI18N
         jbRemover.setText("Remover");
-        jbRemover.setToolTipText("Remove um registro que n�o esteja vinculado � nenhum outro (F1 para saber mais) (F5)");
+        jbRemover.setToolTipText("Remove um registro que não esteja vinculado à nenhum outro (F1 para saber mais) (F5)");
         jbRemover.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbRemoverActionPerformed(evt);
@@ -179,14 +183,9 @@ public class dCadastroEmbutido extends javax.swing.JDialog {
                 .addComponent(jpCadastroEmbutidos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de Embutidos");
-        setResizable(false);
 
-        pack();
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        java.awt.Dimension dialogSize = getSize();
-        setLocation((screenSize.width-dialogSize.width)/2,(screenSize.height-dialogSize.height)/2);
+        setBounds((screenSize.width-496)/2, (screenSize.height-203)/2, 496, 203);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbConcluirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbConcluirActionPerformed
@@ -252,7 +251,7 @@ public class dCadastroEmbutido extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-	private javax.swing.JButton jbCancelar;
+    private javax.swing.JButton jbCancelar;
     private javax.swing.JButton jbConcluir;
     public javax.swing.JButton jbPesquisar;
     private javax.swing.JButton jbRemover;
@@ -276,7 +275,7 @@ public class dCadastroEmbutido extends javax.swing.JDialog {
         Pesquisas pesquisaE = new Pesquisas();
         Embutido e = new Embutido();
         if (jcbNome.getSelectedItem().toString().equals("")) {
-            mensagem.jopAlerta("� necess�rio informar um nome para novo embutido!");
+            mensagem.jopAlerta("É necessário informar um nome para novo embutido!");
         } else {
             e.setDescricao(jcbNome.getSelectedItem().toString());
             if (controladorIncluir.gravarEmbutido(e)) {
@@ -326,17 +325,18 @@ public class dCadastroEmbutido extends javax.swing.JDialog {
         ControladorRemoverBanco controladorRemover = new ControladorRemoverBanco();
         Embutido embutido = new Embutido();
         String descricao;
+
         try {
             descricao = jcbNome.getSelectedItem().toString();
         } catch (ClassCastException ex) {
-            mensagem.jopError("Primeiro pesquise e informe um embutido cadastrado para ser exclu�do!\n" + ex);
+            mensagem.jopError("Primeiro pesquise ou informe um embutido cadastrado para ser excluído!\n" + ex);
             descricao = null;
         }
 
         if (descricao != null) {
             embutido = (Embutido) (jcbNome.getSelectedItem());
 
-            int x = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja apagar este cadastro?", "Aten��o", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            int x = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja apagar este cadastro?", "Atenção", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             if (x == JOptionPane.YES_OPTION) {
                 if (controladorRemover.removerEmbutido(embutido)) {
                     mensagem.jopAviso("Embutido " + embutido.getDescricao().toString() + " foi removido!");

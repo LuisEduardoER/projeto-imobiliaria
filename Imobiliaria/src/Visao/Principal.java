@@ -43,7 +43,7 @@ public class Principal extends javax.swing.JFrame {
         jmComplementares = new javax.swing.JMenu();
         jmiEmbutidos = new javax.swing.JMenuItem();
         jmConfiguracoes = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jmiConexao = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Imob");
@@ -78,13 +78,13 @@ public class Principal extends javax.swing.JFrame {
         jmConfiguracoes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/Cofigure_64x64.png"))); // NOI18N
         jmConfiguracoes.setText("Configurações");
 
-        jMenuItem1.setText("Conexão");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jmiConexao.setText("Conexão");
+        jmiConexao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jmiConexaoActionPerformed(evt);
             }
         });
-        jmConfiguracoes.add(jMenuItem1);
+        jmConfiguracoes.add(jmiConexao);
 
         jmbBarraMenu.add(jmConfiguracoes);
 
@@ -116,10 +116,10 @@ public class Principal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jmiEmbutidosActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        ConexaoTela c = new ConexaoTela();
+    private void jmiConexaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiConexaoActionPerformed
+        dConexaoTela c = new dConexaoTela(this, rootPaneCheckingEnabled);
         c.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jmiConexaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -164,11 +164,11 @@ public class Principal extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu jmCadastro;
     private javax.swing.JMenu jmComplementares;
     private javax.swing.JMenu jmConfiguracoes;
     private javax.swing.JMenuBar jmbBarraMenu;
+    private javax.swing.JMenuItem jmiConexao;
     private javax.swing.JMenuItem jmiEmbutidos;
     private javax.swing.JMenuItem jmiImovel;
     // End of variables declaration//GEN-END:variables
