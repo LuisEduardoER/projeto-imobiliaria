@@ -290,6 +290,7 @@ public class dCadastroEmbutido extends javax.swing.JDialog {
         jcbNome.updateUI();
         jcbNome.updateUI();
         jcbNome.setSelectedIndex(-1);
+        jcbNome.requestFocus();
     }
 
     public void acaoPesquisar() {
