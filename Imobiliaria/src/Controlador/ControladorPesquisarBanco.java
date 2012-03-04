@@ -20,6 +20,7 @@ import javax.swing.JOptionPane;
  * @author Bruno
  */
 public class ControladorPesquisarBanco {
+
     Mensagens mensagem = new Mensagens();
     Conexao c = new Conexao();
     Connection con = c.conexaoMysql();
@@ -38,8 +39,17 @@ public class ControladorPesquisarBanco {
 
             rs = stmt.executeQuery();
 
+
             if (rs.first()) {
-                while (rs.next()) {
+                if (rs.next()) {
+                    while (rs.next()) {
+                        Embutido embutido = new Embutido();
+
+                        embutido.setDescricao(rs.getString("descricaoEmbutido"));
+                        retorno.add(embutido);
+                    }
+                } else {
+                    rs.first();
                     Embutido embutido = new Embutido();
 
                     embutido.setDescricao(rs.getString("descricaoEmbutido"));
@@ -56,7 +66,7 @@ public class ControladorPesquisarBanco {
         resultado = new DefaultComboBoxModel(retorno);
         return resultado;
     }
-    
+
     public boolean verificaDescricaoExiste(String descricao, String msg) {
 
         PreparedStatement stmt;
@@ -65,7 +75,7 @@ public class ControladorPesquisarBanco {
         try {
 
             stmt = this.con.prepareStatement("SELECT descricaoEmbutido FROM embutidos WHERE descricaoEmbutido LIKE ? ");
-            stmt.setString(1, "'"+descricao+"'");
+            stmt.setString(1, "'" + descricao + "'");
 
             rs = stmt.executeQuery();
 
@@ -84,7 +94,6 @@ public class ControladorPesquisarBanco {
         }
 
     }
-    
 //
 //    private class BuscaUF extends JFrame {
 //
