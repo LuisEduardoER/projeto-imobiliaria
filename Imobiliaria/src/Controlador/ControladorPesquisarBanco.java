@@ -43,7 +43,6 @@ public class ControladorPesquisarBanco {
                     Embutido embutido = new Embutido();
 
                     embutido.setDescricao(rs.getString("descricaoEmbutido"));
-                    embutido.setId(rs.getInt("idEmbutido"));
                     retorno.add(embutido);
                 }
             } else {
