@@ -10,6 +10,7 @@ import Controlador.Mensagens;
 import Controlador.Pesquisas;
 import Modelo.Embutido;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import javax.swing.*;
 
 /**
@@ -28,7 +29,7 @@ public class dCadastroEmbutido extends javax.swing.JDialog {
     public dCadastroEmbutido(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         acoesBotoes();
         carregaDescricao();
     }
@@ -360,7 +361,6 @@ public class dCadastroEmbutido extends javax.swing.JDialog {
         Action f2Action = new AbstractAction() {
 
             public void actionPerformed(ActionEvent actionEvent) {
-                acaoPesquisar();
             }
         };
 
@@ -377,6 +377,12 @@ public class dCadastroEmbutido extends javax.swing.JDialog {
         int x = JOptionPane.showConfirmDialog(this, "Tem certeza que deseja " + acao + "? Todos os dados em edição serão perdidos!", "Atençao", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
         if (x == JOptionPane.YES_OPTION) {
             this.dispose();
+        }
+    }
+
+    public void keyPressed(KeyEvent e) {
+        if (e.getKeyCode() == 27) {
+            acaoSair("cancelar");
         }
     }
 }

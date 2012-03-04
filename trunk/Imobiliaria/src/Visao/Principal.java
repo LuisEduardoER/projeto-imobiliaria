@@ -49,6 +49,11 @@ public class Principal extends javax.swing.JFrame {
         setTitle("Imob");
         setMinimumSize(new java.awt.Dimension(800, 600));
         setPreferredSize(new java.awt.Dimension(800, 600));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jmCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/Cadastro_64x64.png"))); // NOI18N
         jmCadastro.setText("Cadastro");
@@ -113,13 +118,16 @@ public class Principal extends javax.swing.JFrame {
     private void jmiEmbutidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiEmbutidosActionPerformed
         dCadastroEmbutido cE = new dCadastroEmbutido(this, rootPaneCheckingEnabled);
         cE.setVisible(true);
-
     }//GEN-LAST:event_jmiEmbutidosActionPerformed
 
     private void jmiConexaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiConexaoActionPerformed
         dConexaoTela c = new dConexaoTela(this, rootPaneCheckingEnabled);
         c.setVisible(true);
     }//GEN-LAST:event_jmiConexaoActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        System.exit(0);
+    }//GEN-LAST:event_formWindowClosing
 
     /**
      * @param args the command line arguments

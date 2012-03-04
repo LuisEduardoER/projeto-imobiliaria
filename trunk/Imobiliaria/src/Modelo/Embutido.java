@@ -9,7 +9,7 @@ package Modelo;
  * @author Bruno
  */
 public class Embutido {
-    int id;
+    private int id;
     String descricao;
 
     public String getDescricao() {
@@ -22,10 +22,6 @@ public class Embutido {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     @Override

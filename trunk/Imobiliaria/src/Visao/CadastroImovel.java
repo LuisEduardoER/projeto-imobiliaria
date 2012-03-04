@@ -15,7 +15,6 @@ package Visao;
  * @author Bruno
  */
 public class CadastroImovel extends javax.swing.JFrame {
-  
 
     /** Creates new form CadastroImovel */
     public CadastroImovel() {
@@ -32,8 +31,7 @@ public class CadastroImovel extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel3 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        jspRolagem = new javax.swing.JScrollPane();
         jpCadastroImovel = new javax.swing.JPanel();
         jpTipo = new javax.swing.JPanel();
         jlTipoImovel = new javax.swing.JLabel();
@@ -87,9 +85,17 @@ public class CadastroImovel extends javax.swing.JFrame {
         jChkbTipoForro = new javax.swing.JCheckBox();
         jChkbTipoTelhado = new javax.swing.JCheckBox();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro de Imóvel");
+        setMinimumSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(800, 600));
+
+        jspRolagem.setMinimumSize(new java.awt.Dimension(800, 768));
+        jspRolagem.setPreferredSize(new java.awt.Dimension(800, 600));
 
         jpCadastroImovel.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro de Imóvel", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        jpCadastroImovel.setMinimumSize(new java.awt.Dimension(800, 600));
+        jpCadastroImovel.setPreferredSize(new java.awt.Dimension(800, 600));
 
         jpTipo.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -122,7 +128,7 @@ public class CadastroImovel extends javax.swing.JFrame {
                 .addComponent(jChkbComercial)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jChkbResidncial)
-                .addContainerGap(186, Short.MAX_VALUE))
+                .addContainerGap(326, Short.MAX_VALUE))
         );
         jpTipoLayout.setVerticalGroup(
             jpTipoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,7 +218,7 @@ public class CadastroImovel extends javax.swing.JFrame {
                                 .addComponent(jlPais)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jlRecebePais)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 441, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 581, Short.MAX_VALUE)
                         .addComponent(jbModificarEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpEnderecoLayout.createSequentialGroup()
                         .addComponent(jlLocalizacaoQuadra)
@@ -303,7 +309,7 @@ public class CadastroImovel extends javax.swing.JFrame {
                     .addComponent(jChkbChurrasqueira)
                     .addComponent(jChkbGaragem)
                     .addComponent(jChkbTerrenoSobra))
-                .addContainerGap(515, Short.MAX_VALUE))
+                .addContainerGap(655, Short.MAX_VALUE))
         );
         jpPropriedadesLayout.setVerticalGroup(
             jpPropriedadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -319,9 +325,13 @@ public class CadastroImovel extends javax.swing.JFrame {
                         .addGap(1, 1, 1)
                         .addComponent(jcbNumeroSuites, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addComponent(jChkbSalas)
+                .addGap(0, 0, 0)
                 .addComponent(jChkbCozinhas)
+                .addGap(0, 0, 0)
                 .addComponent(jChkbBanheiros)
+                .addGap(0, 0, 0)
                 .addComponent(jChkbLavabo)
+                .addGap(0, 0, 0)
                 .addComponent(jChkbChurrasqueira)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jChkbGaragem)
@@ -365,7 +375,7 @@ public class CadastroImovel extends javax.swing.JFrame {
                             .addComponent(jChkbMobiliada)
                             .addComponent(jChkbEmbutidos)
                             .addComponent(jChkbPiscina))))
-                .addContainerGap(413, Short.MAX_VALUE))
+                .addContainerGap(553, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -373,7 +383,9 @@ public class CadastroImovel extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jChkbEdicula)
+                        .addGap(0, 0, 0)
                         .addComponent(jChkbSacada)
+                        .addGap(0, 0, 0)
                         .addComponent(jChkbCloset)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jChkbPorao)
@@ -381,9 +393,11 @@ public class CadastroImovel extends javax.swing.JFrame {
                         .addComponent(jChkbSotao))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jChkbMobiliada)
+                        .addGap(0, 0, 0)
                         .addComponent(jChkbEmbutidos)
+                        .addGap(0, 0, 0)
                         .addComponent(jChkbPiscina)))
-                .addContainerGap(7, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Características"));
@@ -406,14 +420,17 @@ public class CadastroImovel extends javax.swing.JFrame {
                     .addComponent(jChkbTipoForro)
                     .addComponent(jChkbTipoAssoalho)
                     .addComponent(jChkbTipoConstrucao))
-                .addContainerGap(513, Short.MAX_VALUE))
+                .addContainerGap(653, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jChkbTipoTelhado)
+                .addGap(0, 0, 0)
                 .addComponent(jChkbTipoForro)
+                .addGap(0, 0, 0)
                 .addComponent(jChkbTipoAssoalho)
+                .addGap(0, 0, 0)
                 .addComponent(jChkbTipoConstrucao))
         );
 
@@ -439,38 +456,26 @@ public class CadastroImovel extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(517, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jScrollPane1.setViewportView(jpCadastroImovel);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 662, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 923, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        jspRolagem.setViewportView(jpCadastroImovel);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jspRolagem, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(430, Short.MAX_VALUE))
+                .addComponent(jspRolagem, javax.swing.GroupLayout.DEFAULT_SIZE, 768, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        pack();
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-816)/2, (screenSize.height-638)/2, 816, 638);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -484,7 +489,7 @@ public class CadastroImovel extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -537,8 +542,6 @@ public class CadastroImovel extends javax.swing.JFrame {
     private javax.swing.JCheckBox jChkbVenda;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbModificarEndereco;
     private javax.swing.JComboBox jcbNumeroQuartos;
     private javax.swing.JComboBox jcbNumeroSuites;
@@ -564,5 +567,6 @@ public class CadastroImovel extends javax.swing.JFrame {
     private javax.swing.JPanel jpEndereco;
     private javax.swing.JPanel jpPropriedades;
     private javax.swing.JPanel jpTipo;
+    private javax.swing.JScrollPane jspRolagem;
     // End of variables declaration//GEN-END:variables
 }
