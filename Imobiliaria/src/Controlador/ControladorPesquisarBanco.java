@@ -32,7 +32,7 @@ public class ControladorPesquisarBanco {
         Vector<Embutido> retorno = new Vector<Embutido>();
 
         try {
-            stmt = this.con.prepareStatement("SELECT * FROM embutidos WHERE descricaoEmbutido LIKE ?;");
+            stmt = this.con.prepareStatement("SELECT descricaoEmbutido FROM embutidos WHERE descricaoEmbutido LIKE ?;");
 
             stmt.setString(1, "%" + e.getDescricao() + "%");
 

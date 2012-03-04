@@ -275,14 +275,24 @@ public class dCadastroEmbutido extends javax.swing.JDialog {
         ControladorIncluirBanco controladorIncluir = new ControladorIncluirBanco();
         Pesquisas pesquisaE = new Pesquisas();
         Embutido e = new Embutido();
-        if (jcbNome.getSelectedItem().toString().equals("")) {
-            mensagem.jopAlerta("É necessário informar um nome para novo embutido!");
-        } else {
+        String s;
+
+        try {
+            s = (String) (jcbNome.getSelectedItem().toString());
+        } catch (NullPointerException ex) {
+            mensagem.jopAlerta("Informe pelo menos uma letra para gravar!\n\nErro 0001\n" + ex);//Erro 0001: 
+            s = null;
+        }
+
+        if (s != null) {
             e.setDescricao(jcbNome.getSelectedItem().toString());
             if (controladorIncluir.gravarEmbutido(e)) {
-                mensagem.jopAviso("Embutido " + e.getDescricao() + " inclu�do com sucesso!");
+                mensagem.jopAviso("Embutido " + e.getDescricao() + " inclu\u00EDdo com sucesso!");
+            } else {
+                mensagem.jopAlerta("É necessário informar um nome para novo embutido!");
             }
         }
+
         DefaultComboBoxModel tmp = new DefaultComboBoxModel();
         e.setDescricao("%");
         tmp = pesquisaE.pesquisaEmbutido(e);
@@ -303,7 +313,7 @@ public class dCadastroEmbutido extends javax.swing.JDialog {
         try {
             s = (String) (jcbNome.getSelectedItem().toString());
         } catch (NullPointerException ex) {
-            mensagem.jopAlerta("Informe pelo menos uma letra para pesquisar!\nErro 0001" + ex);//Erro 0001: 
+            mensagem.jopAlerta("Informe pelo menos uma letra para pesquisar!\n\nErro 0001\n" + ex);//Erro 0001: 
             s = null;
         }
 
