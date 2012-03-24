@@ -12,20 +12,24 @@ import javax.swing.JOptionPane;
  */
 public class Mensagens {
 
-    public void jopAlerta(String mensagen) {
-        JOptionPane.showMessageDialog(null, mensagen, "Atenção", JOptionPane.WARNING_MESSAGE);
+    public Mensagens(String mensagem) {
+        JOptionPane.showMessageDialog(null, mensagem, "Erro", JOptionPane.ERROR_MESSAGE);
     }
 
-    public void jopError(String mensagen) {
-        JOptionPane.showMessageDialog(null, mensagen, "Erro", JOptionPane.ERROR_MESSAGE);
+    public void jopAlerta(String mensagem) {
+        JOptionPane.showMessageDialog(null, mensagem, "Atenção", JOptionPane.WARNING_MESSAGE);
     }
 
-    public void jopAviso(String mensagen) {
-        JOptionPane.showMessageDialog(null, mensagen, "Aviso do sistema", JOptionPane.INFORMATION_MESSAGE);
+    public void jopError(String mensagem) {
+        JOptionPane.showMessageDialog(null, mensagem, "Erro", JOptionPane.ERROR_MESSAGE);
     }
 
-    public int jopDeletar(String mensagen) {
-        int resposta = JOptionPane.showConfirmDialog(null, mensagen, "Deseja realmente apargar?", JOptionPane.YES_NO_OPTION);
+    public void jopAviso(String mensagem) {
+        JOptionPane.showMessageDialog(null, mensagem, "Aviso do sistema", JOptionPane.INFORMATION_MESSAGE);
+    }
+
+    public int jopDeletar(String mensagem) {
+        int resposta = JOptionPane.showConfirmDialog(null, mensagem, "Deseja realmente apargar?", JOptionPane.YES_NO_OPTION);
         return resposta;
     }
     

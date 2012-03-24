@@ -4,6 +4,8 @@
  */
 package Modelo;
 
+import Controlador.Mensagens;
+
 /**
  *
  * @author Bruno
@@ -20,7 +22,8 @@ public class Imovel {
     int closet;
     int cozinha;
     int andares;
-    
+    int proprietarioID;
+                
     float tamanho; 
     
     boolean comercial;
@@ -33,7 +36,7 @@ public class Imovel {
     
     boolean venda;
     float valorVenda;
-    Pessoa proprietario;
+    
     
     
     boolean terrenoSobra;
@@ -50,6 +53,19 @@ public class Imovel {
     Sala sala;
     Documento idDocumento;
     Construcao construcao;
+
+    public int getProprietarioID() {
+        return proprietarioID;
+    }
+
+    public void setProprietarioID(int proprietarioID) {
+        try{
+            Pessoa p = new Pessoa();
+            this.proprietarioID = p.getProprietarioID;
+        }catch (NumberFormatException e){
+            Mensagens m = new Mensagens("Identificador de proprietário não válido!\n"+e.getMessage());
+        }
+    }
     
     public int getBanheiro() {
         return banheiros;
@@ -145,14 +161,6 @@ public class Imovel {
 
     public void setPiscina(boolean piscina) {
         this.piscina = piscina;
-    }
-
-    public Pessoa getProprietario() {
-        return proprietario;
-    }
-
-    public void setProprietario(Pessoa proprietario) {
-        this.proprietario = proprietario;
     }
 
     public int getQuarto() {

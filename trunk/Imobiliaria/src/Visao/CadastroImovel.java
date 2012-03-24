@@ -59,17 +59,18 @@ public class CadastroImovel extends javax.swing.JFrame {
         jlRecebeLocQuadra = new javax.swing.JLabel();
         jbModificarEndereco = new javax.swing.JButton();
         jpPropriedades = new javax.swing.JPanel();
-        jChkbQuartos = new javax.swing.JCheckBox();
+        jlQuartos = new javax.swing.JLabel();
+        jlSalas = new javax.swing.JLabel();
+        jlBanheiros = new javax.swing.JLabel();
+        jlSuites = new javax.swing.JLabel();
+        jlGaragem = new javax.swing.JLabel();
+        jlVagaGaragem = new javax.swing.JLabel();
         jcbNumeroQuartos = new javax.swing.JComboBox();
-        jChkbSuites = new javax.swing.JCheckBox();
         jcbNumeroSuites = new javax.swing.JComboBox();
-        jChkbSalas = new javax.swing.JCheckBox();
-        jChkbBanheiros = new javax.swing.JCheckBox();
-        jChkbLavabo = new javax.swing.JCheckBox();
-        jChkbChurrasqueira = new javax.swing.JCheckBox();
-        jChkbCozinhas = new javax.swing.JCheckBox();
-        jChkbGaragem = new javax.swing.JCheckBox();
-        jChkbTerrenoSobra = new javax.swing.JCheckBox();
+        jComboBox1 = new javax.swing.JComboBox();
+        jComboBox2 = new javax.swing.JComboBox();
+        jComboBox4 = new javax.swing.JComboBox();
+        jComboBox3 = new javax.swing.JComboBox();
         jPanel1 = new javax.swing.JPanel();
         jChkbPiscina = new javax.swing.JCheckBox();
         jChkbSotao = new javax.swing.JCheckBox();
@@ -174,7 +175,7 @@ public class CadastroImovel extends javax.swing.JFrame {
 
         jlRecebeComplemento.setText("(não definido)");
 
-        jlLocalizacaoQuadra.setText("Localiação na Quadra:");
+        jlLocalizacaoQuadra.setText("Localização na Quadra:");
 
         jlRecebeLocQuadra.setText("(não definido)");
 
@@ -266,77 +267,87 @@ public class CadastroImovel extends javax.swing.JFrame {
 
         jpPropriedades.setBorder(javax.swing.BorderFactory.createTitledBorder("Cômodos"));
 
-        jChkbQuartos.setText("Qartos:");
+        jlQuartos.setText("Quartos:");
+
+        jlSalas.setText("Salas:");
+
+        jlBanheiros.setText("Banheiros:");
+
+        jlSuites.setText("Suítes:");
+
+        jlGaragem.setText("Garagem:");
+
+        jlVagaGaragem.setText("Vaga de Garagem:");
 
         jcbNumeroQuartos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jChkbSuites.setText("Suítes:");
-
         jcbNumeroSuites.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jChkbSalas.setText("Salas:");
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jChkbBanheiros.setText("Banheiros:");
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jChkbLavabo.setText("Lavabo:");
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jChkbChurrasqueira.setText("Churrasqueira:");
-
-        jChkbCozinhas.setText("Cozinhas:");
-
-        jChkbGaragem.setText("Garagens:");
-
-        jChkbTerrenoSobra.setText("Sobra de Terreno");
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout jpPropriedadesLayout = new javax.swing.GroupLayout(jpPropriedades);
         jpPropriedades.setLayout(jpPropriedadesLayout);
         jpPropriedadesLayout.setHorizontalGroup(
             jpPropriedadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPropriedadesLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jpPropriedadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpPropriedadesLayout.createSequentialGroup()
-                        .addComponent(jChkbQuartos)
-                        .addGap(2, 2, 2)
-                        .addComponent(jcbNumeroQuartos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jpPropriedadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlQuartos)
+                            .addComponent(jlSalas))
+                        .addGap(18, 18, 18)
+                        .addGroup(jpPropriedadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jcbNumeroQuartos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbNumeroSuites, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(37, 37, 37)
+                        .addGroup(jpPropriedadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlVagaGaragem)
+                            .addComponent(jlGaragem))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jpPropriedadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jpPropriedadesLayout.createSequentialGroup()
-                        .addComponent(jChkbSuites)
-                        .addGap(6, 6, 6)
-                        .addComponent(jcbNumeroSuites, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jChkbSalas)
-                    .addComponent(jChkbCozinhas)
-                    .addComponent(jChkbBanheiros)
-                    .addComponent(jChkbLavabo)
-                    .addComponent(jChkbChurrasqueira)
-                    .addComponent(jChkbGaragem)
-                    .addComponent(jChkbTerrenoSobra))
-                .addContainerGap(655, Short.MAX_VALUE))
+                        .addGroup(jpPropriedadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jlBanheiros)
+                            .addComponent(jlSuites))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jpPropriedadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpPropriedadesLayout.setVerticalGroup(
             jpPropriedadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPropriedadesLayout.createSequentialGroup()
-                .addGroup(jpPropriedadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jChkbQuartos)
-                    .addGroup(jpPropriedadesLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(jcbNumeroQuartos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGroup(jpPropriedadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jChkbSuites)
-                    .addGroup(jpPropriedadesLayout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(jcbNumeroSuites, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addComponent(jChkbSalas)
-                .addGap(0, 0, 0)
-                .addComponent(jChkbCozinhas)
-                .addGap(0, 0, 0)
-                .addComponent(jChkbBanheiros)
-                .addGap(0, 0, 0)
-                .addComponent(jChkbLavabo)
-                .addGap(0, 0, 0)
-                .addComponent(jChkbChurrasqueira)
+                .addGap(1, 1, 1)
+                .addGroup(jpPropriedadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jcbNumeroQuartos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlQuartos)
+                    .addComponent(jlGaragem)
+                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(6, 6, 6)
+                .addGroup(jpPropriedadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlSalas)
+                    .addComponent(jcbNumeroSuites, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlVagaGaragem)
+                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jChkbGaragem)
+                .addGroup(jpPropriedadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jlBanheiros)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jChkbTerrenoSobra))
+                .addGroup(jpPropriedadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jlSuites))
+                .addContainerGap())
         );
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Extras"));
@@ -431,7 +442,8 @@ public class CadastroImovel extends javax.swing.JFrame {
                 .addGap(0, 0, 0)
                 .addComponent(jChkbTipoAssoalho)
                 .addGap(0, 0, 0)
-                .addComponent(jChkbTipoConstrucao))
+                .addComponent(jChkbTipoConstrucao)
+                .addContainerGap(58, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jpCadastroImovelLayout = new javax.swing.GroupLayout(jpCadastroImovel);
@@ -447,8 +459,9 @@ public class CadastroImovel extends javax.swing.JFrame {
         jpCadastroImovelLayout.setVerticalGroup(
             jpCadastroImovelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpCadastroImovelLayout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(jpTipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(31, 31, 31)
                 .addComponent(jpEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jpPropriedades, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -470,12 +483,12 @@ public class CadastroImovel extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jspRolagem, javax.swing.GroupLayout.DEFAULT_SIZE, 768, Short.MAX_VALUE)
+                .addComponent(jspRolagem, javax.swing.GroupLayout.PREFERRED_SIZE, 582, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-816)/2, (screenSize.height-638)/2, 816, 638);
+        setBounds((screenSize.width-816)/2, (screenSize.height-604)/2, 816, 604);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -515,31 +528,26 @@ public class CadastroImovel extends javax.swing.JFrame {
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox jChkbBanheiros;
-    private javax.swing.JCheckBox jChkbChurrasqueira;
     private javax.swing.JCheckBox jChkbCloset;
     private javax.swing.JCheckBox jChkbComercial;
-    private javax.swing.JCheckBox jChkbCozinhas;
     private javax.swing.JCheckBox jChkbEdicula;
     private javax.swing.JCheckBox jChkbEmbutidos;
-    private javax.swing.JCheckBox jChkbGaragem;
-    private javax.swing.JCheckBox jChkbLavabo;
     private javax.swing.JCheckBox jChkbLocacao;
     private javax.swing.JCheckBox jChkbMobiliada;
     private javax.swing.JCheckBox jChkbPiscina;
     private javax.swing.JCheckBox jChkbPorao;
-    private javax.swing.JCheckBox jChkbQuartos;
     private javax.swing.JCheckBox jChkbResidncial;
     private javax.swing.JCheckBox jChkbSacada;
-    private javax.swing.JCheckBox jChkbSalas;
     private javax.swing.JCheckBox jChkbSotao;
-    private javax.swing.JCheckBox jChkbSuites;
-    private javax.swing.JCheckBox jChkbTerrenoSobra;
     private javax.swing.JCheckBox jChkbTipoAssoalho;
     private javax.swing.JCheckBox jChkbTipoConstrucao;
     private javax.swing.JCheckBox jChkbTipoForro;
     private javax.swing.JCheckBox jChkbTipoTelhado;
     private javax.swing.JCheckBox jChkbVenda;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JComboBox jComboBox3;
+    private javax.swing.JComboBox jComboBox4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JButton jbModificarEndereco;
@@ -547,13 +555,16 @@ public class CadastroImovel extends javax.swing.JFrame {
     private javax.swing.JComboBox jcbNumeroSuites;
     private javax.swing.JComboBox jcbTipoImovel;
     private javax.swing.JLabel jlBairro;
+    private javax.swing.JLabel jlBanheiros;
     private javax.swing.JLabel jlCEP;
     private javax.swing.JLabel jlCidade;
     private javax.swing.JLabel jlComplemento;
     private javax.swing.JLabel jlEstado;
+    private javax.swing.JLabel jlGaragem;
     private javax.swing.JLabel jlLocalizacaoQuadra;
     private javax.swing.JLabel jlLogradouro;
     private javax.swing.JLabel jlPais;
+    private javax.swing.JLabel jlQuartos;
     private javax.swing.JLabel jlRecebeBairro;
     private javax.swing.JLabel jlRecebeCEP;
     private javax.swing.JLabel jlRecebeCidade;
@@ -562,7 +573,10 @@ public class CadastroImovel extends javax.swing.JFrame {
     private javax.swing.JLabel jlRecebeLocQuadra;
     private javax.swing.JLabel jlRecebeLogradouro;
     private javax.swing.JLabel jlRecebePais;
+    private javax.swing.JLabel jlSalas;
+    private javax.swing.JLabel jlSuites;
     private javax.swing.JLabel jlTipoImovel;
+    private javax.swing.JLabel jlVagaGaragem;
     private javax.swing.JPanel jpCadastroImovel;
     private javax.swing.JPanel jpEndereco;
     private javax.swing.JPanel jpPropriedades;
