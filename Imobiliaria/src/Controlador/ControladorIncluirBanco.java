@@ -21,7 +21,7 @@ import javax.swing.JOptionPane;
 public class ControladorIncluirBanco {
 
     ControladorPesquisarBanco cpb = new ControladorPesquisarBanco();
-    Mensagens mensagem = new Mensagens();
+    
     Conexao c = new Conexao();
     Connection con = c.conexaoMysql();
 
@@ -39,7 +39,8 @@ public class ControladorIncluirBanco {
         } catch (SQLException ex) {
 
             Logger.getLogger(ControladorIncluirBanco.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Erro ao verificar identificador no servidor de banco de dados:\nSQLException: " + ex.getMessage()+"\nPossivelmente houve um problema com a conexão!");
+            Mensagens erro = new Mensagens();
+            erro.jopError("Erro ao verificar identificador no servidor de banco de dados:\nSQLException: " + ex.getMessage()+"\nPossivelmente houve um problema com a conexão!");
 
             return false;
         }
@@ -66,7 +67,8 @@ public class ControladorIncluirBanco {
         } catch (SQLException ex) {
 
             Logger.getLogger(ControladorIncluirBanco.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Erro ao gravar dados no servidor de banco de dados:\nSQLException: " + ex.getMessage());
+            Mensagens erro = new Mensagens();
+            erro.jopError("Erro ao gravar dados no servidor de banco de dados:\nSQLException: " + ex.getMessage());
 
             return false;
         }
