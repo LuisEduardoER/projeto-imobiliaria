@@ -21,7 +21,7 @@ public class Imovel {
     int churrasqueira;
     int closet;
     int cozinha;
-    int andares;
+    //int andares; atributo para classe especializada.
     int proprietarioID;
                 
     float tamanho; 
@@ -43,16 +43,17 @@ public class Imovel {
     
     boolean piscina;
     float tamanhoPiscina;
+    String materialPiscina;
     
-    Telhado tipoTelhado;
-    Forro tipoForro;
-    Garagem garagem;
-    Embutido embutidos;
-    Mobilia moveis;
+    Telhado idTipoTelhado;
+    Forro idTipoForro;
+    Garagem iGaragem;
+    Embutido idEmbutidos;
+    Mobilia imMoveis;
     Endereco endereco;
     Sala sala;
     Documento idDocumento;
-    Construcao construcao;
+    Construcao idConstrucao;
 
     public int getProprietarioID() {
         return proprietarioID;
@@ -63,7 +64,8 @@ public class Imovel {
             Pessoa p = new Pessoa();
             this.proprietarioID = p.getProprietarioID;
         }catch (NumberFormatException e){
-            Mensagens m = new Mensagens("Identificador de proprietário não válido!\n"+e.getMessage());
+            Mensagens erro = new Mensagens();
+            erro.jopError("Identificador de proprietário não válido!\n"+e.getMessage());
         }
     }
     
