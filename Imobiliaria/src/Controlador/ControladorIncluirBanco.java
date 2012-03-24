@@ -19,6 +19,7 @@ import javax.swing.JOptionPane;
  * @author Bruno
  */
 public class ControladorIncluirBanco {
+
     ControladorPesquisarBanco cpb = new ControladorPesquisarBanco();
     Mensagens mensagem = new Mensagens();
     Conexao c = new Conexao();
@@ -34,11 +35,20 @@ public class ControladorIncluirBanco {
             String sql = "SELECT MAX(idEmbutido) as MAXID FROM embutidos";
             st = this.con.createStatement();
             rs = st.executeQuery(sql);
+
+        } catch (SQLException ex) {
+
+            Logger.getLogger(ControladorIncluirBanco.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, "Erro ao verificar identificador no servidor de banco de dados:\nSQLException: " + ex.getMessage()+"\nPossivelmente houve um problema com a conexão!");
+
+            return false;
+        }
+        try {
             rs.next();
             int maxId = rs.getInt("MAXID") + 1;
-            
-            String msgErro="Já existe um cadastro com este nome!";
-                    
+
+            String msgErro = "Já existe um cadastro com este nome!";
+
             if (cpb.verificaDescricaoExiste(novo.getDescricao(), msgErro)) {
 
                 stmt = this.con.prepareStatement("INSERT INTO embutidos (idEmbutido, descricaoEmbutido) VALUES (?,?);");
@@ -48,18 +58,17 @@ public class ControladorIncluirBanco {
                 stmt.execute();
 
                 return true;
-                
+
             } else {
                 return false;
             }
-            
+
         } catch (SQLException ex) {
+
             Logger.getLogger(ControladorIncluirBanco.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(null, "Erro ao gravar dados no servidor de banco de dados:\nSQLException: " + ex.getMessage());
 
             return false;
         }
     }
-
-    
 }
