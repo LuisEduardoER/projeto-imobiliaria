@@ -50,7 +50,7 @@ public class Imovel {
     Garagem idGaragem;
     Embutido idEmbutidos;
     Mobilia idMoveis;
-    Endereco endereco;
+    Endereco idEndereco;
     Sala sala;
     Documento idDocumento;
     Construcao idConstrucao;
@@ -254,11 +254,11 @@ public class Imovel {
     }
 
     public Endereco getEndereco() {
-        return endereco;
+        return idEndereco;
     }
 
     public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
+        this.idEndereco = endereco;
     }
 
     public Sala getSala() {
