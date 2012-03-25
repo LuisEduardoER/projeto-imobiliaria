@@ -23,50 +23,75 @@ import javax.swing.JOptionPane;
  */
 public abstract class ImovelDAO {
 
-    Conexao c = new Conexao();
-    Connection con = c.conexaoMysql();
+    static Conexao c = new Conexao();
+    static Connection con = c.conexaoMysql();
+    public static PreparedStatement stmt;
+    /*
+     * public static DefaultComboBoxModel<Imovel> pesquisarImovel(String coluna,
+     * String campos) {
+     *
+     * PreparedStatement stmt; ResultSet rs; DefaultComboBoxModel resultado;
+     * Vector<Imovel> retorno = new Vector<Imovel>();
+     *
+     * try { stmt = this.con.prepareStatement("SELECT * FROM imoveis WHERE ?
+     * LIKE ?;"); // criar consulta por atributos      *
+     * // stmt.setString(1, coluna); // stmt.setString(2, "%" + i.getDescricao()
+     * + "%");
+     *
+     * rs = stmt.executeQuery();
+     *
+     *
+     * if (rs.first()) { if (rs.next()) { while (rs.next()) { Embutido embutido
+     * = new Embutido();
+     *
+     * embutido.setDescricao(rs.getString("descricaoEmbutido"));
+     * retorno.add(embutido); } } else { rs.first(); Embutido embutido = new
+     * Embutido();
+     *
+     * embutido.setDescricao(rs.getString("descricaoEmbutido"));
+     * retorno.add(embutido); } } else { return null; } } catch (SQLException
+     * ex) {
+     * Logger.getLogger(ControladorIncluirBanco.class.getName()).log(Level.SEVERE,
+     * null, ex); JOptionPane.showMessageDialog(null, "Erro ao conectar no
+     * servidor de banco de dados:\nSQLException: " + ex.getMessage()); return
+     * null; } resultado = new DefaultComboBoxModel(retorno); return resultado;
+     *
+     * }
+     */
 
-    public static DefaultComboBoxModel<Imovel> pesquisarImovel(String coluna, Imovel i) {
+    public static boolean verificaDescricaoTipoImovelExiste(String descricao) {
 
-        PreparedStatement stmt;
         ResultSet rs;
-        DefaultComboBoxModel resultado;
-        Vector<Imovel> retorno = new Vector<Imovel>();
+        Mensagens mensagem = new Mensagens();
 
         try {
-            stmt = this.con.prepareStatement("SELECT * FROM imoveis WHERE ? LIKE ?;"); // criar consulta por atributos 
 
-            // stmt.setString(1, coluna);
-            // stmt.setString(2, "%" + i.getDescricao() + "%");
-
+            stmt = ImovelDAO.con.prepareStatement(""
+                    + "SELECT numero,"
+                    + "idCliente"
+                    + "idEndereco"
+                    + "FROM imoveis"
+                    + "WHERE"
+                    + "numero = imovel.getNumero()"
+                    + "AND idCliente = proprietario.getID()"
+                    + "AND idEndereco = imovel.getidEndereco()");
+            
+            stmt.setString(1, "'" + descricao + "'");
             rs = stmt.executeQuery();
 
-
             if (rs.first()) {
-                if (rs.next()) {
-                    while (rs.next()) {
-                        Embutido embutido = new Embutido();
-
-                        embutido.setDescricao(rs.getString("descricaoEmbutido"));
-                        retorno.add(embutido);
-                    }
-                } else {
-                    rs.first();
-                    Embutido embutido = new Embutido();
-
-                    embutido.setDescricao(rs.getString("descricaoEmbutido"));
-                    retorno.add(embutido);
-                }
+                mensagem.jopAlerta("Já existe um cadastro com este nome!");
+                return false;
             } else {
-                return null;
+                return true;
             }
+
         } catch (SQLException ex) {
-            Logger.getLogger(ControladorIncluirBanco.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Erro ao conectar no servidor de banco de dados:\nSQLException: " + ex.getMessage());
-            return null;
+            Logger.getLogger(TipoImovelDAO.class.getName()).log(Level.SEVERE, null, ex);
+            mensagem.jopError("Erro ao verificar exitência de cadastros no servidor de banco de dados.\nSQLException: " + ex.getMessage());
+
+            return false;
         }
-        resultado = new DefaultComboBoxModel(retorno);
-        return resultado;
 
     }
 
@@ -77,24 +102,6 @@ public abstract class ImovelDAO {
         Statement st;
 
         try {
-            String sql = "SELECT MAX(idImovel) as MAXID FROM imoveis";
-            st = this.con.createStatement();
-            rs = st.executeQuery(sql);
-
-        } catch (SQLException ex) {
-
-            Logger.getLogger(ImovelDAO.class.getName()).log(Level.SEVERE, null, ex);
-            Mensagens erro = new Mensagens();
-            erro.jopError("Erro ao verificar identificador no servidor de banco de dados:\nSQLException: " + ex.getMessage() + "\nPossivelmente houve um problema com a conexão!");
-
-            return false;
-        }
-        try {
-            rs.next();
-            int maxId = rs.getInt("MAXID") + 1;
-
-            String msgErro = "Já existe um cadastro com este nome!";
-
             if (pesquisarImovel("numero,matricula,idEndereco", i.getEndereco()).verificaDescricaoEmbutidoExiste(novo.getDescricao(), msgErro)) { //criar verificacao por atributos
 
                 stmt = this.con.prepareStatement(""

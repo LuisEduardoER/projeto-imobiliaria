@@ -25,8 +25,4 @@ public class TipoImovel {
         return descricao;
     }
 
-    public int getIdTipoImovel() {
-        return idTipoImovel;
-    }
-
 }
