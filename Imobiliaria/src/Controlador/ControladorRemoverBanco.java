@@ -27,9 +27,9 @@ public class ControladorRemoverBanco {
         PreparedStatement stmt;
 
         try {
-            stmt = this.con.prepareStatement("DELETE FROM embutidos WHERE idEmbutido = ?;");
+            stmt = this.con.prepareStatement("DELETE FROM embutidos WHERE descricaoEmbutido LIKE ?;");
 
-            stmt.setInt(1, embutido.getId());
+            stmt.setString(1, embutido.getDescricao());
             
             stmt.executeUpdate();
             

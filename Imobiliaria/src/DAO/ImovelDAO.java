@@ -59,7 +59,7 @@ public abstract class ImovelDAO {
      * }
      */
 
-    public static boolean verificaDescricaoTipoImovelExiste(String descricao) {
+    public static boolean verificaImovelExiste(Imovel i) {
 
         ResultSet rs;
         Mensagens mensagem = new Mensagens();
@@ -67,14 +67,13 @@ public abstract class ImovelDAO {
         try {
 
             stmt = ImovelDAO.con.prepareStatement(""
-                    + "SELECT numero,"
-                    + "idCliente"
-                    + "idEndereco"
+                    + "SELECT idCliente,"
+                    +        "idEndereco"
                     + "FROM imoveis"
-                    + "WHERE"
-                    + "numero = imovel.getNumero()"
-                    + "AND idCliente = proprietario.getID()"
-                    + "AND idEndereco = imovel.getidEndereco()");
+                    +  "WHERE"
+                    +    "numero = "+i.getIdEndereco()
+                    +    "AND idCliente = proprietario.getID()"
+                    +    "AND idEndereco = imovel.getidEndereco()");
             
             stmt.setString(1, "'" + descricao + "'");
             rs = stmt.executeQuery();
