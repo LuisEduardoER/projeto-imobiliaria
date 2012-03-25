@@ -35,7 +35,7 @@ public class ControladorRemoverBanco {
             
             String msgErro = "";
             
-            if (cpb.verificaDescricaoExiste(embutido.getDescricao(),msgErro)){
+            if (cpb.verificaDescricaoEmbutidoExiste(embutido.getDescricao(),msgErro)){
                     return true;
 
             } else {

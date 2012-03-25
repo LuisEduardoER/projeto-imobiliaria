@@ -50,7 +50,7 @@ public class ControladorIncluirBanco {
 
             String msgErro = "Já existe um cadastro com este nome!";
 
-            if (cpb.verificaDescricaoExiste(novo.getDescricao(), msgErro)) {
+            if (cpb.verificaDescricaoEmbutidoExiste(novo.getDescricao(), msgErro)) {
 
                 stmt = this.con.prepareStatement("INSERT INTO embutidos (idEmbutido, descricaoEmbutido) VALUES (?,?);");
 
