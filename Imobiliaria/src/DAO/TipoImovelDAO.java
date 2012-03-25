@@ -5,12 +5,11 @@
 package DAO;
 
 import Controlador.Conexao;
+import Controlador.ControladorIncluirBanco;
 import Controlador.Mensagens;
+import Modelo.Embutido;
 import Modelo.TipoImovel;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,23 +22,23 @@ import javax.swing.JOptionPane;
  */
 public class TipoImovelDAO {
 
-    Conexao c = new Conexao();
-    Connection con = c.conexaoMysql();
+    static Conexao c = new Conexao();
+    static Connection con = c.conexaoMysql();
+    public static PreparedStatement stmt;
 
-    public boolean verificaDescricaoTipoImovelExiste(String descricao, String msg) {
+    public static boolean verificaDescricaoTipoImovelExiste(String descricao) {
 
-        PreparedStatement stmt;
         ResultSet rs;
         Mensagens mensagem = new Mensagens();
+        
         try {
 
-            stmt = this.con.prepareStatement("SELECT descricaoTipoImovel FROM TipoImovel WHERE descricaoTipoImovel LIKE ? ");
+            stmt = TipoImovelDAO.con.prepareStatement("SELECT descricaoTipoImovel FROM TipoImovel WHERE descricaoTipoImovel LIKE ? ");
             stmt.setString(1, "'" + descricao + "'");
-
             rs = stmt.executeQuery();
 
             if (rs.first()) {
-                mensagem.jopAlerta(msg);
+                mensagem.jopAlerta("Já existe um cadastro com este nome!");
                 return false;
             } else {
                 return true;
@@ -47,7 +46,7 @@ public class TipoImovelDAO {
 
         } catch (SQLException ex) {
             Logger.getLogger(TipoImovelDAO.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(null, "Erro ao gravar dados no servidor de banco de dados:\nSQLException: " + ex.getMessage());
+            mensagem.jopError("Erro ao verificar exitência de cadastros no servidor de banco de dados.\nSQLException: " + ex.getMessage());
 
             return false;
         }
@@ -91,5 +90,39 @@ public class TipoImovelDAO {
         }
         resultado = new DefaultComboBoxModel(retorno);
         return resultado;
+    }
+
+    public boolean gravarEmbutido(Embutido novo) {
+
+        PreparedStatement stmt;
+        ResultSet rs;
+        Statement st;
+
+        try {
+            st = this.con.createStatement();
+
+
+            if (verificaDescricaoTipoImovelExiste(novo.getDescricao())) {
+
+                stmt = this.con.prepareStatement("INSERT INTO embutidos (idEmbutido, descricaoEmbutido) VALUES (?,?);");
+
+                stmt.setInt(1, maxId);
+                stmt.setString(2, novo.getDescricao());
+                stmt.execute();
+
+                return true;
+
+            } else {
+                return false;
+            }
+
+        } catch (SQLException ex) {
+
+            Logger.getLogger(ControladorIncluirBanco.class.getName()).log(Level.SEVERE, null, ex);
+            Mensagens erro = new Mensagens();
+            erro.jopError("Erro ao gravar dados no servidor de banco de dados:\nSQLException: " + ex.getMessage());
+
+            return false;
+        }
     }
 }
