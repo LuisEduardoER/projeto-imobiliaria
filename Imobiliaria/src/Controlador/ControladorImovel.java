@@ -5,19 +5,17 @@
 package Controlador;
 
 import DAO.ImovelDAO;
+import DAO.TipoImovelDAO;
 import javax.swing.DefaultComboBoxModel;
 
 /**
  *
  * @author Bruno
  */
+public class ControladorImovel extends ImovelDAO {
 
-public class ControladorImovel extends ImovelDAO{
-
-    public DefaultComboBoxModel carregartelaTipoImovel(){
-        DefaultComboBoxModel tipoImovel = pesquisarTipoImovel();
+    public static DefaultComboBoxModel carregartelaTipoImovel() {
+        DefaultComboBoxModel tipoImovel = TipoImovelDAO.pesquisarTipoImovel("%");
         return tipoImovel;
     }
-    
-    
 }

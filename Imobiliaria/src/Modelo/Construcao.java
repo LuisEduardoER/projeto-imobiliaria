@@ -9,7 +9,6 @@ package Modelo;
  * @author Bruno
  */
 public class Construcao {
-    int id;
     String descricao;
 
     public String getDescricao() {
@@ -20,11 +19,4 @@ public class Construcao {
         this.descricao = descricao;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
 }

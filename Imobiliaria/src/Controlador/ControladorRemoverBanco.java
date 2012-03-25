@@ -45,7 +45,7 @@ public class ControladorRemoverBanco {
 
         } catch (SQLException ex) {
             Logger.getLogger(ControladorIncluirBanco.class.getName()).log(Level.SEVERE, null, ex);
-            mensagem.jopError("Erro ao remover dados, possívelmente este cadastro está vinculado! F1 para mais detalhes.:\nSQLException: " + ex.getMessage());
+            mensagem.jopError("Erro ao remover dados, possívelmente este cadastro está vinculado! F1 para mais detalhes.\nSQLException: " + ex.getMessage());
 
             return false;
         }

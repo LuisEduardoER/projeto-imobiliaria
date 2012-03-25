@@ -9,7 +9,6 @@ package Modelo;
  * @author Bruno
  */
 public class Embutido {
-    private int id;
     String descricao;
 
     public String getDescricao() {
@@ -18,10 +17,6 @@ public class Embutido {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-    }
-
-    public int getId() {
-        return id;
     }
 
     @Override
