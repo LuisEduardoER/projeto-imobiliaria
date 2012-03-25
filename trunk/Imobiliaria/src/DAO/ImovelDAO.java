@@ -26,38 +26,6 @@ public abstract class ImovelDAO {
     static Conexao c = new Conexao();
     static Connection con = c.conexaoMysql();
     public static PreparedStatement stmt;
-    /*
-     * public static DefaultComboBoxModel<Imovel> pesquisarImovel(String coluna,
-     * String campos) {
-     *
-     * PreparedStatement stmt; ResultSet rs; DefaultComboBoxModel resultado;
-     * Vector<Imovel> retorno = new Vector<Imovel>();
-     *
-     * try { stmt = this.con.prepareStatement("SELECT * FROM imoveis WHERE ?
-     * LIKE ?;"); // criar consulta por atributos      *
-     * // stmt.setString(1, coluna); // stmt.setString(2, "%" + i.getDescricao()
-     * + "%");
-     *
-     * rs = stmt.executeQuery();
-     *
-     *
-     * if (rs.first()) { if (rs.next()) { while (rs.next()) { Embutido embutido
-     * = new Embutido();
-     *
-     * embutido.setDescricao(rs.getString("descricaoEmbutido"));
-     * retorno.add(embutido); } } else { rs.first(); Embutido embutido = new
-     * Embutido();
-     *
-     * embutido.setDescricao(rs.getString("descricaoEmbutido"));
-     * retorno.add(embutido); } } else { return null; } } catch (SQLException
-     * ex) {
-     * Logger.getLogger(ControladorIncluirBanco.class.getName()).log(Level.SEVERE,
-     * null, ex); JOptionPane.showMessageDialog(null, "Erro ao conectar no
-     * servidor de banco de dados:\nSQLException: " + ex.getMessage()); return
-     * null; } resultado = new DefaultComboBoxModel(retorno); return resultado;
-     *
-     * }
-     */
 
     public static boolean verificaImovelExiste(Imovel i) {
 
@@ -67,19 +35,19 @@ public abstract class ImovelDAO {
         try {
 
             stmt = ImovelDAO.con.prepareStatement(""
-                    + "SELECT idCliente,"
-                    +        "idEndereco"
+                    + "SELECT idEndereco,"
+                    +        "idCliente"
                     + "FROM imoveis"
                     +  "WHERE"
-                    +    "numero = "+i.getIdEndereco()
-                    +    "AND idCliente = proprietario.getID()"
-                    +    "AND idEndereco = imovel.getidEndereco()");
+                    +    "idEndereco = ?"
+                    +    "AND idCliente = ? ");
             
-            stmt.setString(1, "'" + descricao + "'");
+            stmt.setInt(1, i.getIdEndereco());
+            stmt.setInt(2, proprietario.getID());
             rs = stmt.executeQuery();
 
             if (rs.first()) {
-                mensagem.jopAlerta("Já existe um cadastro com este nome!");
+                mensagem.jopAlerta("Já existe um imovél com este proprietário e endereço.\n Não é possível cadastrar ou imovél com estes dados!");
                 return false;
             } else {
                 return true;
@@ -101,7 +69,7 @@ public abstract class ImovelDAO {
         Statement st;
 
         try {
-            if (pesquisarImovel("numero,matricula,idEndereco", i.getEndereco()).verificaDescricaoEmbutidoExiste(novo.getDescricao(), msgErro)) { //criar verificacao por atributos
+            if (verificaImovelExiste(i)) { 
 
                 stmt = this.con.prepareStatement(""
                         + "INSERT INTO `imobiliaria`.`imoveis`"
