@@ -253,11 +253,11 @@ public class Imovel {
         this.venda = venda;
     }
 
-    public Endereco getEndereco() {
+    public Endereco getIdEndereco() {
         return idEndereco;
     }
 
-    public void setEndereco(Endereco endereco) {
+    public void setIdEndereco(Endereco endereco) {
         this.idEndereco = endereco;
     }
 

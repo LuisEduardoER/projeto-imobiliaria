@@ -583,4 +583,7 @@ public class CadastroImovel extends javax.swing.JFrame {
     private javax.swing.JPanel jpTipo;
     private javax.swing.JScrollPane jspRolagem;
     // End of variables declaration//GEN-END:variables
+
+
+
 }
