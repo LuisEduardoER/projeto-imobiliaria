@@ -47,9 +47,9 @@ public class Imovel {
     
     Telhado idTipoTelhado;
     Forro idTipoForro;
-    Garagem iGaragem;
+    Garagem idGaragem;
     Embutido idEmbutidos;
-    Mobilia imMoveis;
+    Mobilia idMoveis;
     Endereco endereco;
     Sala sala;
     Documento idDocumento;
@@ -102,19 +102,19 @@ public class Imovel {
     }
 
     public Embutido getEmbutidos() {
-        return embutidos;
+        return idEmbutidos;
     }
 
     public void setEmbutidos(Embutido embutidos) {
-        this.embutidos = embutidos;
+        this.idEmbutidos = embutidos;
     }
 
     public Garagem getGaragem() {
-        return garagem;
+        return idGaragem;
     }
 
     public void setGaragem(Garagem garagem) {
-        this.garagem = garagem;
+        this.idGaragem = garagem;
     }
 
     public int getCloset() {
@@ -150,11 +150,11 @@ public class Imovel {
     }
 
     public Mobilia getMoveis() {
-        return moveis;
+        return idMoveis;
     }
 
     public void setMoveis(Mobilia moveis) {
-        this.moveis = moveis;
+        this.idMoveis = moveis;
     }
 
     public boolean isPiscina() {
@@ -214,19 +214,19 @@ public class Imovel {
     }
 
     public Forro getTipoForro() {
-        return tipoForro;
+        return idTipoForro;
     }
 
     public void setTipoForro(Forro tipoForro) {
-        this.tipoForro = tipoForro;
+        this.idTipoForro = tipoForro;
     }
 
     public Telhado getTipoTelhado() {
-        return tipoTelhado;
+        return idTipoTelhado;
     }
 
     public void setTipoTelhado(Telhado tipoTelhado) {
-        this.tipoTelhado = tipoTelhado;
+        this.idTipoTelhado = tipoTelhado;
     }
 
     public float getValorLocacao() {
@@ -267,12 +267,5 @@ public class Imovel {
 
     public void setSala(Sala sala) {
         this.sala = sala;
-    }
-    public int getAndares() {
-        return andares;
-    }
-
-    public void setAndares(int andares) {
-        this.andares = andares;
     }
 }

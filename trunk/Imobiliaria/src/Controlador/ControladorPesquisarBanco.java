@@ -67,7 +67,7 @@ public class ControladorPesquisarBanco {
         return resultado;
     }
 
-    public boolean verificaDescricaoExiste(String descricao, String msg) {
+    public boolean verificaDescricaoEmbutidoExiste(String descricao, String msg) {
 
         PreparedStatement stmt;
         ResultSet rs;
