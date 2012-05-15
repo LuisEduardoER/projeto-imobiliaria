@@ -103,6 +103,11 @@ public class CadastroImovel extends javax.swing.JFrame {
         jlTipoImovel.setText("Tipo do Imóvel:");
 
         jcbTipoImovel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbTipoImovel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jcbTipoImovelActionPerformed(evt);
+            }
+        });
 
         jChkbLocacao.setText("Locação");
 
@@ -490,6 +495,10 @@ public class CadastroImovel extends javax.swing.JFrame {
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
         setBounds((screenSize.width-816)/2, (screenSize.height-604)/2, 816, 604);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jcbTipoImovelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbTipoImovelActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbTipoImovelActionPerformed
 
     /**
      * @param args the command line arguments
