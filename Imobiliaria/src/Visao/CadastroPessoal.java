@@ -53,6 +53,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
         jlLogradouro = new javax.swing.JLabel();
         jlCEP_ZIP = new javax.swing.JLabel();
         jlNumero = new javax.swing.JLabel();
+        jlComplemento = new javax.swing.JLabel();
         jpTextFieldsE = new javax.swing.JPanel();
         jcbPais = new javax.swing.JComboBox();
         jcbEstado = new javax.swing.JComboBox();
@@ -60,6 +61,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
         jcbLogradouro = new javax.swing.JComboBox();
         jcbCEP_ZIP = new javax.swing.JComboBox();
         jtfNumero = new javax.swing.JTextField();
+        jtfComplemento = new javax.swing.JTextField();
         jpControles = new javax.swing.JPanel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jButton1 = new javax.swing.JButton();
@@ -144,7 +146,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
 
         jpEndereco.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço"));
 
-        jpLabelsE.setLayout(new java.awt.GridLayout(6, 1, 0, 5));
+        jpLabelsE.setLayout(new java.awt.GridLayout(7, 1, 0, 5));
 
         jlPais.setText("País:");
         jpLabelsE.add(jlPais);
@@ -164,7 +166,10 @@ public class CadastroPessoal extends javax.swing.JDialog {
         jlNumero.setText("Número:");
         jpLabelsE.add(jlNumero);
 
-        jpTextFieldsE.setLayout(new java.awt.GridLayout(6, 1, 0, 5));
+        jlComplemento.setText("Complemento:");
+        jpLabelsE.add(jlComplemento);
+
+        jpTextFieldsE.setLayout(new java.awt.GridLayout(7, 1, 0, 5));
 
         jcbPais.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jpTextFieldsE.add(jcbPais);
@@ -181,6 +186,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
         jcbCEP_ZIP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jpTextFieldsE.add(jcbCEP_ZIP);
         jpTextFieldsE.add(jtfNumero);
+        jpTextFieldsE.add(jtfComplemento);
 
         javax.swing.GroupLayout jpEnderecoLayout = new javax.swing.GroupLayout(jpEndereco);
         jpEndereco.setLayout(jpEnderecoLayout);
@@ -193,11 +199,8 @@ public class CadastroPessoal extends javax.swing.JDialog {
         );
         jpEnderecoLayout.setVerticalGroup(
             jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpEnderecoLayout.createSequentialGroup()
-                .addGroup(jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jpLabelsE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpTextFieldsE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 31, Short.MAX_VALUE))
+            .addComponent(jpLabelsE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpTextFieldsE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jpAgrupadorLayout = new javax.swing.GroupLayout(jpAgrupador);
@@ -220,7 +223,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
                 .addComponent(jpDadosPrincipais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(290, Short.MAX_VALUE))
+                .addContainerGap(321, Short.MAX_VALUE))
         );
 
         jspPainelRolagem.setViewportView(jpAgrupador);
@@ -365,6 +368,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
     private javax.swing.JLabel jlCadastro;
     private javax.swing.JLabel jlCadastroNmr;
     private javax.swing.JLabel jlCidade;
+    private javax.swing.JLabel jlComplemento;
     private javax.swing.JLabel jlEstado;
     private javax.swing.JLabel jlLogradouro;
     private javax.swing.JLabel jlNome;
@@ -385,6 +389,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
     private javax.swing.JScrollPane jspPainelRolagem;
     private javax.swing.JTextField jtfBuscar;
     private javax.swing.JTextField jtfCPF_CNPJ;
+    private javax.swing.JTextField jtfComplemento;
     private javax.swing.JTextField jtfNome;
     private javax.swing.JTextField jtfNumero;
     private javax.swing.JTextField jtfRG;
