@@ -110,7 +110,7 @@
                               <Component id="jpDadosPrincipais" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jpEndereco" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="290" max="32767" attributes="0"/>
+                              <EmptySpace pref="321" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -257,13 +257,8 @@
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" attributes="0">
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jpLabelsE" max="32767" attributes="0"/>
-                                      <Component id="jpTextFieldsE" max="32767" attributes="0"/>
-                                  </Group>
-                                  <EmptySpace min="0" pref="31" max="32767" attributes="0"/>
-                              </Group>
+                              <Component id="jpLabelsE" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jpTextFieldsE" alignment="0" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>
@@ -273,7 +268,7 @@
                           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                             <Property name="columns" type="int" value="1"/>
                             <Property name="verticalGap" type="int" value="5"/>
-                            <Property name="rows" type="int" value="6"/>
+                            <Property name="rows" type="int" value="7"/>
                           </Layout>
                           <SubComponents>
                             <Component class="javax.swing.JLabel" name="jlPais">
@@ -306,6 +301,11 @@
                                 <Property name="text" type="java.lang.String" value="N&#xfa;mero:"/>
                               </Properties>
                             </Component>
+                            <Component class="javax.swing.JLabel" name="jlComplemento">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Complemento:"/>
+                              </Properties>
+                            </Component>
                           </SubComponents>
                         </Container>
                         <Container class="javax.swing.JPanel" name="jpTextFieldsE">
@@ -313,7 +313,7 @@
                           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                             <Property name="columns" type="int" value="1"/>
                             <Property name="verticalGap" type="int" value="5"/>
-                            <Property name="rows" type="int" value="6"/>
+                            <Property name="rows" type="int" value="7"/>
                           </Layout>
                           <SubComponents>
                             <Component class="javax.swing.JComboBox" name="jcbPais">
@@ -377,6 +377,8 @@
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="jtfNumero">
+                            </Component>
+                            <Component class="javax.swing.JTextField" name="jtfComplemento">
                             </Component>
                           </SubComponents>
                         </Container>
