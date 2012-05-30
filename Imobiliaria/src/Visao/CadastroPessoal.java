@@ -14,14 +14,24 @@ import javax.swing.JButton;
  */
 public class CadastroPessoal extends javax.swing.JDialog {
     Componentes c = new Componentes();
+    JButton botaoGravar;
+    
     /**
      * Creates new form CadastroPessoal
      */
     public CadastroPessoal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        jpControles.add(c.criaBotaoGravar());
+        botaoGravar=c.criaBotaoGravar();
+        
     
+            botaoGravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoGravarActionPerformed(evt);
+            }
+        });
+        
+        jpControles.add(c.criaBotaoGravar());
     }
 
     /**
@@ -291,6 +301,14 @@ public class CadastroPessoal extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
+    
+
+
+
+   private void botaoGravarActionPerformed(java.awt.event.ActionEvent evt) {
+        // TODO add your handling code here:
+    }
+
     public static void main(String args[]) {
         /*
          * Set the Nimbus look and feel
@@ -337,6 +355,9 @@ public class CadastroPessoal extends javax.swing.JDialog {
             }
         });
     }
+    
+ 
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
