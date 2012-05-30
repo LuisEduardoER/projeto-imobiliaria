@@ -8,7 +8,7 @@ package Modelo;
  *
  * @author Bruno
  */
-public interface Proprietario {
+public class Proprietario {
     Endereco endereco;
     
     

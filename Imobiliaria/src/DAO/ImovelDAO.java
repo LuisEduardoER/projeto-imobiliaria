@@ -42,8 +42,8 @@ public abstract class ImovelDAO {
                     +    "idEndereco = ?"
                     +    "AND idCliente = ? ");
             
-            stmt.setInt(1, i.getIdEndereco());
-            stmt.setInt(2, proprietario.getID());
+//            stmt.setInt(1, i.getIdEndereco());
+//            stmt.setInt(2, proprietario.getID());
             rs = stmt.executeQuery();
 
             if (rs.first()) {
@@ -122,8 +122,8 @@ public abstract class ImovelDAO {
                         + "  'matricula 23',"
                         + "  'idEmbutido 24');");
 
-                stmt.setInt(1, maxId);
-                stmt.setString(2, novo.getDescricao());
+//                stmt.setInt(1, maxId);
+//                stmt.setString(2, novo.getDescricao());
                 stmt.execute();
 
                 return true;

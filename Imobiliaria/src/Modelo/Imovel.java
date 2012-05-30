@@ -62,7 +62,7 @@ public class Imovel {
     public void setProprietarioID(int proprietarioID) {
         try{
             Pessoa p = new Pessoa();
-            this.proprietarioID = p.getProprietarioID;
+//            this.proprietarioID = p.getProprietarioID;
         }catch (NumberFormatException e){
             Mensagens erro = new Mensagens();
             erro.jopError("Identificador de proprietário não válido!\n"+e.getMessage());
