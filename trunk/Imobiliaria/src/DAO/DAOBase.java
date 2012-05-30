@@ -64,13 +64,13 @@ public abstract class DAOBase {
         }
     }
 
-    public abstract void incluir(BeanBase bean) throws Exception;
-
-    public abstract void excluir(BeanBase bean) throws Exception;
-
-    public abstract void alterar(BeanBase bean) throws Exception;
-
-    public abstract Usuario consultar(int codigo) throws Exception;
-
-    public abstract List<Usuario> consultar(Usuario bean) throws Exception;
+//    public abstract void incluir(BeanBase bean) throws Exception;
+//
+//    public abstract void excluir(BeanBase bean) throws Exception;
+//
+//    public abstract void alterar(BeanBase bean) throws Exception;
+//
+//    public abstract Usuario consultar(int codigo) throws Exception;
+//
+//    public abstract List<Usuario> consultar(Usuario bean) throws Exception;
 }
