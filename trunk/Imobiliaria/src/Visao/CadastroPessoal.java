@@ -4,18 +4,24 @@
  */
 package Visao;
 
+
+import Componentes.Componentes;
+import javax.swing.JButton;
+
 /**
  *
  * @author Bruno
  */
 public class CadastroPessoal extends javax.swing.JDialog {
-
+    Componentes c = new Componentes();
     /**
      * Creates new form CadastroPessoal
      */
     public CadastroPessoal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        jpControles.add(c.criaBotaoGravar());
+    
     }
 
     /**
@@ -64,13 +70,9 @@ public class CadastroPessoal extends javax.swing.JDialog {
         jtfComplemento = new javax.swing.JTextField();
         jpControles = new javax.swing.JPanel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        jButton1 = new javax.swing.JButton();
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        jButton2 = new javax.swing.JButton();
         filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        jButton3 = new javax.swing.JButton();
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        jButton4 = new javax.swing.JButton();
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jpDadosFuncionario = new javax.swing.JPanel();
 
@@ -230,21 +232,9 @@ public class CadastroPessoal extends javax.swing.JDialog {
 
         jpControles.setLayout(new javax.swing.BoxLayout(jpControles, javax.swing.BoxLayout.LINE_AXIS));
         jpControles.add(filler1);
-
-        jButton1.setText("Gravar");
-        jpControles.add(jButton1);
         jpControles.add(filler2);
-
-        jButton2.setText("Remover");
-        jpControles.add(jButton2);
         jpControles.add(filler3);
-
-        jButton3.setText("Pesquisar");
-        jpControles.add(jButton3);
         jpControles.add(filler4);
-
-        jButton4.setText("jButton4");
-        jpControles.add(jButton4);
         jpControles.add(filler5);
 
         javax.swing.GroupLayout jpPessoalLayout = new javax.swing.GroupLayout(jpPessoal);
@@ -260,7 +250,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
         jpPessoalLayout.setVerticalGroup(
             jpPessoalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPessoalLayout.createSequentialGroup()
-                .addComponent(jspPainelRolagem, javax.swing.GroupLayout.DEFAULT_SIZE, 456, Short.MAX_VALUE)
+                .addComponent(jspPainelRolagem, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jpControles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -353,10 +343,6 @@ public class CadastroPessoal extends javax.swing.JDialog {
     private javax.swing.Box.Filler filler3;
     private javax.swing.Box.Filler filler4;
     private javax.swing.Box.Filler filler5;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox jcbCEP_ZIP;
     private javax.swing.JComboBox jcbCidade;
     private javax.swing.JComboBox jcbEstado;
