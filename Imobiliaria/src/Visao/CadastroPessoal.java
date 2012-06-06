@@ -6,6 +6,8 @@ package Visao;
 
 
 import Componentes.Componentes;
+import Controlador.CarregaEndereco;
+import java.awt.event.ItemEvent;
 import javax.swing.JButton;
 
 /**
@@ -13,12 +15,16 @@ import javax.swing.JButton;
  * @author Bruno
  */
 public class CadastroPessoal extends javax.swing.JDialog {
+    CarregaEndereco carregaEndereco = new CarregaEndereco();
+
     Componentes c = new Componentes();
     JButton botaoGravar;
     
     /**
      * Creates new form CadastroPessoal
      */
+    
+    
     public CadastroPessoal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -32,6 +38,13 @@ public class CadastroPessoal extends javax.swing.JDialog {
         });
         
         jpControles.add(c.criaBotaoGravar());
+        
+        
+        
+        jcbPais.setModel(carregaEndereco.carregaPais());
+        jcbPais.updateUI();
+        jcbPais.setSelectedIndex(0);
+        
     }
 
     /**
@@ -184,9 +197,14 @@ public class CadastroPessoal extends javax.swing.JDialog {
         jpTextFieldsE.setLayout(new java.awt.GridLayout(7, 1, 0, 5));
 
         jcbPais.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbPais.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbPaisItemStateChanged(evt);
+            }
+        });
         jpTextFieldsE.add(jcbPais);
 
-        jcbEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbEstado.setEnabled(false);
         jpTextFieldsE.add(jcbEstado);
 
         jcbCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -298,12 +316,20 @@ public class CadastroPessoal extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jcbPaisItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbPaisItemStateChanged
+        System.out.println(evt);
+        if (evt.getStateChange()== ItemEvent.DESELECTED){
+           jcbEstado.setModel(null);
+           jcbEstado.setEnabled(true);
+           jcbEstado.setModel(carregaEndereco.carregaEstado());
+       }
+        
+    }//GEN-LAST:event_jcbPaisItemStateChanged
+
     /**
      * @param args the command line arguments
      */
     
-
-
 
    private void botaoGravarActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
@@ -402,4 +428,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
     private javax.swing.JTextField jtfRG;
     private javax.swing.JTabbedPane jtpAbas;
     // End of variables declaration//GEN-END:variables
+
+
+    
 }

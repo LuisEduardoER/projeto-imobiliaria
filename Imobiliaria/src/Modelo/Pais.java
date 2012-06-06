@@ -46,4 +46,9 @@ public class Pais {
         this.sigla = sigla;
     }
     int codigo;
+
+    @Override
+    public String toString() {
+        return nome;
+    }
 }
