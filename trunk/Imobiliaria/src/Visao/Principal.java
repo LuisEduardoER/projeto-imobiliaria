@@ -39,6 +39,7 @@ public class Principal extends javax.swing.JFrame {
 
         jmbBarraMenu = new javax.swing.JMenuBar();
         jmCadastro = new javax.swing.JMenu();
+        jmiPessoas = new javax.swing.JMenuItem();
         jmiImovel = new javax.swing.JMenuItem();
         jmComplementares = new javax.swing.JMenu();
         jmiEmbutidos = new javax.swing.JMenuItem();
@@ -57,6 +58,14 @@ public class Principal extends javax.swing.JFrame {
 
         jmCadastro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/Cadastro_64x64.png"))); // NOI18N
         jmCadastro.setText("Cadastro");
+
+        jmiPessoas.setText("Pessoas");
+        jmiPessoas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiPessoasActionPerformed(evt);
+            }
+        });
+        jmCadastro.add(jmiPessoas);
 
         jmiImovel.setText("Imóvel");
         jmiImovel.addActionListener(new java.awt.event.ActionListener() {
@@ -129,6 +138,10 @@ public class Principal extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_formWindowClosing
 
+    private void jmiPessoasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPessoasActionPerformed
+        CadastroPessoal cP = new CadastroPessoal(this, rootPaneCheckingEnabled);
+        cP.setVisible(true);    }//GEN-LAST:event_jmiPessoasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -179,6 +192,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiConexao;
     private javax.swing.JMenuItem jmiEmbutidos;
     private javax.swing.JMenuItem jmiImovel;
+    private javax.swing.JMenuItem jmiPessoas;
     // End of variables declaration//GEN-END:variables
 
 

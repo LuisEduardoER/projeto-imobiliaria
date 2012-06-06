@@ -11,22 +11,13 @@ package Modelo;
 public class Estado {
     String nome;
     String sigla;
-    String codigo;
+    int codigo;
 
-    public Estado() {
-    }
-
-    public Estado(String nome, String sigla, String codigo) {
-        this.nome = nome;
-        this.sigla = sigla;
-        this.codigo = codigo;
-    }
-
-    public String getCodigo() {
+    public int getCodigo() {
         return codigo;
     }
 
-    public void setCodigo(String codigo) {
+    public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 
@@ -45,5 +36,9 @@ public class Estado {
     public void setSigla(String sigla) {
         this.sigla = sigla;
     }
-    
+
+    @Override
+    public String toString() {
+        return nome;
+    }
 }
