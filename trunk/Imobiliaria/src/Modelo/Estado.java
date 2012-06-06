@@ -10,15 +10,27 @@ package Modelo;
  */
 public class Estado {
     String nome;
-    String sigla;
-    int codigo;
+    String uf;
+    int idPais;
+    int id;
 
-    public int getCodigo() {
-        return codigo;
+    public Estado() {
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getIdPais() {
+        return idPais;
+    }
+
+    public void setIdPais(int idPais) {
+        this.idPais = idPais;
     }
 
     public String getNome() {
@@ -29,12 +41,12 @@ public class Estado {
         this.nome = nome;
     }
 
-    public String getSigla() {
-        return sigla;
+    public String getUf() {
+        return uf;
     }
 
-    public void setSigla(String sigla) {
-        this.sigla = sigla;
+    public void setUf(String uf) {
+        this.uf = uf;
     }
 
     @Override

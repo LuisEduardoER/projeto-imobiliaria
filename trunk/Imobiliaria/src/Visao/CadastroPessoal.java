@@ -4,9 +4,9 @@
  */
 package Visao;
 
-
 import Componentes.Componentes;
 import Controlador.CarregaEndereco;
+import Modelo.*;
 import java.awt.event.ItemEvent;
 import javax.swing.JButton;
 
@@ -15,36 +15,35 @@ import javax.swing.JButton;
  * @author Bruno
  */
 public class CadastroPessoal extends javax.swing.JDialog {
-    CarregaEndereco carregaEndereco = new CarregaEndereco();
 
+    CarregaEndereco carregaEndereco = new CarregaEndereco();
     Componentes c = new Componentes();
     JButton botaoGravar;
-    
+
     /**
      * Creates new form CadastroPessoal
      */
-    
-    
     public CadastroPessoal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        botaoGravar=c.criaBotaoGravar();
-        
-    
-            botaoGravar.addActionListener(new java.awt.event.ActionListener() {
+        botaoGravar = c.criaBotaoGravar();
+
+
+        botaoGravar.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoGravarActionPerformed(evt);
             }
         });
-        
+
         jpControles.add(c.criaBotaoGravar());
-        
-        
-        
+
         jcbPais.setModel(carregaEndereco.carregaPais());
-        jcbPais.updateUI();
         jcbPais.setSelectedIndex(0);
-        
+
+        jcbEstado.setModel(carregaEndereco.carregaEstado((Pais) jcbPais.getSelectedItem()));
+        jcbEstado.setSelectedIndex(0);
+
     }
 
     /**
@@ -79,17 +78,19 @@ public class CadastroPessoal extends javax.swing.JDialog {
         jlPais = new javax.swing.JLabel();
         jlEstado = new javax.swing.JLabel();
         jlCidade = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jlLogradouro = new javax.swing.JLabel();
-        jlCEP_ZIP = new javax.swing.JLabel();
         jlNumero = new javax.swing.JLabel();
+        jlCEP_ZIP = new javax.swing.JLabel();
         jlComplemento = new javax.swing.JLabel();
         jpTextFieldsE = new javax.swing.JPanel();
         jcbPais = new javax.swing.JComboBox();
         jcbEstado = new javax.swing.JComboBox();
         jcbCidade = new javax.swing.JComboBox();
+        jcbBairro = new javax.swing.JComboBox();
         jcbLogradouro = new javax.swing.JComboBox();
-        jcbCEP_ZIP = new javax.swing.JComboBox();
         jtfNumero = new javax.swing.JTextField();
+        jcbCEP_ZIP = new javax.swing.JComboBox();
         jtfComplemento = new javax.swing.JTextField();
         jpControles = new javax.swing.JPanel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
@@ -171,7 +172,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
 
         jpEndereco.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço"));
 
-        jpLabelsE.setLayout(new java.awt.GridLayout(7, 1, 0, 5));
+        jpLabelsE.setLayout(new java.awt.GridLayout(8, 1, 0, 5));
 
         jlPais.setText("País:");
         jpLabelsE.add(jlPais);
@@ -182,21 +183,23 @@ public class CadastroPessoal extends javax.swing.JDialog {
         jlCidade.setText("Cidade:");
         jpLabelsE.add(jlCidade);
 
+        jLabel1.setText("Bairro:");
+        jpLabelsE.add(jLabel1);
+
         jlLogradouro.setText("Logradouro:");
         jpLabelsE.add(jlLogradouro);
-
-        jlCEP_ZIP.setText("CEP/ZIP:");
-        jpLabelsE.add(jlCEP_ZIP);
 
         jlNumero.setText("Número:");
         jpLabelsE.add(jlNumero);
 
+        jlCEP_ZIP.setText("CEP/ZIP:");
+        jpLabelsE.add(jlCEP_ZIP);
+
         jlComplemento.setText("Complemento:");
         jpLabelsE.add(jlComplemento);
 
-        jpTextFieldsE.setLayout(new java.awt.GridLayout(7, 1, 0, 5));
+        jpTextFieldsE.setLayout(new java.awt.GridLayout(8, 1, 0, 5));
 
-        jcbPais.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jcbPais.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 jcbPaisItemStateChanged(evt);
@@ -204,18 +207,45 @@ public class CadastroPessoal extends javax.swing.JDialog {
         });
         jpTextFieldsE.add(jcbPais);
 
-        jcbEstado.setEnabled(false);
+        jcbEstado.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbEstadoItemStateChanged(evt);
+            }
+        });
         jpTextFieldsE.add(jcbEstado);
 
-        jcbCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jcbCidade.setEnabled(false);
+        jcbCidade.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbCidadeItemStateChanged(evt);
+            }
+        });
         jpTextFieldsE.add(jcbCidade);
 
-        jcbLogradouro.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jpTextFieldsE.add(jcbLogradouro);
+        jcbBairro.setEnabled(false);
+        jcbBairro.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbBairroItemStateChanged(evt);
+            }
+        });
+        jpTextFieldsE.add(jcbBairro);
 
-        jcbCEP_ZIP.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jpTextFieldsE.add(jcbCEP_ZIP);
+        jcbLogradouro.setEnabled(false);
+        jcbLogradouro.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbLogradouroItemStateChanged(evt);
+            }
+        });
+        jpTextFieldsE.add(jcbLogradouro);
         jpTextFieldsE.add(jtfNumero);
+
+        jcbCEP_ZIP.setEnabled(false);
+        jcbCEP_ZIP.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbCEP_ZIPItemStateChanged(evt);
+            }
+        });
+        jpTextFieldsE.add(jcbCEP_ZIP);
         jpTextFieldsE.add(jtfComplemento);
 
         javax.swing.GroupLayout jpEnderecoLayout = new javax.swing.GroupLayout(jpEndereco);
@@ -229,8 +259,8 @@ public class CadastroPessoal extends javax.swing.JDialog {
         );
         jpEnderecoLayout.setVerticalGroup(
             jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpLabelsE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jpTextFieldsE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpLabelsE, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+            .addComponent(jpTextFieldsE, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jpAgrupadorLayout = new javax.swing.GroupLayout(jpAgrupador);
@@ -317,21 +347,47 @@ public class CadastroPessoal extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcbPaisItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbPaisItemStateChanged
-        System.out.println(evt);
-        if (evt.getStateChange()== ItemEvent.DESELECTED){
-           jcbEstado.setModel(null);
-           jcbEstado.setEnabled(true);
-           jcbEstado.setModel(carregaEndereco.carregaEstado());
-       }
-        
     }//GEN-LAST:event_jcbPaisItemStateChanged
+
+    private void jcbCidadeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbCidadeItemStateChanged
+        if (evt.getStateChange() == ItemEvent.DESELECTED) {
+            // jcbBairro.setModel(null);
+            jcbBairro.setEnabled(true);
+            jcbBairro.setModel(carregaEndereco.carregaBairro((Cidade) jcbCidade.getSelectedItem()));
+        }
+    }//GEN-LAST:event_jcbCidadeItemStateChanged
+
+    private void jcbLogradouroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbLogradouroItemStateChanged
+        if (evt.getStateChange() == ItemEvent.DESELECTED) {
+            //  jcbCEP_ZIP.setModel(null);
+            jcbCEP_ZIP.setEnabled(true);
+            jcbCEP_ZIP.setModel(carregaEndereco.carregaCEP_ZIP((Bairro) jcbBairro.getSelectedItem()));
+        }
+    }//GEN-LAST:event_jcbLogradouroItemStateChanged
+
+    private void jcbCEP_ZIPItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbCEP_ZIPItemStateChanged
+    }//GEN-LAST:event_jcbCEP_ZIPItemStateChanged
+
+    private void jcbEstadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbEstadoItemStateChanged
+        if (evt.getStateChange() == ItemEvent.DESELECTED) {
+            //jcbCidade.setModel(null);
+            jcbCidade.setEnabled(true);
+            jcbCidade.setModel(carregaEndereco.carregaCidade((Estado) jcbEstado.getSelectedItem()));
+        }
+    }//GEN-LAST:event_jcbEstadoItemStateChanged
+
+    private void jcbBairroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbBairroItemStateChanged
+        if (evt.getStateChange() == ItemEvent.DESELECTED) {
+            //jcbLogradouro.setModel(null);
+            jcbLogradouro.setEnabled(true);
+            jcbLogradouro.setModel(carregaEndereco.carregaEndereco((Bairro) jcbBairro.getSelectedItem()));
+        }
+    }//GEN-LAST:event_jcbBairroItemStateChanged
 
     /**
      * @param args the command line arguments
      */
-    
-
-   private void botaoGravarActionPerformed(java.awt.event.ActionEvent evt) {
+    private void botaoGravarActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     }
 
@@ -381,15 +437,14 @@ public class CadastroPessoal extends javax.swing.JDialog {
             }
         });
     }
-    
- 
-    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
     private javax.swing.Box.Filler filler4;
     private javax.swing.Box.Filler filler5;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JComboBox jcbBairro;
     private javax.swing.JComboBox jcbCEP_ZIP;
     private javax.swing.JComboBox jcbCidade;
     private javax.swing.JComboBox jcbEstado;
@@ -428,7 +483,4 @@ public class CadastroPessoal extends javax.swing.JDialog {
     private javax.swing.JTextField jtfRG;
     private javax.swing.JTabbedPane jtpAbas;
     // End of variables declaration//GEN-END:variables
-
-
-    
 }

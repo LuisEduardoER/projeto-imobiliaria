@@ -10,16 +10,10 @@ package Modelo;
  */
 public class Cidade {
     String nome;
-    String sigla;
+    int uf;
     int codigo;
 
     public Cidade() {
-    }
-
-    public Cidade(String nome, String sigla, int codigo) {
-        this.nome = nome;
-        this.sigla = sigla;
-        this.codigo = codigo;
     }
 
     public int getCodigo() {
@@ -38,12 +32,16 @@ public class Cidade {
         this.nome = nome;
     }
 
-    public String getSigla() {
-        return sigla;
+    public int getUf() {
+        return uf;
     }
 
-    public void setSigla(String sigla) {
-        this.sigla = sigla;
+    public void setUf(int uf) {
+        this.uf = uf;
     }
-    
+
+    @Override
+    public String toString() {
+        return nome;
+    }
 }

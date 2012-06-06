@@ -9,21 +9,25 @@ package Modelo;
  * @author Bruno
  */
 public class CEP_ZIP {
-    String cep_zip;
+    int cep_zip;
 
     public CEP_ZIP() {
     }
 
-    public CEP_ZIP(String cep_zip) {
-        this.cep_zip = cep_zip;
-    }
-
-    public String getCep_zip() {
+    public int getCep_zip() {
         return cep_zip;
     }
 
-    public void setCep_zip(String cep_zip) {
+    public void setCep_zip(int cep_zip) {
         this.cep_zip = cep_zip;
     }
+
+    @Override
+    public String toString() {
+        String s = cep_zip + "";
+        return s;
+    }
+
+    
     
 }
