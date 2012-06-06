@@ -9,38 +9,31 @@ package Modelo;
  * @author Bruno
  */
 public class Endereco {
-    String pais;
-    String estado;
-    String cidade;
-    String bairro;
+
+    int idEndereco;
+    int idBairro;
     String logradouro;
-    String cep;
-    String numero;
+    int CEP_ZIP;
+    int cdTipoEnderecos;
     String complemento;
-    String localizacaoQuadra;
 
-    public String getBairro() {
-        return bairro;
+    public Endereco() {
     }
 
-    public void setBairro(String bairro) {
-        this.bairro = bairro;
+    public int getCEP_ZIP() {
+        return CEP_ZIP;
     }
 
-    public String getCep() {
-        return cep;
+    public void setCEP_ZIP(int CEP_ZIP) {
+        this.CEP_ZIP = CEP_ZIP;
     }
 
-    public void setCep(String cep) {
-        this.cep = cep;
+    public int getCdTipoEnderecos() {
+        return cdTipoEnderecos;
     }
 
-    public String getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
+    public void setCdTipoEnderecos(int cdTipoEnderecos) {
+        this.cdTipoEnderecos = cdTipoEnderecos;
     }
 
     public String getComplemento() {
@@ -51,20 +44,20 @@ public class Endereco {
         this.complemento = complemento;
     }
 
-    public String getEstado() {
-        return estado;
+    public int getIdBairro() {
+        return idBairro;
     }
 
-    public void setEstado(String estado) {
-        this.estado = estado;
+    public void setIdBairro(int idBairro) {
+        this.idBairro = idBairro;
     }
 
-    public String getLocalizacaoQuadra() {
-        return localizacaoQuadra;
+    public int getIdEndereco() {
+        return idEndereco;
     }
 
-    public void setLocalizacaoQuadra(String localizacaoQuadra) {
-        this.localizacaoQuadra = localizacaoQuadra;
+    public void setIdEndereco(int idEndereco) {
+        this.idEndereco = idEndereco;
     }
 
     public String getLogradouro() {
@@ -75,19 +68,8 @@ public class Endereco {
         this.logradouro = logradouro;
     }
 
-    public String getNumero() {
-        return numero;
-    }
-
-    public void setNumero(String numero) {
-        this.numero = numero;
-    }
-
-    public String getPais() {
-        return pais;
-    }
-
-    public void setPais(String pais) {
-        this.pais = pais;
+    @Override
+    public String toString() {
+        return logradouro;
     }
 }
