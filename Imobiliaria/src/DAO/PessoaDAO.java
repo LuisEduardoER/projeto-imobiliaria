@@ -9,6 +9,7 @@ import Controlador.ControladorIncluirBanco;
 import Controlador.Mensagens;
 import Modelo.Imovel;
 import Modelo.Pessoa;
+import Modelo.Telefone;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,7 +24,7 @@ public class PessoaDAO {
     static Connection con = c.conexaoMysql();
     public static PreparedStatement stmt;
 
-    public boolean inserePessoa(Pessoa pessoa) {
+    public boolean inserePessoa(Pessoa pessoa, Telefone telefone) {
 
         PreparedStatement stmt;
         ResultSet rs;
@@ -67,27 +68,33 @@ public class PessoaDAO {
                     + "?);");//idBairro16
 
             java.sql.Date dataNascimento = new java.sql.Date(pessoa.getNascimento().getTime());
-            
-                stmt.setInt(1, 0);
-                stmt.setString(2, pessoa.getNome());
-                stmt.setInt(3, pessoa.getCPF_CNPJ());
-                stmt.setInt(4, pessoa.getRG());
-                stmt.setDate(5, dataNascimento);
-                stmt.setInt(6, pessoa.getCTPS_Numero());
-                stmt.setInt(7, pessoa.getCTPS_Serie());
-                stmt.setString(8, pessoa.getCTPS_UF());
-                stmt.setInt(9, pessoa.getIdPais());
-                stmt.setInt(10, pessoa.getIdEstado());
-                stmt.setInt(11, pessoa.getIdCidade());
-                stmt.setInt(12, pessoa.getIdLogradouro());
-                stmt.setInt(13, pessoa.getCEP_ZIP());
-                stmt.setInt(14, pessoa.getNumero());
-                stmt.setString(15, pessoa.getComplemento());
-                stmt.setInt(16, pessoa.getIdBairro());
+
+            stmt.setInt(1, 0);
+            stmt.setString(2, pessoa.getNome());
+            stmt.setInt(3, pessoa.getCPF_CNPJ());
+            stmt.setInt(4, pessoa.getRG());
+            stmt.setDate(5, dataNascimento);
+            stmt.setInt(6, pessoa.getCTPS_Numero());
+            stmt.setInt(7, pessoa.getCTPS_Serie());
+            stmt.setString(8, pessoa.getCTPS_UF());
+            stmt.setInt(9, pessoa.getIdPais());
+            stmt.setInt(10, pessoa.getIdEstado());
+            stmt.setInt(11, pessoa.getIdCidade());
+            stmt.setInt(12, pessoa.getIdLogradouro());
+            stmt.setInt(13, pessoa.getCEP_ZIP());
+            stmt.setInt(14, pessoa.getNumero());
+            stmt.setString(15, pessoa.getComplemento());
+            stmt.setInt(16, pessoa.getIdBairro());
             stmt.execute();
 
-            return true;
 
+
+            if (validaCadastro(pessoa)) {
+                return true;
+            } else {
+                return false;
+
+            }
 
         } catch (SQLException ex) {
 
@@ -97,5 +104,116 @@ public class PessoaDAO {
 
             return false;
         }
+    }
+
+    public boolean validaCadastro(Pessoa pessoa) {
+
+        ResultSet rs;
+        Mensagens mensagem = new Mensagens();
+
+        try {
+
+            stmt = PessoaDAO.con.prepareStatement(""
+                    + "SELECT * FROM pessoa "
+                    + "WHERE nome = ?"
+                    + "AND CPF_CNPJ = ?"
+                    + "AND RG = ?"
+                    + "AND dataNascimento = ?;");
+
+            java.sql.Date dataNascimento = new java.sql.Date(pessoa.getNascimento().getTime());
+
+            stmt.setString(1, pessoa.getNome());
+            stmt.setInt(2, pessoa.getCPF_CNPJ());
+            stmt.setInt(3, pessoa.getRG());
+            stmt.setDate(4, dataNascimento);
+            rs = stmt.executeQuery();
+
+            if (rs.first()) {
+
+                pessoa.setCEP_ZIP(rs.getInt(""));
+                pessoa.setCPF_CNPJ(rs.getInt(""));
+                pessoa.setCTPS_Numero(rs.getInt(""));
+                pessoa.setCTPS_Serie(rs.getInt(""));
+                pessoa.setCTPS_UF(rs.getString(""));
+                pessoa.setIdPessoa(rs.getInt(""));
+                pessoa.setComplemento(rs.getString(""));
+                pessoa.setFone(rs.getString(""));
+                pessoa.setIdBairro(rs.getInt(""));
+                pessoa.setIdCidade(rs.getInt(""));
+                pessoa.setIdEstado(rs.getInt(""));
+                pessoa.setIdLogradouro(rs.getInt(""));
+                pessoa.setIdPais(rs.getInt(""));
+                pessoa.setNascimento(rs.getDate(""));
+                pessoa.setNome(rs.getString(""));
+                pessoa.setNumero(rs.getInt(""));
+                pessoa.setRG(rs.getInt(""));
+
+                return true;
+            } else {
+                return false;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TipoImovelDAO.class.getName()).log(Level.SEVERE, null, ex);
+            mensagem.jopError("Erro ao validar o cadastro no servidor de banco de dados.\nSQLException: " + ex.getMessage());
+            return false;
+        }
+
+
+    }
+
+    public Pessoa buscaPessoa(Pessoa pessoa) {
+
+        ResultSet rs;
+        Mensagens mensagem = new Mensagens();
+
+        try {
+
+            stmt = PessoaDAO.con.prepareStatement(""
+                    + "SELECT * FROM pessoa "
+                    + "WHERE nome = ?"
+                    + "AND CPF_CNPJ = ?"
+                    + "AND RG = ?"
+                    + "AND dataNascimento = ?;");
+
+            java.sql.Date dataNascimento = new java.sql.Date(pessoa.getNascimento().getTime());
+
+            stmt.setString(1, pessoa.getNome());
+            stmt.setInt(2, pessoa.getCPF_CNPJ());
+            stmt.setInt(3, pessoa.getRG());
+            stmt.setDate(4, dataNascimento);
+            rs = stmt.executeQuery();
+
+            if (rs.first()) {
+
+                pessoa.setCEP_ZIP(rs.getInt(""));
+                pessoa.setCPF_CNPJ(rs.getInt(""));
+                pessoa.setCTPS_Numero(rs.getInt(""));
+                pessoa.setCTPS_Serie(rs.getInt(""));
+                pessoa.setCTPS_UF(rs.getString(""));
+                pessoa.setIdPessoa(rs.getInt(""));
+                pessoa.setComplemento(rs.getString(""));
+                pessoa.setFone(rs.getString(""));
+                pessoa.setIdBairro(rs.getInt(""));
+                pessoa.setIdCidade(rs.getInt(""));
+                pessoa.setIdEstado(rs.getInt(""));
+                pessoa.setIdLogradouro(rs.getInt(""));
+                pessoa.setIdPais(rs.getInt(""));
+                pessoa.setNascimento(rs.getDate(""));
+                pessoa.setNome(rs.getString(""));
+                pessoa.setNumero(rs.getInt(""));
+                pessoa.setRG(rs.getInt(""));
+
+                return pessoa;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TipoImovelDAO.class.getName()).log(Level.SEVERE, null, ex);
+            mensagem.jopError("Erro ao validar o cadastro no servidor de banco de dados.\nSQLException: " + ex.getMessage());
+            return null;
+        }
+
     }
 }
