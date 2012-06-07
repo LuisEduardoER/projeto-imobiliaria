@@ -14,7 +14,7 @@ import java.util.Date;
 public class Pessoa {
     Mensagens m = new Mensagens();
     
-    int codigo;
+    int idPessoa;
     
     String nome;
     int CPF_CNPJ;
@@ -94,13 +94,14 @@ public class Pessoa {
         this.RG = RG;
     }
 
-    public int getCodigo() {
-        return codigo;
+    public int getIdPessoa() {
+        return idPessoa;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setIdPessoa(int idPessoa) {
+        this.idPessoa = idPessoa;
     }
+
 
     public String getComplemento() {
         return complemento;
