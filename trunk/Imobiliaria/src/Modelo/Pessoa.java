@@ -17,82 +17,64 @@ public class Pessoa {
     int codigo;
     
     String nome;
-    String CPF_CNPJ;
-    String RG;
+    int CPF_CNPJ;
+    int RG;
     String fone;
     Date Nascimento;
     
-    String CTPS_Numero;
-    String CTPS_Serie;
-    Estado CTPS_UF;
+    int CTPS_Numero;
+    int CTPS_Serie;
+    String CTPS_UF;
     
-    Pais pais;
-    Cidade cidade;
-    Estado estado;
-    String logradouro;
-    CEP_ZIP CEP_ZIP;
+    int idBairro;
+    int idPais;
+    int idCidade;
+    int idEstado;
+    int idLogradouro;
+    int CEP_ZIP;
     int numero;
     String complemento;
 
     public Pessoa() {
     }
 
-    public Pessoa(int codigo, String nome, String CPF_CNPJ, String RG, String fone, Date Nascimento, String CTPS_Numero, String CTPS_Serie, Estado CTPS_UF, Pais pais, Cidade cidade, Estado estado, String logradouro, Modelo.CEP_ZIP CEP_ZIP, int numero, String complemento) {
-        this.codigo = codigo;
-        this.nome = nome;
-        this.CPF_CNPJ = CPF_CNPJ;
-        this.RG = RG;
-        this.fone = fone;
-        this.Nascimento = Nascimento;
-        this.CTPS_Numero = CTPS_Numero;
-        this.CTPS_Serie = CTPS_Serie;
-        this.CTPS_UF = CTPS_UF;
-        this.pais = pais;
-        this.cidade = cidade;
-        this.estado = estado;
-        this.logradouro = logradouro;
-        this.CEP_ZIP = CEP_ZIP;
-        this.numero = numero;
-        this.complemento = complemento;
-    }
-
-    public Modelo.CEP_ZIP getCEP_ZIP() {
+    public int getCEP_ZIP() {
         return CEP_ZIP;
     }
 
-    public void setCEP_ZIP(Modelo.CEP_ZIP CEP_ZIP) {
+    public void setCEP_ZIP(int CEP_ZIP) {
         this.CEP_ZIP = CEP_ZIP;
     }
 
-    public String getCPF_CNPJ() {
+    public int getCPF_CNPJ() {
         return CPF_CNPJ;
     }
 
-    public void setCPF_CNPJ(String CPF_CNPJ) {
+    public void setCPF_CNPJ(int CPF_CNPJ) {
         this.CPF_CNPJ = CPF_CNPJ;
     }
 
-    public String getCTPS_Numero() {
+    public int getCTPS_Numero() {
         return CTPS_Numero;
     }
 
-    public void setCTPS_Numero(String CTPS_Numero) {
+    public void setCTPS_Numero(int CTPS_Numero) {
         this.CTPS_Numero = CTPS_Numero;
     }
 
-    public String getCTPS_Serie() {
+    public int getCTPS_Serie() {
         return CTPS_Serie;
     }
 
-    public void setCTPS_Serie(String CTPS_Serie) {
+    public void setCTPS_Serie(int CTPS_Serie) {
         this.CTPS_Serie = CTPS_Serie;
     }
 
-    public Estado getCTPS_UF() {
+    public String getCTPS_UF() {
         return CTPS_UF;
     }
 
-    public void setCTPS_UF(Estado CTPS_UF) {
+    public void setCTPS_UF(String CTPS_UF) {
         this.CTPS_UF = CTPS_UF;
     }
 
@@ -104,20 +86,12 @@ public class Pessoa {
         this.Nascimento = Nascimento;
     }
 
-    public String getRG() {
+    public int getRG() {
         return RG;
     }
 
-    public void setRG(String RG) {
+    public void setRG(int RG) {
         this.RG = RG;
-    }
-
-    public Cidade getCidade() {
-        return cidade;
-    }
-
-    public void setCidade(Cidade cidade) {
-        this.cidade = cidade;
     }
 
     public int getCodigo() {
@@ -136,14 +110,6 @@ public class Pessoa {
         this.complemento = complemento;
     }
 
-    public Estado getEstado() {
-        return estado;
-    }
-
-    public void setEstado(Estado estado) {
-        this.estado = estado;
-    }
-
     public String getFone() {
         return fone;
     }
@@ -152,24 +118,44 @@ public class Pessoa {
         this.fone = fone;
     }
 
-    public String getLogradouro() {
-        return logradouro;
+    public int getIdBairro() {
+        return idBairro;
     }
 
-    public void setLogradouro(String logradouro) {
-        this.logradouro = logradouro;
+    public void setIdBairro(int idBairro) {
+        this.idBairro = idBairro;
     }
 
-    public String getNome() {
-        return nome;
+    public int getIdCidade() {
+        return idCidade;
     }
 
-    public void setNome(String nome) {
-        if (nome != null || !(nome.endsWith(""))){
-            this.nome = nome;
-        }else{
-            m.jopAlerta("O nome informado deve conter apenas letras (A a Z) e não pode ser vazio.");
-        }
+    public void setIdCidade(int idCidade) {
+        this.idCidade = idCidade;
+    }
+
+    public int getIdEstado() {
+        return idEstado;
+    }
+
+    public void setIdEstado(int idEstado) {
+        this.idEstado = idEstado;
+    }
+
+    public int getIdLogradouro() {
+        return idLogradouro;
+    }
+
+    public void setIdLogradouro(int idLogradouro) {
+        this.idLogradouro = idLogradouro;
+    }
+
+    public int getIdPais() {
+        return idPais;
+    }
+
+    public void setIdPais(int idPais) {
+        this.idPais = idPais;
     }
 
     public int getNumero() {
@@ -180,13 +166,16 @@ public class Pessoa {
         this.numero = numero;
     }
 
-    public Pais getPais() {
-        return pais;
+    public void setNome(String nome) {
+        if (nome != null || !(nome.endsWith(""))){
+            this.nome = nome;
+        }else{
+            m.jopAlerta("O nome informado deve conter apenas letras (A a Z) e não pode ser vazio.");
+        }
     }
 
-    public void setPais(Pais pais) {
-        this.pais = pais;
+    public String getNome() {
+        return nome;
     }
-    
     
 }
