@@ -47,41 +47,43 @@ public class PessoaDAO {
                     + "`id_Logradouro`,"
                     + "`CEP_ZIP`,"
                     + "`numero`,"
-                    + "`vcomplemento`)"
-                    + "VALUES ('id',"
-                    + "      'nome',"
-                    + "     'CPF_CNPJ',"
-                    + "   'RG',"
-                    + " 'nascimento',"
-                    + "'CTPS_Numero',"
-                    + "'CTPS_Serie',"
-                    + "'id_Pais',"
-                    + "'id_Estado',"
-                    + "'id_Cidade',"
-                    + "'id_Logradouro',"
-                    + "'CEP_ZIP',"
-                    + "'numero',"
-                    + "'vcomplemento');");
+                    + "`vcomplemento,"
+                    + "idBairro`)"
+                    + "VALUES (?," //id1
+                    + "?,"//nome2
+                    + "?,"//CPF_CNPJ3
+                    + "?,"//RG4
+                    + "?,"//nascimento5
+                    + "?,"//CTPS_Numero6
+                    + "?,"//CTPS_Serie7
+                    + "?,"//CTPS_UF8
+                    + "?,"//id_Pais9
+                    + "?,"//id_Estado10
+                    + "?,"//id_Cidade11
+                    + "?,"//id_Logradouro12
+                    + "?,"//CEP_ZIP13
+                    + "?,"//numero14
+                    + "?,"//vcomplemento15
+                    + "?);");//idBairro16
 
             java.sql.Date dataNascimento = new java.sql.Date(pessoa.getNascimento().getTime());
             
                 stmt.setInt(1, 0);
                 stmt.setString(2, pessoa.getNome());
                 stmt.setInt(3, pessoa.getCPF_CNPJ());
-                stmt.setDate(4, dataNascimento);
-                stmt.setInt(5, pessoa.getCTPS_Numero());
-                stmt.setInt(6, pessoa.getCTPS_Serie());
+                stmt.setInt(4, pessoa.getRG());
+                stmt.setDate(5, dataNascimento);
+                stmt.setInt(6, pessoa.getCTPS_Numero());
                 stmt.setInt(7, pessoa.getCTPS_Serie());
-                stmt.setInt(8, pessoa.getIdPais());
-                stmt.setInt(8, pessoa.getIdEstado());
-                stmt.setInt(8, pessoa.getIdCidade());
-                stmt.setInt(8, pessoa.getIdBairro());
-                stmt.setInt(8, pessoa.getIdLogradouro());
-                stmt.setInt(8, pessoa.getNumero());
-                stmt.setInt(8, pessoa.getCEP_ZIP());
-                stmt.setString(8, pessoa.getComplemento());
-                stmt.setString(8, pessoa.getComplemento());
-                
+                stmt.setString(8, pessoa.getCTPS_UF());
+                stmt.setInt(9, pessoa.getIdPais());
+                stmt.setInt(10, pessoa.getIdEstado());
+                stmt.setInt(11, pessoa.getIdCidade());
+                stmt.setInt(12, pessoa.getIdLogradouro());
+                stmt.setInt(13, pessoa.getCEP_ZIP());
+                stmt.setInt(14, pessoa.getNumero());
+                stmt.setString(15, pessoa.getComplemento());
+                stmt.setInt(16, pessoa.getIdBairro());
             stmt.execute();
 
             return true;
