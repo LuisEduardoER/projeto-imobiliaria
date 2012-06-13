@@ -6,6 +6,8 @@ package Visao;
 
 import Componentes.Componentes;
 import Controlador.CarregaEndereco;
+import Controlador.Mensagens;
+import Controlador.MontaObjetosParaInserirBanco;
 import Modelo.*;
 import java.awt.event.ItemEvent;
 import javax.swing.JButton;
@@ -16,6 +18,9 @@ import javax.swing.JButton;
  */
 public class CadastroPessoal extends javax.swing.JDialog {
 
+    boolean habilitado = true;
+    boolean naoHabilitado = true;
+    Mensagens m;
     CarregaEndereco carregaEndereco = new CarregaEndereco();
     Componentes c = new Componentes();
     JButton botaoGravar;
@@ -36,7 +41,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
             }
         });
 
-        jpControles.add(c.criaBotaoGravar());
+        jpControles.add(botaoGravar);
 
         jcbPais.setModel(carregaEndereco.carregaPais());
         jcbPais.setSelectedIndex(0);
@@ -388,7 +393,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
      * @param args the command line arguments
      */
     private void botaoGravarActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
+        validaCampos();
     }
 
     public static void main(String args[]) {
@@ -483,4 +488,103 @@ public class CadastroPessoal extends javax.swing.JDialog {
     private javax.swing.JTextField jtfRG;
     private javax.swing.JTabbedPane jtpAbas;
     // End of variables declaration//GEN-END:variables
+
+    public boolean validaCampos() {
+
+        if (jtfNome.getText() == null || jtfNome.getText().equals("")) {
+            m = new Mensagens();
+            m.jopAlerta("Por preencha o campo 'Nome'.");
+            return false;
+
+        } else {
+            Pessoa p = new Pessoa();
+
+            p.setNome(jtfNome.getText());
+
+            if (jtfRG.getText() == null || jtfRG.getText().equals("")) {
+                m = new Mensagens();
+                m.jopAlerta("Por preencha o campo 'RG'.");
+                return false;
+
+            } else {
+
+                p.setRG(Integer.parseInt(jtfRG.getText()));
+
+                if (jtfCPF_CNPJ.getText() == null || jtfCPF_CNPJ.getText().equals("")) {
+                    m = new Mensagens();
+                    m.jopAlerta("Por preencha o campo 'CPF/CNPJ'.");
+                    return false;
+
+                } else {
+
+                    p.setCPF_CNPJ(Integer.parseInt(jtfCPF_CNPJ.getText()));
+
+                    if (!jcbCidade.isEnabled()) {
+                        return false;
+
+                    } else if (!jcbBairro.isEnabled()) {
+                        return false;
+
+                    } else {
+                        Pais pais = new Pais();
+                        Estado estado = new Estado();
+                        Cidade cidade = new Cidade();
+                        Bairro bairro = new Bairro();
+
+                        pais = (Pais) jcbPais.getSelectedItem();
+                        estado = (Estado) jcbPais.getSelectedItem();
+                        cidade = (Cidade) jcbPais.getSelectedItem();
+                        bairro = (Bairro) jcbPais.getSelectedItem();
+
+                        if (!jcbLogradouro.isEnabled()) {
+                            return false;
+
+                        } else {
+                            Endereco endereco = new Endereco();
+                            endereco = (Endereco) jcbLogradouro.getSelectedItem();
+
+                            if (jtfNumero.getText() == null || jtfNumero.getText().equals("")) {
+                                m = new Mensagens();
+                                m.jopAlerta("Por preencha o campo 'Número'.");
+                                return false;
+
+                            } else {
+
+                                p.setNumero(Integer.parseInt(jtfNumero.getText()));
+
+                                if (!jcbCEP_ZIP.isEnabled()) {
+                                    return false;
+
+                                } else {
+
+                                    CEP_ZIP cep_zip = new CEP_ZIP();
+
+                                    cep_zip = (CEP_ZIP) jcbCEP_ZIP.getSelectedItem();
+
+                                    if (jtfComplemento.getText() == null || jtfComplemento.getText().equals("")) {
+                                        m = new Mensagens();
+                                        m.jopAlerta("Por preencha o campo 'Complemento'.");
+                                        return false;
+                                    }else {
+                                        p.setComplemento(jtfComplemento.getText());
+                                        p.setIdPais(pais.getCodigo());
+                                        p.setIdEstado(estado.getId());
+                                        p.setIdCidade(cidade.getCodigo());
+                                        p.setIdBairro(bairro.getIdBairro());
+                                        p.setIdLogradouro(endereco.getIdBairro());
+                                        p.setCEP_ZIP(cep_zip.getCep_zip());
+                                        
+                                        return true;
+                                    }
+
+
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
+
