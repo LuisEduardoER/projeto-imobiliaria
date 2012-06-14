@@ -12,14 +12,24 @@ public class Telefone {
     int numero;
     int id;
     int DDD;
+    int idPessoa;
 
+    public int getIdPessoa() {
+        return idPessoa;
+    }
+
+    public void setIdPessoa(int idPessoa) {
+        this.idPessoa = idPessoa;
+    }
+    
     public Telefone() {
     }
 
-    public Telefone(int numero, int id, int DDD) {
+    public Telefone(int numero, int id, int DDD, int idPessoa) {
         this.numero = numero;
         this.id = id;
         this.DDD = DDD;
+        this.idPessoa = idPessoa;
     }
 
     public int getDDD() {

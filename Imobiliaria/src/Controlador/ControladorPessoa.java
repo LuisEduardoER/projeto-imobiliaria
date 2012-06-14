@@ -4,10 +4,12 @@
  */
 package Controlador;
 
+import DAO.PessoaDAO;
+
 /**
  *
  * @author Bruno
  */
-public class ControladorPessoa {
-    
+public class ControladorPessoa extends PessoaDAO{
+
 }
