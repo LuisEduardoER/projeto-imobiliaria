@@ -6,10 +6,13 @@ package Visao;
 
 import Componentes.Componentes;
 import Controlador.CarregaEndereco;
+import Controlador.ControladorPessoa;
 import Controlador.Mensagens;
 import Controlador.MontaObjetosParaInserirBanco;
 import Modelo.*;
+import Util.VerificaNumeros;
 import java.awt.event.ItemEvent;
+import java.util.Date;
 import javax.swing.JButton;
 
 /**
@@ -18,12 +21,12 @@ import javax.swing.JButton;
  */
 public class CadastroPessoal extends javax.swing.JDialog {
 
-    boolean habilitado = true;
-    boolean naoHabilitado = true;
     Mensagens m;
     CarregaEndereco carregaEndereco = new CarregaEndereco();
     Componentes c = new Componentes();
     JButton botaoGravar;
+    ControladorPessoa controladorPessoa;
+    Pessoa p = new Pessoa();
 
     /**
      * Creates new form CadastroPessoal
@@ -75,9 +78,9 @@ public class CadastroPessoal extends javax.swing.JDialog {
         jlRG = new javax.swing.JLabel();
         jlCPF_CNPJ = new javax.swing.JLabel();
         jpTextFieldsDP = new javax.swing.JPanel();
-        jtfCPF_CNPJ = new javax.swing.JTextField();
-        jtfRG = new javax.swing.JTextField();
         jtfNome = new javax.swing.JTextField();
+        jtfRG = new javax.swing.JTextField();
+        jtfCPF_CNPJ = new javax.swing.JTextField();
         jpEndereco = new javax.swing.JPanel();
         jpLabelsE = new javax.swing.JPanel();
         jlPais = new javax.swing.JLabel();
@@ -97,6 +100,13 @@ public class CadastroPessoal extends javax.swing.JDialog {
         jtfNumero = new javax.swing.JTextField();
         jcbCEP_ZIP = new javax.swing.JComboBox();
         jtfComplemento = new javax.swing.JTextField();
+        jpDadosPessoais = new javax.swing.JPanel();
+        jpLablesDPessoais = new javax.swing.JPanel();
+        jlTelefone = new javax.swing.JLabel();
+        jlDataNascimento = new javax.swing.JLabel();
+        jpTextFieldsDPessoais = new javax.swing.JPanel();
+        jtfTelefone = new javax.swing.JTextField();
+        jftfDataNascimento = new javax.swing.JFormattedTextField();
         jpControles = new javax.swing.JPanel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
@@ -156,9 +166,9 @@ public class CadastroPessoal extends javax.swing.JDialog {
         jpLabelsDP.add(jlCPF_CNPJ);
 
         jpTextFieldsDP.setLayout(new java.awt.GridLayout(3, 1, 0, 5));
-        jpTextFieldsDP.add(jtfCPF_CNPJ);
-        jpTextFieldsDP.add(jtfRG);
         jpTextFieldsDP.add(jtfNome);
+        jpTextFieldsDP.add(jtfRG);
+        jpTextFieldsDP.add(jtfCPF_CNPJ);
 
         javax.swing.GroupLayout jpDadosPrincipaisLayout = new javax.swing.GroupLayout(jpDadosPrincipais);
         jpDadosPrincipais.setLayout(jpDadosPrincipaisLayout);
@@ -260,12 +270,48 @@ public class CadastroPessoal extends javax.swing.JDialog {
             .addGroup(jpEnderecoLayout.createSequentialGroup()
                 .addComponent(jpLabelsE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpTextFieldsE, javax.swing.GroupLayout.DEFAULT_SIZE, 574, Short.MAX_VALUE))
+                .addComponent(jpTextFieldsE, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE))
         );
         jpEnderecoLayout.setVerticalGroup(
             jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jpLabelsE, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
             .addComponent(jpTextFieldsE, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+        );
+
+        jpDadosPessoais.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Pessoais"));
+
+        jpLablesDPessoais.setLayout(new java.awt.GridLayout(2, 1, 0, 5));
+
+        jlTelefone.setText("Telefone:");
+        jpLablesDPessoais.add(jlTelefone);
+
+        jlDataNascimento.setText("Data de Nascimento:");
+        jpLablesDPessoais.add(jlDataNascimento);
+
+        jpTextFieldsDPessoais.setLayout(new java.awt.GridLayout(2, 1, 0, 8));
+        jpTextFieldsDPessoais.add(jtfTelefone);
+
+        jftfDataNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        jpTextFieldsDPessoais.add(jftfDataNascimento);
+
+        javax.swing.GroupLayout jpDadosPessoaisLayout = new javax.swing.GroupLayout(jpDadosPessoais);
+        jpDadosPessoais.setLayout(jpDadosPessoaisLayout);
+        jpDadosPessoaisLayout.setHorizontalGroup(
+            jpDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpDadosPessoaisLayout.createSequentialGroup()
+                .addComponent(jpLablesDPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpTextFieldsDPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jpDadosPessoaisLayout.setVerticalGroup(
+            jpDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpDadosPessoaisLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jpLablesDPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jpTextFieldsDPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(37, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jpAgrupadorLayout = new javax.swing.GroupLayout(jpAgrupador);
@@ -277,7 +323,8 @@ public class CadastroPessoal extends javax.swing.JDialog {
                 .addGroup(jpAgrupadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jpEndereco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jpDadosPrincipais, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jpCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpDadosPessoais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jpAgrupadorLayout.setVerticalGroup(
@@ -288,7 +335,9 @@ public class CadastroPessoal extends javax.swing.JDialog {
                 .addComponent(jpDadosPrincipais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(321, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpDadosPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(187, Short.MAX_VALUE))
         );
 
         jspPainelRolagem.setViewportView(jpAgrupador);
@@ -394,6 +443,13 @@ public class CadastroPessoal extends javax.swing.JDialog {
      */
     private void botaoGravarActionPerformed(java.awt.event.ActionEvent evt) {
         validaCampos();
+        controladorPessoa = new ControladorPessoa();
+        Telefone t = new Telefone(12345678, 0, 45, 0);
+        boolean inserePessoa = controladorPessoa.inserePessoa(p, t);
+        if (inserePessoa) {
+            Mensagens m = new Mensagens();
+            m.jopAviso("Cadastro realizado com sucesso!");
+        }
     }
 
     public static void main(String args[]) {
@@ -455,6 +511,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
     private javax.swing.JComboBox jcbEstado;
     private javax.swing.JComboBox jcbLogradouro;
     private javax.swing.JComboBox jcbPais;
+    private javax.swing.JFormattedTextField jftfDataNascimento;
     private javax.swing.JLabel jlBuscar;
     private javax.swing.JLabel jlCEP_ZIP;
     private javax.swing.JLabel jlCPF_CNPJ;
@@ -462,22 +519,27 @@ public class CadastroPessoal extends javax.swing.JDialog {
     private javax.swing.JLabel jlCadastroNmr;
     private javax.swing.JLabel jlCidade;
     private javax.swing.JLabel jlComplemento;
+    private javax.swing.JLabel jlDataNascimento;
     private javax.swing.JLabel jlEstado;
     private javax.swing.JLabel jlLogradouro;
     private javax.swing.JLabel jlNome;
     private javax.swing.JLabel jlNumero;
     private javax.swing.JLabel jlPais;
     private javax.swing.JLabel jlRG;
+    private javax.swing.JLabel jlTelefone;
     private javax.swing.JPanel jpAgrupador;
     private javax.swing.JPanel jpCadastro;
     private javax.swing.JPanel jpControles;
     private javax.swing.JPanel jpDadosFuncionario;
+    private javax.swing.JPanel jpDadosPessoais;
     private javax.swing.JPanel jpDadosPrincipais;
     private javax.swing.JPanel jpEndereco;
     private javax.swing.JPanel jpLabelsDP;
     private javax.swing.JPanel jpLabelsE;
+    private javax.swing.JPanel jpLablesDPessoais;
     private javax.swing.JPanel jpPessoal;
     private javax.swing.JPanel jpTextFieldsDP;
+    private javax.swing.JPanel jpTextFieldsDPessoais;
     private javax.swing.JPanel jpTextFieldsE;
     private javax.swing.JScrollPane jspPainelRolagem;
     private javax.swing.JTextField jtfBuscar;
@@ -486,14 +548,15 @@ public class CadastroPessoal extends javax.swing.JDialog {
     private javax.swing.JTextField jtfNome;
     private javax.swing.JTextField jtfNumero;
     private javax.swing.JTextField jtfRG;
+    private javax.swing.JTextField jtfTelefone;
     private javax.swing.JTabbedPane jtpAbas;
     // End of variables declaration//GEN-END:variables
 
     public boolean validaCampos() {
 
-        if (jtfNome.getText() == null || jtfNome.getText().equals("")) {
+        if (jtfNome.getText().equals("")) {
             m = new Mensagens();
-            m.jopAlerta("Por preencha o campo 'Nome'.");
+            m.jopAlerta("Por favor preencha o campo 'Nome'.");
             return false;
 
         } else {
@@ -501,24 +564,30 @@ public class CadastroPessoal extends javax.swing.JDialog {
 
             p.setNome(jtfNome.getText());
 
-            if (jtfRG.getText() == null || jtfRG.getText().equals("")) {
+            if (jtfRG.getText().equals("")) {
                 m = new Mensagens();
-                m.jopAlerta("Por preencha o campo 'RG'.");
+                m.jopAlerta("Por favor preencha o campo 'RG'.");
                 return false;
 
             } else {
-
-                p.setRG(Integer.parseInt(jtfRG.getText()));
-
-                if (jtfCPF_CNPJ.getText() == null || jtfCPF_CNPJ.getText().equals("")) {
+                if (VerificaNumeros.verificaNumeros(jtfRG.getText())) {
+                    p.setRG(Integer.parseInt(jtfRG.getText()));
+                } else {
+                    Mensagens m = new Mensagens();
+                    m.jopAlerta("Informe apenas números no campo 'RG'.");
+                }
+                if (jtfCPF_CNPJ.getText().equals("")) {
                     m = new Mensagens();
-                    m.jopAlerta("Por preencha o campo 'CPF/CNPJ'.");
+                    m.jopAlerta("Por favor preencha o campo 'CPF/CNPJ'.");
                     return false;
 
                 } else {
-
-                    p.setCPF_CNPJ(Integer.parseInt(jtfCPF_CNPJ.getText()));
-
+                    if (VerificaNumeros.verificaNumeros(jtfCPF_CNPJ.getText())) {
+                        p.setCPF_CNPJ(Integer.parseInt(jtfCPF_CNPJ.getText()));
+                    } else {
+                        Mensagens m = new Mensagens();
+                        m.jopAlerta("Informe apenas números no campo 'CPF/CNPJ'.");
+                    }
                     if (!jcbCidade.isEnabled()) {
                         return false;
 
@@ -532,9 +601,9 @@ public class CadastroPessoal extends javax.swing.JDialog {
                         Bairro bairro = new Bairro();
 
                         pais = (Pais) jcbPais.getSelectedItem();
-                        estado = (Estado) jcbPais.getSelectedItem();
-                        cidade = (Cidade) jcbPais.getSelectedItem();
-                        bairro = (Bairro) jcbPais.getSelectedItem();
+                        estado = (Estado) jcbEstado.getSelectedItem();
+                        cidade = (Cidade) jcbCidade.getSelectedItem();
+                        bairro = (Bairro) jcbBairro.getSelectedItem();
 
                         if (!jcbLogradouro.isEnabled()) {
                             return false;
@@ -543,14 +612,18 @@ public class CadastroPessoal extends javax.swing.JDialog {
                             Endereco endereco = new Endereco();
                             endereco = (Endereco) jcbLogradouro.getSelectedItem();
 
-                            if (jtfNumero.getText() == null || jtfNumero.getText().equals("")) {
+                            if (jtfNumero.getText().equals("")) {
                                 m = new Mensagens();
-                                m.jopAlerta("Por preencha o campo 'Número'.");
+                                m.jopAlerta("Por favor preencha o campo 'Número'.");
                                 return false;
 
                             } else {
-
-                                p.setNumero(Integer.parseInt(jtfNumero.getText()));
+                                if (VerificaNumeros.verificaNumeros(jtfNumero.getText())) {
+                                    p.setNumero(Integer.parseInt(jtfNumero.getText()));
+                                } else {
+                                    Mensagens m = new Mensagens();
+                                    m.jopAlerta("Informe apenas números no campo 'Número'.");
+                                }
 
                                 if (!jcbCEP_ZIP.isEnabled()) {
                                     return false;
@@ -561,11 +634,11 @@ public class CadastroPessoal extends javax.swing.JDialog {
 
                                     cep_zip = (CEP_ZIP) jcbCEP_ZIP.getSelectedItem();
 
-                                    if (jtfComplemento.getText() == null || jtfComplemento.getText().equals("")) {
+                                    if (jtfComplemento.getText().equals("")) {
                                         m = new Mensagens();
-                                        m.jopAlerta("Por preencha o campo 'Complemento'.");
+                                        m.jopAlerta("Por favor preencha o campo 'Complemento'.");
                                         return false;
-                                    }else {
+                                    } else {
                                         p.setComplemento(jtfComplemento.getText());
                                         p.setIdPais(pais.getCodigo());
                                         p.setIdEstado(estado.getId());
@@ -573,11 +646,32 @@ public class CadastroPessoal extends javax.swing.JDialog {
                                         p.setIdBairro(bairro.getIdBairro());
                                         p.setIdLogradouro(endereco.getIdBairro());
                                         p.setCEP_ZIP(cep_zip.getCep_zip());
-                                        
-                                        return true;
+
+                                        if (jtfTelefone.getText().equals("")) {
+                                            m = new Mensagens();
+                                            m.jopAlerta("Por favor preencha o campo 'Telefone'.");
+                                            return false;
+                                        } else {
+
+                                            Telefone t = new Telefone();
+                                            if (VerificaNumeros.verificaNumeros(jtfTelefone.getText())) {
+                                                t.setNumero(Integer.parseInt(jtfTelefone.getText()));
+                                            } else {
+                                                Mensagens m = new Mensagens();
+                                                m.jopAlerta("Informe apenas números no campo 'Telefone'.");
+                                            }
+                                            if (jftfDataNascimento.getText().equals("")) {
+                                                m = new Mensagens();
+                                                m.jopAlerta("Por favor preencha o campo 'Data de Nascimento'.");
+                                                return false;
+                                            } else {
+
+                                                p.setNascimento((java.util.Date) (Date) jftfDataNascimento.getValue());
+                                            }
+
+                                            return true;
+                                        }
                                     }
-
-
                                 }
                             }
                         }
@@ -587,4 +681,3 @@ public class CadastroPessoal extends javax.swing.JDialog {
         }
     }
 }
-
