@@ -91,7 +91,7 @@ public class PessoaDAO {
             if (validaCadastroPessoa(pessoa)) {
                 pessoa = buscaPessoa(pessoa);
                 insereTelefonePessoa(pessoa, telefone);
-                validaCadastroTelefone(telefone, pessoa);                   
+                validaCadastroTelefone(telefone, pessoa);
                 return true;
             } else {
                 return false;
@@ -220,6 +220,67 @@ public class PessoaDAO {
 
     }
 
+    public Pessoa alterarPessoa(Pessoa pessoa) {
+
+        PreparedStatement stmt;
+        ResultSet rs;
+        Statement st;
+
+        try {
+
+            stmt = this.con.prepareStatement(""
+                    + "UPDATE pessoa SET "
+                    + "`nome`          = ?,"
+                    + "`CPF_CNPJ`      = ?,"
+                    + "`RG`            = ?,"
+                    + "`nascimento`    = ?,"
+                    + "`CTPS_Numero`   = ?,"
+                    + "`CTPS_Serie`    = ?,"
+                    + "`CTPS_UF`       = ?,"
+                    + "`id_Pais`       = ?,"
+                    + "`id_Estado`     = ?,"
+                    + "`id_Cidade`     = ?,"
+                    + "`id_Logradouro` = ?,"
+                    + "`CEP_ZIP`       = ?,"
+                    + "`numero`        = ?,"
+                    + "`vcomplemento`  = ?,"
+                    + "`idBairro`      = ?)"
+                    + "WHERE "
+                    + "`id`            = ?;");
+
+            java.sql.Date dataNascimento = new java.sql.Date(pessoa.getNascimento().getTime());
+
+            stmt.setString(1, pessoa.getNome());
+            stmt.setInt(2, pessoa.getCPF_CNPJ());
+            stmt.setInt(3, pessoa.getRG());
+            stmt.setDate(4, dataNascimento);
+            stmt.setInt(5, pessoa.getCTPS_Numero());
+            stmt.setInt(6, pessoa.getCTPS_Serie());
+            stmt.setString(7, pessoa.getCTPS_UF());
+            stmt.setInt(8, pessoa.getIdPais());
+            stmt.setInt(9, pessoa.getIdEstado());
+            stmt.setInt(10, pessoa.getIdCidade());
+            stmt.setInt(11, pessoa.getIdLogradouro());
+            stmt.setInt(12, pessoa.getCEP_ZIP());
+            stmt.setInt(13, pessoa.getNumero());
+            stmt.setString(14, pessoa.getComplemento());
+            stmt.setInt(15, pessoa.getIdBairro());
+            stmt.setInt(16, pessoa.getIdPessoa());
+            stmt.execute();
+
+            buscaPessoa(pessoa);
+            return pessoa;
+
+        } catch (SQLException ex) {
+
+            Logger.getLogger(ControladorIncluirBanco.class.getName()).log(Level.SEVERE, null, ex);
+            Mensagens erro = new Mensagens();
+            erro.jopError("Erro ao gravar dados no servidor de banco de dados:\nSQLException: " + ex.getMessage());
+
+            return null;
+        }
+    }
+
     public boolean insereTelefonePessoa(Pessoa pessoa, Telefone telefone) {
 
         PreparedStatement stmt;
@@ -292,7 +353,7 @@ public class PessoaDAO {
 
         }
     }
-    
+
     public Telefone buscaTelefone(Telefone telefone, Pessoa pessoa) {
         ResultSet rs;
         Mensagens mensagem = new Mensagens();
@@ -331,5 +392,4 @@ public class PessoaDAO {
 
         }
     }
-    
 }
