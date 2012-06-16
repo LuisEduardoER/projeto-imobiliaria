@@ -442,13 +442,16 @@ public class CadastroPessoal extends javax.swing.JDialog {
      * @param args the command line arguments
      */
     private void botaoGravarActionPerformed(java.awt.event.ActionEvent evt) {
-        validaCampos();
-        controladorPessoa = new ControladorPessoa();
-        Telefone t = new Telefone(12345678, 0, 45, 0);
-        boolean inserePessoa = controladorPessoa.inserePessoa(p, t);
-        if (inserePessoa) {
-            Mensagens m = new Mensagens();
-            m.jopAviso("Cadastro realizado com sucesso!");
+        if (validaCampos()) {
+            controladorPessoa = new ControladorPessoa();
+            Telefone t = new Telefone(12345678, 0, 45, 0);
+            
+            boolean inserePessoa = controladorPessoa.inserePessoa(p, t);
+
+            if (inserePessoa) {
+                Mensagens m = new Mensagens();
+                m.jopAviso("Cadastro realizado com sucesso!");
+            }
         }
     }
 
@@ -560,9 +563,9 @@ public class CadastroPessoal extends javax.swing.JDialog {
             return false;
 
         } else {
-            Pessoa p = new Pessoa();
+            
 
-            p.setNome(jtfNome.getText());
+            this.p.setNome(jtfNome.getText());
 
             if (jtfRG.getText().equals("")) {
                 m = new Mensagens();
@@ -571,7 +574,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
 
             } else {
                 if (VerificaNumeros.verificaNumeros(jtfRG.getText())) {
-                    p.setRG(Integer.parseInt(jtfRG.getText()));
+                    this.p.setRG(Integer.parseInt(jtfRG.getText()));
                 } else {
                     Mensagens m = new Mensagens();
                     m.jopAlerta("Informe apenas números no campo 'RG'.");
@@ -583,7 +586,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
 
                 } else {
                     if (VerificaNumeros.verificaNumeros(jtfCPF_CNPJ.getText())) {
-                        p.setCPF_CNPJ(Integer.parseInt(jtfCPF_CNPJ.getText()));
+                       this.p.setCPF_CNPJ(Integer.parseInt(jtfCPF_CNPJ.getText()));
                     } else {
                         Mensagens m = new Mensagens();
                         m.jopAlerta("Informe apenas números no campo 'CPF/CNPJ'.");
@@ -619,7 +622,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
 
                             } else {
                                 if (VerificaNumeros.verificaNumeros(jtfNumero.getText())) {
-                                    p.setNumero(Integer.parseInt(jtfNumero.getText()));
+                                    this.p.setNumero(Integer.parseInt(jtfNumero.getText()));
                                 } else {
                                     Mensagens m = new Mensagens();
                                     m.jopAlerta("Informe apenas números no campo 'Número'.");
@@ -639,13 +642,13 @@ public class CadastroPessoal extends javax.swing.JDialog {
                                         m.jopAlerta("Por favor preencha o campo 'Complemento'.");
                                         return false;
                                     } else {
-                                        p.setComplemento(jtfComplemento.getText());
-                                        p.setIdPais(pais.getCodigo());
-                                        p.setIdEstado(estado.getId());
-                                        p.setIdCidade(cidade.getCodigo());
-                                        p.setIdBairro(bairro.getIdBairro());
-                                        p.setIdLogradouro(endereco.getIdBairro());
-                                        p.setCEP_ZIP(cep_zip.getCep_zip());
+                                        this.p.setComplemento(jtfComplemento.getText());
+                                        this.p.setIdPais(pais.getCodigo());
+                                        this.p.setIdEstado(estado.getId());
+                                        this.p.setIdCidade(cidade.getCodigo());
+                                        this.p.setIdBairro(bairro.getIdBairro());
+                                        this.p.setIdLogradouro(endereco.getIdBairro());
+                                        this.p.setCEP_ZIP(cep_zip.getCep_zip());
 
                                         if (jtfTelefone.getText().equals("")) {
                                             m = new Mensagens();
@@ -666,7 +669,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
                                                 return false;
                                             } else {
 
-                                                p.setNascimento((java.util.Date) (Date) jftfDataNascimento.getValue());
+                                                this.p.setNascimento((java.util.Date) (Date) jftfDataNascimento.getValue());
                                             }
 
                                             return true;

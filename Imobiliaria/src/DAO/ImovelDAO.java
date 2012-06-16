@@ -7,15 +7,10 @@ package DAO;
 import Controlador.Conexao;
 import Controlador.ControladorIncluirBanco;
 import Controlador.Mensagens;
-import Modelo.Embutido;
 import Modelo.Imovel;
-import Modelo.TipoImovel;
 import java.sql.*;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
 
 /**
  *

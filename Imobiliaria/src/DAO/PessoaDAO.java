@@ -7,7 +7,6 @@ package DAO;
 import Controlador.Conexao;
 import Controlador.ControladorIncluirBanco;
 import Controlador.Mensagens;
-import Modelo.Imovel;
 import Modelo.Pessoa;
 import Modelo.Telefone;
 import java.sql.*;
@@ -31,7 +30,7 @@ public class PessoaDAO {
         Statement st;
 
         try {
-
+            
             stmt = this.con.prepareStatement(""
                     + "INSERT INTO pessoa"
                     + "(`id`,"
@@ -48,8 +47,8 @@ public class PessoaDAO {
                     + "`id_Logradouro`,"
                     + "`CEP_ZIP`,"
                     + "`numero`,"
-                    + "`vcomplemento,"
-                    + "idBairro`)"
+                    + "`complemento`,"
+                    + "`idBairro`)"
                     + "VALUES (?," //id1
                     + "        ?,"//nome2
                     + "        ?,"//CPF_CNPJ3
@@ -67,13 +66,13 @@ public class PessoaDAO {
                     + "        ?,"//vcomplemento15
                     + "        ?);");//idBairro16
 
-            java.sql.Date dataNascimento = new java.sql.Date(pessoa.getNascimento().getTime());
+//            java.sql.Date dataNascimento = new java.sql.Date(pessoa.getNascimento().getTime());
 
             stmt.setInt(1, 0);
             stmt.setString(2, pessoa.getNome());
             stmt.setInt(3, pessoa.getCPF_CNPJ());
             stmt.setInt(4, pessoa.getRG());
-            stmt.setDate(5, dataNascimento);
+            stmt.setDate(5, null);
             stmt.setInt(6, pessoa.getCTPS_Numero());
             stmt.setInt(7, pessoa.getCTPS_Serie());
             stmt.setString(8, pessoa.getCTPS_UF());
@@ -89,15 +88,15 @@ public class PessoaDAO {
 
 
             if (validaCadastroPessoa(pessoa)) {
+                con.commit();
                 pessoa = buscaPessoa(pessoa);
                 insereTelefonePessoa(pessoa, telefone);
                 validaCadastroTelefone(telefone, pessoa);
                 return true;
             } else {
+                con.rollback();
                 return false;
             }
-
-
 
         } catch (SQLException ex) {
 
@@ -118,10 +117,10 @@ public class PessoaDAO {
 
             stmt = PessoaDAO.con.prepareStatement(""
                     + "SELECT * FROM pessoa "
-                    + "WHERE nome = ?"
-                    + "AND CPF_CNPJ = ?"
-                    + "AND RG = ?"
-                    + "AND dataNascimento = ?;");
+                    + "WHERE nome = ? "
+                    + "AND CPF_CNPJ = ? "
+                    + "AND RG = ? "
+                    + "AND nascimento = ?;");
 
             java.sql.Date dataNascimento = new java.sql.Date(pessoa.getNascimento().getTime());
 

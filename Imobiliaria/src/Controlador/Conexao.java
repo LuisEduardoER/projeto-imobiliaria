@@ -56,6 +56,7 @@ public class Conexao {
             try {
                 Class.forName("com.mysql.jdbc.Driver").newInstance();
                 Connection conexao = DriverManager.getConnection(url, login, senha);
+                conexao.setAutoCommit(false);
                 return conexao;
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(null, ex + "\nErro ao conectar ao Servidor de banco de dados! \nVerifique as Configurações de Conexão.");
