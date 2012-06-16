@@ -152,6 +152,7 @@ public class PessoaDAO {
 
                 return true;
             } else {
+                mensagem.jopAlerta("Não foi possível validar a gravação do cadastro.\nCadastro não realizado.");
                 return false;
             }
 
