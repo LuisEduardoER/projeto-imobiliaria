@@ -8,11 +8,14 @@ import Componentes.Componentes;
 import Controlador.CarregaEndereco;
 import Controlador.ControladorPessoa;
 import Controlador.Mensagens;
-import Controlador.MontaObjetosParaInserirBanco;
 import Modelo.*;
 import Util.VerificaNumeros;
 import java.awt.event.ItemEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 
 /**
@@ -20,14 +23,14 @@ import javax.swing.JButton;
  * @author Bruno
  */
 public class CadastroPessoal extends javax.swing.JDialog {
-
+    SimpleDateFormat formataData = new SimpleDateFormat("dd/MM/yyyy");
     Mensagens m;
     CarregaEndereco carregaEndereco = new CarregaEndereco();
     Componentes c = new Componentes();
     JButton botaoGravar;
     ControladorPessoa controladorPessoa;
     Pessoa p = new Pessoa();
-
+    
     /**
      * Creates new form CadastroPessoal
      */
@@ -105,8 +108,12 @@ public class CadastroPessoal extends javax.swing.JDialog {
         jlTelefone = new javax.swing.JLabel();
         jlDataNascimento = new javax.swing.JLabel();
         jpTextFieldsDPessoais = new javax.swing.JPanel();
-        jtfTelefone = new javax.swing.JTextField();
         jftfDataNascimento = new javax.swing.JFormattedTextField();
+        jPanel1 = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jTextField1 = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jtfTelefone = new javax.swing.JTextField();
         jpControles = new javax.swing.JPanel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
@@ -288,11 +295,21 @@ public class CadastroPessoal extends javax.swing.JDialog {
         jlDataNascimento.setText("Data de Nascimento:");
         jpLablesDPessoais.add(jlDataNascimento);
 
-        jpTextFieldsDPessoais.setLayout(new java.awt.GridLayout(2, 1, 0, 8));
-        jpTextFieldsDPessoais.add(jtfTelefone);
+        jpTextFieldsDPessoais.setLayout(new java.awt.GridLayout(1, 1, 0, 5));
 
         jftfDataNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
+        jftfDataNascimento.setRequestFocusEnabled(false);
         jpTextFieldsDPessoais.add(jftfDataNascimento);
+
+        jPanel1.setLayout(new java.awt.GridLayout(1, 4, 5, 5));
+
+        jLabel3.setText("DDD:");
+        jPanel1.add(jLabel3);
+        jPanel1.add(jTextField1);
+
+        jLabel2.setText("Número:");
+        jPanel1.add(jLabel2);
+        jPanel1.add(jtfTelefone);
 
         javax.swing.GroupLayout jpDadosPessoaisLayout = new javax.swing.GroupLayout(jpDadosPessoais);
         jpDadosPessoais.setLayout(jpDadosPessoaisLayout);
@@ -301,17 +318,20 @@ public class CadastroPessoal extends javax.swing.JDialog {
             .addGroup(jpDadosPessoaisLayout.createSequentialGroup()
                 .addComponent(jpLablesDPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpTextFieldsDPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jpDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jpTextFieldsDPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jpDadosPessoaisLayout.setVerticalGroup(
             jpDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpDadosPessoaisLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jpDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jpLablesDPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jpTextFieldsDPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(37, Short.MAX_VALUE))
+                    .addComponent(jpTextFieldsDPessoais, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jpAgrupadorLayout = new javax.swing.GroupLayout(jpAgrupador);
@@ -353,7 +373,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
         jpPessoal.setLayout(jpPessoalLayout);
         jpPessoalLayout.setHorizontalGroup(
             jpPessoalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jspPainelRolagem, javax.swing.GroupLayout.DEFAULT_SIZE, 688, Short.MAX_VALUE)
+            .addComponent(jspPainelRolagem, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE)
             .addGroup(jpPessoalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jpControles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -374,7 +394,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
         jpDadosFuncionario.setLayout(jpDadosFuncionarioLayout);
         jpDadosFuncionarioLayout.setHorizontalGroup(
             jpDadosFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 688, Short.MAX_VALUE)
+            .addGap(0, 694, Short.MAX_VALUE)
         );
         jpDadosFuncionarioLayout.setVerticalGroup(
             jpDadosFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -387,7 +407,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jtpAbas, javax.swing.GroupLayout.DEFAULT_SIZE, 693, Short.MAX_VALUE)
+            .addComponent(jtpAbas, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -508,6 +528,10 @@ public class CadastroPessoal extends javax.swing.JDialog {
     private javax.swing.Box.Filler filler4;
     private javax.swing.Box.Filler filler5;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTextField jTextField1;
     private javax.swing.JComboBox jcbBairro;
     private javax.swing.JComboBox jcbCEP_ZIP;
     private javax.swing.JComboBox jcbCidade;
@@ -668,8 +692,13 @@ public class CadastroPessoal extends javax.swing.JDialog {
                                                 m.jopAlerta("Por favor preencha o campo 'Data de Nascimento'.");
                                                 return false;
                                             } else {
-
-                                                this.p.setNascimento((java.util.Date) (Date) jftfDataNascimento.getValue());
+                                                try {
+                                                    //simpleDateFormate
+                                                    formataData = (SimpleDateFormat) jftfDataNascimento.getValue();
+                                                    this.p.setNascimento(new SimpleDateFormat("dd/MM/yyyy").parse(jftfDataNascimento.getText()));
+                                                } catch (ParseException ex) {
+                                                    Logger.getLogger(CadastroPessoal.class.getName()).log(Level.SEVERE, null, ex);
+                                                }
                                             }
 
                                             return true;
