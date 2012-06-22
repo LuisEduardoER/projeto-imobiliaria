@@ -17,6 +17,7 @@ import java.util.logging.Logger;
  *
  * @author Bruno
  */
+
 public class PessoaDAO {
 
     static Conexao c = new Conexao();
@@ -30,7 +31,7 @@ public class PessoaDAO {
         Statement st;
 
         try {
-            
+
             stmt = this.con.prepareStatement(""
                     + "INSERT INTO pessoa"
                     + "(`id`,"
@@ -48,7 +49,7 @@ public class PessoaDAO {
                     + "`CEP_ZIP`,"
                     + "`numero`,"
                     + "`complemento`,"
-                    + "`idBairro`)"
+                    + "`id_Bairro`)"
                     + "VALUES (?," //id1
                     + "        ?,"//nome2
                     + "        ?,"//CPF_CNPJ3
@@ -63,16 +64,16 @@ public class PessoaDAO {
                     + "        ?,"//id_Logradouro12
                     + "        ?,"//CEP_ZIP13
                     + "        ?,"//numero14
-                    + "        ?,"//vcomplemento15
-                    + "        ?);");//idBairro16
+                    + "        ?,"//complemento15
+                    + "        ?);");//id_Bairro16
 
-//            java.sql.Date dataNascimento = new java.sql.Date(pessoa.getNascimento().getTime());
+            java.sql.Date dataNascimento = new java.sql.Date(pessoa.getNascimento().getTime());
 
             stmt.setInt(1, 0);
             stmt.setString(2, pessoa.getNome());
             stmt.setInt(3, pessoa.getCPF_CNPJ());
             stmt.setInt(4, pessoa.getRG());
-            stmt.setDate(5, null);
+            stmt.setDate(5, dataNascimento);
             stmt.setInt(6, pessoa.getCTPS_Numero());
             stmt.setInt(7, pessoa.getCTPS_Serie());
             stmt.setString(8, pessoa.getCTPS_UF());
@@ -102,7 +103,7 @@ public class PessoaDAO {
 
             Logger.getLogger(ControladorIncluirBanco.class.getName()).log(Level.SEVERE, null, ex);
             Mensagens erro = new Mensagens();
-            erro.jopError("Erro ao gravar dados no servidor de banco de dados:\nSQLException: " + ex.getMessage());
+            erro.jopError("Erro ao gravar dados no servidor de banco de dados:\nSQLException: " + ex.getMessage() + "\n inserePessoa");
 
             return false;
         }
@@ -132,23 +133,22 @@ public class PessoaDAO {
 
             if (rs.first()) {
 
-                pessoa.setCEP_ZIP(rs.getInt(""));
-                pessoa.setCPF_CNPJ(rs.getInt(""));
-                pessoa.setCTPS_Numero(rs.getInt(""));
-                pessoa.setCTPS_Serie(rs.getInt(""));
-                pessoa.setCTPS_UF(rs.getString(""));
-                pessoa.setIdPessoa(rs.getInt(""));
-                pessoa.setComplemento(rs.getString(""));
-                pessoa.setFone(rs.getString(""));
-                pessoa.setIdBairro(rs.getInt(""));
-                pessoa.setIdCidade(rs.getInt(""));
-                pessoa.setIdEstado(rs.getInt(""));
-                pessoa.setIdLogradouro(rs.getInt(""));
-                pessoa.setIdPais(rs.getInt(""));
-                pessoa.setNascimento(rs.getDate(""));
-                pessoa.setNome(rs.getString(""));
-                pessoa.setNumero(rs.getInt(""));
-                pessoa.setRG(rs.getInt(""));
+                pessoa.setCEP_ZIP(rs.getInt("CEP_ZIP"));
+                pessoa.setCPF_CNPJ(rs.getInt("CPF_CNPJ"));
+                pessoa.setCTPS_Numero(rs.getInt("CTPS_Numero"));
+                pessoa.setCTPS_Serie(rs.getInt("CTPS_Serie"));
+                pessoa.setCTPS_UF(rs.getString("CTPS_UF"));
+                pessoa.setIdPessoa(rs.getInt("id"));
+                pessoa.setComplemento(rs.getString("complemento"));
+                pessoa.setIdBairro(rs.getInt("id_Bairro"));
+                pessoa.setIdCidade(rs.getInt("id_Cidade"));
+                pessoa.setIdEstado(rs.getInt("id_Estado"));
+                pessoa.setIdLogradouro(rs.getInt("id_Logradouro"));
+                pessoa.setIdPais(rs.getInt("id_Pais"));
+                pessoa.setNascimento(rs.getDate("nascimento"));
+                pessoa.setNome(rs.getString("nome"));
+                pessoa.setNumero(rs.getInt("numero"));
+                pessoa.setRG(rs.getInt("rg"));
 
                 return true;
             } else {
@@ -158,7 +158,7 @@ public class PessoaDAO {
 
         } catch (SQLException ex) {
             Logger.getLogger(TipoImovelDAO.class.getName()).log(Level.SEVERE, null, ex);
-            mensagem.jopError("Erro ao buscar o cadastro no servidor de banco de dados.\nSQLException: " + ex.getMessage());
+            mensagem.jopError("Erro ao buscar o cadastro no servidor de banco de dados.\nSQLException: " + ex.getMessage() + "\n validaCadastroPessoa");
             return false;
         }
 
@@ -174,38 +174,29 @@ public class PessoaDAO {
 
             stmt = PessoaDAO.con.prepareStatement(""
                     + "SELECT * FROM pessoa "
-                    + "WHERE nome = ?"
-                    + "AND CPF_CNPJ = ?"
-                    + "AND RG = ?"
-                    + "AND dataNascimento = ?;");
+                    + "WHERE id = ?" );
 
-            java.sql.Date dataNascimento = new java.sql.Date(pessoa.getNascimento().getTime());
-
-            stmt.setString(1, pessoa.getNome());
-            stmt.setInt(2, pessoa.getCPF_CNPJ());
-            stmt.setInt(3, pessoa.getRG());
-            stmt.setDate(4, dataNascimento);
+            stmt.setInt(1, pessoa.getIdPessoa());
             rs = stmt.executeQuery();
 
             if (rs.first()) {
 
-                pessoa.setCEP_ZIP(rs.getInt(""));
-                pessoa.setCPF_CNPJ(rs.getInt(""));
-                pessoa.setCTPS_Numero(rs.getInt(""));
-                pessoa.setCTPS_Serie(rs.getInt(""));
-                pessoa.setCTPS_UF(rs.getString(""));
-                pessoa.setIdPessoa(rs.getInt(""));
-                pessoa.setComplemento(rs.getString(""));
-                pessoa.setFone(rs.getString(""));
-                pessoa.setIdBairro(rs.getInt(""));
-                pessoa.setIdCidade(rs.getInt(""));
-                pessoa.setIdEstado(rs.getInt(""));
-                pessoa.setIdLogradouro(rs.getInt(""));
-                pessoa.setIdPais(rs.getInt(""));
-                pessoa.setNascimento(rs.getDate(""));
-                pessoa.setNome(rs.getString(""));
-                pessoa.setNumero(rs.getInt(""));
-                pessoa.setRG(rs.getInt(""));
+                pessoa.setCEP_ZIP(rs.getInt("CEP_ZIP"));
+                pessoa.setCPF_CNPJ(rs.getInt("CPF_CNPJ"));
+                pessoa.setCTPS_Numero(rs.getInt("CTPS_Numero"));
+                pessoa.setCTPS_Serie(rs.getInt("CTPS_Serie"));
+                pessoa.setCTPS_UF(rs.getString("CTPS_UF"));
+                pessoa.setIdPessoa(rs.getInt("id"));
+                pessoa.setComplemento(rs.getString("complemento"));
+                pessoa.setIdBairro(rs.getInt("id_Bairro"));
+                pessoa.setIdCidade(rs.getInt("id_Cidade"));
+                pessoa.setIdEstado(rs.getInt("id_Estado"));
+                pessoa.setIdLogradouro(rs.getInt("id_Logradouro"));
+                pessoa.setIdPais(rs.getInt("id_Pais"));
+                pessoa.setNascimento(rs.getDate("nascimento"));
+                pessoa.setNome(rs.getString("nome"));
+                pessoa.setNumero(rs.getInt("numero"));
+                pessoa.setRG(rs.getInt("rg"));
 
                 return pessoa;
             } else {
@@ -214,7 +205,7 @@ public class PessoaDAO {
 
         } catch (SQLException ex) {
             Logger.getLogger(TipoImovelDAO.class.getName()).log(Level.SEVERE, null, ex);
-            mensagem.jopError("Erro ao validar o cadastro no servidor de banco de dados.\nSQLException: " + ex.getMessage());
+            mensagem.jopError("Erro ao buscar o cadastro no servidor de banco de dados.\nSQLException: " + ex.getMessage() + "\n buscaPessoa");
             return null;
         }
 
@@ -275,7 +266,7 @@ public class PessoaDAO {
 
             Logger.getLogger(ControladorIncluirBanco.class.getName()).log(Level.SEVERE, null, ex);
             Mensagens erro = new Mensagens();
-            erro.jopError("Erro ao gravar dados no servidor de banco de dados:\nSQLException: " + ex.getMessage());
+            erro.jopError("Erro ao gravar dados no servidor de banco de dados:\nSQLException: " + ex.getMessage() + "\n alterarPessoa");
 
             return null;
         }
@@ -309,7 +300,7 @@ public class PessoaDAO {
 
             Logger.getLogger(ControladorIncluirBanco.class.getName()).log(Level.SEVERE, null, ex);
             Mensagens erro = new Mensagens();
-            erro.jopError("Erro ao gravar dados no servidor de banco de dados:\nSQLException: " + ex.getMessage());
+            erro.jopError("Erro ao gravar dados no servidor de banco de dados:\nSQLException: " + ex.getMessage() + "\n insereTelefone");
 
             return false;
         }
@@ -347,7 +338,7 @@ public class PessoaDAO {
 
             Logger.getLogger(ControladorIncluirBanco.class.getName()).log(Level.SEVERE, null, ex);
             Mensagens erro = new Mensagens();
-            erro.jopError("Erro ao buscar dados no servidor de banco de dados:\nSQLException: " + ex.getMessage());
+            erro.jopError("Erro ao buscar dados no servidor de banco de dados:\nSQLException: " + ex.getMessage() + "\n validaCadastroTelefone");
 
             return false;
 
@@ -386,10 +377,41 @@ public class PessoaDAO {
 
             Logger.getLogger(ControladorIncluirBanco.class.getName()).log(Level.SEVERE, null, ex);
             Mensagens erro = new Mensagens();
-            erro.jopError("Erro ao buscar dados no servidor de banco de dados:\nSQLException: " + ex.getMessage());
+            erro.jopError("Erro ao buscar dados do no servidor de banco de dados:\nSQLException: " + ex.getMessage() + "\n buscaTelefone");
 
             return null;
 
         }
+    }
+
+    public boolean removePessoa(Pessoa pessoa) {
+
+        Mensagens mensagem = new Mensagens();
+
+        try {
+
+            stmt = PessoaDAO.con.prepareStatement(""
+                    + "DELETE * FROM pessoa "
+                    + "WHERE id = ?; ");
+
+            stmt.setInt(1, pessoa.getIdPessoa());
+            stmt.executeQuery();
+
+            if (!validaCadastroPessoa(pessoa)) {
+                mensagem.jopError("Cadastro removido com sucesso.");
+
+                return true;
+            } else {
+                mensagem.jopAviso("Não foi possível remover o cadastro.");
+                return false;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TipoImovelDAO.class.getName()).log(Level.SEVERE, null, ex);
+            mensagem.jopError("Erro ao remover o cadastro no servidor de banco de dados.\nSQLException: " + ex.getMessage() + "\n removePessoa");
+            return false;
+        }
+
+
     }
 }
