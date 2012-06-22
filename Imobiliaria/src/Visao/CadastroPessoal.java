@@ -13,7 +13,6 @@ import Util.VerificaNumeros;
 import java.awt.event.ItemEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -23,14 +22,18 @@ import javax.swing.JButton;
  * @author Bruno
  */
 public class CadastroPessoal extends javax.swing.JDialog {
+
     SimpleDateFormat formataData = new SimpleDateFormat("dd/MM/yyyy");
     Mensagens m;
-    CarregaEndereco carregaEndereco = new CarregaEndereco();
     Componentes c = new Componentes();
     JButton botaoGravar;
+    JButton botaoExcluir;
+    JButton botaoBuscar;
+    CarregaEndereco carregaEndereco = new CarregaEndereco();
     ControladorPessoa controladorPessoa;
     Pessoa p = new Pessoa();
-    
+    Telefone t = new Telefone();
+
     /**
      * Creates new form CadastroPessoal
      */
@@ -38,6 +41,8 @@ public class CadastroPessoal extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         botaoGravar = c.criaBotaoGravar();
+        botaoExcluir = c.criaBotaoExcluir();
+        botaoBuscar = c.criaBotaoBuscar();
 
 
         botaoGravar.addActionListener(new java.awt.event.ActionListener() {
@@ -47,7 +52,23 @@ public class CadastroPessoal extends javax.swing.JDialog {
             }
         });
 
+        botaoExcluir.addActionListener(new java.awt.event.ActionListener() {
+
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoExcluirActionPerformed(evt);
+            }
+        });
+
+        botaoBuscar.addActionListener(new java.awt.event.ActionListener() {
+
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoBuscarActionPerformed(evt);
+            }
+        });
+
         jpControles.add(botaoGravar);
+        jpControles.add(botaoExcluir);
+        jpControles.add(botaoBuscar);
 
         jcbPais.setModel(carregaEndereco.carregaPais());
         jcbPais.setSelectedIndex(0);
@@ -111,7 +132,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
         jftfDataNascimento = new javax.swing.JFormattedTextField();
         jPanel1 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jtfDDD = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jtfTelefone = new javax.swing.JTextField();
         jpControles = new javax.swing.JPanel();
@@ -298,14 +319,13 @@ public class CadastroPessoal extends javax.swing.JDialog {
         jpTextFieldsDPessoais.setLayout(new java.awt.GridLayout(1, 1, 0, 5));
 
         jftfDataNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
-        jftfDataNascimento.setRequestFocusEnabled(false);
         jpTextFieldsDPessoais.add(jftfDataNascimento);
 
         jPanel1.setLayout(new java.awt.GridLayout(1, 4, 5, 5));
 
         jLabel3.setText("DDD:");
         jPanel1.add(jLabel3);
-        jPanel1.add(jTextField1);
+        jPanel1.add(jtfDDD);
 
         jLabel2.setText("Número:");
         jPanel1.add(jLabel2);
@@ -425,7 +445,6 @@ public class CadastroPessoal extends javax.swing.JDialog {
 
     private void jcbCidadeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbCidadeItemStateChanged
         if (evt.getStateChange() == ItemEvent.DESELECTED) {
-            // jcbBairro.setModel(null);
             jcbBairro.setEnabled(true);
             jcbBairro.setModel(carregaEndereco.carregaBairro((Cidade) jcbCidade.getSelectedItem()));
         }
@@ -433,7 +452,6 @@ public class CadastroPessoal extends javax.swing.JDialog {
 
     private void jcbLogradouroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbLogradouroItemStateChanged
         if (evt.getStateChange() == ItemEvent.DESELECTED) {
-            //  jcbCEP_ZIP.setModel(null);
             jcbCEP_ZIP.setEnabled(true);
             jcbCEP_ZIP.setModel(carregaEndereco.carregaCEP_ZIP((Bairro) jcbBairro.getSelectedItem()));
         }
@@ -444,7 +462,6 @@ public class CadastroPessoal extends javax.swing.JDialog {
 
     private void jcbEstadoItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbEstadoItemStateChanged
         if (evt.getStateChange() == ItemEvent.DESELECTED) {
-            //jcbCidade.setModel(null);
             jcbCidade.setEnabled(true);
             jcbCidade.setModel(carregaEndereco.carregaCidade((Estado) jcbEstado.getSelectedItem()));
         }
@@ -452,7 +469,6 @@ public class CadastroPessoal extends javax.swing.JDialog {
 
     private void jcbBairroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbBairroItemStateChanged
         if (evt.getStateChange() == ItemEvent.DESELECTED) {
-            //jcbLogradouro.setModel(null);
             jcbLogradouro.setEnabled(true);
             jcbLogradouro.setModel(carregaEndereco.carregaEndereco((Bairro) jcbBairro.getSelectedItem()));
         }
@@ -464,14 +480,35 @@ public class CadastroPessoal extends javax.swing.JDialog {
     private void botaoGravarActionPerformed(java.awt.event.ActionEvent evt) {
         if (validaCampos()) {
             controladorPessoa = new ControladorPessoa();
-            Telefone t = new Telefone(12345678, 0, 45, 0);
-            
+
             boolean inserePessoa = controladorPessoa.inserePessoa(p, t);
 
             if (inserePessoa) {
                 Mensagens m = new Mensagens();
                 m.jopAviso("Cadastro realizado com sucesso!");
             }
+        }
+    }
+
+    private void botaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {
+        if (p.getNome() != null) {
+            controladorPessoa = new ControladorPessoa();
+            controladorPessoa.removePessoa(p);
+        } else {
+            m = new Mensagens();
+            m.jopAlerta("É necessário buscar um cadastro antes de excluir.");
+        }
+    }
+
+    private void botaoBuscarActionPerformed(java.awt.event.ActionEvent evt) {
+        if (!jtfBuscar.getText().equals("")) {
+            controladorPessoa = new ControladorPessoa();
+            p.setIdPessoa(Integer.parseInt(jtfBuscar.getText()));
+            p = controladorPessoa.buscaPessoa(p);
+            montaTelaResultadoBusca(p);
+        } else {
+            m = new Mensagens();
+            m.jopAlerta("É necessário informar o código de um cadastro antes de pesquisar.");
         }
     }
 
@@ -531,7 +568,6 @@ public class CadastroPessoal extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JComboBox jcbBairro;
     private javax.swing.JComboBox jcbCEP_ZIP;
     private javax.swing.JComboBox jcbCidade;
@@ -572,6 +608,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
     private javax.swing.JTextField jtfBuscar;
     private javax.swing.JTextField jtfCPF_CNPJ;
     private javax.swing.JTextField jtfComplemento;
+    private javax.swing.JTextField jtfDDD;
     private javax.swing.JTextField jtfNome;
     private javax.swing.JTextField jtfNumero;
     private javax.swing.JTextField jtfRG;
@@ -587,7 +624,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
             return false;
 
         } else {
-            
+
 
             this.p.setNome(jtfNome.getText());
 
@@ -610,7 +647,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
 
                 } else {
                     if (VerificaNumeros.verificaNumeros(jtfCPF_CNPJ.getText())) {
-                       this.p.setCPF_CNPJ(Integer.parseInt(jtfCPF_CNPJ.getText()));
+                        this.p.setCPF_CNPJ(Integer.parseInt(jtfCPF_CNPJ.getText()));
                     } else {
                         Mensagens m = new Mensagens();
                         m.jopAlerta("Informe apenas números no campo 'CPF/CNPJ'.");
@@ -680,9 +717,11 @@ public class CadastroPessoal extends javax.swing.JDialog {
                                             return false;
                                         } else {
 
-                                            Telefone t = new Telefone();
                                             if (VerificaNumeros.verificaNumeros(jtfTelefone.getText())) {
                                                 t.setNumero(Integer.parseInt(jtfTelefone.getText()));
+                                                if (VerificaNumeros.verificaNumeros(jtfDDD.getText())) {
+                                                    t.setDDD(Integer.parseInt(jtfDDD.getText()));
+                                                }
                                             } else {
                                                 Mensagens m = new Mensagens();
                                                 m.jopAlerta("Informe apenas números no campo 'Telefone'.");
@@ -693,8 +732,6 @@ public class CadastroPessoal extends javax.swing.JDialog {
                                                 return false;
                                             } else {
                                                 try {
-                                                    //simpleDateFormate
-                                                    formataData = (SimpleDateFormat) jftfDataNascimento.getValue();
                                                     this.p.setNascimento(new SimpleDateFormat("dd/MM/yyyy").parse(jftfDataNascimento.getText()));
                                                 } catch (ParseException ex) {
                                                     Logger.getLogger(CadastroPessoal.class.getName()).log(Level.SEVERE, null, ex);
@@ -711,5 +748,14 @@ public class CadastroPessoal extends javax.swing.JDialog {
                 }
             }
         }
+    }
+
+    private void montaTelaResultadoBusca(Pessoa p) {
+        jtfNome.setText(p.getNome());
+        jtfCPF_CNPJ.setText(p.getCPF_CNPJ()+"");
+        jtfRG.setText(p.getRG()+"");
+        jtfNumero.setText(p.getNumero()+"");
+        jtfComplemento.setText(p.getComplemento());
+        
     }
 }
