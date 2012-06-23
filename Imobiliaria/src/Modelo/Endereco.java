@@ -20,6 +20,15 @@ public class Endereco {
     public Endereco() {
     }
 
+    public Endereco(int idEndereco, int idBairro, String logradouro, int CEP_ZIP, int cdTipoEnderecos, String complemento) {
+        this.idEndereco = idEndereco;
+        this.idBairro = idBairro;
+        this.logradouro = logradouro;
+        this.CEP_ZIP = CEP_ZIP;
+        this.cdTipoEnderecos = cdTipoEnderecos;
+        this.complemento = complemento;
+    }
+    
     public int getCEP_ZIP() {
         return CEP_ZIP;
     }

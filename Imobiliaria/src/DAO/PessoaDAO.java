@@ -395,7 +395,7 @@ public class PessoaDAO {
                     + "WHERE id = ?; ");
 
             stmt.setInt(1, pessoa.getIdPessoa());
-            stmt.executeQuery();
+            stmt.execute();
 
             if (!validaCadastroPessoa(pessoa)) {
                 mensagem.jopError("Cadastro removido com sucesso.");

@@ -16,6 +16,12 @@ public class Cidade {
     public Cidade() {
     }
 
+    public Cidade(String nome, int uf, int codigo) {
+        this.nome = nome;
+        this.uf = uf;
+        this.codigo = codigo;
+    }
+    
     public int getCodigo() {
         return codigo;
     }

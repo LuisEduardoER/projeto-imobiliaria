@@ -294,6 +294,6 @@ public class CarregaEnderecoDAO {
         return modeloCEP_ZIP;
     }
     
-    
+    // chamar carrega endereço e setar no combo o objeto com o ID no obj pessoa
 
 }

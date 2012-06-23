@@ -9,12 +9,20 @@ package Modelo;
  * @author Bruno
  */
 public class Estado {
+
     String nome;
     String uf;
     int idPais;
     int id;
 
     public Estado() {
+    }
+
+    public Estado(String nome, String uf, int idPais, int id) {
+        this.nome = nome;
+        this.uf = uf;
+        this.idPais = idPais;
+        this.id = id;
     }
 
     public int getId() {
