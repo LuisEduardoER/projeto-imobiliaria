@@ -10,9 +10,12 @@ import Controlador.ControladorPessoa;
 import Controlador.Mensagens;
 import Modelo.*;
 import Util.VerificaNumeros;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -63,6 +66,15 @@ public class CadastroPessoal extends javax.swing.JDialog {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoBuscarActionPerformed(evt);
+            }
+        });
+
+
+        jtfBuscar.addActionListener(new ActionListener() {
+
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                acaoBuscar();
             }
         });
 
@@ -478,16 +490,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
      * @param args the command line arguments
      */
     private void botaoGravarActionPerformed(java.awt.event.ActionEvent evt) {
-        if (validaCampos()) {
-            controladorPessoa = new ControladorPessoa();
-
-            boolean inserePessoa = controladorPessoa.inserePessoa(p, t);
-
-            if (inserePessoa) {
-                Mensagens m = new Mensagens();
-                m.jopAviso("Cadastro realizado com sucesso!");
-            }
-        }
+        acaoGravar();
     }
 
     private void botaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {
@@ -501,15 +504,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
     }
 
     private void botaoBuscarActionPerformed(java.awt.event.ActionEvent evt) {
-        if (!jtfBuscar.getText().equals("")) {
-            controladorPessoa = new ControladorPessoa();
-            p.setIdPessoa(Integer.parseInt(jtfBuscar.getText()));
-            p = controladorPessoa.buscaPessoa(p);
-            montaTelaResultadoBusca(p);
-        } else {
-            m = new Mensagens();
-            m.jopAlerta("É necessário informar o código de um cadastro antes de pesquisar.");
-        }
+        acaoBuscar();
     }
 
     public static void main(String args[]) {
@@ -750,12 +745,99 @@ public class CadastroPessoal extends javax.swing.JDialog {
         }
     }
 
-    private void montaTelaResultadoBusca(Pessoa p) {
-        jtfNome.setText(p.getNome());
-        jtfCPF_CNPJ.setText(p.getCPF_CNPJ()+"");
-        jtfRG.setText(p.getRG()+"");
-        jtfNumero.setText(p.getNumero()+"");
-        jtfComplemento.setText(p.getComplemento());
-        
+    public void acaoBuscar() {
+        if (!jtfBuscar.getText().equals("")) {
+            controladorPessoa = new ControladorPessoa();
+            p.setIdPessoa(Integer.parseInt(jtfBuscar.getText()));
+            p = controladorPessoa.buscaPessoa(p);
+
+            jtfNome.setText(p.getNome());
+            jtfCPF_CNPJ.setText(p.getCPF_CNPJ() + "");
+            jtfRG.setText(p.getRG() + "");
+            jtfNumero.setText(p.getNumero() + "");
+            jtfComplemento.setText(p.getComplemento());
+            jftfDataNascimento.setText(p.getNascimento().toString());
+
+            Pais pais = new Pais("", "", p.getIdPais());
+            Estado estado = new Estado("", "", 0, p.getIdEstado());
+            Cidade cidade = new Cidade("", 0, p.getIdCidade());
+            Bairro bairro = new Bairro(p.getIdBairro(), 0, "", "");
+            Bairro bairroCEP = new Bairro(p.getIdBairro(), 0, "", "");
+            Endereco endereco = new Endereco(0, p.getIdBairro(), "", 0, 0, "");
+
+            jcbPais.removeAll();
+            jcbEstado.removeAll();;
+            jcbCidade.removeAll();;
+            jcbBairro.removeAll();;
+            jcbLogradouro.removeAll();
+            jcbCEP_ZIP.removeAll();
+
+            jcbPais.setModel(carregaEndereco.carregaPais());
+            jcbEstado.setModel(carregaEndereco.carregaEstado((Pais) jcbPais.getSelectedItem()));
+            jcbCidade.setModel(carregaEndereco.carregaCidade(estado));
+            jcbBairro.setModel(carregaEndereco.carregaBairro(cidade));
+            jcbLogradouro.setModel(carregaEndereco.carregaEndereco(bairro));
+            jcbCEP_ZIP.setModel(carregaEndereco.carregaCEP_ZIP(bairroCEP));
+
+            pais.setCodigo(p.getIdPais());
+
+            jcbPais.setSelectedItem(pais);
+            jcbEstado.setSelectedItem(estado);
+            jcbCidade.setSelectedItem(cidade);
+            jcbBairro.setSelectedItem(bairro);
+            jcbCEP_ZIP.setSelectedItem(bairroCEP);
+            jcbLogradouro.setSelectedItem(m);
+
+            jcbCidade.setEnabled(true);
+            jcbBairro.setEnabled(true);
+            jcbLogradouro.setEnabled(true);
+            jcbCEP_ZIP.setEnabled(true);
+
+            jcbPais.updateUI();
+            jcbEstado.updateUI();
+            jcbCidade.updateUI();
+            jcbBairro.updateUI();
+            jcbLogradouro.updateUI();
+            jcbCEP_ZIP.updateUI();
+
+        } else {
+            m = new Mensagens();
+            m.jopAlerta("É necessário informar o código de um cadastro antes de pesquisar.");
+        }
+    }
+
+    public void acaoGravar() {
+        if (validaCampos()) {
+            controladorPessoa = new ControladorPessoa();
+
+            boolean inserePessoa = controladorPessoa.inserePessoa(p, t);
+
+            if (inserePessoa) {
+                Mensagens m = new Mensagens();
+                m.jopAviso("Cadastro realizado com sucesso!");
+            }
+
+            jtfBuscar.setText("");
+            jtfNome.setText("");
+            jtfRG.setText("");
+            jtfCPF_CNPJ.setText("");
+            jtfNumero.setText("");
+            jtfComplemento.setText("");
+            jtfDDD.setText("");
+            jtfTelefone.setText("");
+            jftfDataNascimento.setText("");
+
+            jcbPais.setSelectedIndex(0);
+            jcbEstado.setSelectedIndex(0);
+            jcbCidade.setSelectedIndex(0);
+            jcbBairro.setSelectedIndex(0);
+            jcbLogradouro.setSelectedIndex(0);
+            jcbCEP_ZIP.setSelectedIndex(0);
+
+            jcbCidade.setEnabled(false);
+            jcbBairro.setEnabled(false);
+            jcbLogradouro.setEnabled(false);
+            jcbCEP_ZIP.setEnabled(false);
+        }
     }
 }

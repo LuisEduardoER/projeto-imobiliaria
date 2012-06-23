@@ -17,6 +17,13 @@ public class Bairro {
     public Bairro() {
     }
 
+    public Bairro(int idBairro, int idMunicipio, String descricao, String complemento) {
+        this.idBairro = idBairro;
+        this.idMunicipio = idMunicipio;
+        this.descricao = descricao;
+        this.complemento = complemento;
+    }
+
     public String getComplemento() {
         return complemento;
     }
