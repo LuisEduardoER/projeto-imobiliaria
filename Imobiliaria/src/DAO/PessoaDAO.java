@@ -391,13 +391,13 @@ public class PessoaDAO {
         try {
 
             stmt = PessoaDAO.con.prepareStatement(""
-                    + "DELETE * FROM pessoa "
+                    + "DELETE FROM pessoa "
                     + "WHERE id = ?; ");
 
             stmt.setInt(1, pessoa.getIdPessoa());
             stmt.execute();
 
-            if (!validaCadastroPessoa(pessoa)) {
+            if (!(validaCadastroPessoa(pessoa))) {
                 mensagem.jopError("Cadastro removido com sucesso.");
 
                 return true;
