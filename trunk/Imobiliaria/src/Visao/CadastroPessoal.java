@@ -15,7 +15,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -766,9 +765,9 @@ public class CadastroPessoal extends javax.swing.JDialog {
             Endereco endereco = new Endereco(0, p.getIdBairro(), "", 0, 0, "");
 
             jcbPais.removeAll();
-            jcbEstado.removeAll();;
-            jcbCidade.removeAll();;
-            jcbBairro.removeAll();;
+            jcbEstado.removeAll();
+            jcbCidade.removeAll();
+            jcbBairro.removeAll();
             jcbLogradouro.removeAll();
             jcbCEP_ZIP.removeAll();
 
@@ -786,7 +785,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
             jcbCidade.setSelectedItem(cidade);
             jcbBairro.setSelectedItem(bairro);
             jcbCEP_ZIP.setSelectedItem(bairroCEP);
-            jcbLogradouro.setSelectedItem(m);
+            jcbLogradouro.setSelectedItem(endereco);
 
             jcbCidade.setEnabled(true);
             jcbBairro.setEnabled(true);
