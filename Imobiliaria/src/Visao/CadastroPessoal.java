@@ -840,4 +840,10 @@ public class CadastroPessoal extends javax.swing.JDialog {
             jcbCEP_ZIP.setEnabled(false);
         }
     }
+
+    public void acaoAlterar() {
+        if (validaCampos()) {
+        }
+
+    }
 }
