@@ -9,5 +9,5 @@ package Modelo;
  * @author junyvr
  */
 public class teste {
-    int viado = 10; 
+    String viado = "Maycon"; 
 }

@@ -60,4 +60,25 @@ public class Bairro {
     public String toString() {
         return descricao;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Bairro other = (Bairro) obj;
+        if (this.idBairro != other.idBairro) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        return hash;
+    }
 }
