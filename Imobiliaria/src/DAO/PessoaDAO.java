@@ -17,7 +17,6 @@ import java.util.logging.Logger;
  *
  * @author Bruno
  */
-
 public class PessoaDAO {
 
     static Conexao c = new Conexao();
@@ -91,9 +90,12 @@ public class PessoaDAO {
             if (validaCadastroPessoa(pessoa)) {
                 con.commit();
                 pessoa = buscaPessoa(pessoa);
-                insereTelefonePessoa(pessoa, telefone);
-                validaCadastroTelefone(telefone, pessoa);
-                return true;
+                if (insereTelefonePessoa(pessoa, telefone)) {
+                    return true;
+                } else {
+                    removePessoa(pessoa);
+                    return false;
+                }
             } else {
                 con.rollback();
                 return false;
@@ -174,7 +176,7 @@ public class PessoaDAO {
 
             stmt = PessoaDAO.con.prepareStatement(""
                     + "SELECT * FROM pessoa "
-                    + "WHERE id = ?" );
+                    + "WHERE id = ? ");
 
             stmt.setInt(1, pessoa.getIdPessoa());
             rs = stmt.executeQuery();
@@ -295,7 +297,14 @@ public class PessoaDAO {
             stmt.setInt(3, telefone.getDDD());
             stmt.setInt(4, pessoa.getIdPessoa());
 
-            return true;
+            if (validaCadastroTelefone(telefone, pessoa)) {
+                con.commit();
+                return true;
+            } else {
+                con.rollback();
+                return false;
+
+            }
         } catch (SQLException ex) {
 
             Logger.getLogger(ControladorIncluirBanco.class.getName()).log(Level.SEVERE, null, ex);
@@ -391,10 +400,13 @@ public class PessoaDAO {
         try {
 
             stmt = PessoaDAO.con.prepareStatement(""
+                    + "DELETE FROM telefone "
+                    + "WHERE id = ?; "
                     + "DELETE FROM pessoa "
-                    + "WHERE id = ?; ");
+                    + "WHERE id = ?");
 
             stmt.setInt(1, pessoa.getIdPessoa());
+            stmt.setInt(2, pessoa.getIdPessoa());
             stmt.execute();
 
             if (!(validaCadastroPessoa(pessoa))) {
