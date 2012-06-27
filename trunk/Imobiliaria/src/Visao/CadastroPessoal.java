@@ -43,8 +43,8 @@ public class CadastroPessoal extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         botaoGravar = c.criaBotaoGravar();
-        botaoExcluir = c.criaBotaoExcluir();
-        botaoBuscar = c.criaBotaoBuscar();
+//        botaoExcluir = c.criaBotaoExcluir();
+  //      botaoBuscar = c.criaBotaoBuscar();
 
 
         botaoGravar.addActionListener(new java.awt.event.ActionListener() {
