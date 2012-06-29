@@ -89,7 +89,6 @@ public class CadastroImovel extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Imóvel");
         setMinimumSize(new java.awt.Dimension(800, 600));
-        setPreferredSize(new java.awt.Dimension(800, 600));
 
         jspRolagem.setMinimumSize(new java.awt.Dimension(800, 768));
         jspRolagem.setPreferredSize(new java.awt.Dimension(800, 600));
@@ -327,7 +326,7 @@ public class CadastroImovel extends javax.swing.JFrame {
                         .addGroup(jpPropriedadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(457, Short.MAX_VALUE))
         );
         jpPropriedadesLayout.setVerticalGroup(
             jpPropriedadesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
