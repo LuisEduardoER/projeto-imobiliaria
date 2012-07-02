@@ -120,8 +120,8 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmiImovelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiImovelActionPerformed
-        CadastroImovel cI = new CadastroImovel();
-        cI.setVisible(true);
+//        CadastroImovel cI = new CadastroImovel();
+//        cI.setVisible(true);
     }//GEN-LAST:event_jmiImovelActionPerformed
 
     private void jmiEmbutidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiEmbutidosActionPerformed
