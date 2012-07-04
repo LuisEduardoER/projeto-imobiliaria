@@ -1,1 +1,1 @@
-169.254.79.9;3306;imobiliaria;root;root
+localhost;3306;imobiliaria;root;root
