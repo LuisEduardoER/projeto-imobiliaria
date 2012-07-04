@@ -23,7 +23,7 @@ import javax.swing.JButton;
  *
  * @author Bruno
  */
-public class CadastroPessoal extends javax.swing.JDialog {
+public class CadastroImovel extends javax.swing.JDialog {
 
     SimpleDateFormat formataData = new SimpleDateFormat("dd/MM/yyyy");
     Mensagens m;
@@ -39,12 +39,12 @@ public class CadastroPessoal extends javax.swing.JDialog {
     /**
      * Creates new form CadastroPessoal
      */
-    public CadastroPessoal(java.awt.Frame parent, boolean modal) {
+    public CadastroImovel(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         botaoGravar = c.criaBotaoGravar();
-        botaoExcluir = c.criaBotaoExcluir();
-        botaoBuscar = c.criaBotaoBuscar();
+//        botaoExcluir = c.criaBotaoExcluir();
+  //      botaoBuscar = c.criaBotaoBuscar();
 
 
         botaoGravar.addActionListener(new java.awt.event.ActionListener() {
@@ -191,7 +191,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jpDadosPrincipais.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Principais"));
+        jpDadosPrincipais.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Proprietário"));
 
         jpLabelsDP.setLayout(new java.awt.GridLayout(3, 1, 0, 5));
 
@@ -524,13 +524,13 @@ public class CadastroPessoal extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroPessoal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroImovel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroPessoal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroImovel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroPessoal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroImovel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroPessoal.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroImovel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -540,7 +540,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                CadastroPessoal dialog = new CadastroPessoal(new javax.swing.JFrame(), true);
+                CadastroImovel dialog = new CadastroImovel(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
 
                     @Override
@@ -728,7 +728,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
                                                 try {
                                                     this.p.setNascimento(new SimpleDateFormat("dd/MM/yyyy").parse(jftfDataNascimento.getText()));
                                                 } catch (ParseException ex) {
-                                                    Logger.getLogger(CadastroPessoal.class.getName()).log(Level.SEVERE, null, ex);
+                                                    Logger.getLogger(CadastroImovel.class.getName()).log(Level.SEVERE, null, ex);
                                                 }
                                             }
 
