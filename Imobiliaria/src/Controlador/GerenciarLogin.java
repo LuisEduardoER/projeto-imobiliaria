@@ -27,20 +27,14 @@ public class GerenciarLogin {
     public Usuario login(Usuario u) {
         try {
             Statement stmt = this.con.createStatement();
-            ResultSet rs = stmt.executeQuery("SELECT * FROM usuarios WHERE nomeUsuario= '"+u.getNomeUsuario()+"' AND senha ='"+u.getSenha()+"';");
+            ResultSet rs = stmt.executeQuery("SELECT * FROM usuario WHERE login = '"+u.getLogin()+"' AND senha ='"+u.getSenha()+"';");
 
             if (rs.first()) {
                 u.setId(Integer.parseInt(rs.getString("id")));
                 u.setNome(rs.getString("nome"));
-                u.setBimestre(Integer.parseInt(rs.getString("bimestre")));
-                u.setCurso(rs.getString("curso"));
-                u.setGrau(Integer.parseInt(rs.getString("grau")));
-                u.setNomeUsuario(rs.getString("nomeUsuario"));
+                u.setLogin(rs.getString("login"));
                 u.setPerfil(Integer.parseInt(rs.getString("perfil")));
                 u.setSenha(rs.getString("senha"));
-                u.setSerie(Integer.parseInt(rs.getString("serie")));
-                u.setTelefone(rs.getString("telefone"));
-                u.seteMail(rs.getString("email"));
                 return u;
             }
         } catch (SQLException ex) {
