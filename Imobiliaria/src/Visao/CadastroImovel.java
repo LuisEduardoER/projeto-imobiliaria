@@ -101,22 +101,24 @@ public class CadastroImovel extends javax.swing.JDialog {
         jtpAbas = new javax.swing.JTabbedPane();
         jpPessoal = new javax.swing.JPanel();
         jspPainelRolagem = new javax.swing.JScrollPane();
-        jpAgrupador = new javax.swing.JPanel();
+        jpAgrupadorDImvl = new javax.swing.JPanel();
         jpCadastro = new javax.swing.JPanel();
         jtfBuscar = new javax.swing.JTextField();
         jlBuscar = new javax.swing.JLabel();
         jlCadastro = new javax.swing.JLabel();
         jlCadastroNmr = new javax.swing.JLabel();
-        jpDadosPrincipais = new javax.swing.JPanel();
+        jpDadosProprietario = new javax.swing.JPanel();
         jpLabelsDP = new javax.swing.JPanel();
+        jlBuscarProp = new javax.swing.JLabel();
         jlNome = new javax.swing.JLabel();
         jlRG = new javax.swing.JLabel();
         jlCPF_CNPJ = new javax.swing.JLabel();
         jpTextFieldsDP = new javax.swing.JPanel();
+        jtfBuscarProp = new javax.swing.JTextField();
         jtfNome = new javax.swing.JTextField();
         jtfRG = new javax.swing.JTextField();
         jtfCPF_CNPJ = new javax.swing.JTextField();
-        jpEndereco = new javax.swing.JPanel();
+        jpEnderecoImovel = new javax.swing.JPanel();
         jpLabelsE = new javax.swing.JPanel();
         jlPais = new javax.swing.JLabel();
         jlEstado = new javax.swing.JLabel();
@@ -135,17 +137,6 @@ public class CadastroImovel extends javax.swing.JDialog {
         jtfNumero = new javax.swing.JTextField();
         jcbCEP_ZIP = new javax.swing.JComboBox();
         jtfComplemento = new javax.swing.JTextField();
-        jpDadosPessoais = new javax.swing.JPanel();
-        jpLablesDPessoais = new javax.swing.JPanel();
-        jlTelefone = new javax.swing.JLabel();
-        jlDataNascimento = new javax.swing.JLabel();
-        jpTextFieldsDPessoais = new javax.swing.JPanel();
-        jftfDataNascimento = new javax.swing.JFormattedTextField();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel3 = new javax.swing.JLabel();
-        jtfDDD = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jtfTelefone = new javax.swing.JTextField();
         jpControles = new javax.swing.JPanel();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
@@ -153,6 +144,37 @@ public class CadastroImovel extends javax.swing.JDialog {
         filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jpDadosFuncionario = new javax.swing.JPanel();
+        jpAgrupadorPImvl = new javax.swing.JPanel();
+        jpDadosProprietario1 = new javax.swing.JPanel();
+        jpLabelsDP1 = new javax.swing.JPanel();
+        jlBuscarProp1 = new javax.swing.JLabel();
+        jlNome1 = new javax.swing.JLabel();
+        jlRG1 = new javax.swing.JLabel();
+        jlCPF_CNPJ1 = new javax.swing.JLabel();
+        jpTextFieldsDP1 = new javax.swing.JPanel();
+        jtfBuscarProp1 = new javax.swing.JTextField();
+        jtfNome1 = new javax.swing.JTextField();
+        jtfRG1 = new javax.swing.JTextField();
+        jtfCPF_CNPJ1 = new javax.swing.JTextField();
+        jpEnderecoImovel1 = new javax.swing.JPanel();
+        jpLabelsE1 = new javax.swing.JPanel();
+        jlPais1 = new javax.swing.JLabel();
+        jlEstado1 = new javax.swing.JLabel();
+        jlCidade1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jlLogradouro1 = new javax.swing.JLabel();
+        jlNumero1 = new javax.swing.JLabel();
+        jlCEP_ZIP1 = new javax.swing.JLabel();
+        jlComplemento1 = new javax.swing.JLabel();
+        jpTextFieldsE1 = new javax.swing.JPanel();
+        jcbPais1 = new javax.swing.JComboBox();
+        jcbEstado1 = new javax.swing.JComboBox();
+        jcbCidade1 = new javax.swing.JComboBox();
+        jcbBairro1 = new javax.swing.JComboBox();
+        jcbLogradouro1 = new javax.swing.JComboBox();
+        jtfNumero1 = new javax.swing.JTextField();
+        jcbCEP_ZIP1 = new javax.swing.JComboBox();
+        jtfComplemento1 = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -191,9 +213,12 @@ public class CadastroImovel extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jpDadosPrincipais.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Proprietário"));
+        jpDadosProprietario.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Proprietário"));
 
-        jpLabelsDP.setLayout(new java.awt.GridLayout(3, 1, 0, 5));
+        jpLabelsDP.setLayout(new java.awt.GridLayout(4, 1, 0, 5));
+
+        jlBuscarProp.setText("Buscar:");
+        jpLabelsDP.add(jlBuscarProp);
 
         jlNome.setText("Nome:");
         jpLabelsDP.add(jlNome);
@@ -204,27 +229,29 @@ public class CadastroImovel extends javax.swing.JDialog {
         jlCPF_CNPJ.setText("CPF/CNPJ:");
         jpLabelsDP.add(jlCPF_CNPJ);
 
-        jpTextFieldsDP.setLayout(new java.awt.GridLayout(3, 1, 0, 5));
+        jpTextFieldsDP.setLayout(new java.awt.GridLayout(4, 1, 0, 5));
+        jpTextFieldsDP.add(jtfBuscarProp);
         jpTextFieldsDP.add(jtfNome);
         jpTextFieldsDP.add(jtfRG);
         jpTextFieldsDP.add(jtfCPF_CNPJ);
 
-        javax.swing.GroupLayout jpDadosPrincipaisLayout = new javax.swing.GroupLayout(jpDadosPrincipais);
-        jpDadosPrincipais.setLayout(jpDadosPrincipaisLayout);
-        jpDadosPrincipaisLayout.setHorizontalGroup(
-            jpDadosPrincipaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpDadosPrincipaisLayout.createSequentialGroup()
+        javax.swing.GroupLayout jpDadosProprietarioLayout = new javax.swing.GroupLayout(jpDadosProprietario);
+        jpDadosProprietario.setLayout(jpDadosProprietarioLayout);
+        jpDadosProprietarioLayout.setHorizontalGroup(
+            jpDadosProprietarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpDadosProprietarioLayout.createSequentialGroup()
                 .addComponent(jpLabelsDP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jpTextFieldsDP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jpDadosPrincipaisLayout.setVerticalGroup(
-            jpDadosPrincipaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpLabelsDP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jpTextFieldsDP, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+        jpDadosProprietarioLayout.setVerticalGroup(
+            jpDadosProprietarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jpLabelsDP, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+            .addComponent(jpTextFieldsDP, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
-        jpEndereco.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço"));
+        jpEnderecoImovel.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço do Imóvel"));
+        jpEnderecoImovel.setToolTipText("O endereço do imóvel é preenchido automaticamente com os dados do proprietário do imóvel.");
 
         jpLabelsE.setLayout(new java.awt.GridLayout(8, 1, 0, 5));
 
@@ -302,96 +329,45 @@ public class CadastroImovel extends javax.swing.JDialog {
         jpTextFieldsE.add(jcbCEP_ZIP);
         jpTextFieldsE.add(jtfComplemento);
 
-        javax.swing.GroupLayout jpEnderecoLayout = new javax.swing.GroupLayout(jpEndereco);
-        jpEndereco.setLayout(jpEnderecoLayout);
-        jpEnderecoLayout.setHorizontalGroup(
-            jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpEnderecoLayout.createSequentialGroup()
+        javax.swing.GroupLayout jpEnderecoImovelLayout = new javax.swing.GroupLayout(jpEnderecoImovel);
+        jpEnderecoImovel.setLayout(jpEnderecoImovelLayout);
+        jpEnderecoImovelLayout.setHorizontalGroup(
+            jpEnderecoImovelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpEnderecoImovelLayout.createSequentialGroup()
                 .addComponent(jpLabelsE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpTextFieldsE, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE))
         );
-        jpEnderecoLayout.setVerticalGroup(
-            jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jpEnderecoImovelLayout.setVerticalGroup(
+            jpEnderecoImovelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jpLabelsE, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
             .addComponent(jpTextFieldsE, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
-        jpDadosPessoais.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Pessoais"));
-
-        jpLablesDPessoais.setLayout(new java.awt.GridLayout(2, 1, 0, 5));
-
-        jlTelefone.setText("Telefone:");
-        jpLablesDPessoais.add(jlTelefone);
-
-        jlDataNascimento.setText("Data de Nascimento:");
-        jpLablesDPessoais.add(jlDataNascimento);
-
-        jpTextFieldsDPessoais.setLayout(new java.awt.GridLayout(1, 1, 0, 5));
-
-        jftfDataNascimento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter()));
-        jpTextFieldsDPessoais.add(jftfDataNascimento);
-
-        jPanel1.setLayout(new java.awt.GridLayout(1, 4, 5, 5));
-
-        jLabel3.setText("DDD:");
-        jPanel1.add(jLabel3);
-        jPanel1.add(jtfDDD);
-
-        jLabel2.setText("Número:");
-        jPanel1.add(jLabel2);
-        jPanel1.add(jtfTelefone);
-
-        javax.swing.GroupLayout jpDadosPessoaisLayout = new javax.swing.GroupLayout(jpDadosPessoais);
-        jpDadosPessoais.setLayout(jpDadosPessoaisLayout);
-        jpDadosPessoaisLayout.setHorizontalGroup(
-            jpDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpDadosPessoaisLayout.createSequentialGroup()
-                .addComponent(jpLablesDPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jpDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpTextFieldsDPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
-        );
-        jpDadosPessoaisLayout.setVerticalGroup(
-            jpDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpDadosPessoaisLayout.createSequentialGroup()
+        javax.swing.GroupLayout jpAgrupadorDImvlLayout = new javax.swing.GroupLayout(jpAgrupadorDImvl);
+        jpAgrupadorDImvl.setLayout(jpAgrupadorDImvlLayout);
+        jpAgrupadorDImvlLayout.setHorizontalGroup(
+            jpAgrupadorDImvlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpAgrupadorDImvlLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpDadosPessoaisLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpLablesDPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jpTextFieldsDPessoais, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
-        javax.swing.GroupLayout jpAgrupadorLayout = new javax.swing.GroupLayout(jpAgrupador);
-        jpAgrupador.setLayout(jpAgrupadorLayout);
-        jpAgrupadorLayout.setHorizontalGroup(
-            jpAgrupadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpAgrupadorLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jpAgrupadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpEndereco, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpDadosPrincipais, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpDadosPessoais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jpAgrupadorDImvlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jpEnderecoImovel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpDadosProprietario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        jpAgrupadorLayout.setVerticalGroup(
-            jpAgrupadorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpAgrupadorLayout.createSequentialGroup()
+        jpAgrupadorDImvlLayout.setVerticalGroup(
+            jpAgrupadorDImvlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpAgrupadorDImvlLayout.createSequentialGroup()
                 .addComponent(jpCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jpDadosPrincipais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jpDadosProprietario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpDadosPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(187, Short.MAX_VALUE))
+                .addComponent(jpEnderecoImovel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(276, Short.MAX_VALUE))
         );
 
-        jspPainelRolagem.setViewportView(jpAgrupador);
+        jspPainelRolagem.setViewportView(jpAgrupadorDImvl);
 
         jpControles.setLayout(new javax.swing.BoxLayout(jpControles, javax.swing.BoxLayout.LINE_AXIS));
         jpControles.add(filler1);
@@ -413,26 +389,188 @@ public class CadastroImovel extends javax.swing.JDialog {
         jpPessoalLayout.setVerticalGroup(
             jpPessoalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPessoalLayout.createSequentialGroup()
-                .addComponent(jspPainelRolagem, javax.swing.GroupLayout.DEFAULT_SIZE, 479, Short.MAX_VALUE)
+                .addComponent(jspPainelRolagem, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jpControles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        jtpAbas.addTab("Dados da Pessoa", jpPessoal);
+        jtpAbas.addTab("Dados do Imóvel", jpPessoal);
+
+        jpDadosProprietario1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Proprietário"));
+
+        jpLabelsDP1.setLayout(new java.awt.GridLayout(4, 1, 0, 5));
+
+        jlBuscarProp1.setText("Tamanho:");
+        jpLabelsDP1.add(jlBuscarProp1);
+
+        jlNome1.setText("Nome:");
+        jpLabelsDP1.add(jlNome1);
+
+        jlRG1.setText("RG:");
+        jpLabelsDP1.add(jlRG1);
+
+        jlCPF_CNPJ1.setText("CPF/CNPJ:");
+        jpLabelsDP1.add(jlCPF_CNPJ1);
+
+        jpTextFieldsDP1.setLayout(new java.awt.GridLayout(4, 1, 0, 5));
+        jpTextFieldsDP1.add(jtfBuscarProp1);
+        jpTextFieldsDP1.add(jtfNome1);
+        jpTextFieldsDP1.add(jtfRG1);
+        jpTextFieldsDP1.add(jtfCPF_CNPJ1);
+
+        javax.swing.GroupLayout jpDadosProprietario1Layout = new javax.swing.GroupLayout(jpDadosProprietario1);
+        jpDadosProprietario1.setLayout(jpDadosProprietario1Layout);
+        jpDadosProprietario1Layout.setHorizontalGroup(
+            jpDadosProprietario1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpDadosProprietario1Layout.createSequentialGroup()
+                .addComponent(jpLabelsDP1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jpTextFieldsDP1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jpDadosProprietario1Layout.setVerticalGroup(
+            jpDadosProprietario1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jpLabelsDP1, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+            .addComponent(jpTextFieldsDP1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+        );
+
+        jpEnderecoImovel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço do Imóvel"));
+        jpEnderecoImovel1.setToolTipText("O endereço do imóvel é preenchido automaticamente com os dados do proprietário do imóvel.");
+
+        jpLabelsE1.setLayout(new java.awt.GridLayout(8, 1, 0, 5));
+
+        jlPais1.setText("País:");
+        jpLabelsE1.add(jlPais1);
+
+        jlEstado1.setText("Estado:");
+        jpLabelsE1.add(jlEstado1);
+
+        jlCidade1.setText("Cidade:");
+        jpLabelsE1.add(jlCidade1);
+
+        jLabel2.setText("Bairro:");
+        jpLabelsE1.add(jLabel2);
+
+        jlLogradouro1.setText("Logradouro:");
+        jpLabelsE1.add(jlLogradouro1);
+
+        jlNumero1.setText("Número:");
+        jpLabelsE1.add(jlNumero1);
+
+        jlCEP_ZIP1.setText("CEP/ZIP:");
+        jpLabelsE1.add(jlCEP_ZIP1);
+
+        jlComplemento1.setText("Complemento:");
+        jpLabelsE1.add(jlComplemento1);
+
+        jpTextFieldsE1.setLayout(new java.awt.GridLayout(8, 1, 0, 5));
+
+        jcbPais1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbPais1ItemStateChanged(evt);
+            }
+        });
+        jpTextFieldsE1.add(jcbPais1);
+
+        jcbEstado1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbEstado1ItemStateChanged(evt);
+            }
+        });
+        jpTextFieldsE1.add(jcbEstado1);
+
+        jcbCidade1.setEnabled(false);
+        jcbCidade1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbCidade1ItemStateChanged(evt);
+            }
+        });
+        jpTextFieldsE1.add(jcbCidade1);
+
+        jcbBairro1.setEnabled(false);
+        jcbBairro1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbBairro1ItemStateChanged(evt);
+            }
+        });
+        jpTextFieldsE1.add(jcbBairro1);
+
+        jcbLogradouro1.setEnabled(false);
+        jcbLogradouro1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbLogradouro1ItemStateChanged(evt);
+            }
+        });
+        jpTextFieldsE1.add(jcbLogradouro1);
+        jpTextFieldsE1.add(jtfNumero1);
+
+        jcbCEP_ZIP1.setEnabled(false);
+        jcbCEP_ZIP1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbCEP_ZIP1ItemStateChanged(evt);
+            }
+        });
+        jpTextFieldsE1.add(jcbCEP_ZIP1);
+        jpTextFieldsE1.add(jtfComplemento1);
+
+        javax.swing.GroupLayout jpEnderecoImovel1Layout = new javax.swing.GroupLayout(jpEnderecoImovel1);
+        jpEnderecoImovel1.setLayout(jpEnderecoImovel1Layout);
+        jpEnderecoImovel1Layout.setHorizontalGroup(
+            jpEnderecoImovel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpEnderecoImovel1Layout.createSequentialGroup()
+                .addComponent(jpLabelsE1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpTextFieldsE1, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE))
+        );
+        jpEnderecoImovel1Layout.setVerticalGroup(
+            jpEnderecoImovel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jpLabelsE1, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+            .addComponent(jpTextFieldsE1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jpAgrupadorPImvlLayout = new javax.swing.GroupLayout(jpAgrupadorPImvl);
+        jpAgrupadorPImvl.setLayout(jpAgrupadorPImvlLayout);
+        jpAgrupadorPImvlLayout.setHorizontalGroup(
+            jpAgrupadorPImvlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpAgrupadorPImvlLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpAgrupadorPImvlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jpEnderecoImovel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpDadosProprietario1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jpAgrupadorPImvlLayout.setVerticalGroup(
+            jpAgrupadorPImvlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpAgrupadorPImvlLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jpDadosProprietario1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(41, 41, 41)
+                .addComponent(jpEnderecoImovel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(276, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout jpDadosFuncionarioLayout = new javax.swing.GroupLayout(jpDadosFuncionario);
         jpDadosFuncionario.setLayout(jpDadosFuncionarioLayout);
         jpDadosFuncionarioLayout.setHorizontalGroup(
             jpDadosFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 694, Short.MAX_VALUE)
+            .addGroup(jpDadosFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpDadosFuncionarioLayout.createSequentialGroup()
+                    .addGap(0, 2, Short.MAX_VALUE)
+                    .addComponent(jpAgrupadorPImvl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 2, Short.MAX_VALUE)))
         );
         jpDadosFuncionarioLayout.setVerticalGroup(
             jpDadosFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 508, Short.MAX_VALUE)
+            .addGap(0, 625, Short.MAX_VALUE)
+            .addGroup(jpDadosFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jpDadosFuncionarioLayout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jpAgrupadorPImvl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        jtpAbas.addTab("Dados do Funcionário", jpDadosFuncionario);
+        jtpAbas.addTab("Propridades do Imóvel", jpDadosFuncionario);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -442,7 +580,7 @@ public class CadastroImovel extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jtpAbas, javax.swing.GroupLayout.DEFAULT_SIZE, 536, Short.MAX_VALUE)
+            .addComponent(jtpAbas, javax.swing.GroupLayout.DEFAULT_SIZE, 653, Short.MAX_VALUE)
         );
 
         jtpAbas.getAccessibleContext().setAccessibleName("Dados Principais");
@@ -484,6 +622,30 @@ public class CadastroImovel extends javax.swing.JDialog {
             jcbLogradouro.setModel(carregaEndereco.carregaEndereco((Bairro) jcbBairro.getSelectedItem()));
         }
     }//GEN-LAST:event_jcbBairroItemStateChanged
+
+    private void jcbPais1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbPais1ItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbPais1ItemStateChanged
+
+    private void jcbEstado1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbEstado1ItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbEstado1ItemStateChanged
+
+    private void jcbCidade1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbCidade1ItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbCidade1ItemStateChanged
+
+    private void jcbBairro1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbBairro1ItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbBairro1ItemStateChanged
+
+    private void jcbLogradouro1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbLogradouro1ItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbLogradouro1ItemStateChanged
+
+    private void jcbCEP_ZIP1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbCEP_ZIP1ItemStateChanged
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jcbCEP_ZIP1ItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -560,53 +722,75 @@ public class CadastroImovel extends javax.swing.JDialog {
     private javax.swing.Box.Filler filler5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JComboBox jcbBairro;
+    private javax.swing.JComboBox jcbBairro1;
     private javax.swing.JComboBox jcbCEP_ZIP;
+    private javax.swing.JComboBox jcbCEP_ZIP1;
     private javax.swing.JComboBox jcbCidade;
+    private javax.swing.JComboBox jcbCidade1;
     private javax.swing.JComboBox jcbEstado;
+    private javax.swing.JComboBox jcbEstado1;
     private javax.swing.JComboBox jcbLogradouro;
+    private javax.swing.JComboBox jcbLogradouro1;
     private javax.swing.JComboBox jcbPais;
-    private javax.swing.JFormattedTextField jftfDataNascimento;
+    private javax.swing.JComboBox jcbPais1;
     private javax.swing.JLabel jlBuscar;
+    private javax.swing.JLabel jlBuscarProp;
+    private javax.swing.JLabel jlBuscarProp1;
     private javax.swing.JLabel jlCEP_ZIP;
+    private javax.swing.JLabel jlCEP_ZIP1;
     private javax.swing.JLabel jlCPF_CNPJ;
+    private javax.swing.JLabel jlCPF_CNPJ1;
     private javax.swing.JLabel jlCadastro;
     private javax.swing.JLabel jlCadastroNmr;
     private javax.swing.JLabel jlCidade;
+    private javax.swing.JLabel jlCidade1;
     private javax.swing.JLabel jlComplemento;
-    private javax.swing.JLabel jlDataNascimento;
+    private javax.swing.JLabel jlComplemento1;
     private javax.swing.JLabel jlEstado;
+    private javax.swing.JLabel jlEstado1;
     private javax.swing.JLabel jlLogradouro;
+    private javax.swing.JLabel jlLogradouro1;
     private javax.swing.JLabel jlNome;
+    private javax.swing.JLabel jlNome1;
     private javax.swing.JLabel jlNumero;
+    private javax.swing.JLabel jlNumero1;
     private javax.swing.JLabel jlPais;
+    private javax.swing.JLabel jlPais1;
     private javax.swing.JLabel jlRG;
-    private javax.swing.JLabel jlTelefone;
-    private javax.swing.JPanel jpAgrupador;
+    private javax.swing.JLabel jlRG1;
+    private javax.swing.JPanel jpAgrupadorDImvl;
+    private javax.swing.JPanel jpAgrupadorPImvl;
     private javax.swing.JPanel jpCadastro;
     private javax.swing.JPanel jpControles;
     private javax.swing.JPanel jpDadosFuncionario;
-    private javax.swing.JPanel jpDadosPessoais;
-    private javax.swing.JPanel jpDadosPrincipais;
-    private javax.swing.JPanel jpEndereco;
+    private javax.swing.JPanel jpDadosProprietario;
+    private javax.swing.JPanel jpDadosProprietario1;
+    private javax.swing.JPanel jpEnderecoImovel;
+    private javax.swing.JPanel jpEnderecoImovel1;
     private javax.swing.JPanel jpLabelsDP;
+    private javax.swing.JPanel jpLabelsDP1;
     private javax.swing.JPanel jpLabelsE;
-    private javax.swing.JPanel jpLablesDPessoais;
+    private javax.swing.JPanel jpLabelsE1;
     private javax.swing.JPanel jpPessoal;
     private javax.swing.JPanel jpTextFieldsDP;
-    private javax.swing.JPanel jpTextFieldsDPessoais;
+    private javax.swing.JPanel jpTextFieldsDP1;
     private javax.swing.JPanel jpTextFieldsE;
+    private javax.swing.JPanel jpTextFieldsE1;
     private javax.swing.JScrollPane jspPainelRolagem;
     private javax.swing.JTextField jtfBuscar;
+    private javax.swing.JTextField jtfBuscarProp;
+    private javax.swing.JTextField jtfBuscarProp1;
     private javax.swing.JTextField jtfCPF_CNPJ;
+    private javax.swing.JTextField jtfCPF_CNPJ1;
     private javax.swing.JTextField jtfComplemento;
-    private javax.swing.JTextField jtfDDD;
+    private javax.swing.JTextField jtfComplemento1;
     private javax.swing.JTextField jtfNome;
+    private javax.swing.JTextField jtfNome1;
     private javax.swing.JTextField jtfNumero;
+    private javax.swing.JTextField jtfNumero1;
     private javax.swing.JTextField jtfRG;
-    private javax.swing.JTextField jtfTelefone;
+    private javax.swing.JTextField jtfRG1;
     private javax.swing.JTabbedPane jtpAbas;
     // End of variables declaration//GEN-END:variables
 
