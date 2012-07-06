@@ -13,10 +13,7 @@ import Util.VerificaNumeros;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 
 /**
@@ -43,8 +40,8 @@ public class CadastroImovel extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         botaoGravar = c.criaBotaoGravar();
-//        botaoExcluir = c.criaBotaoExcluir();
-  //      botaoBuscar = c.criaBotaoBuscar();
+        botaoExcluir = c.criaBotaoExcluir();
+        botaoBuscar = c.criaBotaoBuscar();
 
 
         botaoGravar.addActionListener(new java.awt.event.ActionListener() {
@@ -889,37 +886,12 @@ public class CadastroImovel extends javax.swing.JDialog {
                                         this.p.setIdLogradouro(endereco.getIdBairro());
                                         this.p.setCEP_ZIP(cep_zip.getCep_zip());
 
-                                        if (jtfTelefone.getText().equals("")) {
-                                            m = new Mensagens();
-                                            m.jopAlerta("Por favor preencha o campo 'Telefone'.");
-                                            return false;
-                                        } else {
-
-                                            if (VerificaNumeros.verificaNumeros(jtfTelefone.getText())) {
-                                                t.setNumero(Integer.parseInt(jtfTelefone.getText()));
-                                                if (VerificaNumeros.verificaNumeros(jtfDDD.getText())) {
-                                                    t.setDDD(Integer.parseInt(jtfDDD.getText()));
-                                                }
-                                            } else {
-                                                Mensagens m = new Mensagens();
-                                                m.jopAlerta("Informe apenas números no campo 'Telefone'.");
-                                            }
-                                            if (jftfDataNascimento.getText().equals("")) {
-                                                m = new Mensagens();
-                                                m.jopAlerta("Por favor preencha o campo 'Data de Nascimento'.");
-                                                return false;
-                                            } else {
-                                                try {
-                                                    this.p.setNascimento(new SimpleDateFormat("dd/MM/yyyy").parse(jftfDataNascimento.getText()));
-                                                } catch (ParseException ex) {
-                                                    Logger.getLogger(CadastroImovel.class.getName()).log(Level.SEVERE, null, ex);
-                                                }
-                                            }
-
-                                            return true;
-                                        }
                                     }
+                                    Mensagens m = new Mensagens();
+                                    m.jopAlerta("Informe apenas números no campo 'Telefone'.");
                                 }
+
+                                return true;
                             }
                         }
                     }
@@ -939,7 +911,6 @@ public class CadastroImovel extends javax.swing.JDialog {
             jtfRG.setText(p.getRG() + "");
             jtfNumero.setText(p.getNumero() + "");
             jtfComplemento.setText(p.getComplemento());
-            jftfDataNascimento.setText(p.getNascimento().toString());
 
             Pais pais = new Pais("", "", p.getIdPais());
             Estado estado = new Estado("", "", 0, p.getIdEstado());
@@ -1006,9 +977,6 @@ public class CadastroImovel extends javax.swing.JDialog {
             jtfCPF_CNPJ.setText("");
             jtfNumero.setText("");
             jtfComplemento.setText("");
-            jtfDDD.setText("");
-            jtfTelefone.setText("");
-            jftfDataNascimento.setText("");
 
             jcbPais.setSelectedIndex(0);
             jcbEstado.setSelectedIndex(0);
