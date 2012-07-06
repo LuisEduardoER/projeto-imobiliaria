@@ -31,13 +31,13 @@ public class GerenciarUsuario {
 
             Statement stmt = this.con.createStatement();
 
-            ResultSet rs = stmt.executeQuery("SELECT nomeUsuario FROM usuarios WHERE nomeUsuario ='" + novo.getNomeUsuario() + "';");
+            ResultSet rs = stmt.executeQuery("SELECT nomeUsuario FROM usuarios WHERE nomeUsuario ='" + novo.getLogin() + "';");
             String verifica;
 
             if (rs.first()) {
                 verifica = rs.getString("nomeUsuario");
 
-                if (!verifica.equals(novo.getNomeUsuario())) {
+                if (!verifica.equals(novo.getLogin())) {
                     JOptionPane.showMessageDialog(null, "Nome de Usuário já existente, por favor selecione outro nome.");
                     return false;
                 }
@@ -48,7 +48,7 @@ public class GerenciarUsuario {
                 novo.setId(Integer.parseInt(rs.getString("MAX(id)")) + 1);
 
                 String query =
-                        ("insert into usuarios (nome, serie, bimestre, idTeste, id, telefone, email, nomeUsuario, senha, grau, perfil,curso,aluno) values ('" + novo.getNome() + "', ' " + novo.getSerie() + " ', ' " + novo.getBimestre() + "',NULL,'" + novo.getId() + "', '" + novo.getTelefone() + "','" + novo.geteMail() + "','" + novo.getNomeUsuario() + "','" + novo.getSenha() + "','" + novo.getGrau() + "', " + novo.getPerfil() + ",'" + novo.getCurso() + "','"+novo.getAluno()+"');");
+                        ("insert into usuarios (nome, serie, bimestre, idTeste, id, telefone, email, nomeUsuario, senha, grau, perfil,curso,aluno) values ('" + novo.getNome() + "', ' " + novo.getSerie() + " ', ' " + novo.getBimestre() + "',NULL,'" + novo.getId() + "', '" + novo.getTelefone() + "','" + novo.geteMail() + "','" + novo.getLogin() + "','" + novo.getSenha() + "','" + novo.getGrau() + "', " + novo.getPerfil() + ",'" + novo.getCurso() + "','"+novo.getAluno()+"');");
                 stmt.executeUpdate(query);
                 stmt.close();
                 con.close();

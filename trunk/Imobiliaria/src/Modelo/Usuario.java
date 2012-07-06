@@ -15,7 +15,7 @@ public class Usuario {
     String nome;
     String telefone;
     String eMail;
-    String nomeUsuario;
+    String login;
     String senha;
     String curso;
     int perfil;           //tipo Usuario, ou tipo Adminsitrador
@@ -42,12 +42,12 @@ public class Usuario {
         this.bimestre = bimestre;
     }
 
-    public String getNomeUsuario() {
-        return nomeUsuario;
+    public String getLogin() {
+        return login;
     }
 
-    public void setNomeUsuario(String nomeUsuario) {
-        this.nomeUsuario = nomeUsuario;
+    public void setLogin(String login) {
+        this.login = login;
     }
 
     public String getSenha() {
