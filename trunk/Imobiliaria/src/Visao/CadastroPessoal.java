@@ -155,6 +155,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
         jpDadosFuncionario = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro de Pessoas");
 
         jtpAbas.setPreferredSize(new java.awt.Dimension(400, 600));
 
@@ -448,7 +449,8 @@ public class CadastroPessoal extends javax.swing.JDialog {
         jtpAbas.getAccessibleContext().setAccessibleName("Dados Principais");
         jtpAbas.getAccessibleContext().setAccessibleDescription("Dados Principais");
 
-        pack();
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-715)/2, (screenSize.height-574)/2, 715, 574);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcbPaisItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbPaisItemStateChanged
