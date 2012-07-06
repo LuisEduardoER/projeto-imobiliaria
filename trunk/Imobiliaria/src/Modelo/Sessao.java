@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Controlador;
+package Modelo;
 
 import Modelo.Usuario;
 
@@ -17,8 +17,8 @@ public class Sessao{
    private Sessao(){  
    }  
   
-   public void setUsuario(Usuario pessoa){  
-      this.usuario = pessoa;  
+   public void setUsuario(Usuario usuario){  
+      this.usuario = usuario;  
    }  
   
    public Usuario getUsuario(){  
