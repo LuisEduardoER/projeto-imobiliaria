@@ -323,6 +323,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
         jpLablesDPessoais.setLayout(new java.awt.GridLayout(2, 1, 0, 5));
 
         jlTelefone.setText("Telefone:");
+        jlTelefone.setEnabled(false);
         jpLablesDPessoais.add(jlTelefone);
 
         jlDataNascimento.setText("Data de Nascimento:");
@@ -336,11 +337,17 @@ public class CadastroPessoal extends javax.swing.JDialog {
         jPanel1.setLayout(new java.awt.GridLayout(1, 4, 5, 5));
 
         jLabel3.setText("DDD:");
+        jLabel3.setEnabled(false);
         jPanel1.add(jLabel3);
+
+        jtfDDD.setEnabled(false);
         jPanel1.add(jtfDDD);
 
         jLabel2.setText("Número:");
+        jLabel2.setEnabled(false);
         jPanel1.add(jLabel2);
+
+        jtfTelefone.setEnabled(false);
         jPanel1.add(jtfTelefone);
 
         javax.swing.GroupLayout jpDadosPessoaisLayout = new javax.swing.GroupLayout(jpDadosPessoais);
@@ -707,21 +714,21 @@ public class CadastroPessoal extends javax.swing.JDialog {
                                         this.p.setIdLogradouro(endereco.getIdBairro());
                                         this.p.setCEP_ZIP(cep_zip.getCep_zip());
 
-                                        if (jtfTelefone.getText().equals("")) {
-                                            m = new Mensagens();
-                                            m.jopAlerta("Por favor preencha o campo 'Telefone'.");
-                                            return false;
-                                        } else {
+//                                        if (jtfTelefone.getText().equals("")) {
+//                                            m = new Mensagens();
+//                                            m.jopAlerta("Por favor preencha o campo 'Telefone'.");
+//                                            return false;
+//                                        } else {
 
-                                            if (VerificaNumeros.verificaNumeros(jtfTelefone.getText())) {
-                                                t.setNumero(Integer.parseInt(jtfTelefone.getText()));
-                                                if (VerificaNumeros.verificaNumeros(jtfDDD.getText())) {
-                                                    t.setDDD(Integer.parseInt(jtfDDD.getText()));
-                                                }
-                                            } else {
-                                                Mensagens m = new Mensagens();
-                                                m.jopAlerta("Informe apenas números no campo 'Telefone'.");
-                                            }
+//                                            if (VerificaNumeros.verificaNumeros(jtfTelefone.getText())) {
+//                                                t.setNumero(Integer.parseInt(jtfTelefone.getText()));
+//                                                if (VerificaNumeros.verificaNumeros(jtfDDD.getText())) {
+//                                                    t.setDDD(Integer.parseInt(jtfDDD.getText()));
+//                                                }
+//                                            }else {
+//                                                Mensagens m = new Mensagens();
+//                                                m.jopAlerta("Informe apenas números no campo 'Telefone'.");
+//                                            }
                                             if (jftfDataNascimento.getText().equals("")) {
                                                 m = new Mensagens();
                                                 m.jopAlerta("Por favor preencha o campo 'Data de Nascimento'.");
@@ -734,8 +741,8 @@ public class CadastroPessoal extends javax.swing.JDialog {
                                                 }
                                             }
 
-                                            return true;
-                                        }
+                                        return true;
+//                                        }
                                     }
                                 }
                             }

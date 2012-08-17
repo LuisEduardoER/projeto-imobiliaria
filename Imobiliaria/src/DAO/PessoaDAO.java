@@ -90,12 +90,13 @@ public class PessoaDAO {
             if (validaCadastroPessoa(pessoa)) {
                 con.commit();
                 pessoa = buscaPessoa(pessoa);
-                if (insereTelefonePessoa(pessoa, telefone)) {
-                    return true;
-                } else {
-                    removePessoa(pessoa);
-                    return false;
-                }
+//                if (insereTelefonePessoa(pessoa, telefone)) {
+//                    return true;
+//                } else {
+//                    removePessoa(pessoa);
+//                    return false;
+//                }
+                return true;
             } else {
                 con.rollback();
                 return false;
