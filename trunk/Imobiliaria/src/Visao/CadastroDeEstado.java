@@ -4,6 +4,7 @@
  */
 package Visao;
 
+import Util.DocumentSizeFilter;
 import Componentes.Componentes;
 import Controlador.CarregaEndereco;
 import Modelo.Pais;
