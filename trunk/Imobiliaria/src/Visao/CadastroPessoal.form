@@ -449,6 +449,7 @@
                             <Component class="javax.swing.JLabel" name="jlTelefone">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Telefone:"/>
+                                <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jlDataNascimento">
@@ -487,16 +488,24 @@
                             <Component class="javax.swing.JLabel" name="jLabel3">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="DDD:"/>
+                                <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="jtfDDD">
+                              <Properties>
+                                <Property name="enabled" type="boolean" value="false"/>
+                              </Properties>
                             </Component>
                             <Component class="javax.swing.JLabel" name="jLabel2">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="N&#xfa;mero:"/>
+                                <Property name="enabled" type="boolean" value="false"/>
                               </Properties>
                             </Component>
                             <Component class="javax.swing.JTextField" name="jtfTelefone">
+                              <Properties>
+                                <Property name="enabled" type="boolean" value="false"/>
+                              </Properties>
                             </Component>
                           </SubComponents>
                         </Container>
