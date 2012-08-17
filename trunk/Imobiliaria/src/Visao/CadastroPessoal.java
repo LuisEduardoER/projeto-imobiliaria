@@ -714,6 +714,8 @@ public class CadastroPessoal extends javax.swing.JDialog {
                                         this.p.setIdLogradouro(endereco.getIdBairro());
                                         this.p.setCEP_ZIP(cep_zip.getCep_zip());
 
+//comentado pois a gravação do telefone está falha. Sendo assim não será feita validação dos campos.
+                                        
 //                                        if (jtfTelefone.getText().equals("")) {
 //                                            m = new Mensagens();
 //                                            m.jopAlerta("Por favor preencha o campo 'Telefone'.");
