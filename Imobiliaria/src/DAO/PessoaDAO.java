@@ -10,8 +10,10 @@ import Controlador.Mensagens;
 import Modelo.Pessoa;
 import Modelo.Telefone;
 import java.sql.*;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
@@ -165,6 +167,82 @@ public class PessoaDAO {
             return false;
         }
 
+
+    }
+
+    public DefaultComboBoxModel buscaPessoaNome (String nome) {
+
+        ResultSet rs;
+        Mensagens mensagem = new Mensagens();
+        PreparedStatement stmt;
+        DefaultComboBoxModel modeloPessoa;
+        Vector<Pessoa> vetorPessoa = new Vector<Pessoa>();
+
+        try {
+
+            stmt = PessoaDAO.con.prepareStatement(""
+                    + "SELECT * FROM pessoa "
+                    + "WHERE nome LIKE ? ");
+
+            stmt.setString(1, "%" + nome + "%");
+            rs = stmt.executeQuery();
+
+            if (rs.first()) {
+                if (rs.next()) {
+                    while (rs.next()) {
+                        Pessoa resultado = new Pessoa();
+
+                        resultado.setCEP_ZIP(rs.getInt("CEP_ZIP"));
+                        resultado.setCPF_CNPJ(rs.getInt("CPF_CNPJ"));
+                        resultado.setCTPS_Numero(rs.getInt("CTPS_Numero"));
+                        resultado.setCTPS_Serie(rs.getInt("CTPS_Serie"));
+                        resultado.setCTPS_UF(rs.getString("CTPS_UF"));
+                        resultado.setIdPessoa(rs.getInt("id"));
+                        resultado.setComplemento(rs.getString("complemento"));
+                        resultado.setIdBairro(rs.getInt("id_Bairro"));
+                        resultado.setIdCidade(rs.getInt("id_Cidade"));
+                        resultado.setIdEstado(rs.getInt("id_Estado"));
+                        resultado.setIdLogradouro(rs.getInt("id_Logradouro"));
+                        resultado.setIdPais(rs.getInt("id_Pais"));
+                        resultado.setNascimento(rs.getDate("nascimento"));
+                        resultado.setNome(rs.getString("nome"));
+                        resultado.setNumero(rs.getInt("numero"));
+                        resultado.setRG(rs.getInt("rg"));
+                        vetorPessoa.add(resultado);
+                    }
+                } else {
+                    rs.first();
+                    Pessoa resultado = new Pessoa();
+
+                    resultado.setCEP_ZIP(rs.getInt("CEP_ZIP"));
+                    resultado.setCPF_CNPJ(rs.getInt("CPF_CNPJ"));
+                    resultado.setCTPS_Numero(rs.getInt("CTPS_Numero"));
+                    resultado.setCTPS_Serie(rs.getInt("CTPS_Serie"));
+                    resultado.setCTPS_UF(rs.getString("CTPS_UF"));
+                    resultado.setIdPessoa(rs.getInt("id"));
+                    resultado.setComplemento(rs.getString("complemento"));
+                    resultado.setIdBairro(rs.getInt("id_Bairro"));
+                    resultado.setIdCidade(rs.getInt("id_Cidade"));
+                    resultado.setIdEstado(rs.getInt("id_Estado"));
+                    resultado.setIdLogradouro(rs.getInt("id_Logradouro"));
+                    resultado.setIdPais(rs.getInt("id_Pais"));
+                    resultado.setNascimento(rs.getDate("nascimento"));
+                    resultado.setNome(rs.getString("nome"));
+                    resultado.setNumero(rs.getInt("numero"));
+                    resultado.setRG(rs.getInt("rg"));
+                    vetorPessoa.add(resultado);
+                }
+            } else {
+                return null;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TipoImovelDAO.class.getName()).log(Level.SEVERE, null, ex);
+            mensagem.jopError("Erro ao buscar o cadastro no servidor de banco de dados.\nSQLException: " + ex.getMessage() + "\n buscaPessoaNome");
+            return null;
+        }
+        modeloPessoa = new DefaultComboBoxModel(vetorPessoa);
+        return modeloPessoa;
 
     }
 
