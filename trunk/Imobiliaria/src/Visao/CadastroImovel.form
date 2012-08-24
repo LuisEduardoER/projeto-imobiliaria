@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.5" maxVersion="1.8" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+  <NonVisualComponents>
+    <Component class="javax.swing.ButtonGroup" name="btgBuscaPessoa">
+    </Component>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
@@ -94,9 +98,14 @@
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jpEnderecoImovel" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="jpDadosProprietario" alignment="1" max="32767" attributes="0"/>
                                   <Component id="jpCadastro" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="jpEnderecoImovel" alignment="0" pref="0" max="32767" attributes="0"/>
+                                          <Component id="jpDadosProprietario" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -108,7 +117,7 @@
                               <Component id="jpCadastro" min="-2" pref="35" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jpDadosProprietario" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                               <Component id="jpEnderecoImovel" min="-2" max="-2" attributes="0"/>
                               <EmptySpace pref="276" max="32767" attributes="0"/>
                           </Group>
@@ -126,7 +135,7 @@
                                   <Component id="jlCadastro" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jlCadastroNmr" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace pref="533" max="32767" attributes="0"/>
                                   <Component id="jlBuscar" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jtfBuscar" min="-2" pref="56" max="-2" attributes="0"/>
@@ -181,14 +190,17 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jpLabelsDP" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jpTextFieldsDP" max="32767" attributes="0"/>
+                                  <Component id="jpTextFieldsDP" min="-2" pref="401" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jpBuscarPessoa" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
                         <DimensionLayout dim="1">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jpLabelsDP" pref="81" max="32767" attributes="0"/>
                               <Component id="jpTextFieldsDP" alignment="0" pref="0" max="32767" attributes="0"/>
+                              <Component id="jpLabelsDP" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jpBuscarPessoa" alignment="1" max="32767" attributes="0"/>
                           </Group>
                         </DimensionLayout>
                       </Layout>
@@ -198,14 +210,9 @@
                           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                             <Property name="columns" type="int" value="1"/>
                             <Property name="verticalGap" type="int" value="5"/>
-                            <Property name="rows" type="int" value="4"/>
+                            <Property name="rows" type="int" value="3"/>
                           </Layout>
                           <SubComponents>
-                            <Component class="javax.swing.JLabel" name="jlBuscarProp">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="Buscar:"/>
-                              </Properties>
-                            </Component>
                             <Component class="javax.swing.JLabel" name="jlNome">
                               <Properties>
                                 <Property name="text" type="java.lang.String" value="Nome:"/>
@@ -227,17 +234,92 @@
 
                           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                             <Property name="columns" type="int" value="1"/>
-                            <Property name="verticalGap" type="int" value="5"/>
-                            <Property name="rows" type="int" value="4"/>
+                            <Property name="verticalGap" type="int" value="8"/>
+                            <Property name="rows" type="int" value="3"/>
                           </Layout>
                           <SubComponents>
-                            <Component class="javax.swing.JTextField" name="jtfBuscarProp">
-                            </Component>
                             <Component class="javax.swing.JTextField" name="jtfNome">
                             </Component>
                             <Component class="javax.swing.JTextField" name="jtfRG">
                             </Component>
                             <Component class="javax.swing.JTextField" name="jtfCPF_CNPJ">
+                            </Component>
+                          </SubComponents>
+                        </Container>
+                        <Container class="javax.swing.JPanel" name="jpBuscarPessoa">
+                          <Properties>
+                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                                <TitledBorder title="Buscar Propriet&#xe1;rio"/>
+                              </Border>
+                            </Property>
+                          </Properties>
+
+                          <Layout>
+                            <DimensionLayout dim="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" attributes="0">
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jrbNome" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jrbCPF_CNPJ" min="-2" max="-2" attributes="0"/>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="jrbRG" min="-2" max="-2" attributes="0"/>
+                                          </Group>
+                                          <Component id="jbBuscar" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                            <DimensionLayout dim="1">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="3" attributes="0">
+                                          <Component id="jrbNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jrbCPF_CNPJ" alignment="3" min="-2" max="-2" attributes="0"/>
+                                          <Component id="jrbRG" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace max="32767" attributes="0"/>
+                                      <Component id="jbBuscar" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                              </Group>
+                            </DimensionLayout>
+                          </Layout>
+                          <SubComponents>
+                            <Component class="javax.swing.JRadioButton" name="jrbNome">
+                              <Properties>
+                                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                                  <ComponentRef name="btgBuscaPessoa"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="Nome"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JRadioButton" name="jrbCPF_CNPJ">
+                              <Properties>
+                                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                                  <ComponentRef name="btgBuscaPessoa"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="CFP/CNPJ"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JRadioButton" name="jrbRG">
+                              <Properties>
+                                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                                  <ComponentRef name="btgBuscaPessoa"/>
+                                </Property>
+                                <Property name="text" type="java.lang.String" value="RG"/>
+                              </Properties>
+                            </Component>
+                            <Component class="javax.swing.JButton" name="jbBuscar">
+                              <Properties>
+                                <Property name="text" type="java.lang.String" value="Buscar"/>
+                              </Properties>
+                              <Events>
+                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbBuscarActionPerformed"/>
+                              </Events>
                             </Component>
                           </SubComponents>
                         </Container>
@@ -259,7 +341,8 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jpLabelsE" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jpTextFieldsE" pref="583" max="32767" attributes="0"/>
+                                  <Component id="jpTextFieldsE" min="-2" pref="576" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>

@@ -10,11 +10,14 @@ import Controlador.ControladorPessoa;
 import Controlador.Mensagens;
 import Modelo.*;
 import Util.VerificaNumeros;
+import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.text.SimpleDateFormat;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -95,6 +98,7 @@ public class CadastroImovel extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btgBuscaPessoa = new javax.swing.ButtonGroup();
         jtpAbas = new javax.swing.JTabbedPane();
         jpPessoal = new javax.swing.JPanel();
         jspPainelRolagem = new javax.swing.JScrollPane();
@@ -106,15 +110,18 @@ public class CadastroImovel extends javax.swing.JDialog {
         jlCadastroNmr = new javax.swing.JLabel();
         jpDadosProprietario = new javax.swing.JPanel();
         jpLabelsDP = new javax.swing.JPanel();
-        jlBuscarProp = new javax.swing.JLabel();
         jlNome = new javax.swing.JLabel();
         jlRG = new javax.swing.JLabel();
         jlCPF_CNPJ = new javax.swing.JLabel();
         jpTextFieldsDP = new javax.swing.JPanel();
-        jtfBuscarProp = new javax.swing.JTextField();
         jtfNome = new javax.swing.JTextField();
         jtfRG = new javax.swing.JTextField();
         jtfCPF_CNPJ = new javax.swing.JTextField();
+        jpBuscarPessoa = new javax.swing.JPanel();
+        jrbNome = new javax.swing.JRadioButton();
+        jrbCPF_CNPJ = new javax.swing.JRadioButton();
+        jrbRG = new javax.swing.JRadioButton();
+        jbBuscar = new javax.swing.JButton();
         jpEnderecoImovel = new javax.swing.JPanel();
         jpLabelsE = new javax.swing.JPanel();
         jlPais = new javax.swing.JLabel();
@@ -192,7 +199,7 @@ public class CadastroImovel extends javax.swing.JDialog {
                 .addComponent(jlCadastro)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlCadastroNmr)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 533, Short.MAX_VALUE)
                 .addComponent(jlBuscar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -212,10 +219,7 @@ public class CadastroImovel extends javax.swing.JDialog {
 
         jpDadosProprietario.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Proprietário"));
 
-        jpLabelsDP.setLayout(new java.awt.GridLayout(4, 1, 0, 5));
-
-        jlBuscarProp.setText("Buscar:");
-        jpLabelsDP.add(jlBuscarProp);
+        jpLabelsDP.setLayout(new java.awt.GridLayout(3, 1, 0, 5));
 
         jlNome.setText("Nome:");
         jpLabelsDP.add(jlNome);
@@ -226,11 +230,55 @@ public class CadastroImovel extends javax.swing.JDialog {
         jlCPF_CNPJ.setText("CPF/CNPJ:");
         jpLabelsDP.add(jlCPF_CNPJ);
 
-        jpTextFieldsDP.setLayout(new java.awt.GridLayout(4, 1, 0, 5));
-        jpTextFieldsDP.add(jtfBuscarProp);
+        jpTextFieldsDP.setLayout(new java.awt.GridLayout(3, 1, 0, 8));
         jpTextFieldsDP.add(jtfNome);
         jpTextFieldsDP.add(jtfRG);
         jpTextFieldsDP.add(jtfCPF_CNPJ);
+
+        jpBuscarPessoa.setBorder(javax.swing.BorderFactory.createTitledBorder("Buscar Proprietário"));
+
+        btgBuscaPessoa.add(jrbNome);
+        jrbNome.setText("Nome");
+
+        btgBuscaPessoa.add(jrbCPF_CNPJ);
+        jrbCPF_CNPJ.setText("CFP/CNPJ");
+
+        btgBuscaPessoa.add(jrbRG);
+        jrbRG.setText("RG");
+
+        jbBuscar.setText("Buscar");
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jpBuscarPessoaLayout = new javax.swing.GroupLayout(jpBuscarPessoa);
+        jpBuscarPessoa.setLayout(jpBuscarPessoaLayout);
+        jpBuscarPessoaLayout.setHorizontalGroup(
+            jpBuscarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpBuscarPessoaLayout.createSequentialGroup()
+                .addGroup(jpBuscarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jpBuscarPessoaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jrbNome)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jrbCPF_CNPJ)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jrbRG))
+                    .addComponent(jbBuscar))
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jpBuscarPessoaLayout.setVerticalGroup(
+            jpBuscarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpBuscarPessoaLayout.createSequentialGroup()
+                .addGroup(jpBuscarPessoaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jrbNome)
+                    .addComponent(jrbCPF_CNPJ)
+                    .addComponent(jrbRG))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jbBuscar))
+        );
 
         javax.swing.GroupLayout jpDadosProprietarioLayout = new javax.swing.GroupLayout(jpDadosProprietario);
         jpDadosProprietario.setLayout(jpDadosProprietarioLayout);
@@ -239,12 +287,15 @@ public class CadastroImovel extends javax.swing.JDialog {
             .addGroup(jpDadosProprietarioLayout.createSequentialGroup()
                 .addComponent(jpLabelsDP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jpTextFieldsDP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jpTextFieldsDP, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpBuscarPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jpDadosProprietarioLayout.setVerticalGroup(
             jpDadosProprietarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpLabelsDP, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
             .addComponent(jpTextFieldsDP, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addComponent(jpLabelsDP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpBuscarPessoa, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         jpEnderecoImovel.setBorder(javax.swing.BorderFactory.createTitledBorder("Endereço do Imóvel"));
@@ -333,7 +384,8 @@ public class CadastroImovel extends javax.swing.JDialog {
             .addGroup(jpEnderecoImovelLayout.createSequentialGroup()
                 .addComponent(jpLabelsE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpTextFieldsE, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE))
+                .addComponent(jpTextFieldsE, javax.swing.GroupLayout.PREFERRED_SIZE, 576, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpEnderecoImovelLayout.setVerticalGroup(
             jpEnderecoImovelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -348,9 +400,12 @@ public class CadastroImovel extends javax.swing.JDialog {
             .addGroup(jpAgrupadorDImvlLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpAgrupadorDImvlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpEnderecoImovel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpDadosProprietario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jpCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jpAgrupadorDImvlLayout.createSequentialGroup()
+                        .addGroup(jpAgrupadorDImvlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jpEnderecoImovel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jpDadosProprietario, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jpAgrupadorDImvlLayout.setVerticalGroup(
@@ -359,7 +414,7 @@ public class CadastroImovel extends javax.swing.JDialog {
                 .addComponent(jpCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jpDadosProprietario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(44, 44, 44)
                 .addComponent(jpEnderecoImovel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(276, Short.MAX_VALUE))
         );
@@ -644,6 +699,10 @@ public class CadastroImovel extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jcbCEP_ZIP1ItemStateChanged
 
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarActionPerformed
+        
+    }//GEN-LAST:event_jbBuscarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -712,6 +771,7 @@ public class CadastroImovel extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup btgBuscaPessoa;
     private javax.swing.Box.Filler filler1;
     private javax.swing.Box.Filler filler2;
     private javax.swing.Box.Filler filler3;
@@ -719,6 +779,7 @@ public class CadastroImovel extends javax.swing.JDialog {
     private javax.swing.Box.Filler filler5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton jbBuscar;
     private javax.swing.JComboBox jcbBairro;
     private javax.swing.JComboBox jcbBairro1;
     private javax.swing.JComboBox jcbCEP_ZIP;
@@ -732,7 +793,6 @@ public class CadastroImovel extends javax.swing.JDialog {
     private javax.swing.JComboBox jcbPais;
     private javax.swing.JComboBox jcbPais1;
     private javax.swing.JLabel jlBuscar;
-    private javax.swing.JLabel jlBuscarProp;
     private javax.swing.JLabel jlBuscarProp1;
     private javax.swing.JLabel jlCEP_ZIP;
     private javax.swing.JLabel jlCEP_ZIP1;
@@ -758,6 +818,7 @@ public class CadastroImovel extends javax.swing.JDialog {
     private javax.swing.JLabel jlRG1;
     private javax.swing.JPanel jpAgrupadorDImvl;
     private javax.swing.JPanel jpAgrupadorPImvl;
+    private javax.swing.JPanel jpBuscarPessoa;
     private javax.swing.JPanel jpCadastro;
     private javax.swing.JPanel jpControles;
     private javax.swing.JPanel jpDadosFuncionario;
@@ -774,9 +835,11 @@ public class CadastroImovel extends javax.swing.JDialog {
     private javax.swing.JPanel jpTextFieldsDP1;
     private javax.swing.JPanel jpTextFieldsE;
     private javax.swing.JPanel jpTextFieldsE1;
+    private javax.swing.JRadioButton jrbCPF_CNPJ;
+    private javax.swing.JRadioButton jrbNome;
+    private javax.swing.JRadioButton jrbRG;
     private javax.swing.JScrollPane jspPainelRolagem;
     private javax.swing.JTextField jtfBuscar;
-    private javax.swing.JTextField jtfBuscarProp;
     private javax.swing.JTextField jtfBuscarProp1;
     private javax.swing.JTextField jtfCPF_CNPJ;
     private javax.swing.JTextField jtfCPF_CNPJ1;
@@ -997,4 +1060,20 @@ public class CadastroImovel extends javax.swing.JDialog {
         }
 
     }
+
+    public DefaultComboBoxModel<Pessoa> acaoBuscarPessoa(){
+        
+        if (jrbNome.isSelected()){
+            if ("".equals(jtfNome.getText())){
+                m.jopAlerta("Foi selecionada a opção de busca por 'Nome' porém o campo 'Nome' está vazio");
+                return null;
+            }else{
+                p.setNome(jtfNome.getText());
+                p = controladorPessoa.buscaPessoa(p);
+                return new DefaultComboBoxModel<Pessoa>();
+            }
+        } 
+        return new DefaultComboBoxModel<Pessoa>();
+    }
+    
 }

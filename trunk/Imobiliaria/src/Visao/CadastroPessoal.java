@@ -466,7 +466,11 @@ public class CadastroPessoal extends javax.swing.JDialog {
     private void jcbCidadeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbCidadeItemStateChanged
         if (evt.getStateChange() == ItemEvent.DESELECTED) {
             jcbBairro.setEnabled(true);
-            jcbBairro.setModel(carregaEndereco.carregaBairro((Cidade) jcbCidade.getSelectedItem()));
+            try {
+                jcbBairro.setModel(carregaEndereco.carregaBairro((Cidade) jcbCidade.getSelectedItem()));
+            } catch (Exception e) {
+                jcbBairro.getModel().setSelectedItem(new Bairro(0, 0, "-Selecione-", "-Selecione-"));
+            }
         }
     }//GEN-LAST:event_jcbCidadeItemStateChanged
 
@@ -715,7 +719,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
                                         this.p.setCEP_ZIP(cep_zip.getCep_zip());
 
 //comentado pois a gravação do telefone está falha. Sendo assim não será feita validação dos campos.
-                                        
+
 //                                        if (jtfTelefone.getText().equals("")) {
 //                                            m = new Mensagens();
 //                                            m.jopAlerta("Por favor preencha o campo 'Telefone'.");
@@ -731,17 +735,17 @@ public class CadastroPessoal extends javax.swing.JDialog {
 //                                                Mensagens m = new Mensagens();
 //                                                m.jopAlerta("Informe apenas números no campo 'Telefone'.");
 //                                            }
-                                            if (jftfDataNascimento.getText().equals("")) {
-                                                m = new Mensagens();
-                                                m.jopAlerta("Por favor preencha o campo 'Data de Nascimento'.");
-                                                return false;
-                                            } else {
-                                                try {
-                                                    this.p.setNascimento(new SimpleDateFormat("dd/MM/yyyy").parse(jftfDataNascimento.getText()));
-                                                } catch (ParseException ex) {
-                                                    Logger.getLogger(CadastroPessoal.class.getName()).log(Level.SEVERE, null, ex);
-                                                }
+                                        if (jftfDataNascimento.getText().equals("")) {
+                                            m = new Mensagens();
+                                            m.jopAlerta("Por favor preencha o campo 'Data de Nascimento'.");
+                                            return false;
+                                        } else {
+                                            try {
+                                                this.p.setNascimento(new SimpleDateFormat("dd/MM/yyyy").parse(jftfDataNascimento.getText()));
+                                            } catch (ParseException ex) {
+                                                Logger.getLogger(CadastroPessoal.class.getName()).log(Level.SEVERE, null, ex);
                                             }
+                                        }
 
                                         return true;
 //                                        }
