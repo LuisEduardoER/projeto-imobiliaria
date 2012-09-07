@@ -17,32 +17,32 @@ public class CarregaEndereco {
     CarregaEnderecoDAO carregaEndereco = new CarregaEnderecoDAO();
 
     public DefaultComboBoxModel carregaPais() {
-        DefaultComboBoxModel<Pais> modeloPais = carregaEndereco.carregaPais();
+        DefaultComboBoxModel modeloPais = carregaEndereco.carregaPais();
         return modeloPais;
     }
 
     public DefaultComboBoxModel carregaEstado(Pais pais) {
-        DefaultComboBoxModel<Estado> modeloEstado = carregaEndereco.carregaEstado(pais);
+        DefaultComboBoxModel modeloEstado = carregaEndereco.carregaEstado(pais);
         return modeloEstado;
     }
 
     public DefaultComboBoxModel carregaCidade(Estado estado) {
-        DefaultComboBoxModel<Cidade> modeloCidade = carregaEndereco.carregaCidade(estado);
+        DefaultComboBoxModel modeloCidade = carregaEndereco.carregaCidade(estado);
         return modeloCidade;
     }
 
     public DefaultComboBoxModel carregaBairro(Cidade cidade) {
-        DefaultComboBoxModel<Bairro> modeloBairro = carregaEndereco.carregaBairro(cidade);
+        DefaultComboBoxModel modeloBairro = carregaEndereco.carregaBairro(cidade);
         return modeloBairro;
     }
     
     public DefaultComboBoxModel carregaEndereco(Bairro bairro) {
-        DefaultComboBoxModel<Endereco> modeloEndereco = carregaEndereco.carregaEndereco(bairro);
+        DefaultComboBoxModel modeloEndereco = carregaEndereco.carregaEndereco(bairro);
         return modeloEndereco;
     }
     
         public DefaultComboBoxModel carregaCEP_ZIP(Bairro bairro) {
-        DefaultComboBoxModel<CEP_ZIP> modeloCEP_ZIP = carregaEndereco.carregaCEP_ZIP(bairro);
+        DefaultComboBoxModel modeloCEP_ZIP = carregaEndereco.carregaCEP_ZIP(bairro);
         return modeloCEP_ZIP;
     }
 }

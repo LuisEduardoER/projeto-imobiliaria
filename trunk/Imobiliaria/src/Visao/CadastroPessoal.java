@@ -15,6 +15,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Formatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -42,35 +43,31 @@ public class CadastroPessoal extends javax.swing.JDialog {
     public CadastroPessoal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
         botaoGravar = c.criaBotaoGravar();
         botaoExcluir = c.criaBotaoExcluir();
         botaoBuscar = c.criaBotaoBuscar();
 
 
         botaoGravar.addActionListener(new java.awt.event.ActionListener() {
-
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoGravarActionPerformed(evt);
             }
         });
 
         botaoExcluir.addActionListener(new java.awt.event.ActionListener() {
-
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoExcluirActionPerformed(evt);
             }
         });
 
         botaoBuscar.addActionListener(new java.awt.event.ActionListener() {
-
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoBuscarActionPerformed(evt);
             }
         });
 
-
         jtfBuscar.addActionListener(new ActionListener() {
-
             @Override
             public void actionPerformed(ActionEvent ae) {
                 acaoBuscar();
@@ -116,6 +113,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
         jtfNome = new javax.swing.JTextField();
         jtfRG = new javax.swing.JTextField();
         jtfCPF_CNPJ = new javax.swing.JTextField();
+        jftfNome = new javax.swing.JFormattedTextField();
         jpEndereco = new javax.swing.JPanel();
         jpLabelsE = new javax.swing.JPanel();
         jlPais = new javax.swing.JLabel();
@@ -206,9 +204,18 @@ public class CadastroPessoal extends javax.swing.JDialog {
         jpLabelsDP.add(jlCPF_CNPJ);
 
         jpTextFieldsDP.setLayout(new java.awt.GridLayout(3, 1, 0, 5));
+
+        jtfNome.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                jtfNomeKeyTyped(evt);
+            }
+        });
         jpTextFieldsDP.add(jtfNome);
         jpTextFieldsDP.add(jtfRG);
         jpTextFieldsDP.add(jtfCPF_CNPJ);
+
+        jftfNome.setText("jFormattedTextField1");
+        jpTextFieldsDP.add(jftfNome);
 
         javax.swing.GroupLayout jpDadosPrincipaisLayout = new javax.swing.GroupLayout(jpDadosPrincipais);
         jpDadosPrincipais.setLayout(jpDadosPrincipaisLayout);
@@ -498,6 +505,31 @@ public class CadastroPessoal extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_jcbBairroItemStateChanged
 
+    private void jtfNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNomeKeyTyped
+        if (jtfNome.getText().contains("1")
+                || jtfNome.getText().contains("2")
+                || jtfNome.getText().contains("3")
+                || jtfNome.getText().contains("4")
+                || jtfNome.getText().contains("5")
+                || jtfNome.getText().contains("6")
+                || jtfNome.getText().contains("7")
+                || jtfNome.getText().contains("8")
+                || jtfNome.getText().contains("9")
+                || jtfNome.getText().contains("0")) {
+
+            String tamanho = jtfNome.getText();
+            int posicao = 0;
+
+            while (posicao < tamanho.length() - 1) {
+                char verificado = tamanho.charAt(posicao);
+                Character vazio = (null);
+                if (Character.isDigit(verificado)) {
+                    jtfNome.setText(jtfNome.getText().replace(verificado, vazio));
+                }
+            }
+        }
+    }//GEN-LAST:event_jtfNomeKeyTyped
+
     /**
      * @param args the command line arguments
      */
@@ -551,11 +583,9 @@ public class CadastroPessoal extends javax.swing.JDialog {
          * Create and display the dialog
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-
             public void run() {
                 CadastroPessoal dialog = new CadastroPessoal(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
@@ -582,6 +612,7 @@ public class CadastroPessoal extends javax.swing.JDialog {
     private javax.swing.JComboBox jcbLogradouro;
     private javax.swing.JComboBox jcbPais;
     private javax.swing.JFormattedTextField jftfDataNascimento;
+    private javax.swing.JFormattedTextField jftfNome;
     private javax.swing.JLabel jlBuscar;
     private javax.swing.JLabel jlCEP_ZIP;
     private javax.swing.JLabel jlCPF_CNPJ;
