@@ -1061,7 +1061,7 @@ public class CadastroImovel extends javax.swing.JDialog {
 
     }
 
-    public DefaultComboBoxModel<Pessoa> acaoBuscarPessoa(){
+    public DefaultComboBoxModel acaoBuscarPessoa(){
         
         if (jrbNome.isSelected()){
             if ("".equals(jtfNome.getText())){
@@ -1070,10 +1070,10 @@ public class CadastroImovel extends javax.swing.JDialog {
             }else{
                 p.setNome(jtfNome.getText());
                 p = controladorPessoa.buscaPessoa(p);
-                return new DefaultComboBoxModel<Pessoa>();
+                return new DefaultComboBoxModel();
             }
         } 
-        return new DefaultComboBoxModel<Pessoa>();
+        return new DefaultComboBoxModel();
     }
     
 }
