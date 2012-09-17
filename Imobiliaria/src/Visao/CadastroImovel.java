@@ -151,12 +151,10 @@ public class CadastroImovel extends javax.swing.JDialog {
         jpAgrupadorPImvl = new javax.swing.JPanel();
         jpDadosProprietario1 = new javax.swing.JPanel();
         jpLabelsDP1 = new javax.swing.JPanel();
-        jlBuscarProp1 = new javax.swing.JLabel();
         jlNome1 = new javax.swing.JLabel();
         jlRG1 = new javax.swing.JLabel();
         jlCPF_CNPJ1 = new javax.swing.JLabel();
         jpTextFieldsDP1 = new javax.swing.JPanel();
-        jtfBuscarProp1 = new javax.swing.JTextField();
         jtfNome1 = new javax.swing.JTextField();
         jtfRG1 = new javax.swing.JTextField();
         jtfCPF_CNPJ1 = new javax.swing.JTextField();
@@ -199,7 +197,7 @@ public class CadastroImovel extends javax.swing.JDialog {
                 .addComponent(jlCadastro)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jlCadastroNmr)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 533, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 579, Short.MAX_VALUE)
                 .addComponent(jlBuscar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -432,11 +430,13 @@ public class CadastroImovel extends javax.swing.JDialog {
         jpPessoal.setLayout(jpPessoalLayout);
         jpPessoalLayout.setHorizontalGroup(
             jpPessoalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jspPainelRolagem, javax.swing.GroupLayout.DEFAULT_SIZE, 694, Short.MAX_VALUE)
             .addGroup(jpPessoalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jpControles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jpControles, javax.swing.GroupLayout.DEFAULT_SIZE, 766, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(jpPessoalLayout.createSequentialGroup()
+                .addComponent(jspPainelRolagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jpPessoalLayout.setVerticalGroup(
             jpPessoalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -451,10 +451,7 @@ public class CadastroImovel extends javax.swing.JDialog {
 
         jpDadosProprietario1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Proprietário"));
 
-        jpLabelsDP1.setLayout(new java.awt.GridLayout(4, 1, 0, 5));
-
-        jlBuscarProp1.setText("Tamanho:");
-        jpLabelsDP1.add(jlBuscarProp1);
+        jpLabelsDP1.setLayout(new java.awt.GridLayout(3, 1, 0, 5));
 
         jlNome1.setText("Nome:");
         jpLabelsDP1.add(jlNome1);
@@ -465,8 +462,7 @@ public class CadastroImovel extends javax.swing.JDialog {
         jlCPF_CNPJ1.setText("CPF/CNPJ:");
         jpLabelsDP1.add(jlCPF_CNPJ1);
 
-        jpTextFieldsDP1.setLayout(new java.awt.GridLayout(4, 1, 0, 5));
-        jpTextFieldsDP1.add(jtfBuscarProp1);
+        jpTextFieldsDP1.setLayout(new java.awt.GridLayout(3, 1, 0, 5));
         jpTextFieldsDP1.add(jtfNome1);
         jpTextFieldsDP1.add(jtfRG1);
         jpTextFieldsDP1.add(jtfCPF_CNPJ1);
@@ -478,11 +474,11 @@ public class CadastroImovel extends javax.swing.JDialog {
             .addGroup(jpDadosProprietario1Layout.createSequentialGroup()
                 .addComponent(jpLabelsDP1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jpTextFieldsDP1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jpTextFieldsDP1, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE))
         );
         jpDadosProprietario1Layout.setVerticalGroup(
             jpDadosProprietario1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpLabelsDP1, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
+            .addComponent(jpLabelsDP1, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)
             .addComponent(jpTextFieldsDP1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
@@ -576,7 +572,7 @@ public class CadastroImovel extends javax.swing.JDialog {
         );
         jpEnderecoImovel1Layout.setVerticalGroup(
             jpEnderecoImovel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jpLabelsE1, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)
+            .addComponent(jpLabelsE1, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
             .addComponent(jpTextFieldsE1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
@@ -587,8 +583,8 @@ public class CadastroImovel extends javax.swing.JDialog {
             .addGroup(jpAgrupadorPImvlLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpAgrupadorPImvlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpEnderecoImovel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpDadosProprietario1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jpDadosProprietario1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpEnderecoImovel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jpAgrupadorPImvlLayout.setVerticalGroup(
@@ -596,30 +592,24 @@ public class CadastroImovel extends javax.swing.JDialog {
             .addGroup(jpAgrupadorPImvlLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jpDadosProprietario1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addGap(18, 18, 18)
                 .addComponent(jpEnderecoImovel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(276, Short.MAX_VALUE))
+                .addContainerGap(318, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jpDadosFuncionarioLayout = new javax.swing.GroupLayout(jpDadosFuncionario);
         jpDadosFuncionario.setLayout(jpDadosFuncionarioLayout);
         jpDadosFuncionarioLayout.setHorizontalGroup(
             jpDadosFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 694, Short.MAX_VALUE)
-            .addGroup(jpDadosFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jpDadosFuncionarioLayout.createSequentialGroup()
-                    .addGap(0, 2, Short.MAX_VALUE)
-                    .addComponent(jpAgrupadorPImvl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 2, Short.MAX_VALUE)))
+            .addGroup(jpDadosFuncionarioLayout.createSequentialGroup()
+                .addComponent(jpAgrupadorPImvl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 96, Short.MAX_VALUE))
         );
         jpDadosFuncionarioLayout.setVerticalGroup(
             jpDadosFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 625, Short.MAX_VALUE)
-            .addGroup(jpDadosFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jpDadosFuncionarioLayout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jpAgrupadorPImvl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpDadosFuncionarioLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jpAgrupadorPImvl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         jtpAbas.addTab("Propridades do Imóvel", jpDadosFuncionario);
@@ -628,7 +618,9 @@ public class CadastroImovel extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jtpAbas, javax.swing.GroupLayout.DEFAULT_SIZE, 699, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jtpAbas, javax.swing.GroupLayout.PREFERRED_SIZE, 791, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -793,7 +785,6 @@ public class CadastroImovel extends javax.swing.JDialog {
     private javax.swing.JComboBox jcbPais;
     private javax.swing.JComboBox jcbPais1;
     private javax.swing.JLabel jlBuscar;
-    private javax.swing.JLabel jlBuscarProp1;
     private javax.swing.JLabel jlCEP_ZIP;
     private javax.swing.JLabel jlCEP_ZIP1;
     private javax.swing.JLabel jlCPF_CNPJ;
@@ -840,7 +831,6 @@ public class CadastroImovel extends javax.swing.JDialog {
     private javax.swing.JRadioButton jrbRG;
     private javax.swing.JScrollPane jspPainelRolagem;
     private javax.swing.JTextField jtfBuscar;
-    private javax.swing.JTextField jtfBuscarProp1;
     private javax.swing.JTextField jtfCPF_CNPJ;
     private javax.swing.JTextField jtfCPF_CNPJ1;
     private javax.swing.JTextField jtfComplemento;

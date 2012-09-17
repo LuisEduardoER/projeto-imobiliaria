@@ -26,7 +26,10 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jtpAbas" alignment="0" pref="699" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="jtpAbas" min="-2" pref="791" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -61,11 +64,14 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jspPainelRolagem" alignment="0" pref="694" max="32767" attributes="0"/>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jpControles" max="32767" attributes="0"/>
+                      <Component id="jpControles" pref="766" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
+                  </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jspPainelRolagem" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -135,7 +141,7 @@
                                   <Component id="jlCadastro" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jlCadastroNmr" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="533" max="32767" attributes="0"/>
+                                  <EmptySpace pref="579" max="32767" attributes="0"/>
                                   <Component id="jlBuscar" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jtfBuscar" min="-2" pref="56" max="-2" attributes="0"/>
@@ -558,25 +564,17 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="694" max="32767" attributes="0"/>
-                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="0" pref="2" max="32767" attributes="0"/>
-                          <Component id="jpAgrupadorPImvl" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="2" max="32767" attributes="0"/>
-                      </Group>
+                  <Group type="102" alignment="0" attributes="0">
+                      <Component id="jpAgrupadorPImvl" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="0" pref="96" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="625" max="32767" attributes="0"/>
-                  <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                          <Component id="jpAgrupadorPImvl" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jpAgrupadorPImvl" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -590,8 +588,8 @@
                       <Group type="102" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jpDadosProprietario1" max="32767" attributes="0"/>
                               <Component id="jpEnderecoImovel1" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jpDadosProprietario1" alignment="1" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                       </Group>
@@ -602,9 +600,9 @@
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jpDadosProprietario1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="41" max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jpEnderecoImovel1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="276" max="32767" attributes="0"/>
+                          <EmptySpace pref="318" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -625,13 +623,13 @@
                           <Group type="102" alignment="0" attributes="0">
                               <Component id="jpLabelsDP1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jpTextFieldsDP1" max="32767" attributes="0"/>
+                              <Component id="jpTextFieldsDP1" pref="596" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jpLabelsDP1" alignment="0" pref="81" max="32767" attributes="0"/>
+                          <Component id="jpLabelsDP1" alignment="0" pref="59" max="32767" attributes="0"/>
                           <Component id="jpTextFieldsDP1" alignment="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
@@ -642,14 +640,9 @@
                       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                         <Property name="columns" type="int" value="1"/>
                         <Property name="verticalGap" type="int" value="5"/>
-                        <Property name="rows" type="int" value="4"/>
+                        <Property name="rows" type="int" value="3"/>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JLabel" name="jlBuscarProp1">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Tamanho:"/>
-                          </Properties>
-                        </Component>
                         <Component class="javax.swing.JLabel" name="jlNome1">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Nome:"/>
@@ -672,11 +665,9 @@
                       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                         <Property name="columns" type="int" value="1"/>
                         <Property name="verticalGap" type="int" value="5"/>
-                        <Property name="rows" type="int" value="4"/>
+                        <Property name="rows" type="int" value="3"/>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JTextField" name="jtfBuscarProp1">
-                        </Component>
                         <Component class="javax.swing.JTextField" name="jtfNome1">
                         </Component>
                         <Component class="javax.swing.JTextField" name="jtfRG1">
@@ -709,7 +700,7 @@
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jpLabelsE1" alignment="0" pref="170" max="32767" attributes="0"/>
+                          <Component id="jpLabelsE1" alignment="0" pref="173" max="32767" attributes="0"/>
                           <Component id="jpTextFieldsE1" alignment="0" pref="0" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
