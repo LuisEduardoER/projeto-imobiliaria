@@ -113,7 +113,6 @@ public class CadastroPessoal extends javax.swing.JDialog {
         jtfNome = new javax.swing.JTextField();
         jtfRG = new javax.swing.JTextField();
         jtfCPF_CNPJ = new javax.swing.JTextField();
-        jftfNome = new javax.swing.JFormattedTextField();
         jpEndereco = new javax.swing.JPanel();
         jpLabelsE = new javax.swing.JPanel();
         jlPais = new javax.swing.JLabel();
@@ -213,9 +212,6 @@ public class CadastroPessoal extends javax.swing.JDialog {
         jpTextFieldsDP.add(jtfNome);
         jpTextFieldsDP.add(jtfRG);
         jpTextFieldsDP.add(jtfCPF_CNPJ);
-
-        jftfNome.setText("jFormattedTextField1");
-        jpTextFieldsDP.add(jftfNome);
 
         javax.swing.GroupLayout jpDadosPrincipaisLayout = new javax.swing.GroupLayout(jpDadosPrincipais);
         jpDadosPrincipais.setLayout(jpDadosPrincipaisLayout);
@@ -612,7 +608,6 @@ public class CadastroPessoal extends javax.swing.JDialog {
     private javax.swing.JComboBox jcbLogradouro;
     private javax.swing.JComboBox jcbPais;
     private javax.swing.JFormattedTextField jftfDataNascimento;
-    private javax.swing.JFormattedTextField jftfNome;
     private javax.swing.JLabel jlBuscar;
     private javax.swing.JLabel jlCEP_ZIP;
     private javax.swing.JLabel jlCPF_CNPJ;
