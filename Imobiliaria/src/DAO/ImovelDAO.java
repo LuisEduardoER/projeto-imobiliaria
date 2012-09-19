@@ -21,6 +21,7 @@ public abstract class ImovelDAO {
     static Conexao c = new Conexao();
     static Connection con = c.conexaoMysql();
     public static PreparedStatement stmt;
+    
 
     public static boolean verificaImovelExiste(Imovel i) {
 
@@ -31,12 +32,12 @@ public abstract class ImovelDAO {
 
             stmt = ImovelDAO.con.prepareStatement(""
                     + "SELECT idEndereco,"
-                    +        "idCliente"
+                    + "idCliente"
                     + "FROM imoveis"
-                    +  "WHERE"
-                    +    "idEndereco = ?"
-                    +    "AND idCliente = ? ");
-            
+                    + "WHERE"
+                    + "idEndereco = ?"
+                    + "AND idCliente = ? ");
+
 //            stmt.setInt(1, i.getIdEndereco());
 //            stmt.setInt(2, proprietario.getID());
             rs = stmt.executeQuery();
@@ -64,7 +65,7 @@ public abstract class ImovelDAO {
         Statement st;
 
         try {
-            if (verificaImovelExiste(i)) { 
+            if (verificaImovelExiste(i)) {
 
                 stmt = this.con.prepareStatement(""
                         + "INSERT INTO `imobiliaria`.`imoveis`"

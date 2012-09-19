@@ -10,14 +10,12 @@ import Controlador.ControladorPessoa;
 import Controlador.Mensagens;
 import Modelo.*;
 import Util.VerificaNumeros;
-import com.sun.xml.internal.ws.api.streaming.XMLStreamReaderFactory;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.text.SimpleDateFormat;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 
 /**
  *

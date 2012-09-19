@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemadesigner version="6.5">
+<source>
+<database charset="latin1" collation="latin1_swedish_ci">imobiliaria</database>
+</source>
+<canvas zoom="50">
+<tables>
+<table name="aluguel" view="colnames">
+<left>43</left>
+<top>904</top>
+<width>98</width>
+<height>76</height>
+<sql_create_table>CREATE TABLE `aluguel` (
+  `valor` float DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="bairros" view="colnames">
+<left>48</left>
+<top>268</top>
+<width>86</width>
+<height>108</height>
+<sql_create_table>CREATE TABLE `bairros` (
+  `idBairro` int(11) NOT NULL,
+  `idMunicipio` int(11) DEFAULT NULL,
+  `descricao` varchar(255) DEFAULT NULL,
+  `complemento` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`idBairro`),
+  KEY `FK_Bairros` (`idMunicipio`),
+  CONSTRAINT `FK_Bairros` FOREIGN KEY (`idMunicipio`) REFERENCES `municipios` (`idMunicipio`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="clientes" view="colnames">
+<left>246</left>
+<top>25</top>
+<width>96</width>
+<height>148</height>
+<sql_create_table>CREATE TABLE `clientes` (
+  `idCliente` int(11) NOT NULL,
+  `idEndereco` int(11) NOT NULL,
+  `numero` varchar(10) DEFAULT NULL,
+  `nome` varchar(255) DEFAULT NULL,
+  `rgIe` varchar(30) DEFAULT NULL,
+  `cpfCnpj` varchar(30) DEFAULT NULL,
+  `telefone` varchar(30) DEFAULT NULL,
+  `celular` varchar(30) DEFAULT NULL,
+  `telefoneComercial` varchar(30) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `complemento` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`idCliente`,`idEndereco`),
+  KEY `FK_Clientes` (`idEndereco`),
+  CONSTRAINT `FK_clientes` FOREIGN KEY (`idEndereco`) REFERENCES `enderecos` (`idEndereco`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="closets" view="colnames">
+<left>456</left>
+<top>503</top>
+<width>144</width>
+<height>154</height>
+<sql_create_table>CREATE TABLE `closets` (
+  `idCloset` int(11) NOT NULL,
+  `descricao` varchar(11) DEFAULT NULL,
+  `quantidade` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idCloset`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="comerciais" view="colnames">
+<left>154</left>
+<top>902</top>
+<width>94</width>
+<height>72</height>
+<sql_create_table>CREATE TABLE `comerciais` (
+  `idComercial` int(11) NOT NULL,
+  `Descricao` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`idComercial`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="documentos" view="colnames">
+<left>619</left>
+<top>407</top>
+<width>98</width>
+<height>96</height>
+<sql_create_table>CREATE TABLE `documentos` (
+  `idDocumento` int(11) NOT NULL,
+  `tipo` varchar(50) DEFAULT NULL,
+  `descricao` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`idDocumento`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="embutidos" view="colnames">
+<left>42</left>
+<top>570</top>
+<width>90</width>
+<height>66</height>
+<sql_create_table>CREATE TABLE `embutidos` (
+  `idEmbutido` int(11) NOT NULL,
+  `descricaoEmbutido` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`idEmbutido`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="enderecos" view="colnames">
+<left>48</left>
+<top>146</top>
+<width>82</width>
+<height>88</height>
+<sql_create_table>CREATE TABLE `enderecos` (
+  `idEndereco` int(11) NOT NULL,
+  `idBairro` int(11) NOT NULL,
+  `logradouro` varchar(255) DEFAULT NULL,
+  `cep` varchar(30) DEFAULT NULL,
+  `Cd_TIPO_enderecos` varchar(20) DEFAULT NULL,
+  `complemento` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`idEndereco`,`idBairro`),
+  KEY `FK_Enderecos` (`idBairro`),
+  CONSTRAINT `FK_Enderecos` FOREIGN KEY (`idBairro`) REFERENCES `bairros` (`idBairro`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="estados" view="colnames">
+<left>157</left>
+<top>193</top>
+<width>84</width>
+<height>88</height>
+<sql_create_table>CREATE TABLE `estados` (
+  `idEstado` int(11) NOT NULL,
+  `idPais` int(11) NOT NULL,
+  `Descricao` varchar(255) DEFAULT NULL,
+  `UF` varchar(12) DEFAULT NULL,
+  PRIMARY KEY (`idEstado`,`idPais`),
+  KEY `FK_Estados` (`idPais`),
+  CONSTRAINT `FK_Estados` FOREIGN KEY (`idPais`) REFERENCES `paises` (`idPais`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="garagens" view="colnames">
+<left>465</left>
+<top>420</top>
+<width>90</width>
+<height>70</height>
+<sql_create_table>CREATE TABLE `garagens` (
+  `idGaragem` int(11) NOT NULL,
+  `vagas` int(11) DEFAULT NULL,
+  `descricao` int(11) DEFAULT NULL,
+  `coberta` tinyint(1) DEFAULT NULL,
+  PRIMARY KEY (`idGaragem`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="imoveis" view="colnames">
+<left>249</left>
+<top>406</top>
+<width>84</width>
+<height>302</height>
+<sql_create_table>CREATE TABLE `imoveis` (
+  `valor` float NOT NULL,
+  `tamanho` float NOT NULL,
+  `numero` int(11) DEFAULT NULL,
+  `complemento` varchar(100) DEFAULT NULL,
+  `quarto` int(11) DEFAULT NULL,
+  `suite` int(11) DEFAULT NULL,
+  `sala` int(11) DEFAULT NULL,
+  `banheiro` int(11) DEFAULT NULL,
+  `lavabo` int(11) DEFAULT NULL,
+  `sacada` int(11) DEFAULT NULL,
+  `idCloset` int(11) DEFAULT NULL,
+  `churasqueira` int(11) DEFAULT NULL,
+  `edicula` tinyint(1) DEFAULT NULL,
+  `idDocumento` int(11) DEFAULT NULL,
+  `idGaragem` int(11) DEFAULT NULL,
+  `locacao` float DEFAULT NULL,
+  `piscina` int(11) DEFAULT NULL,
+  `idCliente` int(11) NOT NULL,
+  `idImovel` int(11) NOT NULL AUTO_INCREMENT,
+  `idEndereco` int(11) NOT NULL,
+  `quadra` varchar(20) DEFAULT NULL,
+  `lote` varchar(20) DEFAULT NULL,
+  `matricula` varchar(20) DEFAULT NULL,
+  `idEmbutido` int(4) DEFAULT NULL,
+  `idTeto` int(11) DEFAULT NULL,
+  `idTelhado` int(11) DEFAULT NULL,
+  PRIMARY KEY (`idImovel`,`idEndereco`),
+  KEY `FK_Imoveis_end` (`idEndereco`),
+  KEY `FK_imoveis_cliente` (`idCliente`),
+  KEY `FK_imoveis_documento` (`idDocumento`),
+  KEY `FK_imoveis_embutido` (`idEmbutido`),
+  KEY `FK_imoveis_garagem` (`idGaragem`),
+  KEY `FK_imoveis_teto` (`idTeto`),
+  KEY `FK_imoveis_telhado` (`idTelhado`),
+  KEY `FK_imoveis_closet` (`idCloset`),
+  CONSTRAINT `FK_imoveis_closet` FOREIGN KEY (`idCloset`) REFERENCES `closets` (`idCloset`),
+  CONSTRAINT `FK_imoveis` FOREIGN KEY (`idEndereco`) REFERENCES `enderecos` (`idEndereco`),
+  CONSTRAINT `FK_imoveis_cliente` FOREIGN KEY (`idCliente`) REFERENCES `clientes` (`idCliente`),
+  CONSTRAINT `FK_imoveis_documento` FOREIGN KEY (`idDocumento`) REFERENCES `documentos` (`idDocumento`),
+  CONSTRAINT `FK_imoveis_embutido` FOREIGN KEY (`idEmbutido`) REFERENCES `embutidos` (`idEmbutido`),
+  CONSTRAINT `FK_imoveis_garagem` FOREIGN KEY (`idGaragem`) REFERENCES `garagens` (`idGaragem`),
+  CONSTRAINT `FK_imoveis_telhado` FOREIGN KEY (`idTelhado`) REFERENCES `telhados` (`idTelhado`),
+  CONSTRAINT `FK_imoveis_teto` FOREIGN KEY (`idTeto`) REFERENCES `tetos` (`idTeto`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="municipios" view="colnames">
+<left>44</left>
+<top>388</top>
+<width>96</width>
+<height>90</height>
+<sql_create_table>CREATE TABLE `municipios` (
+  `idMunicipio` int(11) NOT NULL,
+  `idEstado` int(11) NOT NULL,
+  `Descricao` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`idMunicipio`,`idEstado`),
+  KEY `FK_Municipios` (`idEstado`),
+  CONSTRAINT `FK_Municipios` FOREIGN KEY (`idEstado`) REFERENCES `estados` (`idEstado`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="paises" view="colnames">
+<left>58</left>
+<top>16</top>
+<width>100</width>
+<height>106</height>
+<sql_create_table>CREATE TABLE `paises` (
+  `idPais` int(11) NOT NULL,
+  `Descricao` varchar(255) DEFAULT NULL,
+  `Sigla` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`idPais`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="residenciais" view="colnames">
+<left>242</left>
+<top>796</top>
+<width>94</width>
+<height>74</height>
+<sql_create_table>CREATE TABLE `residenciais` (
+  `idResidencial` int(11) NOT NULL,
+  `descricao` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`idResidencial`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="rurais" view="colnames">
+<left>56</left>
+<top>680</top>
+<width>106</width>
+<height>72</height>
+<sql_create_table>CREATE TABLE `rurais` (
+  `idRural` int(11) NOT NULL,
+  `descricao` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`idRural`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="telhados" view="colnames">
+<left>446</left>
+<top>670</top>
+<width>98</width>
+<height>54</height>
+<sql_create_table>CREATE TABLE `telhados` (
+  `idTelhado` int(11) NOT NULL,
+  `tipo` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`idTelhado`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="tetos" view="colnames">
+<left>44</left>
+<top>486</top>
+<width>88</width>
+<height>78</height>
+<sql_create_table>CREATE TABLE `tetos` (
+  `idTeto` int(11) NOT NULL,
+  `tipo` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`idTeto`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="tipoimovel" view="colnames">
+<left>50</left>
+<top>779</top>
+<width>184</width>
+<height>114</height>
+<sql_create_table>CREATE TABLE `tipoimovel` (
+  `idTipoImovel` int(4) NOT NULL AUTO_INCREMENT,
+  `descricaoTipoImovel` varchar(100) NOT NULL,
+  PRIMARY KEY (`idTipoImovel`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8</sql_create_table>
+</table>
+<table name="vendas" view="colnames">
+<left>464</left>
+<top>285</top>
+<width>126</width>
+<height>118</height>
+<sql_create_table>CREATE TABLE `vendas` (
+  `idVenda` int(11) NOT NULL,
+  `idDocumento` int(11) NOT NULL,
+  `idCliente` int(11) NOT NULL,
+  `valorVenda` float DEFAULT NULL,
+  `idImovel` int(11) NOT NULL,
+  PRIMARY KEY (`idVenda`,`idDocumento`,`idCliente`,`idImovel`),
+  KEY `FK_vendas_pessoa` (`idCliente`),
+  KEY `FK_vendas_documento` (`idDocumento`),
+  KEY `FK_vendas_imovel` (`idImovel`),
+  CONSTRAINT `FK_vendas_imovel` FOREIGN KEY (`idImovel`) REFERENCES `imoveis` (`idImovel`),
+  CONSTRAINT `FK_vendas_documento` FOREIGN KEY (`idDocumento`) REFERENCES `documentos` (`idDocumento`),
+  CONSTRAINT `FK_vendas_pessoa` FOREIGN KEY (`idCliente`) REFERENCES `pessoa` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+<table name="pessoa" view="colnames">
+<left>254</left>
+<top>186</top>
+<width>102</width>
+<height>206</height>
+<sql_create_table>CREATE TABLE `pessoa` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(100) NOT NULL,
+  `CNPJ_CPF` int(11) DEFAULT NULL,
+  `RG` int(11) DEFAULT NULL,
+  `nascimento` date DEFAULT NULL,
+  `CTPS_Numero` int(11) DEFAULT NULL,
+  `CTPS_Serie` varchar(11) DEFAULT NULL,
+  `CTPS_UF` varchar(2) DEFAULT NULL,
+  `id_Pais` int(11) DEFAULT NULL,
+  `id_Estado` int(11) DEFAULT NULL,
+  `id_Cidade` int(11) DEFAULT NULL,
+  `id_Logradouro` int(11) DEFAULT NULL,
+  `CEP_ZIP` int(11) DEFAULT NULL,
+  `numero` int(11) DEFAULT NULL,
+  `complemento` varchar(100) DEFAULT NULL,
+  `id_bairro` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK_pessoa_bairro` (`id_bairro`),
+  KEY `FK_pessoa_estado` (`id_Estado`),
+  KEY `FK_pessoa_pais` (`id_Pais`),
+  KEY `FK_pessoa_municipio` (`id_Cidade`),
+  CONSTRAINT `FK_pessoa_municipio` FOREIGN KEY (`id_Cidade`) REFERENCES `municipios` (`idMunicipio`),
+  CONSTRAINT `FK_pessoa_bairro` FOREIGN KEY (`id_bairro`) REFERENCES `bairros` (`idBairro`),
+  CONSTRAINT `FK_pessoa_estado` FOREIGN KEY (`id_Estado`) REFERENCES `estados` (`idEstado`),
+  CONSTRAINT `FK_pessoa_pais` FOREIGN KEY (`id_Pais`) REFERENCES `paises` (`idPais`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1</sql_create_table>
+</table>
+</tables>
+</canvas>
+</schemadesigner>
