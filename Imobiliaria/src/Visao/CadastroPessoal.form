@@ -242,11 +242,6 @@
                             </Component>
                             <Component class="javax.swing.JTextField" name="jtfCPF_CNPJ">
                             </Component>
-                            <Component class="javax.swing.JFormattedTextField" name="jftfNome">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="jFormattedTextField1"/>
-                              </Properties>
-                            </Component>
                           </SubComponents>
                         </Container>
                       </SubComponents>

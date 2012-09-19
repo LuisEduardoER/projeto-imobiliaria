@@ -34,7 +34,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jtpAbas" alignment="0" pref="653" max="32767" attributes="0"/>
+          <Component id="jtpAbas" alignment="0" pref="753" max="32767" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -64,13 +64,13 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
+                  <Group type="102" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jpControles" pref="766" max="32767" attributes="0"/>
+                      <Component id="jpControles" pref="774" max="32767" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jspPainelRolagem" min="-2" max="-2" attributes="0"/>
+                      <Component id="jspPainelRolagem" min="-2" pref="732" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -78,8 +78,8 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jspPainelRolagem" pref="596" max="32767" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <Component id="jspPainelRolagem" min="-2" pref="585" max="-2" attributes="0"/>
+                      <EmptySpace pref="129" max="32767" attributes="0"/>
                       <Component id="jpControles" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -103,29 +103,21 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jpCadastro" alignment="0" max="32767" attributes="0"/>
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                          <Component id="jpEnderecoImovel" alignment="0" pref="0" max="32767" attributes="0"/>
-                                          <Component id="jpDadosProprietario" alignment="0" max="32767" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jpEnderecoImovel" min="-2" pref="664" max="-2" attributes="0"/>
+                                  <Component id="jpCadastro" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
+                              <EmptySpace pref="183" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
+                          <Group type="102" attributes="0">
                               <Component id="jpCadastro" min="-2" pref="35" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jpDadosProprietario" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
                               <Component id="jpEnderecoImovel" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="276" max="32767" attributes="0"/>
+                              <EmptySpace pref="457" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -137,11 +129,14 @@
                         <DimensionLayout dim="0">
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jlCadastro" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jlCadastroNmr" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace pref="579" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <EmptySpace min="-2" pref="64" max="-2" attributes="0"/>
+                                          <Component id="jlCadastroNmr" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="jlCadastro" alignment="0" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
                                   <Component id="jlBuscar" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jtfBuscar" min="-2" pref="56" max="-2" attributes="0"/>
@@ -154,10 +149,10 @@
                               <Group type="102" attributes="0">
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="jtfBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jlBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jlCadastro" alignment="3" min="-2" max="-2" attributes="0"/>
                                       <Component id="jlCadastroNmr" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jtfBuscar" alignment="3" min="-2" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                               </Group>
@@ -165,8 +160,6 @@
                         </DimensionLayout>
                       </Layout>
                       <SubComponents>
-                        <Component class="javax.swing.JTextField" name="jtfBuscar">
-                        </Component>
                         <Component class="javax.swing.JLabel" name="jlBuscar">
                           <Properties>
                             <Property name="text" type="java.lang.String" value="Buscar:"/>
@@ -179,156 +172,8 @@
                         </Component>
                         <Component class="javax.swing.JLabel" name="jlCadastroNmr">
                         </Component>
-                      </SubComponents>
-                    </Container>
-                    <Container class="javax.swing.JPanel" name="jpDadosProprietario">
-                      <Properties>
-                        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                          <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                            <TitledBorder title="Dados do Propriet&#xe1;rio"/>
-                          </Border>
-                        </Property>
-                      </Properties>
-
-                      <Layout>
-                        <DimensionLayout dim="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="0" attributes="0">
-                                  <Component id="jpLabelsDP" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                                  <Component id="jpTextFieldsDP" min="-2" pref="401" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jpBuscarPessoa" min="-2" max="-2" attributes="0"/>
-                              </Group>
-                          </Group>
-                        </DimensionLayout>
-                        <DimensionLayout dim="1">
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jpTextFieldsDP" alignment="0" pref="0" max="32767" attributes="0"/>
-                              <Component id="jpLabelsDP" alignment="0" max="32767" attributes="0"/>
-                              <Component id="jpBuscarPessoa" alignment="1" max="32767" attributes="0"/>
-                          </Group>
-                        </DimensionLayout>
-                      </Layout>
-                      <SubComponents>
-                        <Container class="javax.swing.JPanel" name="jpLabelsDP">
-
-                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-                            <Property name="columns" type="int" value="1"/>
-                            <Property name="verticalGap" type="int" value="5"/>
-                            <Property name="rows" type="int" value="3"/>
-                          </Layout>
-                          <SubComponents>
-                            <Component class="javax.swing.JLabel" name="jlNome">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="Nome:"/>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JLabel" name="jlRG">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="RG:"/>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JLabel" name="jlCPF_CNPJ">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="CPF/CNPJ:"/>
-                              </Properties>
-                            </Component>
-                          </SubComponents>
-                        </Container>
-                        <Container class="javax.swing.JPanel" name="jpTextFieldsDP">
-
-                          <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-                            <Property name="columns" type="int" value="1"/>
-                            <Property name="verticalGap" type="int" value="8"/>
-                            <Property name="rows" type="int" value="3"/>
-                          </Layout>
-                          <SubComponents>
-                            <Component class="javax.swing.JTextField" name="jtfNome">
-                            </Component>
-                            <Component class="javax.swing.JTextField" name="jtfRG">
-                            </Component>
-                            <Component class="javax.swing.JTextField" name="jtfCPF_CNPJ">
-                            </Component>
-                          </SubComponents>
-                        </Container>
-                        <Container class="javax.swing.JPanel" name="jpBuscarPessoa">
-                          <Properties>
-                            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                              <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                                <TitledBorder title="Buscar Propriet&#xe1;rio"/>
-                              </Border>
-                            </Property>
-                          </Properties>
-
-                          <Layout>
-                            <DimensionLayout dim="0">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Group type="102" attributes="0">
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jrbNome" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jrbCPF_CNPJ" min="-2" max="-2" attributes="0"/>
-                                              <EmptySpace max="-2" attributes="0"/>
-                                              <Component id="jrbRG" min="-2" max="-2" attributes="0"/>
-                                          </Group>
-                                          <Component id="jbBuscar" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                            </DimensionLayout>
-                            <DimensionLayout dim="1">
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" alignment="0" attributes="0">
-                                      <Group type="103" groupAlignment="3" attributes="0">
-                                          <Component id="jrbNome" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jrbCPF_CNPJ" alignment="3" min="-2" max="-2" attributes="0"/>
-                                          <Component id="jrbRG" alignment="3" min="-2" max="-2" attributes="0"/>
-                                      </Group>
-                                      <EmptySpace max="32767" attributes="0"/>
-                                      <Component id="jbBuscar" min="-2" max="-2" attributes="0"/>
-                                  </Group>
-                              </Group>
-                            </DimensionLayout>
-                          </Layout>
-                          <SubComponents>
-                            <Component class="javax.swing.JRadioButton" name="jrbNome">
-                              <Properties>
-                                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                                  <ComponentRef name="btgBuscaPessoa"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="Nome"/>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JRadioButton" name="jrbCPF_CNPJ">
-                              <Properties>
-                                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                                  <ComponentRef name="btgBuscaPessoa"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="CFP/CNPJ"/>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JRadioButton" name="jrbRG">
-                              <Properties>
-                                <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-                                  <ComponentRef name="btgBuscaPessoa"/>
-                                </Property>
-                                <Property name="text" type="java.lang.String" value="RG"/>
-                              </Properties>
-                            </Component>
-                            <Component class="javax.swing.JButton" name="jbBuscar">
-                              <Properties>
-                                <Property name="text" type="java.lang.String" value="Buscar"/>
-                              </Properties>
-                              <Events>
-                                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbBuscarActionPerformed"/>
-                              </Events>
-                            </Component>
-                          </SubComponents>
-                        </Container>
+                        <Component class="javax.swing.JTextField" name="jtfBuscar">
+                        </Component>
                       </SubComponents>
                     </Container>
                     <Container class="javax.swing.JPanel" name="jpEnderecoImovel">
@@ -555,8 +400,8 @@
         <Container class="javax.swing.JPanel" name="jpDadosFuncionario">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout" value="org.netbeans.modules.form.compat2.layouts.support.JTabbedPaneSupportLayout$JTabbedPaneConstraintsDescription">
-              <JTabbedPaneConstraints tabName="Propridades do Im&#xf3;vel">
-                <Property name="tabTitle" type="java.lang.String" value="Propridades do Im&#xf3;vel"/>
+              <JTabbedPaneConstraints tabName="Propridades do Propriet&#xe1;rio">
+                <Property name="tabTitle" type="java.lang.String" value="Propridades do Propriet&#xe1;rio"/>
               </JTabbedPaneConstraints>
             </Constraint>
           </Constraints>
@@ -565,8 +410,14 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="jpAgrupadorPImvl" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="96" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Group type="102" alignment="0" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jpDadosProprietario" max="32767" attributes="0"/>
+                          </Group>
+                          <Component id="jpAgrupadorPImvl" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="0" pref="67" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -574,7 +425,10 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jpDadosProprietario" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
                       <Component id="jpAgrupadorPImvl" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="607" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -585,255 +439,163 @@
               <Layout>
                 <DimensionLayout dim="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" attributes="0">
+                      <EmptySpace min="0" pref="727" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <EmptySpace min="0" pref="18" max="32767" attributes="0"/>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+            </Container>
+            <Container class="javax.swing.JPanel" name="jpDadosProprietario">
+              <Properties>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
+                    <TitledBorder title="Dados do Propriet&#xe1;rio"/>
+                  </Border>
+                </Property>
+              </Properties>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <Component id="jpLabelsDP" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jpTextFieldsDP" min="-2" pref="401" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="jpDadosProprietario1" max="32767" attributes="0"/>
-                              <Component id="jpEnderecoImovel1" alignment="0" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jpBuscarPessoa" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
                 <DimensionLayout dim="1">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jpDadosProprietario1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="separate" max="-2" attributes="0"/>
-                          <Component id="jpEnderecoImovel1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace pref="318" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="jpTextFieldsDP" alignment="0" pref="0" max="32767" attributes="0"/>
+                      <Component id="jpLabelsDP" alignment="0" max="32767" attributes="0"/>
+                      <Component id="jpBuscarPessoa" alignment="1" max="32767" attributes="0"/>
                   </Group>
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Container class="javax.swing.JPanel" name="jpDadosProprietario1">
-                  <Properties>
-                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                        <TitledBorder title="Dados do Propriet&#xe1;rio"/>
-                      </Border>
-                    </Property>
-                  </Properties>
+                <Container class="javax.swing.JPanel" name="jpLabelsDP">
 
-                  <Layout>
-                    <DimensionLayout dim="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jpLabelsDP1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="jpTextFieldsDP1" pref="596" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                    </DimensionLayout>
-                    <DimensionLayout dim="1">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jpLabelsDP1" alignment="0" pref="59" max="32767" attributes="0"/>
-                          <Component id="jpTextFieldsDP1" alignment="0" pref="0" max="32767" attributes="0"/>
-                      </Group>
-                    </DimensionLayout>
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+                    <Property name="columns" type="int" value="1"/>
+                    <Property name="verticalGap" type="int" value="5"/>
+                    <Property name="rows" type="int" value="3"/>
                   </Layout>
                   <SubComponents>
-                    <Container class="javax.swing.JPanel" name="jpLabelsDP1">
-
-                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-                        <Property name="columns" type="int" value="1"/>
-                        <Property name="verticalGap" type="int" value="5"/>
-                        <Property name="rows" type="int" value="3"/>
-                      </Layout>
-                      <SubComponents>
-                        <Component class="javax.swing.JLabel" name="jlNome1">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Nome:"/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JLabel" name="jlRG1">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="RG:"/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JLabel" name="jlCPF_CNPJ1">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="CPF/CNPJ:"/>
-                          </Properties>
-                        </Component>
-                      </SubComponents>
-                    </Container>
-                    <Container class="javax.swing.JPanel" name="jpTextFieldsDP1">
-
-                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-                        <Property name="columns" type="int" value="1"/>
-                        <Property name="verticalGap" type="int" value="5"/>
-                        <Property name="rows" type="int" value="3"/>
-                      </Layout>
-                      <SubComponents>
-                        <Component class="javax.swing.JTextField" name="jtfNome1">
-                        </Component>
-                        <Component class="javax.swing.JTextField" name="jtfRG1">
-                        </Component>
-                        <Component class="javax.swing.JTextField" name="jtfCPF_CNPJ1">
-                        </Component>
-                      </SubComponents>
-                    </Container>
+                    <Component class="javax.swing.JLabel" name="jlNome">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Nome:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jlRG">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="RG:"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JLabel" name="jlCPF_CNPJ">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="CPF/CNPJ:"/>
+                      </Properties>
+                    </Component>
                   </SubComponents>
                 </Container>
-                <Container class="javax.swing.JPanel" name="jpEnderecoImovel1">
+                <Container class="javax.swing.JPanel" name="jpTextFieldsDP">
+
+                  <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
+                    <Property name="columns" type="int" value="1"/>
+                    <Property name="verticalGap" type="int" value="8"/>
+                    <Property name="rows" type="int" value="3"/>
+                  </Layout>
+                  <SubComponents>
+                    <Component class="javax.swing.JTextField" name="jtfNome">
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="jtfRG">
+                    </Component>
+                    <Component class="javax.swing.JTextField" name="jtfCPF_CNPJ">
+                    </Component>
+                  </SubComponents>
+                </Container>
+                <Container class="javax.swing.JPanel" name="jpBuscarPessoa">
                   <Properties>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-                        <TitledBorder title="Endere&#xe7;o do Im&#xf3;vel"/>
+                        <TitledBorder title="Buscar Propriet&#xe1;rio"/>
                       </Border>
                     </Property>
-                    <Property name="toolTipText" type="java.lang.String" value="O endere&#xe7;o do im&#xf3;vel &#xe9; preenchido automaticamente com os dados do propriet&#xe1;rio do im&#xf3;vel."/>
                   </Properties>
 
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Group type="102" alignment="0" attributes="0">
-                              <Component id="jpLabelsE1" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jpTextFieldsE1" pref="583" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jrbNome" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jrbCPF_CNPJ" min="-2" max="-2" attributes="0"/>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Component id="jrbRG" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Component id="jbBuscar" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jpLabelsE1" alignment="0" pref="173" max="32767" attributes="0"/>
-                          <Component id="jpTextFieldsE1" alignment="0" pref="0" max="32767" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Group type="103" groupAlignment="3" attributes="0">
+                                  <Component id="jrbNome" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jrbCPF_CNPJ" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="jrbRG" alignment="3" min="-2" max="-2" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="32767" attributes="0"/>
+                              <Component id="jbBuscar" min="-2" max="-2" attributes="0"/>
+                          </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Container class="javax.swing.JPanel" name="jpLabelsE1">
-
-                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-                        <Property name="columns" type="int" value="1"/>
-                        <Property name="verticalGap" type="int" value="5"/>
-                        <Property name="rows" type="int" value="8"/>
-                      </Layout>
-                      <SubComponents>
-                        <Component class="javax.swing.JLabel" name="jlPais1">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Pa&#xed;s:"/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JLabel" name="jlEstado1">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Estado:"/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JLabel" name="jlCidade1">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Cidade:"/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JLabel" name="jLabel2">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Bairro:"/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JLabel" name="jlLogradouro1">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Logradouro:"/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JLabel" name="jlNumero1">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="N&#xfa;mero:"/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JLabel" name="jlCEP_ZIP1">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="CEP/ZIP:"/>
-                          </Properties>
-                        </Component>
-                        <Component class="javax.swing.JLabel" name="jlComplemento1">
-                          <Properties>
-                            <Property name="text" type="java.lang.String" value="Complemento:"/>
-                          </Properties>
-                        </Component>
-                      </SubComponents>
-                    </Container>
-                    <Container class="javax.swing.JPanel" name="jpTextFieldsE1">
-
-                      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
-                        <Property name="columns" type="int" value="1"/>
-                        <Property name="verticalGap" type="int" value="5"/>
-                        <Property name="rows" type="int" value="8"/>
-                      </Layout>
-                      <SubComponents>
-                        <Component class="javax.swing.JComboBox" name="jcbPais1">
-                          <Properties>
-                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                              <StringArray count="0"/>
-                            </Property>
-                          </Properties>
-                          <Events>
-                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jcbPais1ItemStateChanged"/>
-                          </Events>
-                        </Component>
-                        <Component class="javax.swing.JComboBox" name="jcbEstado1">
-                          <Properties>
-                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                              <StringArray count="0"/>
-                            </Property>
-                          </Properties>
-                          <Events>
-                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jcbEstado1ItemStateChanged"/>
-                          </Events>
-                        </Component>
-                        <Component class="javax.swing.JComboBox" name="jcbCidade1">
-                          <Properties>
-                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                              <StringArray count="0"/>
-                            </Property>
-                            <Property name="enabled" type="boolean" value="false"/>
-                          </Properties>
-                          <Events>
-                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jcbCidade1ItemStateChanged"/>
-                          </Events>
-                        </Component>
-                        <Component class="javax.swing.JComboBox" name="jcbBairro1">
-                          <Properties>
-                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                              <StringArray count="0"/>
-                            </Property>
-                            <Property name="enabled" type="boolean" value="false"/>
-                          </Properties>
-                          <Events>
-                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jcbBairro1ItemStateChanged"/>
-                          </Events>
-                        </Component>
-                        <Component class="javax.swing.JComboBox" name="jcbLogradouro1">
-                          <Properties>
-                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                              <StringArray count="0"/>
-                            </Property>
-                            <Property name="enabled" type="boolean" value="false"/>
-                          </Properties>
-                          <Events>
-                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jcbLogradouro1ItemStateChanged"/>
-                          </Events>
-                        </Component>
-                        <Component class="javax.swing.JTextField" name="jtfNumero1">
-                        </Component>
-                        <Component class="javax.swing.JComboBox" name="jcbCEP_ZIP1">
-                          <Properties>
-                            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                              <StringArray count="0"/>
-                            </Property>
-                            <Property name="enabled" type="boolean" value="false"/>
-                          </Properties>
-                          <Events>
-                            <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jcbCEP_ZIP1ItemStateChanged"/>
-                          </Events>
-                        </Component>
-                        <Component class="javax.swing.JTextField" name="jtfComplemento1">
-                        </Component>
-                      </SubComponents>
-                    </Container>
+                    <Component class="javax.swing.JRadioButton" name="jrbNome">
+                      <Properties>
+                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                          <ComponentRef name="btgBuscaPessoa"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="Nome"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JRadioButton" name="jrbCPF_CNPJ">
+                      <Properties>
+                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                          <ComponentRef name="btgBuscaPessoa"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="CFP/CNPJ"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JRadioButton" name="jrbRG">
+                      <Properties>
+                        <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
+                          <ComponentRef name="btgBuscaPessoa"/>
+                        </Property>
+                        <Property name="text" type="java.lang.String" value="RG"/>
+                      </Properties>
+                    </Component>
+                    <Component class="javax.swing.JButton" name="jbBuscar">
+                      <Properties>
+                        <Property name="text" type="java.lang.String" value="Buscar"/>
+                      </Properties>
+                      <Events>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jbBuscarActionPerformed"/>
+                      </Events>
+                    </Component>
                   </SubComponents>
                 </Container>
               </SubComponents>
