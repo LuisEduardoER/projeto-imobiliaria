@@ -9,13 +9,15 @@ import Controlador.CarregaEndereco;
 import Controlador.ControladorPessoa;
 import Controlador.Mensagens;
 import Modelo.*;
+import Util.FiltrosDigitacaoLetras;
+import Util.FiltrosDigitacaoNumerico;
 import Util.VerificaNumeros;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
+import java.awt.event.KeyEvent;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Formatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -43,7 +45,16 @@ public class CadastroPessoal extends javax.swing.JDialog {
     public CadastroPessoal(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
+        
+        jtfCPF_CNPJ.setDocument(new FiltrosDigitacaoNumerico());
+        jtfDDD.setDocument(new FiltrosDigitacaoNumerico());
+        jtfNumero.setDocument(new FiltrosDigitacaoNumerico());
+        jtfRG.setDocument(new FiltrosDigitacaoNumerico());
+        jtfTelefone.setDocument(new FiltrosDigitacaoNumerico());
+        jftfDataNascimento.setDocument(new FiltrosDigitacaoNumerico());
+        
+        jtfNome.setDocument(new FiltrosDigitacaoLetras());
+        
         botaoGravar = c.criaBotaoGravar();
         botaoExcluir = c.criaBotaoExcluir();
         botaoBuscar = c.criaBotaoBuscar();
@@ -203,12 +214,6 @@ public class CadastroPessoal extends javax.swing.JDialog {
         jpLabelsDP.add(jlCPF_CNPJ);
 
         jpTextFieldsDP.setLayout(new java.awt.GridLayout(3, 1, 0, 5));
-
-        jtfNome.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                jtfNomeKeyTyped(evt);
-            }
-        });
         jpTextFieldsDP.add(jtfNome);
         jpTextFieldsDP.add(jtfRG);
         jpTextFieldsDP.add(jtfCPF_CNPJ);
@@ -500,31 +505,6 @@ public class CadastroPessoal extends javax.swing.JDialog {
             jcbLogradouro.setModel(carregaEndereco.carregaEndereco((Bairro) jcbBairro.getSelectedItem()));
         }
     }//GEN-LAST:event_jcbBairroItemStateChanged
-
-    private void jtfNomeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfNomeKeyTyped
-        if (jtfNome.getText().contains("1")
-                || jtfNome.getText().contains("2")
-                || jtfNome.getText().contains("3")
-                || jtfNome.getText().contains("4")
-                || jtfNome.getText().contains("5")
-                || jtfNome.getText().contains("6")
-                || jtfNome.getText().contains("7")
-                || jtfNome.getText().contains("8")
-                || jtfNome.getText().contains("9")
-                || jtfNome.getText().contains("0")) {
-
-            String tamanho = jtfNome.getText();
-            int posicao = 0;
-
-            while (posicao < tamanho.length() - 1) {
-                char verificado = tamanho.charAt(posicao);
-                Character vazio = (null);
-                if (Character.isDigit(verificado)) {
-                    jtfNome.setText(jtfNome.getText().replace(verificado, vazio));
-                }
-            }
-        }
-    }//GEN-LAST:event_jtfNomeKeyTyped
 
     /**
      * @param args the command line arguments
@@ -886,4 +866,5 @@ public class CadastroPessoal extends javax.swing.JDialog {
         }
 
     }
+
 }
