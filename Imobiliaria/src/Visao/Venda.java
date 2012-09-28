@@ -27,17 +27,74 @@ public class Venda extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jpPessoas = new javax.swing.JPanel();
+        jpLabel = new javax.swing.JPanel();
+        jlVendedor = new javax.swing.JLabel();
+        jlComprador = new javax.swing.JLabel();
+        jlFuncionario = new javax.swing.JLabel();
+        jpCombos = new javax.swing.JPanel();
+        jComboBox1 = new javax.swing.JComboBox();
+        jComboBox2 = new javax.swing.JComboBox();
+        jComboBox3 = new javax.swing.JComboBox();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(550, 310));
+
+        jpPessoas.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        jpLabel.setLayout(new java.awt.GridLayout(3, 1, 0, 5));
+
+        jlVendedor.setText("Vendedor");
+        jpLabel.add(jlVendedor);
+
+        jlComprador.setText("Comprador");
+        jpLabel.add(jlComprador);
+
+        jlFuncionario.setText("Funcionario");
+        jpLabel.add(jlFuncionario);
+
+        jpCombos.setLayout(new java.awt.GridLayout(3, 1, 0, 4));
+
+        jComboBox1.setEditable(true);
+        jpCombos.add(jComboBox1);
+
+        jComboBox2.setEditable(true);
+        jpCombos.add(jComboBox2);
+
+        jComboBox3.setEditable(true);
+        jpCombos.add(jComboBox3);
+
+        javax.swing.GroupLayout jpPessoasLayout = new javax.swing.GroupLayout(jpPessoas);
+        jpPessoas.setLayout(jpPessoasLayout);
+        jpPessoasLayout.setHorizontalGroup(
+            jpPessoasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpPessoasLayout.createSequentialGroup()
+                .addComponent(jpLabel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpCombos, javax.swing.GroupLayout.PREFERRED_SIZE, 373, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jpPessoasLayout.setVerticalGroup(
+            jpPessoasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jpLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jpCombos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 458, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jpPessoas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 344, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jpPessoas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(260, Short.MAX_VALUE))
         );
 
         pack();
@@ -93,5 +150,14 @@ public class Venda extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JComboBox jComboBox3;
+    private javax.swing.JLabel jlComprador;
+    private javax.swing.JLabel jlFuncionario;
+    private javax.swing.JLabel jlVendedor;
+    private javax.swing.JPanel jpCombos;
+    private javax.swing.JPanel jpLabel;
+    private javax.swing.JPanel jpPessoas;
     // End of variables declaration//GEN-END:variables
 }
