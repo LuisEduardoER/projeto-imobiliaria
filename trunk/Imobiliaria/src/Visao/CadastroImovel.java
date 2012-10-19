@@ -75,9 +75,9 @@ public class CadastroImovel extends javax.swing.JDialog {
             }
         });
 
-        jpControles.add(botaoGravar);
-        jpControles.add(botaoExcluir);
-        jpControles.add(botaoBuscar);
+        jpBotoes.add(botaoGravar);
+        jpBotoes.add(botaoExcluir);
+        jpBotoes.add(botaoBuscar);
 
         jcbPais.setModel(carregaEndereco.carregaPais());
         jcbPais.setSelectedIndex(0);
@@ -97,6 +97,7 @@ public class CadastroImovel extends javax.swing.JDialog {
     private void initComponents() {
 
         btgBuscaPessoa = new javax.swing.ButtonGroup();
+        jpAbas = new javax.swing.JPanel();
         jtpAbas = new javax.swing.JTabbedPane();
         jpPessoal = new javax.swing.JPanel();
         jspPainelRolagem = new javax.swing.JScrollPane();
@@ -125,14 +126,7 @@ public class CadastroImovel extends javax.swing.JDialog {
         jtfNumero = new javax.swing.JTextField();
         jcbCEP_ZIP = new javax.swing.JComboBox();
         jtfComplemento = new javax.swing.JTextField();
-        jpControles = new javax.swing.JPanel();
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        filler2 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        filler3 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        filler4 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
-        filler5 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 0));
         jpDadosFuncionario = new javax.swing.JPanel();
-        jpAgrupadorPImvl = new javax.swing.JPanel();
         jpDadosProprietario = new javax.swing.JPanel();
         jpLabelsDP = new javax.swing.JPanel();
         jlNome = new javax.swing.JLabel();
@@ -147,6 +141,7 @@ public class CadastroImovel extends javax.swing.JDialog {
         jrbCPF_CNPJ = new javax.swing.JRadioButton();
         jrbRG = new javax.swing.JRadioButton();
         jbBuscar = new javax.swing.JButton();
+        jpBotoes = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -168,7 +163,7 @@ public class CadastroImovel extends javax.swing.JDialog {
                         .addGap(64, 64, 64)
                         .addComponent(jlCadastroNmr))
                     .addComponent(jlCadastro))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 494, Short.MAX_VALUE)
                 .addComponent(jlBuscar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 56, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -287,62 +282,38 @@ public class CadastroImovel extends javax.swing.JDialog {
             jpAgrupadorDImvlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpAgrupadorDImvlLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpAgrupadorDImvlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jpEnderecoImovel, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jpCadastro, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(183, Short.MAX_VALUE))
+                .addGroup(jpAgrupadorDImvlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jpCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jpEnderecoImovel, javax.swing.GroupLayout.PREFERRED_SIZE, 664, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
         jpAgrupadorDImvlLayout.setVerticalGroup(
             jpAgrupadorDImvlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpAgrupadorDImvlLayout.createSequentialGroup()
                 .addComponent(jpCadastro, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpEnderecoImovel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(457, Short.MAX_VALUE))
+                .addContainerGap(462, Short.MAX_VALUE))
         );
 
         jspPainelRolagem.setViewportView(jpAgrupadorDImvl);
-
-        jpControles.setLayout(new javax.swing.BoxLayout(jpControles, javax.swing.BoxLayout.LINE_AXIS));
-        jpControles.add(filler1);
-        jpControles.add(filler2);
-        jpControles.add(filler3);
-        jpControles.add(filler4);
-        jpControles.add(filler5);
 
         javax.swing.GroupLayout jpPessoalLayout = new javax.swing.GroupLayout(jpPessoal);
         jpPessoal.setLayout(jpPessoalLayout);
         jpPessoalLayout.setHorizontalGroup(
             jpPessoalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPessoalLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jpControles, javax.swing.GroupLayout.DEFAULT_SIZE, 774, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(jpPessoalLayout.createSequentialGroup()
-                .addComponent(jspPainelRolagem, javax.swing.GroupLayout.PREFERRED_SIZE, 732, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(jspPainelRolagem, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 46, Short.MAX_VALUE))
         );
         jpPessoalLayout.setVerticalGroup(
             jpPessoalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPessoalLayout.createSequentialGroup()
-                .addComponent(jspPainelRolagem, javax.swing.GroupLayout.PREFERRED_SIZE, 585, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 129, Short.MAX_VALUE)
-                .addComponent(jpControles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(jspPainelRolagem, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 32, Short.MAX_VALUE))
         );
 
         jtpAbas.addTab("Dados do Imóvel", jpPessoal);
-
-        javax.swing.GroupLayout jpAgrupadorPImvlLayout = new javax.swing.GroupLayout(jpAgrupadorPImvl);
-        jpAgrupadorPImvl.setLayout(jpAgrupadorPImvlLayout);
-        jpAgrupadorPImvlLayout.setHorizontalGroup(
-            jpAgrupadorPImvlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 727, Short.MAX_VALUE)
-        );
-        jpAgrupadorPImvlLayout.setVerticalGroup(
-            jpAgrupadorPImvlLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 18, Short.MAX_VALUE)
-        );
 
         jpDadosProprietario.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Proprietário"));
 
@@ -417,7 +388,7 @@ public class CadastroImovel extends javax.swing.JDialog {
                 .addComponent(jpTextFieldsDP, javax.swing.GroupLayout.PREFERRED_SIZE, 401, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpBuscarPessoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
         jpDadosProprietarioLayout.setVerticalGroup(
             jpDadosProprietarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -431,40 +402,68 @@ public class CadastroImovel extends javax.swing.JDialog {
         jpDadosFuncionarioLayout.setHorizontalGroup(
             jpDadosFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpDadosFuncionarioLayout.createSequentialGroup()
-                .addGroup(jpDadosFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jpDadosFuncionarioLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jpDadosProprietario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jpAgrupadorPImvl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 67, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(jpDadosProprietario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 42, Short.MAX_VALUE))
         );
         jpDadosFuncionarioLayout.setVerticalGroup(
             jpDadosFuncionarioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpDadosFuncionarioLayout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jpDadosProprietario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpAgrupadorPImvl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(607, 607, 607))
+                .addGap(631, 631, 631))
         );
 
         jtpAbas.addTab("Propridades do Proprietário", jpDadosFuncionario);
+
+        javax.swing.GroupLayout jpBotoesLayout = new javax.swing.GroupLayout(jpBotoes);
+        jpBotoes.setLayout(jpBotoesLayout);
+        jpBotoesLayout.setHorizontalGroup(
+            jpBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 352, Short.MAX_VALUE)
+        );
+        jpBotoesLayout.setVerticalGroup(
+            jpBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 25, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jpAbasLayout = new javax.swing.GroupLayout(jpAbas);
+        jpAbas.setLayout(jpAbasLayout);
+        jpAbasLayout.setHorizontalGroup(
+            jpAbasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpAbasLayout.createSequentialGroup()
+                .addGroup(jpAbasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jpBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtpAbas, javax.swing.GroupLayout.PREFERRED_SIZE, 774, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 56, Short.MAX_VALUE))
+        );
+        jpAbasLayout.setVerticalGroup(
+            jpAbasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpAbasLayout.createSequentialGroup()
+                .addComponent(jtpAbas, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
+        );
+
+        jtpAbas.getAccessibleContext().setAccessibleName("Dados Principais");
+        jtpAbas.getAccessibleContext().setAccessibleDescription("Dados Principais");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jtpAbas, javax.swing.GroupLayout.PREFERRED_SIZE, 791, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jpAbas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jtpAbas, javax.swing.GroupLayout.DEFAULT_SIZE, 753, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jpAbas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 21, Short.MAX_VALUE))
         );
-
-        jtpAbas.getAccessibleContext().setAccessibleName("Dados Principais");
-        jtpAbas.getAccessibleContext().setAccessibleDescription("Dados Principais");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -577,11 +576,6 @@ public class CadastroImovel extends javax.swing.JDialog {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup btgBuscaPessoa;
-    private javax.swing.Box.Filler filler1;
-    private javax.swing.Box.Filler filler2;
-    private javax.swing.Box.Filler filler3;
-    private javax.swing.Box.Filler filler4;
-    private javax.swing.Box.Filler filler5;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JButton jbBuscar;
     private javax.swing.JComboBox jcbBairro;
@@ -603,11 +597,11 @@ public class CadastroImovel extends javax.swing.JDialog {
     private javax.swing.JLabel jlNumero;
     private javax.swing.JLabel jlPais;
     private javax.swing.JLabel jlRG;
+    private javax.swing.JPanel jpAbas;
     private javax.swing.JPanel jpAgrupadorDImvl;
-    private javax.swing.JPanel jpAgrupadorPImvl;
+    private javax.swing.JPanel jpBotoes;
     private javax.swing.JPanel jpBuscarPessoa;
     private javax.swing.JPanel jpCadastro;
-    private javax.swing.JPanel jpControles;
     private javax.swing.JPanel jpDadosFuncionario;
     private javax.swing.JPanel jpDadosProprietario;
     private javax.swing.JPanel jpEnderecoImovel;
