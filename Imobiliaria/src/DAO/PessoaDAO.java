@@ -6,8 +6,10 @@ package DAO;
 
 import Controlador.Conexao;
 import Controlador.ControladorIncluirBanco;
+import Controlador.ControladorPessoa;
 import Controlador.Mensagens;
 import Modelo.Pessoa;
+import Modelo.PessoaN;
 import Modelo.Telefone;
 import java.sql.*;
 import java.util.Vector;
@@ -19,13 +21,14 @@ import javax.swing.DefaultComboBoxModel;
  *
  * @author Bruno
  */
-public class PessoaDAO {
+public class PessoaDAO implements ControladorPessoa {
 
     static Conexao c = new Conexao();
     static Connection con = c.conexaoMysql();
     public static PreparedStatement stmt;
 
-    public boolean inserePessoa(Pessoa pessoa, Telefone telefone) {
+    @Override
+    public boolean inserePessoa(PessoaN pessoa) {
 
         PreparedStatement stmt;
         ResultSet rs;
@@ -34,73 +37,36 @@ public class PessoaDAO {
         try {
 
             stmt = this.con.prepareStatement(""
-                    + "INSERT INTO pessoa"
-                    + "(`id`,"
-                    + "`nome`,"
-                    + "`CPF_CNPJ`,"
-                    + "`RG`,"
-                    + "`nascimento`,"
-                    + "`CTPS_Numero`,"
-                    + "`CTPS_Serie`,"
-                    + "`CTPS_UF`,"
-                    + "`id_Pais`,"
-                    + "`id_Estado`,"
-                    + "`id_Cidade`,"
-                    + "`id_Logradouro`,"
-                    + "`CEP_ZIP`,"
-                    + "`numero`,"
-                    + "`complemento`,"
-                    + "`id_Bairro`)"
-                    + "VALUES (?," //id1
-                    + "        ?,"//nome2
-                    + "        ?,"//CPF_CNPJ3
-                    + "        ?,"//RG4
-                    + "        ?,"//nascimento5
-                    + "        ?,"//CTPS_Numero6
-                    + "        ?,"//CTPS_Serie7
-                    + "        ?,"//CTPS_UF8
-                    + "        ?,"//id_Pais9
-                    + "        ?,"//id_Estado10
-                    + "        ?,"//id_Cidade11
-                    + "        ?,"//id_Logradouro12
-                    + "        ?,"//CEP_ZIP13
-                    + "        ?,"//numero14
-                    + "        ?,"//complemento15
-                    + "        ?);");//id_Bairro16
+                    + "INSERT INTO pessoan"
+                    + "(id,"
+                    + "nome,"
+                    + "cpf,"
+                    + "rua,"
+                    + "bairro,"
+                    + "cidade,"
+                    + "numero) "
+                    + "VALUES (0,"// 1 id
+                    + " ?,"//2 nome
+                    + " ?,"//3 cpf
+                    + " ?,"//4 rua
+                    + " ?,"//5 bairro
+                    + " ?,"//6 cidade
+                    + " ?);");//7 numero
 
-            java.sql.Date dataNascimento = new java.sql.Date(pessoa.getNascimento().getTime());
-
-            stmt.setInt(1, 0);
-            stmt.setString(2, pessoa.getNome());
-            stmt.setInt(3, pessoa.getCPF_CNPJ());
-            stmt.setInt(4, pessoa.getRG());
-            stmt.setDate(5, dataNascimento);
-            stmt.setInt(6, pessoa.getCTPS_Numero());
-            stmt.setInt(7, pessoa.getCTPS_Serie());
-            stmt.setString(8, pessoa.getCTPS_UF());
-            stmt.setInt(9, pessoa.getIdPais());
-            stmt.setInt(10, pessoa.getIdEstado());
-            stmt.setInt(11, pessoa.getIdCidade());
-            stmt.setInt(12, pessoa.getIdLogradouro());
-            stmt.setInt(13, pessoa.getCEP_ZIP());
-            stmt.setInt(14, pessoa.getNumero());
-            stmt.setString(15, pessoa.getComplemento());
-            stmt.setInt(16, pessoa.getIdBairro());
+            //stmt.setInt(1,0);
+            stmt.setString(1, pessoa.getNome());
+            stmt.setInt(2, pessoa.getCPF());
+            stmt.setString(3, pessoa.getRua());
+            stmt.setString(4, pessoa.getBairro());
+            stmt.setString(5, pessoa.getCidade());
+            stmt.setInt(6, pessoa.getNumero());
+            
             stmt.execute();
-
-
-            if (validaCadastroPessoa(pessoa)) {
-                con.commit();
-                pessoa = buscaPessoa(pessoa);
-//                if (insereTelefonePessoa(pessoa, telefone)) {
-//                    return true;
-//                } else {
-//                    removePessoa(pessoa);
-//                    return false;
-//                }
+                        
+            if (stmt.getUpdateCount() > 0) {
+                //con.commit();
                 return true;
             } else {
-                con.rollback();
                 return false;
             }
 
@@ -109,79 +75,78 @@ public class PessoaDAO {
             Logger.getLogger(ControladorIncluirBanco.class.getName()).log(Level.SEVERE, null, ex);
             Mensagens erro = new Mensagens();
             erro.jopError("Erro ao gravar dados no servidor de banco de dados:\nSQLException: " + ex.getMessage() + "\n inserePessoa");
-
             return false;
         }
     }
 
-    public boolean validaCadastroPessoa(Pessoa pessoa) {
-
-        ResultSet rs;
-        Mensagens mensagem = new Mensagens();
-
-        try {
-
-            stmt = PessoaDAO.con.prepareStatement(""
-                    + "SELECT * FROM pessoa "
-                    + "WHERE nome = ? "
-                    + "AND CPF_CNPJ = ? "
-                    + "AND RG = ? "
-                    + "AND nascimento = ?;");
-
-            java.sql.Date dataNascimento = new java.sql.Date(pessoa.getNascimento().getTime());
-
-            stmt.setString(1, pessoa.getNome());
-            stmt.setInt(2, pessoa.getCPF_CNPJ());
-            stmt.setInt(3, pessoa.getRG());
-            stmt.setDate(4, dataNascimento);
-            rs = stmt.executeQuery();
-
-            if (rs.first()) {
-
-                pessoa.setCEP_ZIP(rs.getInt("CEP_ZIP"));
-                pessoa.setCPF_CNPJ(rs.getInt("CPF_CNPJ"));
-                pessoa.setCTPS_Numero(rs.getInt("CTPS_Numero"));
-                pessoa.setCTPS_Serie(rs.getInt("CTPS_Serie"));
-                pessoa.setCTPS_UF(rs.getString("CTPS_UF"));
-                pessoa.setIdPessoa(rs.getInt("id"));
-                pessoa.setComplemento(rs.getString("complemento"));
-                pessoa.setIdBairro(rs.getInt("id_Bairro"));
-                pessoa.setIdCidade(rs.getInt("id_Cidade"));
-                pessoa.setIdEstado(rs.getInt("id_Estado"));
-                pessoa.setIdLogradouro(rs.getInt("id_Logradouro"));
-                pessoa.setIdPais(rs.getInt("id_Pais"));
-                pessoa.setNascimento(rs.getDate("nascimento"));
-                pessoa.setNome(rs.getString("nome"));
-                pessoa.setNumero(rs.getInt("numero"));
-                pessoa.setRG(rs.getInt("rg"));
-
-                return true;
-            } else {
-                mensagem.jopAlerta("Não foi possível validar a gravação do cadastro.\nCadastro não realizado.");
-                return false;
-            }
-
-        } catch (SQLException ex) {
-            Logger.getLogger(TipoImovelDAO.class.getName()).log(Level.SEVERE, null, ex);
-            mensagem.jopError("Erro ao buscar o cadastro no servidor de banco de dados.\nSQLException: " + ex.getMessage() + "\n validaCadastroPessoa");
-            return false;
-        }
-
-
-    }
-
-    public DefaultComboBoxModel buscaPessoaNome (String nome) {
+//    public boolean validaCadastroPessoa(Pessoa pessoa) {
+//
+//        ResultSet rs;
+//        Mensagens mensagem = new Mensagens();
+//
+//        try {
+//
+//            stmt = PessoaDAO.con.prepareStatement(""
+//                    + "SELECT * FROM pessoa "
+//                    + "WHERE nome = ? "
+//                    + "AND CPF_CNPJ = ? "
+//                    + "AND RG = ? "
+//                    + "AND nascimento = ?;");
+//
+//            java.sql.Date dataNascimento = new java.sql.Date(pessoa.getNascimento().getTime());
+//
+//            stmt.setString(1, pessoa.getNome());
+//            stmt.setInt(2, pessoa.getCPF_CNPJ());
+//            stmt.setInt(3, pessoa.getRG());
+//            stmt.setDate(4, dataNascimento);
+//            rs = stmt.executeQuery();
+//
+//            if (rs.first()) {
+//
+//                pessoa.setCEP_ZIP(rs.getInt("CEP_ZIP"));
+//                pessoa.setCPF_CNPJ(rs.getInt("CPF_CNPJ"));
+//                pessoa.setCTPS_Numero(rs.getInt("CTPS_Numero"));
+//                pessoa.setCTPS_Serie(rs.getInt("CTPS_Serie"));
+//                pessoa.setCTPS_UF(rs.getString("CTPS_UF"));
+//                pessoa.setIdPessoa(rs.getInt("id"));
+//                pessoa.setComplemento(rs.getString("complemento"));
+//                pessoa.setIdBairro(rs.getInt("id_Bairro"));
+//                pessoa.setIdCidade(rs.getInt("id_Cidade"));
+//                pessoa.setIdEstado(rs.getInt("id_Estado"));
+//                pessoa.setIdLogradouro(rs.getInt("id_Logradouro"));
+//                pessoa.setIdPais(rs.getInt("id_Pais"));
+//                pessoa.setNascimento(rs.getDate("nascimento"));
+//                pessoa.setNome(rs.getString("nome"));
+//                pessoa.setNumero(rs.getInt("numero"));
+//                pessoa.setRG(rs.getInt("rg"));
+//
+//                return true;
+//            } else {
+//                mensagem.jopAlerta("Não foi possível validar a gravação do cadastro.\nCadastro não realizado.");
+//                return false;
+//            }
+//
+//        } catch (SQLException ex) {
+//            Logger.getLogger(TipoImovelDAO.class.getName()).log(Level.SEVERE, null, ex);
+//            mensagem.jopError("Erro ao buscar o cadastro no servidor de banco de dados.\nSQLException: " + ex.getMessage() + "\n validaCadastroPessoa");
+//            return false;
+//        }
+//
+//
+//    }
+    @Override
+    public DefaultComboBoxModel buscaPessoaNome(String nome) {
 
         ResultSet rs;
         Mensagens mensagem = new Mensagens();
         PreparedStatement stmt;
         DefaultComboBoxModel modeloPessoa;
-        Vector<Pessoa> vetorPessoa = new Vector<Pessoa>();
+        Vector<PessoaN> vetorPessoa = new Vector<PessoaN>();
 
         try {
 
             stmt = PessoaDAO.con.prepareStatement(""
-                    + "SELECT * FROM pessoa "
+                    + "SELECT * FROM pessoaN "
                     + "WHERE nome LIKE ? ");
 
             stmt.setString(1, "%" + nome + "%");
@@ -190,46 +155,28 @@ public class PessoaDAO {
             if (rs.first()) {
                 if (rs.next()) {
                     while (rs.next()) {
-                        Pessoa resultado = new Pessoa();
+                        PessoaN resultado = new PessoaN();
 
-                        resultado.setCEP_ZIP(rs.getInt("CEP_ZIP"));
-                        resultado.setCPF_CNPJ(rs.getInt("CPF_CNPJ"));
-                        resultado.setCTPS_Numero(rs.getInt("CTPS_Numero"));
-                        resultado.setCTPS_Serie(rs.getInt("CTPS_Serie"));
-                        resultado.setCTPS_UF(rs.getString("CTPS_UF"));
-                        resultado.setIdPessoa(rs.getInt("id"));
-                        resultado.setComplemento(rs.getString("complemento"));
-                        resultado.setIdBairro(rs.getInt("id_Bairro"));
-                        resultado.setIdCidade(rs.getInt("id_Cidade"));
-                        resultado.setIdEstado(rs.getInt("id_Estado"));
-                        resultado.setIdLogradouro(rs.getInt("id_Logradouro"));
-                        resultado.setIdPais(rs.getInt("id_Pais"));
-                        resultado.setNascimento(rs.getDate("nascimento"));
+                        resultado.setId(rs.getInt("id"));
                         resultado.setNome(rs.getString("nome"));
+                        resultado.setCPF(rs.getInt("cpf"));
                         resultado.setNumero(rs.getInt("numero"));
-                        resultado.setRG(rs.getInt("rg"));
+                        resultado.setRua(rs.getString("rua"));
+                        resultado.setBairro(rs.getString("bairro"));
+                        resultado.setCidade(rs.getString("cidade"));
                         vetorPessoa.add(resultado);
                     }
                 } else {
                     rs.first();
-                    Pessoa resultado = new Pessoa();
+                    PessoaN resultado = new PessoaN();
 
-                    resultado.setCEP_ZIP(rs.getInt("CEP_ZIP"));
-                    resultado.setCPF_CNPJ(rs.getInt("CPF_CNPJ"));
-                    resultado.setCTPS_Numero(rs.getInt("CTPS_Numero"));
-                    resultado.setCTPS_Serie(rs.getInt("CTPS_Serie"));
-                    resultado.setCTPS_UF(rs.getString("CTPS_UF"));
-                    resultado.setIdPessoa(rs.getInt("id"));
-                    resultado.setComplemento(rs.getString("complemento"));
-                    resultado.setIdBairro(rs.getInt("id_Bairro"));
-                    resultado.setIdCidade(rs.getInt("id_Cidade"));
-                    resultado.setIdEstado(rs.getInt("id_Estado"));
-                    resultado.setIdLogradouro(rs.getInt("id_Logradouro"));
-                    resultado.setIdPais(rs.getInt("id_Pais"));
-                    resultado.setNascimento(rs.getDate("nascimento"));
+                    resultado.setId(rs.getInt("id"));
                     resultado.setNome(rs.getString("nome"));
+                    resultado.setCPF(rs.getInt("cpf"));
                     resultado.setNumero(rs.getInt("numero"));
-                    resultado.setRG(rs.getInt("rg"));
+                    resultado.setRua(rs.getString("rua"));
+                    resultado.setBairro(rs.getString("bairro"));
+                    resultado.setCidade(rs.getString("cidade"));
                     vetorPessoa.add(resultado);
                 }
             } else {
@@ -246,7 +193,7 @@ public class PessoaDAO {
 
     }
 
-    public Pessoa buscaPessoa(Pessoa pessoa) {
+    public PessoaN buscaPessoa(PessoaN pessoa) {
 
         ResultSet rs;
         Mensagens mensagem = new Mensagens();
@@ -254,31 +201,20 @@ public class PessoaDAO {
         try {
 
             stmt = PessoaDAO.con.prepareStatement(""
-                    + "SELECT * FROM pessoa "
+                    + "SELECT * FROM pessoaN "
                     + "WHERE id = ? ");
 
-            stmt.setInt(1, pessoa.getIdPessoa());
+            stmt.setInt(1, pessoa.getId());
             rs = stmt.executeQuery();
 
             if (rs.first()) {
-
-                pessoa.setCEP_ZIP(rs.getInt("CEP_ZIP"));
-                pessoa.setCPF_CNPJ(rs.getInt("CPF_CNPJ"));
-                pessoa.setCTPS_Numero(rs.getInt("CTPS_Numero"));
-                pessoa.setCTPS_Serie(rs.getInt("CTPS_Serie"));
-                pessoa.setCTPS_UF(rs.getString("CTPS_UF"));
-                pessoa.setIdPessoa(rs.getInt("id"));
-                pessoa.setComplemento(rs.getString("complemento"));
-                pessoa.setIdBairro(rs.getInt("id_Bairro"));
-                pessoa.setIdCidade(rs.getInt("id_Cidade"));
-                pessoa.setIdEstado(rs.getInt("id_Estado"));
-                pessoa.setIdLogradouro(rs.getInt("id_Logradouro"));
-                pessoa.setIdPais(rs.getInt("id_Pais"));
-                pessoa.setNascimento(rs.getDate("nascimento"));
+                pessoa.setId(rs.getInt("id"));
+                pessoa.setCPF(rs.getInt("cpf"));
                 pessoa.setNome(rs.getString("nome"));
                 pessoa.setNumero(rs.getInt("numero"));
-                pessoa.setRG(rs.getInt("rg"));
-
+                pessoa.setRua(rs.getString("rua"));
+                pessoa.setBairro(rs.getString("bairro"));
+                pessoa.setCidade(rs.getString("cidade"));
                 return pessoa;
             } else {
                 return null;
@@ -292,7 +228,8 @@ public class PessoaDAO {
 
     }
 
-    public Pessoa alterarPessoa(Pessoa pessoa) {
+    @Override
+    public PessoaN alterarPessoa(PessoaN pessoa) {
 
         PreparedStatement stmt;
         ResultSet rs;
@@ -301,45 +238,24 @@ public class PessoaDAO {
         try {
 
             stmt = this.con.prepareStatement(""
-                    + "UPDATE pessoa SET "
+                    + "UPDATE pessoaN SET "
                     + "`nome`          = ?,"
-                    + "`CPF_CNPJ`      = ?,"
-                    + "`RG`            = ?,"
-                    + "`nascimento`    = ?,"
-                    + "`CTPS_Numero`   = ?,"
-                    + "`CTPS_Serie`    = ?,"
-                    + "`CTPS_UF`       = ?,"
-                    + "`id_Pais`       = ?,"
-                    + "`id_Estado`     = ?,"
-                    + "`id_Cidade`     = ?,"
-                    + "`id_Logradouro` = ?,"
-                    + "`CEP_ZIP`       = ?,"
+                    + "`CPF`           = ?,"
+                    + "`rua`           = ?,"
+                    + "`bairro`        = ?,"
+                    + "`cidade`        = ?,"
                     + "`numero`        = ?,"
-                    + "`vcomplemento`  = ?,"
-                    + "`idBairro`      = ?)"
                     + "WHERE "
                     + "`id`            = ?;");
 
-            java.sql.Date dataNascimento = new java.sql.Date(pessoa.getNascimento().getTime());
-
             stmt.setString(1, pessoa.getNome());
-            stmt.setInt(2, pessoa.getCPF_CNPJ());
-            stmt.setInt(3, pessoa.getRG());
-            stmt.setDate(4, dataNascimento);
-            stmt.setInt(5, pessoa.getCTPS_Numero());
-            stmt.setInt(6, pessoa.getCTPS_Serie());
-            stmt.setString(7, pessoa.getCTPS_UF());
-            stmt.setInt(8, pessoa.getIdPais());
-            stmt.setInt(9, pessoa.getIdEstado());
-            stmt.setInt(10, pessoa.getIdCidade());
-            stmt.setInt(11, pessoa.getIdLogradouro());
-            stmt.setInt(12, pessoa.getCEP_ZIP());
-            stmt.setInt(13, pessoa.getNumero());
-            stmt.setString(14, pessoa.getComplemento());
-            stmt.setInt(15, pessoa.getIdBairro());
-            stmt.setInt(16, pessoa.getIdPessoa());
+            stmt.setInt(2, pessoa.getCPF());
+            stmt.setString(3, pessoa.getRua());
+            stmt.setString(4, pessoa.getBairro());
+            stmt.setString(5, pessoa.getCidade());
+            stmt.setInt(6, pessoa.getNumero());
+            stmt.setInt(7, pessoa.getId());
             stmt.execute();
-
             buscaPessoa(pessoa);
             return pessoa;
 
@@ -472,25 +388,22 @@ public class PessoaDAO {
         }
     }
 
-    public boolean removePessoa(Pessoa pessoa) {
+    @Override
+    public boolean removePessoa(PessoaN pessoa) {
 
         Mensagens mensagem = new Mensagens();
 
         try {
 
             stmt = PessoaDAO.con.prepareStatement(""
-                    + "DELETE FROM telefone "
-                    + "WHERE id = ?; "
-                    + "DELETE FROM pessoa "
+                    + "DELETE FROM pessoaN "
                     + "WHERE id = ?");
 
-            stmt.setInt(1, pessoa.getIdPessoa());
-            stmt.setInt(2, pessoa.getIdPessoa());
+            stmt.setInt(1, pessoa.getId());
             stmt.execute();
 
-            if (!(validaCadastroPessoa(pessoa))) {
+            if ((null == (buscaPessoa(pessoa)))) {
                 mensagem.jopError("Cadastro removido com sucesso.");
-
                 return true;
             } else {
                 mensagem.jopAviso("Não foi possível remover o cadastro.");
@@ -502,7 +415,5 @@ public class PessoaDAO {
             mensagem.jopError("Erro ao remover o cadastro no servidor de banco de dados.\nSQLException: " + ex.getMessage() + "\n removePessoa");
             return false;
         }
-
-
     }
 }
