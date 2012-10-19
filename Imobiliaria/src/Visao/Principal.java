@@ -27,7 +27,8 @@ public class Principal extends javax.swing.JFrame {
 
         jmConfiguracoes.setVerticalTextPosition(SwingConstants.BOTTOM);
         jmConfiguracoes.setHorizontalTextPosition(SwingConstants.CENTER);
-    }        
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -120,7 +121,7 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jmiImovelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiImovelActionPerformed
-        CadastroImovel cI = new CadastroImovel(this, rootPaneCheckingEnabled);
+        CadastroImovelN cI = new CadastroImovelN();
         cI.setVisible(true);
     }//GEN-LAST:event_jmiImovelActionPerformed
 
@@ -194,6 +195,4 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiImovel;
     private javax.swing.JMenuItem jmiPessoas;
     // End of variables declaration//GEN-END:variables
-
-
 }

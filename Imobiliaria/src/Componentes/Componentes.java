@@ -65,7 +65,7 @@ public class Componentes {
     
     public JButton criaBotaoEditar() {
         JButton jbEditar = new JButton();
-        jbEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/save_16x16.png")));
+       // jbEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/editar.png")));
         jbEditar.setText("editar");
         jbEditar.setToolTipText("Ediata um imovel!");
         return jbEditar;
