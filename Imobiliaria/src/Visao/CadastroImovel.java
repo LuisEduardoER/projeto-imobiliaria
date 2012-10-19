@@ -44,7 +44,10 @@ public class CadastroImovel extends javax.swing.JDialog {
         botaoExcluir = c.criaBotaoExcluir();
         botaoBuscar = c.criaBotaoBuscar();
 
-
+        jpBotoes.add(botaoGravar);
+        jpBotoes.add(botaoExcluir);
+        jpBotoes.add(botaoBuscar);
+        
         botaoGravar.addActionListener(new java.awt.event.ActionListener() {
 
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,9 +78,8 @@ public class CadastroImovel extends javax.swing.JDialog {
             }
         });
 
-        jpBotoes.add(botaoGravar);
-        jpBotoes.add(botaoExcluir);
-        jpBotoes.add(botaoBuscar);
+        
+        
 
         jcbPais.setModel(carregaEndereco.carregaPais());
         jcbPais.setSelectedIndex(0);
@@ -303,14 +305,14 @@ public class CadastroImovel extends javax.swing.JDialog {
         jpPessoalLayout.setHorizontalGroup(
             jpPessoalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPessoalLayout.createSequentialGroup()
-                .addComponent(jspPainelRolagem, javax.swing.GroupLayout.PREFERRED_SIZE, 723, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 46, Short.MAX_VALUE))
+                .addComponent(jspPainelRolagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jpPessoalLayout.setVerticalGroup(
             jpPessoalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPessoalLayout.createSequentialGroup()
-                .addComponent(jspPainelRolagem, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 32, Short.MAX_VALUE))
+                .addComponent(jspPainelRolagem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jtpAbas.addTab("Dados do Imóvel", jpPessoal);
@@ -416,16 +418,7 @@ public class CadastroImovel extends javax.swing.JDialog {
 
         jtpAbas.addTab("Propridades do Proprietário", jpDadosFuncionario);
 
-        javax.swing.GroupLayout jpBotoesLayout = new javax.swing.GroupLayout(jpBotoes);
-        jpBotoes.setLayout(jpBotoesLayout);
-        jpBotoesLayout.setHorizontalGroup(
-            jpBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 352, Short.MAX_VALUE)
-        );
-        jpBotoesLayout.setVerticalGroup(
-            jpBotoesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 25, Short.MAX_VALUE)
-        );
+        jpBotoes.setLayout(new java.awt.GridLayout(1, 4, 0, 5));
 
         javax.swing.GroupLayout jpAbasLayout = new javax.swing.GroupLayout(jpAbas);
         jpAbas.setLayout(jpAbasLayout);
@@ -462,7 +455,7 @@ public class CadastroImovel extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jpAbas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 21, Short.MAX_VALUE))
+                .addGap(0, 46, Short.MAX_VALUE))
         );
 
         pack();
@@ -719,8 +712,6 @@ public class CadastroImovel extends javax.swing.JDialog {
                                         this.p.setCEP_ZIP(cep_zip.getCep_zip());
 
                                     }
-                                    Mensagens m = new Mensagens();
-                                    m.jopAlerta("Informe apenas números no campo 'Telefone'.");
                                 }
 
                                 return true;
