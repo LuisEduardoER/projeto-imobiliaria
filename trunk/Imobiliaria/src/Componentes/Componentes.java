@@ -62,4 +62,12 @@ public class Componentes {
         jbBuscar.setToolTipText("Localiza um cadastro com base nas informações do campo buscar! (F2)");
         return jbBuscar;
     }
+    
+    public JButton criaBotaoEditar() {
+        JButton jbEditar = new JButton();
+        jbEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/save_16x16.png")));
+        jbEditar.setText("editar");
+        jbEditar.setToolTipText("Ediata um imovel!");
+        return jbEditar;
+    }
 }
