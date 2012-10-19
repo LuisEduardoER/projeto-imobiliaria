@@ -514,13 +514,13 @@ public class CadastroPessoal extends javax.swing.JDialog {
     }
 
     private void botaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {
-        if (p.getNome() != null) {
-            controladorPessoa = new ControladorPessoa();
-            controladorPessoa.removePessoa(p);
-        } else {
-            m = new Mensagens();
-            m.jopAlerta("É necessário buscar um cadastro antes de excluir.");
-        }
+//        if (p.getNome() != null) {
+//            controladorPessoa = new ControladorPessoa();
+//            controladorPessoa.removePessoa(p);
+//        } else {
+//            m = new Mensagens();
+//            m.jopAlerta("É necessário buscar um cadastro antes de excluir.");
+//        }
     }
 
     private void botaoBuscarActionPerformed(java.awt.event.ActionEvent evt) {
@@ -767,9 +767,9 @@ public class CadastroPessoal extends javax.swing.JDialog {
 
     public void acaoBuscar() {
         if (!jtfBuscar.getText().equals("")) {
-            controladorPessoa = new ControladorPessoa();
+//            controladorPessoa = new ControladorPessoa();
             p.setIdPessoa(Integer.parseInt(jtfBuscar.getText()));
-            p = controladorPessoa.buscaPessoa(p);
+//          p = controladorPessoa.buscaPessoa(p);
 
             jtfNome.setText(p.getNome());
             jtfCPF_CNPJ.setText(p.getCPF_CNPJ() + "");
@@ -828,14 +828,14 @@ public class CadastroPessoal extends javax.swing.JDialog {
 
     public void acaoGravar() {
         if (validaCampos()) {
-            controladorPessoa = new ControladorPessoa();
+//            controladorPessoa = new ControladorPessoa();
 
-            boolean inserePessoa = controladorPessoa.inserePessoa(p, t);
+//            boolean inserePessoa = controladorPessoa.inserePessoa(p, t);
 
-            if (inserePessoa) {
-                Mensagens m = new Mensagens();
-                m.jopAviso("Cadastro realizado com sucesso!");
-            }
+//            if (inserePessoa) {
+//                Mensagens m = new Mensagens();
+//                m.jopAviso("Cadastro realizado com sucesso!");
+//            }
 
             jtfBuscar.setText("");
             jtfNome.setText("");

@@ -278,6 +278,91 @@ public class CadastroImovel extends javax.swing.JDialog {
             .addComponent(jpTextFieldsE, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
+        jpEspecificacoesImv.setBorder(javax.swing.BorderFactory.createTitledBorder("Especificações do Imóvel"));
+
+        jpLableEspecificacoes.setLayout(new java.awt.GridLayout(12, 1, 0, 8));
+
+        jlTamanho.setText("Tamanho:");
+        jpLableEspecificacoes.add(jlTamanho);
+
+        jlQuartos.setText("Quartos:");
+        jpLableEspecificacoes.add(jlQuartos);
+
+        jlSalas.setText("Salas:");
+        jpLableEspecificacoes.add(jlSalas);
+
+        jlSuites.setText("Suites:");
+        jpLableEspecificacoes.add(jlSuites);
+
+        jlLavabo.setText("Lavabo:");
+        jpLableEspecificacoes.add(jlLavabo);
+
+        jlSacada.setText("Sacada:");
+        jpLableEspecificacoes.add(jlSacada);
+
+        jlEdicula.setText("Edícula:");
+        jpLableEspecificacoes.add(jlEdicula);
+
+        jlPscina.setText("Pscina:");
+        jpLableEspecificacoes.add(jlPscina);
+
+        jlEmbutido.setText("Embutido:");
+        jpLableEspecificacoes.add(jlEmbutido);
+
+        jlTeto.setText("Teto:");
+        jpLableEspecificacoes.add(jlTeto);
+
+        jlTelhado.setText("Telhado:");
+        jpLableEspecificacoes.add(jlTelhado);
+
+        jlChurrasqueira.setText("Churrasqueira:");
+        jpLableEspecificacoes.add(jlChurrasqueira);
+
+        jpTextFieldsEspecificacoes.setLayout(new java.awt.GridLayout(12, 1, 0, 8));
+        jpTextFieldsEspecificacoes.add(jtfTamanho);
+
+        jcbQuartos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " " }));
+        jpTextFieldsEspecificacoes.add(jcbQuartos);
+
+        jcbSala.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " " }));
+        jpTextFieldsEspecificacoes.add(jcbSala);
+
+        jcbSuites.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " " }));
+        jpTextFieldsEspecificacoes.add(jcbSuites);
+
+        jcbLavabo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " " }));
+        jpTextFieldsEspecificacoes.add(jcbLavabo);
+
+        jcbSacada.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " " }));
+        jpTextFieldsEspecificacoes.add(jcbSacada);
+        jpTextFieldsEspecificacoes.add(jchkbEdicula);
+        jpTextFieldsEspecificacoes.add(jchkbPiscina);
+
+        jcbEmbutido.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " " }));
+        jpTextFieldsEspecificacoes.add(jcbEmbutido);
+
+        jcbTeto.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " " }));
+        jpTextFieldsEspecificacoes.add(jcbTeto);
+
+        jcbTelhado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", " " }));
+        jpTextFieldsEspecificacoes.add(jcbTelhado);
+        jpTextFieldsEspecificacoes.add(jchkChurrasqueira);
+
+        javax.swing.GroupLayout jpEspecificacoesImvLayout = new javax.swing.GroupLayout(jpEspecificacoesImv);
+        jpEspecificacoesImv.setLayout(jpEspecificacoesImvLayout);
+        jpEspecificacoesImvLayout.setHorizontalGroup(
+            jpEspecificacoesImvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpEspecificacoesImvLayout.createSequentialGroup()
+                .addComponent(jpLableEspecificacoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpTextFieldsEspecificacoes, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE))
+        );
+        jpEspecificacoesImvLayout.setVerticalGroup(
+            jpEspecificacoesImvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jpLableEspecificacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpTextFieldsEspecificacoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jpAgrupadorDImvlLayout = new javax.swing.GroupLayout(jpAgrupadorDImvl);
         jpAgrupadorDImvl.setLayout(jpAgrupadorDImvlLayout);
         jpAgrupadorDImvlLayout.setHorizontalGroup(
@@ -508,13 +593,13 @@ public class CadastroImovel extends javax.swing.JDialog {
     }
 
     private void botaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {
-        if (p.getNome() != null) {
-            controladorPessoa = new ControladorPessoa();
-            controladorPessoa.removePessoa(p);
-        } else {
-            m = new Mensagens();
-            m.jopAlerta("É necessário buscar um cadastro antes de excluir.");
-        }
+//        if (p.getNome() != null) {
+//            controladorPessoa = new ControladorPessoa();
+//            controladorPessoa.removePessoa(p);
+//        } else {
+//            m = new Mensagens();
+//            m.jopAlerta("É necessário buscar um cadastro antes de excluir.");
+//        }
     }
 
     private void botaoBuscarActionPerformed(java.awt.event.ActionEvent evt) {
@@ -574,21 +659,38 @@ public class CadastroImovel extends javax.swing.JDialog {
     private javax.swing.JComboBox jcbBairro;
     private javax.swing.JComboBox jcbCEP_ZIP;
     private javax.swing.JComboBox jcbCidade;
+    private javax.swing.JComboBox jcbEmbutido;
     private javax.swing.JComboBox jcbEstado;
+    private javax.swing.JComboBox jcbLavabo;
     private javax.swing.JComboBox jcbLogradouro;
     private javax.swing.JComboBox jcbPais;
+    private javax.swing.JComboBox jcbQuartos;
+    private javax.swing.JComboBox jcbSacada;
+    private javax.swing.JComboBox jcbSala;
+    private javax.swing.JComboBox jcbSuites;
+    private javax.swing.JComboBox jcbTelhado;
+    private javax.swing.JComboBox jcbTeto;
+    private javax.swing.JCheckBox jchkChurrasqueira;
+    private javax.swing.JCheckBox jchkbEdicula;
+    private javax.swing.JCheckBox jchkbPiscina;
     private javax.swing.JLabel jlBuscar;
     private javax.swing.JLabel jlCEP_ZIP;
     private javax.swing.JLabel jlCPF_CNPJ;
     private javax.swing.JLabel jlCadastro;
     private javax.swing.JLabel jlCadastroNmr;
+    private javax.swing.JLabel jlChurrasqueira;
     private javax.swing.JLabel jlCidade;
     private javax.swing.JLabel jlComplemento;
+    private javax.swing.JLabel jlEdicula;
+    private javax.swing.JLabel jlEmbutido;
     private javax.swing.JLabel jlEstado;
+    private javax.swing.JLabel jlLavabo;
     private javax.swing.JLabel jlLogradouro;
     private javax.swing.JLabel jlNome;
     private javax.swing.JLabel jlNumero;
     private javax.swing.JLabel jlPais;
+    private javax.swing.JLabel jlPscina;
+    private javax.swing.JLabel jlQuartos;
     private javax.swing.JLabel jlRG;
     private javax.swing.JPanel jpAbas;
     private javax.swing.JPanel jpAgrupadorDImvl;
@@ -598,11 +700,14 @@ public class CadastroImovel extends javax.swing.JDialog {
     private javax.swing.JPanel jpDadosFuncionario;
     private javax.swing.JPanel jpDadosProprietario;
     private javax.swing.JPanel jpEnderecoImovel;
+    private javax.swing.JPanel jpEspecificacoesImv;
     private javax.swing.JPanel jpLabelsDP;
     private javax.swing.JPanel jpLabelsE;
+    private javax.swing.JPanel jpLableEspecificacoes;
     private javax.swing.JPanel jpPessoal;
     private javax.swing.JPanel jpTextFieldsDP;
     private javax.swing.JPanel jpTextFieldsE;
+    private javax.swing.JPanel jpTextFieldsEspecificacoes;
     private javax.swing.JRadioButton jrbCPF_CNPJ;
     private javax.swing.JRadioButton jrbNome;
     private javax.swing.JRadioButton jrbRG;
@@ -613,6 +718,7 @@ public class CadastroImovel extends javax.swing.JDialog {
     private javax.swing.JTextField jtfNome;
     private javax.swing.JTextField jtfNumero;
     private javax.swing.JTextField jtfRG;
+    private javax.swing.JTextField jtfTamanho;
     private javax.swing.JTabbedPane jtpAbas;
     // End of variables declaration//GEN-END:variables
 
@@ -725,9 +831,9 @@ public class CadastroImovel extends javax.swing.JDialog {
 
     public void acaoBuscar() {
         if (!jtfBuscar.getText().equals("")) {
-            controladorPessoa = new ControladorPessoa();
+//            controladorPessoa = new ControladorPessoa();
             p.setIdPessoa(Integer.parseInt(jtfBuscar.getText()));
-            p = controladorPessoa.buscaPessoa(p);
+//            p = controladorPessoa.buscaPessoa(p);
 
             jtfNome.setText(p.getNome());
             jtfCPF_CNPJ.setText(p.getCPF_CNPJ() + "");
@@ -785,14 +891,14 @@ public class CadastroImovel extends javax.swing.JDialog {
 
     public void acaoGravar() {
         if (validaCampos()) {
-            controladorPessoa = new ControladorPessoa();
+//            controladorPessoa = new ControladorPessoa();
 
-            boolean inserePessoa = controladorPessoa.inserePessoa(p, t);
+//            boolean inserePessoa = controladorPessoa.inserePessoa(p, t);
 
-            if (inserePessoa) {
-                Mensagens m = new Mensagens();
-                m.jopAviso("Cadastro realizado com sucesso!");
-            }
+//            if (inserePessoa) {
+//                Mensagens m = new Mensagens();
+//                m.jopAviso("Cadastro realizado com sucesso!");
+//            }
 
             jtfBuscar.setText("");
             jtfNome.setText("");
@@ -829,7 +935,7 @@ public class CadastroImovel extends javax.swing.JDialog {
                 return null;
             }else{
                 p.setNome(jtfNome.getText());
-                p = controladorPessoa.buscaPessoa(p);
+//                p = controladorPessoa.buscaPessoa(p);
                 return new DefaultComboBoxModel();
             }
         } 

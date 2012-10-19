@@ -4,12 +4,20 @@
  */
 package Controlador;
 
-import DAO.PessoaDAO;
+import Modelo.PessoaN;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
  * @author Bruno
  */
-public class ControladorPessoa extends PessoaDAO{
+public interface ControladorPessoa {
 
+    public boolean inserePessoa(PessoaN pessoa);
+
+    public PessoaN alterarPessoa(PessoaN pessoa);
+
+    public boolean removePessoa(PessoaN pessoa);
+    
+    public DefaultComboBoxModel buscaPessoaNome(String nome);
 }
