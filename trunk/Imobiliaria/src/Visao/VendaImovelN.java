@@ -5,6 +5,18 @@
 package Visao;
 
 import Componentes.Componentes;
+import Controlador.ControladorImovel;
+import Controlador.ControladorPessoa;
+import Controlador.ControladorVenda;
+import Controlador.Mensagens;
+import DAO.ImovelDAO;
+import DAO.PessoaDAO;
+import DAO.VendaDAO;
+import Modelo.ImovelN;
+import Modelo.PessoaN;
+import Modelo.Venda;
+import Util.FiltrosDigitacaoNumerico;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 
 /**
@@ -16,33 +28,70 @@ public class VendaImovelN extends javax.swing.JDialog {
     /**
      * Creates new form VendaImovelN
      */
-    Componentes c = new  Componentes();
+    Componentes c = new Componentes();
+    ControladorImovel controladorImovel;
+    ControladorPessoa controladorPessoa;
+    ControladorVenda controladorVenda;
     JButton imovelProcurar;
     JButton pessoaProcurar;
-    
     JButton vendaGravar;
     JButton vendaProcurar;
     JButton vendaExcluir;
-    
+    Mensagens m;
+
     public VendaImovelN(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         imovelProcurar = c.criaBotaoPesquisar();
         jpControleImovel.add(imovelProcurar);
-        
+
         pessoaProcurar = c.criaBotaoPesquisar();
         jpControleComprador.add(pessoaProcurar);
-        
+
         vendaGravar = c.criaBotaoGravar();
         vendaProcurar = c.criaBotaoPesquisar();
         vendaExcluir = c.criaBotaoExcluir();
-        
+
         jpControlesVenda.add(vendaGravar);
         jpControlesVenda.add(vendaProcurar);
         jpControlesVenda.add(vendaExcluir);
-        
-                
+
+        jtfValor.setDocument(new FiltrosDigitacaoNumerico());
+
+
+        imovelProcurar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                imovelBuscarActionPerformed(evt);
+            }
+        });
+
+        pessoaProcurar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                pessoaBuscarActionPerformed(evt);
+            }
+        });
+
+        vendaGravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vendaGravarActionPerformed(evt);
+            }
+        });
+
+        vendaExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vendaExcluirActionPerformed(evt);
+            }
+        });
+
+        vendaProcurar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vendaBuscarActionPerformed(evt);
+            }
+        });
+
+
+
     }
 
     /**
@@ -61,7 +110,7 @@ public class VendaImovelN extends javax.swing.JDialog {
         jlBairro = new javax.swing.JLabel();
         jlCidade = new javax.swing.JLabel();
         jpITF = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jcbNumero = new javax.swing.JComboBox();
         jlDescricaoRua = new javax.swing.JLabel();
         jlDescricaoBairro = new javax.swing.JLabel();
         jlDescricaoCidade = new javax.swing.JLabel();
@@ -71,8 +120,8 @@ public class VendaImovelN extends javax.swing.JDialog {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jpCTF = new javax.swing.JPanel();
-        jtfNome = new javax.swing.JTextField();
-        jtfCPF = new javax.swing.JTextField();
+        jcbNome = new javax.swing.JComboBox();
+        jlDescricaoCPF = new javax.swing.JLabel();
         jpControleComprador = new javax.swing.JPanel();
         jpVenda = new javax.swing.JPanel();
         jpVL = new javax.swing.JPanel();
@@ -101,8 +150,8 @@ public class VendaImovelN extends javax.swing.JDialog {
 
         jpITF.setLayout(new java.awt.GridLayout(4, 1, 0, 8));
 
-        jComboBox1.setEditable(true);
-        jpITF.add(jComboBox1);
+        jcbNumero.setEditable(true);
+        jpITF.add(jcbNumero);
 
         jlDescricaoRua.setText("(rua)");
         jpITF.add(jlDescricaoRua);
@@ -146,10 +195,14 @@ public class VendaImovelN extends javax.swing.JDialog {
         jpCL.add(jLabel2);
 
         jpCTF.setLayout(new java.awt.GridLayout(2, 1, 0, 8));
-        jpCTF.add(jtfNome);
-        jpCTF.add(jtfCPF);
 
-        jpControleComprador.setLayout(new java.awt.GridLayout());
+        jcbNome.setEditable(true);
+        jpCTF.add(jcbNome);
+
+        jlDescricaoCPF.setText("(cpf)");
+        jpCTF.add(jlDescricaoCPF);
+
+        jpControleComprador.setLayout(new java.awt.GridLayout(1, 0));
 
         javax.swing.GroupLayout jpCompradorLayout = new javax.swing.GroupLayout(jpComprador);
         jpComprador.setLayout(jpCompradorLayout);
@@ -216,8 +269,8 @@ public class VendaImovelN extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpControlesVenda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(36, Short.MAX_VALUE))
+                .addComponent(jpControlesVenda, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         pack();
@@ -226,6 +279,26 @@ public class VendaImovelN extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
+    private void imovelBuscarActionPerformed(java.awt.event.ActionEvent evt) {
+        imovelBuscar();
+    }
+
+    private void pessoaBuscarActionPerformed(java.awt.event.ActionEvent evt) {
+        pessoaBuscar();
+    }
+
+    private void vendaGravarActionPerformed(java.awt.event.ActionEvent evt) {
+        vendaGravar();
+    }
+
+    private void vendaExcluirActionPerformed(java.awt.event.ActionEvent evt) {
+        vendaRemover();
+    }
+
+    private void vendaBuscarActionPerformed(java.awt.event.ActionEvent evt) {
+        vendaBuscar();
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -265,12 +338,14 @@ public class VendaImovelN extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JComboBox jcbNome;
+    private javax.swing.JComboBox jcbNumero;
     private javax.swing.JLabel jlBairro;
     private javax.swing.JLabel jlCidade;
     private javax.swing.JLabel jlDescricaoBairro;
+    private javax.swing.JLabel jlDescricaoCPF;
     private javax.swing.JLabel jlDescricaoCidade;
     private javax.swing.JLabel jlDescricaoRua;
     private javax.swing.JLabel jlNumero;
@@ -288,8 +363,92 @@ public class VendaImovelN extends javax.swing.JDialog {
     private javax.swing.JPanel jpVL;
     private javax.swing.JPanel jpVTF;
     private javax.swing.JPanel jpVenda;
-    private javax.swing.JTextField jtfCPF;
-    private javax.swing.JTextField jtfNome;
     private javax.swing.JTextField jtfValor;
     // End of variables declaration//GEN-END:variables
+
+    public boolean validaCampos() {
+        if ((null != jcbNumero.getSelectedItem())
+                && (null != jcbNome.getSelectedItem())
+                && (null != jtfValor.getText()) && ("".equals(jtfValor.getText()))) {
+
+//            Venda v = new Venda();
+//            v.setValor(Float.parseFloat(jtfValor.getText()));
+            return true;
+
+        } else {
+            return false;
+        }
+    }
+
+    private boolean imovelBuscar() {
+        if (validaCampos()) {
+            controladorImovel = new ImovelDAO();
+            DefaultComboBoxModel dcbm = controladorImovel.buscaImovelNumero(Integer.parseInt(jcbNumero.getSelectedItem().toString()));
+
+            if (dcbm != null) {
+                jcbNumero.setModel(dcbm);
+                ImovelN imovel = (ImovelN) jcbNumero.getSelectedItem();
+                jtfValor.setText(imovel.getValor()+"");
+                return true;
+            } else {
+                return false;
+            }
+        } else {
+            m = new Mensagens();
+            m.jopAviso("Nenhum imóvel encontrado.");
+            return false;
+        }
+    }
+
+    private boolean pessoaBuscar() {
+        if (null != jcbNome.getSelectedItem().toString() && !("".equals(jcbNome.getSelectedItem().toString()))) {
+
+            controladorPessoa = new PessoaDAO();
+            String s = (String) jcbNome.getSelectedItem().toString();
+            DefaultComboBoxModel dcbm = controladorPessoa.buscaPessoaNome(s);
+            if (dcbm != null) {
+
+                jcbNome.setModel(dcbm);
+                return true;
+            } else {
+                m =  new Mensagens();
+                m.jopAviso("Nenhuma pessoa encontrada.");
+                return false;
+            }
+        } else {
+            m =  new Mensagens();
+            m.jopAviso("É nescessário informar o nome da pessoa para efetuar uma busca.");
+            return false;
+        }
+    }
+
+    private void vendaGravar() {
+        if (validaCampos()){
+            Venda v = new Venda();
+            
+            ImovelN imovel = (ImovelN) jcbNumero.getSelectedItem();
+            PessoaN pessoa = (PessoaN) jcbNome.getSelectedItem();
+                    
+            v.setIdImovel(imovel.getId());
+            v.setIdPessoaProprietario(pessoa.getId());
+            v.setValor(Float.parseFloat(jtfValor.getText()));
+            
+            controladorVenda = new VendaDAO();
+            
+            controladorVenda.insereVenda(v);
+        }
+    }
+
+    private void vendaRemover() {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    private void vendaBuscar() {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    public ImovelN montaImovel() {
+        ImovelN imovel = new ImovelN();
+        return imovel;
+    }
 }
