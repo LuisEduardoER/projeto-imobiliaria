@@ -5,25 +5,27 @@
 package DAO;
 
 import Controlador.Conexao;
+import Controlador.ControladorImovel;
 import Controlador.ControladorIncluirBanco;
 import Controlador.Mensagens;
-import Modelo.Imovel;
+import Modelo.ImovelN;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  *
  * @author Bruno
  */
-public abstract class ImovelDAO {
+public class ImovelDAO implements ControladorImovel{
 
     static Conexao c = new Conexao();
     static Connection con = c.conexaoMysql();
     public static PreparedStatement stmt;
     
 
-    public static boolean verificaImovelExiste(Imovel i) {
+    public static boolean verificaImovelExiste(ImovelN i) {
 
         ResultSet rs;
         Mensagens mensagem = new Mensagens();
@@ -58,7 +60,8 @@ public abstract class ImovelDAO {
 
     }
 
-    public boolean gravarImovel(Imovel i) {
+    @Override
+    public boolean insereImovel(ImovelN i) {
 
         PreparedStatement stmt;
         ResultSet rs;
@@ -136,5 +139,20 @@ public abstract class ImovelDAO {
 
             return false;
         }
+    }
+
+    @Override
+    public ImovelN alterarImovel(ImovelN imovel) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public boolean removeImovel(ImovelN imovel) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
+    public DefaultComboBoxModel buscaImovelNumero(int numero) {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

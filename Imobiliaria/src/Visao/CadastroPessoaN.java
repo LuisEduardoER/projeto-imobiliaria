@@ -333,10 +333,10 @@ public class CadastroPessoaN extends javax.swing.JDialog {
 
             controladorPessoa = new PessoaDAO();
             String s = (String) jcbNome.getSelectedItem().toString();
-            DefaultComboBoxModel dcm = controladorPessoa.buscaPessoaNome(s);
-            if (dcm != null) {
+            DefaultComboBoxModel dcbm = controladorPessoa.buscaPessoaNome(s);
+            if (dcbm != null) {
 
-                jcbNome.setModel(dcm);
+                jcbNome.setModel(dcbm);
 
 //            jtfCidade.setText(p.getCidade());
 //            //jtfNome.setText(p.getNome()); alterado para o comboBox jcbNome para queja possível efetuar a busca
