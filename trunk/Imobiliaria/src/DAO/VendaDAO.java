@@ -55,7 +55,7 @@ public class VendaDAO implements ControladorVenda {
             stmt.execute();
 
             if (stmt.getUpdateCount() > 0) {//se gravou a venda entra para atualziar o imovel
-                
+
                 // atualiza imóvel para vendido
                 stmt = this.con.prepareStatement(""
                         + "UPDATE `imobiliaria`.`imoveln`"
@@ -63,7 +63,7 @@ public class VendaDAO implements ControladorVenda {
                         + "WHERE `id` = 'id';");
 
                 stmt.execute();
-                
+
                 if (stmt.getUpdateCount() > 0) {//se atualizar o imovel retorna true
                     return true;
                 } else {
@@ -90,8 +90,8 @@ public class VendaDAO implements ControladorVenda {
 
     @Override
     public boolean removeVenda(Venda venda) {
-        
-        
+
+
         Mensagens mensagem = new Mensagens();
 
         try {
@@ -116,20 +116,50 @@ public class VendaDAO implements ControladorVenda {
             mensagem.jopError("Erro ao remover o cadastro no servidor de banco de dados.\nSQLException: " + ex.getMessage() + "\n removePessoa");
             return false;
         }
-        
-        
+
+
 //        UPDATE `imobiliaria`.`venda`
 //SET `id` = 'id',
 //  `idProprietarioPessoa` = 'idProprietarioPessoa',
 //  `idImovel` = 'idImovel',
 //  `valor` = 'valor'
 //WHERE `id` = 'id';
-        
-        
+
+
     }
 
     @Override
     public DefaultComboBoxModel buscaVendaImovel(int numero) {
         throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    public Venda buscaVenda(Venda venda) {
+        ResultSet rs;
+        Mensagens mensagem = new Mensagens();
+
+        try {
+
+            stmt = PessoaDAO.con.prepareStatement(""
+                    + "SELECT * FROM pessoaN "
+                    + "WHERE id = ? ");
+
+            stmt.setInt(1, venda.getId());
+            rs = stmt.executeQuery();
+
+            if (rs.first()) {
+                venda.setId(rs.getInt("id"));
+                venda.setIdImovel(rs.getInt("idImovel"));
+                venda.setIdPessoaProprietario(rs.getInt("idPessoaProprietario"));
+                venda.setValor(rs.getFloat("valor"));
+                return venda;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(TipoImovelDAO.class.getName()).log(Level.SEVERE, null, ex);
+            mensagem.jopError("Erro ao buscar o cadastro no servidor de banco de dados.\nSQLException: " + ex.getMessage() + "\n buscaPessoa");
+            return null;
+        }
     }
 }
