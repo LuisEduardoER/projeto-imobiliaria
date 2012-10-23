@@ -59,7 +59,7 @@ public class VendaDAO implements ControladorVenda {
                 // atualiza imóvel para vendido
                 stmt = this.con.prepareStatement(""
                         + "UPDATE `imobiliaria`.`imoveln`"
-                        + "SET `vendido` = 1"
+                        + "SET `vendido` = 1"  //Vendido = 1, Não Vendido = 0;
                         + "WHERE `id` = 'id';");
 
                 stmt.execute();

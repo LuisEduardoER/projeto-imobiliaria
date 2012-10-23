@@ -5,6 +5,11 @@
 package Visao;
 
 import Componentes.Componentes;
+import Controlador.ControladorImovel;
+import Controlador.Mensagens;
+import DAO.ImovelDAO;
+import Modelo.ImovelN;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 
 /**
@@ -15,9 +20,13 @@ public class CadastroImovelN extends javax.swing.JFrame {
 
     Componentes c = new Componentes();
     JButton jbGravar;
+    JButton jbBuscar;
     JButton jbEditar;
     JButton jbCancelar;
     JButton jbExcluir;
+    ImovelN imovel;
+    ControladorImovel controladorImovel;
+    Mensagens m;
 
     /**
      * Creates new form CadastroImovelN
@@ -27,9 +36,28 @@ public class CadastroImovelN extends javax.swing.JFrame {
 
 
         jbGravar = c.criaBotaoGravar();
+        jbBuscar = c.criaBotaoGravar();
         jbEditar = c.criaBotaoEditar();
         jbCancelar = c.criaBotaoCancelar();
         jbExcluir = c.criaBotaoExcluir();
+
+        jbGravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGravarActionPerformed(evt);
+            }
+        });
+
+        jbExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbExcluirActionPerformed(evt);
+            }
+        });
+
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
 
         jpBotoes.add(jbGravar);
         jpBotoes.add(jbEditar);
@@ -167,6 +195,18 @@ public class CadastroImovelN extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {
+        acaoGravar();
+    }
+
+    private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {
+        acaoRemover();
+    }
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {
+        acaoBuscar();
+    }
+
     public static void main(String args[]) {
         /*
          * Set the Nimbus look and feel
@@ -199,7 +239,6 @@ public class CadastroImovelN extends javax.swing.JFrame {
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-
             public void run() {
                 new CadastroImovelN().setVisible(true);
             }
@@ -226,4 +265,77 @@ public class CadastroImovelN extends javax.swing.JFrame {
     private javax.swing.JTextField jtfTamanho;
     private javax.swing.JTextField jtfValor;
     // End of variables declaration//GEN-END:variables
+
+    public boolean validaCampos() {
+        return true;
+    }
+
+    public void acaoGravar() {
+        if (validaCampos()) {
+
+            controladorImovel = new ImovelDAO();
+            boolean insereImovel = controladorImovel.insereImovel(imovel);
+
+            if (insereImovel) {
+                m = new Mensagens();
+                m.jopAviso("Cadastro realizado com sucesso!");
+            }
+
+            limparTela();
+
+        } else {
+            m = new Mensagens();
+            m.jopAviso("Exitem campos vazios, preencha todos os campos antes de gravar.");
+        }
+    }
+
+    public void acaoAlterar() {
+        if (validaCampos()) {
+            controladorImovel.alterarImovel(imovel);
+        }
+    }
+
+    public boolean acaoBuscar() {
+        if (null != jcbNumero.getSelectedItem().toString() && !("".equals(jcbNumero.getSelectedItem().toString()))) {
+
+            controladorImovel = new ImovelDAO();
+            String s = (String) jcbNumero.getSelectedItem().toString();
+            DefaultComboBoxModel dcbm = controladorImovel.buscaImovelNumero(0); // informar o numero do imovel
+            if (dcbm != null) {
+
+                jcbNumero.setModel(dcbm);
+                if (jcbNumero.getItemCount() > 1) {
+                    jcbNumero.setSelectedIndex(-1);
+                    jcbNumero.setSelectedIndex(0);
+                }
+
+                return true;
+            } else {
+                m = new Mensagens();
+                m.jopAviso("Nenhum imóvel encontrado.");
+                return false;
+            }
+        } else {
+            m = new Mensagens();
+            m.jopAviso("É nescessário informar o nome da pessoa para efetuar uma busca.");
+            return false;
+        }
+    }
+
+    public void acaoRemover() {
+        if (acaoBuscar()) {
+            controladorImovel = new ImovelDAO();
+            imovel = (ImovelN) jcbNumero.getSelectedItem();
+            controladorImovel.removeImovel(imovel);
+            limparTela();
+        }
+    }
+
+    public void limparTela() {
+        jtfBairro.setText("");
+        jtfCidade.setText("");
+        jtfRua.setText("");
+        jtfTamanho.setText("");
+        jtfValor.setText("");
+    }
 }
