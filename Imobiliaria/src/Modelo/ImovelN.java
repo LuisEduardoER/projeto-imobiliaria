@@ -6,7 +6,7 @@ package Modelo;
 
 /**
  *
- * @author Bruno
+ * @author MAYCON
  */
 public class ImovelN {
     
@@ -21,7 +21,7 @@ public class ImovelN {
     float valor;
 
     public ImovelN() {
-    }
+}
 
     public ImovelN(int id, int idPessoaProprietario, int numero, int vendido, String rua, String bairro, String cidade, float valor) {
         this.id = id;
