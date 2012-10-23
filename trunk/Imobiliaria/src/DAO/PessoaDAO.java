@@ -403,7 +403,7 @@ public class PessoaDAO implements ControladorPessoa {
             stmt.execute();
 
             if ((null == (buscaPessoa(pessoa)))) {
-                mensagem.jopError("Cadastro removido com sucesso.");
+                mensagem.jopAviso("Cadastro removido com sucesso.");
                 return true;
             } else {
                 mensagem.jopAviso("Não foi possível remover o cadastro.");

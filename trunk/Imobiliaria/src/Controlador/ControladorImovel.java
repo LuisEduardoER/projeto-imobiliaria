@@ -4,8 +4,6 @@
  */
 package Controlador;
 
-import DAO.ImovelDAO;
-import DAO.TipoImovelDAO;
 import Modelo.ImovelN;
 import javax.swing.DefaultComboBoxModel;
 
@@ -15,11 +13,6 @@ import javax.swing.DefaultComboBoxModel;
  */
 public interface ControladorImovel {
 
-//    public static DefaultComboBoxModel carregartelaTipoImovel() {
-//        DefaultComboBoxModel tipoImovel = TipoImovelDAO.pesquisarTipoImovel("%");
-//        return tipoImovel;
-//    }
-    
     public boolean insereImovel(ImovelN imovel);
 
     public ImovelN alterarImovel(ImovelN imovel);
