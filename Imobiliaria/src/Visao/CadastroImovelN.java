@@ -299,8 +299,9 @@ public class CadastroImovelN extends javax.swing.JFrame {
         if (null != jcbNumero.getSelectedItem().toString() && !("".equals(jcbNumero.getSelectedItem().toString()))) {
 
             controladorImovel = new ImovelDAO();
-            String s = (String) jcbNumero.getSelectedItem().toString();
-            DefaultComboBoxModel dcbm = controladorImovel.buscaImovelNumero(0); // informar o numero do imovel
+            int i = Integer.parseInt(jcbNumero.getSelectedItem().toString());
+            DefaultComboBoxModel dcbm = controladorImovel.buscaImovelNumero(i); // informar o numero do imovel
+
             if (dcbm != null) {
 
                 jcbNumero.setModel(dcbm);
@@ -308,7 +309,6 @@ public class CadastroImovelN extends javax.swing.JFrame {
                     jcbNumero.setSelectedIndex(-1);
                     jcbNumero.setSelectedIndex(0);
                 }
-
                 return true;
             } else {
                 m = new Mensagens();

@@ -183,7 +183,7 @@ public class PessoaDAO implements ControladorPessoa {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(TipoImovelDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PessoaDAO.class.getName()).log(Level.SEVERE, null, ex);
             mensagem.jopError("Erro ao buscar o cadastro no servidor de banco de dados.\nSQLException: " + ex.getMessage() + "\n buscaPessoaNome");
             return null;
         }
@@ -220,7 +220,7 @@ public class PessoaDAO implements ControladorPessoa {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(TipoImovelDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PessoaDAO.class.getName()).log(Level.SEVERE, null, ex);
             mensagem.jopError("Erro ao buscar o cadastro no servidor de banco de dados.\nSQLException: " + ex.getMessage() + "\n buscaPessoa");
             return null;
         }
@@ -410,7 +410,7 @@ public class PessoaDAO implements ControladorPessoa {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(TipoImovelDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Pessoa.class.getName()).log(Level.SEVERE, null, ex);
             mensagem.jopError("Erro ao remover o cadastro no servidor de banco de dados.\nSQLException: " + ex.getMessage() + "\n removePessoa");
             return false;
         }

@@ -97,4 +97,12 @@ public class ImovelN {
     public void setVendido(int vendido) {
         this.vendido = vendido;
     }
+
+    @Override
+    public String toString() {
+        return numero+"";
+    }
+    
+    
+    
 }
