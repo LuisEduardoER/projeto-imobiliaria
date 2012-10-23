@@ -30,9 +30,6 @@ public class MontaObjetosParaInserirBanco {
             String complemento) {
         Pessoa pessoa = new Pessoa();
         
-        
-        
-        
         return pessoa;
     }
 }

@@ -14,10 +14,10 @@ import javax.swing.JButton;
 public class CadastroImovelN extends javax.swing.JFrame {
 
     Componentes c = new Componentes();
-    JButton grava;
-    JButton edita;
-    JButton cancela;
-    JButton apagar;
+    JButton jbGravar;
+    JButton jbEditar;
+    JButton jbCancelar;
+    JButton jbExcluir;
 
     /**
      * Creates new form CadastroImovelN
@@ -26,15 +26,15 @@ public class CadastroImovelN extends javax.swing.JFrame {
         initComponents();
 
 
-        grava = c.criaBotaoGravar();
-        edita = c.criaBotaoEditar();
-        cancela = c.criaBotaoCancelar();
-        apagar = c.criaBotaoExcluir();
+        jbGravar = c.criaBotaoGravar();
+        jbEditar = c.criaBotaoEditar();
+        jbCancelar = c.criaBotaoCancelar();
+        jbExcluir = c.criaBotaoExcluir();
 
-        jpBotoes.add(grava);
-        jpBotoes.add(edita);
-        jpBotoes.add(cancela);
-        jpBotoes.add(apagar);
+        jpBotoes.add(jbGravar);
+        jpBotoes.add(jbEditar);
+        jpBotoes.add(jbCancelar);
+        jpBotoes.add(jbExcluir);
     }
 
     /**
@@ -50,11 +50,9 @@ public class CadastroImovelN extends javax.swing.JFrame {
         jpLabels = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jpDados = new javax.swing.JPanel();
         jtfTamanho = new javax.swing.JTextField();
         jtfValor = new javax.swing.JTextField();
-        jcbSouN = new javax.swing.JCheckBox();
         jpEnderecoImovel = new javax.swing.JPanel();
         jpLabe = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
@@ -62,7 +60,7 @@ public class CadastroImovelN extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jpTextField = new javax.swing.JPanel();
-        jtfNumero = new javax.swing.JTextField();
+        jcbNumero = new javax.swing.JComboBox();
         jtfRua = new javax.swing.JTextField();
         jtfBairro = new javax.swing.JTextField();
         jtfCidade = new javax.swing.JTextField();
@@ -72,7 +70,7 @@ public class CadastroImovelN extends javax.swing.JFrame {
 
         jpDadosImovel.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Imovel"));
 
-        jpLabels.setLayout(new java.awt.GridLayout(3, 1, 0, 8));
+        jpLabels.setLayout(new java.awt.GridLayout(2, 1, 0, 8));
 
         jLabel1.setText("Tamanho");
         jpLabels.add(jLabel1);
@@ -80,15 +78,9 @@ public class CadastroImovelN extends javax.swing.JFrame {
         jLabel2.setText("Valor");
         jpLabels.add(jLabel2);
 
-        jLabel3.setText("Documentação");
-        jpLabels.add(jLabel3);
-
-        jpDados.setLayout(new java.awt.GridLayout(3, 1, 0, 5));
+        jpDados.setLayout(new java.awt.GridLayout(2, 1, 0, 5));
         jpDados.add(jtfTamanho);
         jpDados.add(jtfValor);
-
-        jcbSouN.setText("Sim(Não)");
-        jpDados.add(jcbSouN);
 
         javax.swing.GroupLayout jpDadosImovelLayout = new javax.swing.GroupLayout(jpDadosImovel);
         jpDadosImovel.setLayout(jpDadosImovelLayout);
@@ -123,7 +115,9 @@ public class CadastroImovelN extends javax.swing.JFrame {
         jpLabe.add(jLabel7);
 
         jpTextField.setLayout(new java.awt.GridLayout(4, 1, 0, 5));
-        jpTextField.add(jtfNumero);
+
+        jcbNumero.setEditable(true);
+        jpTextField.add(jcbNumero);
         jpTextField.add(jtfRua);
         jpTextField.add(jtfBairro);
         jpTextField.add(jtfCidade);
@@ -134,17 +128,13 @@ public class CadastroImovelN extends javax.swing.JFrame {
             jpEnderecoImovelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpEnderecoImovelLayout.createSequentialGroup()
                 .addComponent(jpLabe, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jpTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 404, Short.MAX_VALUE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpTextField, javax.swing.GroupLayout.DEFAULT_SIZE, 426, Short.MAX_VALUE))
         );
         jpEnderecoImovelLayout.setVerticalGroup(
             jpEnderecoImovelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jpEnderecoImovelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jpEnderecoImovelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jpTextField, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpLabe, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addComponent(jpLabe, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jpTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         jpBotoes.setLayout(new java.awt.GridLayout(1, 4, 0, 5));
@@ -154,24 +144,21 @@ public class CadastroImovelN extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jpBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jpDadosImovel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jpEnderecoImovel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(70, Short.MAX_VALUE))
+                    .addComponent(jpDadosImovel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jpEnderecoImovel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jpBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addComponent(jpDadosImovel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpEnderecoImovel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpBotoes, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(111, Short.MAX_VALUE))
+                .addComponent(jpBotoes, javax.swing.GroupLayout.DEFAULT_SIZE, 8, Short.MAX_VALUE)
+                .addGap(22, 22, 22))
         );
 
         pack();
@@ -221,12 +208,11 @@ public class CadastroImovelN extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JCheckBox jcbSouN;
+    private javax.swing.JComboBox jcbNumero;
     private javax.swing.JPanel jpBotoes;
     private javax.swing.JPanel jpDados;
     private javax.swing.JPanel jpDadosImovel;
@@ -236,7 +222,6 @@ public class CadastroImovelN extends javax.swing.JFrame {
     private javax.swing.JPanel jpTextField;
     private javax.swing.JTextField jtfBairro;
     private javax.swing.JTextField jtfCidade;
-    private javax.swing.JTextField jtfNumero;
     private javax.swing.JTextField jtfRua;
     private javax.swing.JTextField jtfTamanho;
     private javax.swing.JTextField jtfValor;

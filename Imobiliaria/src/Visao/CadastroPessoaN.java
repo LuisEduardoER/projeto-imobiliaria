@@ -29,7 +29,7 @@ public class CadastroPessoaN extends javax.swing.JDialog {
     JButton botaoBuscar;
     JButton botaoExcluir;
     Mensagens m;
-    PessoaN p = new PessoaN();
+    PessoaN p;
 
     public CadastroPessoaN(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -115,6 +115,11 @@ public class CadastroPessoaN extends javax.swing.JDialog {
         jpTFDP.setLayout(new java.awt.GridLayout(2, 1, 0, 4));
 
         jcbNome.setEditable(true);
+        jcbNome.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbNomeItemStateChanged(evt);
+            }
+        });
         jpTFDP.add(jcbNome);
         jpTFDP.add(jtfCPF);
 
@@ -165,7 +170,7 @@ public class CadastroPessoaN extends javax.swing.JDialog {
             .addGroup(jpEnderecoLayout.createSequentialGroup()
                 .addComponent(jpLE, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpTFE, javax.swing.GroupLayout.DEFAULT_SIZE, 519, Short.MAX_VALUE))
+                .addComponent(jpTFE, javax.swing.GroupLayout.DEFAULT_SIZE, 539, Short.MAX_VALUE))
         );
         jpEnderecoLayout.setVerticalGroup(
             jpEnderecoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -179,28 +184,38 @@ public class CadastroPessoaN extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpDadosPessoais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpControles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addComponent(jpDadosPessoais, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jpControles, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap(53, Short.MAX_VALUE)
                 .addComponent(jpDadosPessoais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpEndereco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpControles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jpControles, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jcbNomeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbNomeItemStateChanged
+        try {
+            p = (PessoaN) jcbNome.getSelectedItem();
+            if (null != p) {
+                jtfCPF.setText(p.getCPF() + "");
+                jtfRua.setText(p.getRua());
+                jtfNumero.setText(p.getNumero() + "");
+                jtfBairro.setText(p.getBairro());
+                jtfCidade.setText(p.getCidade());
+            }
+        } catch (ClassCastException e) {
+        }
+
+    }//GEN-LAST:event_jcbNomeItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -279,11 +294,13 @@ public class CadastroPessoaN extends javax.swing.JDialog {
 
     public boolean validaCampos() {
         if (((null != jcbNome.getSelectedItem())
-                && ((null != jtfCPF.getText())    && ("".equals(jtfCPF.getText())))
-                && ((null != jtfRua.getText())    && ("".equals(jtfRua.getText())))
-                && ((null != jtfNumero.getText()) && ("".equals(jtfNumero.getText())))
-                && ((null != jtfBairro.getText()) && ("".equals(jtfBairro.getText())))
-                && ((null != jtfCidade.getText()) && ("".equals(jtfCidade.getText()))))) {
+                && ((null != jtfCPF.getText()) && !("".equals(jtfCPF.getText())))
+                && ((null != jtfRua.getText()) && !("".equals(jtfRua.getText())))
+                && ((null != jtfNumero.getText()) && !("".equals(jtfNumero.getText())))
+                && ((null != jtfBairro.getText()) && !("".equals(jtfBairro.getText())))
+                && ((null != jtfCidade.getText()) && !("".equals(jtfCidade.getText()))))) {
+
+            p = new PessoaN();
 
             this.p.setBairro(jtfBairro.getText());
             this.p.setCPF(Integer.parseInt(jtfCPF.getText()));
@@ -300,7 +317,7 @@ public class CadastroPessoaN extends javax.swing.JDialog {
 
     public void acaoGravar() {
         if (validaCampos()) {
-            
+
             controladorPessoa = new PessoaDAO();
             boolean inserePessoa = controladorPessoa.inserePessoa(this.p);
 
@@ -309,13 +326,8 @@ public class CadastroPessoaN extends javax.swing.JDialog {
                 m.jopAviso("Cadastro realizado com sucesso!");
             }
 
-            jtfCidade.setText("");
-            jcbNome.setSelectedIndex(-1);
-            //jtfNome.setText("");
-            jtfCPF.setText(null);
-            jtfBairro.setText("");
-            jtfNumero.setText(null);
-            jtfRua.setText("");
+            limparTela();
+
         } else {
             m = new Mensagens();
             m.jopAviso("Exitem campos vazios, preencha todos os campos antes de gravar.");
@@ -337,21 +349,19 @@ public class CadastroPessoaN extends javax.swing.JDialog {
             if (dcbm != null) {
 
                 jcbNome.setModel(dcbm);
-
-//            jtfCidade.setText(p.getCidade());
-//            //jtfNome.setText(p.getNome()); alterado para o comboBox jcbNome para queja possível efetuar a busca
-//            jtfCPF.setText(p.getCPF() + "");
-//            jtfBairro.setText(p.getBairro());
-//            jtfNumero.setText(p.getNumero() + "");
-//            jtfRua.setText(p.getRua());
+                if (jcbNome.getItemCount() > 1) {
+                    jcbNome.setSelectedIndex(-1);
+                    jcbNome.setSelectedIndex(0);
+                }
+                
                 return true;
             } else {
-                m =  new Mensagens();
+                m = new Mensagens();
                 m.jopAviso("Nenhuma pessoa encontrada.");
                 return false;
             }
         } else {
-            m =  new Mensagens();
+            m = new Mensagens();
             m.jopAviso("É nescessário informar o nome da pessoa para efetuar uma busca.");
             return false;
         }
@@ -362,6 +372,16 @@ public class CadastroPessoaN extends javax.swing.JDialog {
             controladorPessoa = new PessoaDAO();
             PessoaN p = (PessoaN) jcbNome.getSelectedItem();
             controladorPessoa.removePessoa(p);
+            limparTela();
         }
+    }
+
+    public void limparTela() {
+        jtfCidade.setText("");
+        jcbNome.setSelectedIndex(-1);
+        jtfCPF.setText(null);
+        jtfBairro.setText("");
+        jtfNumero.setText(null);
+        jtfRua.setText("");
     }
 }
