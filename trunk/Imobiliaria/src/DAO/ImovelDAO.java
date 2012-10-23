@@ -18,14 +18,13 @@ import javax.swing.DefaultComboBoxModel;
  *
  * @author Bruno
  */
-public class ImovelDAO implements ControladorImovel{
+public class ImovelDAO implements ControladorImovel {
 
     static Conexao c = new Conexao();
     static Connection con = c.conexaoMysql();
     public static PreparedStatement stmt;
-    
 
-    public static boolean verificaImovelExiste(ImovelN i) {
+    public boolean verificaImovelExiste(ImovelN i) {
 
         ResultSet rs;
         Mensagens mensagem = new Mensagens();
@@ -68,65 +67,38 @@ public class ImovelDAO implements ControladorImovel{
         Statement st;
 
         try {
-            if (verificaImovelExiste(i)) {
+            stmt = this.con.prepareStatement(""
+                    + " INSERT INTO `imobiliaria`.`imoveln`"
+                    + "(`id`,"
+                    + "`numero`,"
+                    + "`rua`,"
+                    + "`bairro`,"
+                    + "`cidade`,"
+                    + "`idPessoaProprietario`,"
+                    + "`valor`,"
+                    + "`vendido`)"
+                    + "VALUES (0,"              //id
+                    + "?,"                      //numero
+                    + "?,"                      //rua
+                    + "?,"                      //bairro
+                    + "?,"                      //Cidade
+                    + "'idPessoaProprietario'," // ID pessoaProprietario
+                    + "?,"                      //valor
+                    + "0);");                   // Não vendido = 0;
 
-                stmt = this.con.prepareStatement(""
-                        + "INSERT INTO `imobiliaria`.`imoveis`"
-                        + "( `valor`,"
-                        + "  `tamanho`,"
-                        + "  `numero`,"
-                        + "  `complemento`,"
-                        + "  `quarto`,"
-                        + "  `suite`,"
-                        + "  `sala`,"
-                        + "  `banheiro`,"
-                        + "  `lavabo`,"
-                        + "  `sacada`,"
-                        + "  `idCloset`,"
-                        + "  `churasqueira`,"
-                        + "  `edicula`,"
-                        + "  `idDocumento`,"
-                        + "  `idGaragem`,"
-                        + "  `locacao`,"
-                        + "  `piscina`,"
-                        + "  `idCliente`,"
-                        + "  `idImovel`,"
-                        + "  `idEndereco`,"
-                        + "  `quadra`,"
-                        + "  `lote`,"
-                        + "  `matricula`,"
-                        + "  `idEmbutido`)"
-                        + "VALUES ('valor 1',"
-                        + "  'tamanho 2',"
-                        + "  'numero 3',"
-                        + "  'complemento 4',"
-                        + "  'quarto 5',"
-                        + "  'suite 6',"
-                        + "  'sala 7',"
-                        + "  'banheiro 8',"
-                        + "  'lavabo 9',"
-                        + "  'sacada 10',"
-                        + "  'idCloset 11',"
-                        + "  'churasqueira 12',"
-                        + "  'edicula 13',"
-                        + "  'idDocumento 14',"
-                        + "  'idGaragem 15',"
-                        + "  'locacao 16',"
-                        + "  'piscina 17',"
-                        + "  'idClient 18e',"
-                        + "  'idImovel 19',"
-                        + "  'idEndereco 20',"
-                        + "  'quadra 21',"
-                        + "  'lote 22',"
-                        + "  'matricula 23',"
-                        + "  'idEmbutido 24');");
+            stmt.setInt(1, i.getNumero());
+            stmt.setString(2, i.getRua());
+            stmt.setString(3, i.getBairro());
+            stmt.setString(4, i.getCidade());
+            stmt.setInt(5, i.getIdPessoaProprietario());
+            stmt.setFloat(6, i.getValor());
+            
+            
+            stmt.execute();
 
-//                stmt.setInt(1, maxId);
-//                stmt.setString(2, novo.getDescricao());
-                stmt.execute();
-
+            if (stmt.getUpdateCount() > 0) {
+                //con.commit();
                 return true;
-
             } else {
                 return false;
             }

@@ -25,9 +25,9 @@ public class CadastroPessoaN extends javax.swing.JDialog {
      */
     Componentes c = new Componentes();
     ControladorPessoa controladorPessoa;
-    JButton botaoGravar;
-    JButton botaoBuscar;
-    JButton botaoExcluir;
+    JButton jbGravar;
+    JButton jbBuscar;
+    JButton jbExcluir;
     Mensagens m;
     PessoaN p;
 
@@ -43,31 +43,31 @@ public class CadastroPessoaN extends javax.swing.JDialog {
         jtfBairro.setDocument(new FiltrosDigitacaoLetras());
         jtfCidade.setDocument(new FiltrosDigitacaoLetras());
 
-        botaoGravar = c.criaBotaoGravar();
-        botaoBuscar = c.criaBotaoBuscar();
-        botaoExcluir = c.criaBotaoExcluir();
+        jbGravar = c.criaBotaoGravar();
+        jbBuscar = c.criaBotaoBuscar();
+        jbExcluir = c.criaBotaoExcluir();
 
-        botaoGravar.addActionListener(new java.awt.event.ActionListener() {
+        jbGravar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoGravarActionPerformed(evt);
+                jbGravarActionPerformed(evt);
             }
         });
 
-        botaoExcluir.addActionListener(new java.awt.event.ActionListener() {
+        jbExcluir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoExcluirActionPerformed(evt);
+                jbExcluirActionPerformed(evt);
             }
         });
 
-        botaoBuscar.addActionListener(new java.awt.event.ActionListener() {
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botaoBuscarActionPerformed(evt);
+                jbBuscarActionPerformed(evt);
             }
         });
 
-        jpControles.add(botaoGravar);
-        jpControles.add(botaoBuscar);
-        jpControles.add(botaoExcluir);
+        jpControles.add(jbGravar);
+        jpControles.add(jbBuscar);
+        jpControles.add(jbExcluir);
 
     }
 
@@ -220,15 +220,15 @@ public class CadastroPessoaN extends javax.swing.JDialog {
     /**
      * @param args the command line arguments
      */
-    private void botaoGravarActionPerformed(java.awt.event.ActionEvent evt) {
+    private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {
         acaoGravar();
     }
 
-    private void botaoExcluirActionPerformed(java.awt.event.ActionEvent evt) {
+    private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {
         acaoRemover();
     }
 
-    private void botaoBuscarActionPerformed(java.awt.event.ActionEvent evt) {
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {
         acaoBuscar();
     }
 

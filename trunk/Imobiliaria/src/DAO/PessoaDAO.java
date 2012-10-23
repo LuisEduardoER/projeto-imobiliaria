@@ -45,15 +45,14 @@ public class PessoaDAO implements ControladorPessoa {
                     + "bairro,"
                     + "cidade,"
                     + "numero) "
-                    + "VALUES (0,"// 1 id
-                    + " ?,"//2 nome
-                    + " ?,"//3 cpf
-                    + " ?,"//4 rua
-                    + " ?,"//5 bairro
-                    + " ?,"//6 cidade
-                    + " ?);");//7 numero
+                    + "VALUES (0,"// id
+                    + " ?,"       // nome
+                    + " ?,"       // cpf
+                    + " ?,"       // rua
+                    + " ?,"       // bairro
+                    + " ?,"       // cidade
+                    + " ?);");    // numero
 
-            //stmt.setInt(1,0);
             stmt.setString(1, pessoa.getNome());
             stmt.setInt(2, pessoa.getCPF());
             stmt.setString(3, pessoa.getRua());
