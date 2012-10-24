@@ -38,7 +38,6 @@ public class CadastroPessoaN extends javax.swing.JDialog {
         jtfCPF.setDocument(new FiltrosDigitacaoNumerico());
         jtfNumero.setDocument(new FiltrosDigitacaoNumerico());
 
-//        jcbNome.setDocument(new FiltrosDigitacaoLetras());
         jtfRua.setDocument(new FiltrosDigitacaoLetras());
         jtfBairro.setDocument(new FiltrosDigitacaoLetras());
         jtfCidade.setDocument(new FiltrosDigitacaoLetras());
@@ -349,7 +348,7 @@ public class CadastroPessoaN extends javax.swing.JDialog {
             if (dcbm != null) {
 
                 jcbNome.setModel(dcbm);
-                if (jcbNome.getItemCount() > 1) {
+                if (jcbNome.getItemCount() >= 1) {
                     jcbNome.setSelectedIndex(-1);
                     jcbNome.setSelectedIndex(0);
                 }

@@ -77,15 +77,17 @@ public class ImovelDAO implements ControladorImovel {
                     + "`cidade`,"
                     + "`idPessoaProprietario`,"
                     + "`valor`,"
-                    + "`vendido`)"
+                    + "`vendido`,"
+                    + "`tamanho`)"
                     + "VALUES (0," //id
                     + "?," //numero
                     + "?," //rua
                     + "?," //bairro
                     + "?," //Cidade
-                    + "'idPessoaProprietario'," // ID pessoaProprietario
+                    + "?," // ID pessoaProprietario
                     + "?," //valor
-                    + "0);");                   // Não vendido = 0;
+                    + "?,"// Não vendido = 0;
+                    + "?);");//Tamanho                   
 
             stmt.setInt(1, i.getNumero());
             stmt.setString(2, i.getRua());
@@ -93,6 +95,8 @@ public class ImovelDAO implements ControladorImovel {
             stmt.setString(4, i.getCidade());
             stmt.setInt(5, i.getIdPessoaProprietario());
             stmt.setFloat(6, i.getValor());
+            stmt.setInt(7, i.getVendido());
+            stmt.setFloat(8, i.getTamanho());
 
 
             stmt.execute();
@@ -121,18 +125,19 @@ public class ImovelDAO implements ControladorImovel {
 
     @Override
     public boolean removeImovel(ImovelN imovel) {
+
         Mensagens mensagem = new Mensagens();
 
         try {
 
             stmt = PessoaDAO.con.prepareStatement(""
                     + "DELETE FROM imovelN "
-                    + "WHERE id = ?");
+                    + "WHERE numero = ?");
 
-            stmt.setInt(1, imovel.getId());
+            stmt.setInt(1, imovel.getNumero());
             stmt.execute();
 
-            if ((null == (buscaImovelNumero(imovel.getNumero())))) {
+            if ((null == (buscaImovel(imovel)))) {
                 mensagem.jopAviso("Cadastro removido com sucesso.");
                 return true;
             } else {
@@ -158,43 +163,26 @@ public class ImovelDAO implements ControladorImovel {
         try {
 
             stmt = PessoaDAO.con.prepareStatement(""
-                    + "SELECT * FROM pessoaN "
+                    + "SELECT * FROM imoveln "
                     + "WHERE numero = ? ");
 
             stmt.setInt(1, numero);
             rs = stmt.executeQuery();
 
-            if (rs.first()) {
-                if (rs.next()) {
-                    while (rs.next()) {
-                        ImovelN resultado = new ImovelN();
 
-                        resultado.setId(rs.getInt("id"));
-                        resultado.setNumero(rs.getInt("numero"));
-                        resultado.setRua(rs.getString("rua"));
-                        resultado.setBairro(rs.getString("bairro"));
-                        resultado.setCidade(rs.getString("cidade"));
-                        resultado.setIdPessoaProprietario(rs.getInt("idPessoaProprietario"));
-                        resultado.setValor(rs.getFloat("valor"));
-                        resultado.setVendido(rs.getInt("vendido"));
-                        vetorImovel.add(resultado);
-                    }
-                } else {
-                    rs.first();
-                    ImovelN resultado = new ImovelN();
+            while (rs.next()) {
+                ImovelN resultado = new ImovelN();
 
-                    resultado.setId(rs.getInt("id"));
-                    resultado.setNumero(rs.getInt("numero"));
-                    resultado.setRua(rs.getString("rua"));
-                    resultado.setBairro(rs.getString("bairro"));
-                    resultado.setCidade(rs.getString("cidade"));
-                    resultado.setIdPessoaProprietario(rs.getInt("idPessoaProprietario"));
-                    resultado.setValor(rs.getFloat("valor"));
-                    resultado.setVendido(rs.getInt("vendido"));
-                    vetorImovel.add(resultado);
-                }
-            } else {
-                return null;
+                resultado.setId(rs.getInt("id"));
+                resultado.setNumero(rs.getInt("numero"));
+                resultado.setRua(rs.getString("rua"));
+                resultado.setBairro(rs.getString("bairro"));
+                resultado.setCidade(rs.getString("cidade"));
+                resultado.setIdPessoaProprietario(rs.getInt("idPessoaProprietario"));
+                resultado.setValor(rs.getFloat("valor"));
+                resultado.setVendido(rs.getInt("vendido"));
+                resultado.setTamanho(rs.getFloat("tamanho"));
+                vetorImovel.add(resultado);
             }
 
         } catch (SQLException ex) {
@@ -205,6 +193,43 @@ public class ImovelDAO implements ControladorImovel {
         modeloPessoa = new DefaultComboBoxModel(vetorImovel);
         return modeloPessoa;
 
+
+    }
+
+    public ImovelN buscaImovel(ImovelN imovel) {
+
+        ResultSet rs;
+        Mensagens mensagem = new Mensagens();
+
+        try {
+
+            stmt = PessoaDAO.con.prepareStatement(""
+                    + "SELECT * FROM imovelN "
+                    + "WHERE id = ? ");
+
+            stmt.setInt(1, imovel.getId());
+            rs = stmt.executeQuery();
+
+            if (rs.first()) {
+                imovel.setId(rs.getInt("id"));
+                imovel.setNumero(rs.getInt("numero"));
+                imovel.setRua(rs.getString("rua"));
+                imovel.setBairro(rs.getString("bairro"));
+                imovel.setCidade(rs.getString("cidade"));
+                imovel.setIdPessoaProprietario(rs.getInt("idPessoaProprietario"));
+                imovel.setValor(rs.getFloat("valor"));
+                imovel.setVendido(rs.getInt("vendido"));
+                imovel.setTamanho(rs.getFloat("tamanho"));
+                return imovel;
+            } else {
+                return null;
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PessoaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            mensagem.jopError("Erro ao buscar o cadastro no servidor de banco de dados.\nSQLException: " + ex.getMessage() + "\n buscaImovel");
+            return null;
+        }
 
     }
 }
