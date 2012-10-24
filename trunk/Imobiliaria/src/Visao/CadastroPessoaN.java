@@ -100,6 +100,8 @@ public class CadastroPessoaN extends javax.swing.JDialog {
         jpControles = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro de Pessoas");
+        setResizable(false);
 
         jpDadosPessoais.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Pessoais"));
 
@@ -198,7 +200,8 @@ public class CadastroPessoaN extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        pack();
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-614)/2, (screenSize.height-272)/2, 614, 272);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcbNomeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbNomeItemStateChanged

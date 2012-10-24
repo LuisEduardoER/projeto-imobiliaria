@@ -135,6 +135,8 @@ public class VendaImovelN extends javax.swing.JDialog {
         jpControlesVenda = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Venda de Imóveis");
+        setResizable(false);
 
         jpImovel.setBorder(javax.swing.BorderFactory.createTitledBorder("Imóvel"));
 
@@ -287,7 +289,8 @@ public class VendaImovelN extends javax.swing.JDialog {
                 .addContainerGap(63, Short.MAX_VALUE))
         );
 
-        pack();
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-428)/2, (screenSize.height-408)/2, 428, 408);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcbNumeroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbNumeroItemStateChanged

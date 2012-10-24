@@ -11,7 +11,7 @@ import Modelo.Usuario;
  * @author Bruno
  */
 public class Sessao{  
-   private static Sessao instance = null;  
+   private static Sessao instance;  
    private Usuario usuario;  
   
    private Sessao(){  
