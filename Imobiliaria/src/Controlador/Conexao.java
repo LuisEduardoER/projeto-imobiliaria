@@ -6,7 +6,7 @@ package Controlador;
 
 import Modelo.Config;
 
-import Visao.ConexaoTela;
+import descontinuados.ConexaoTela;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;

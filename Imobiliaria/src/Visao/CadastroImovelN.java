@@ -102,7 +102,9 @@ public class CadastroImovelN extends javax.swing.JFrame {
         jtfCidade = new javax.swing.JTextField();
         jpBotoes = new javax.swing.JPanel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro de Imóveis");
+        setResizable(false);
 
         jpDadosImovel.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Imovel"));
 
@@ -202,7 +204,8 @@ public class CadastroImovelN extends javax.swing.JFrame {
                 .addGap(22, 22, 22))
         );
 
-        pack();
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-497)/2, (screenSize.height-274)/2, 497, 274);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcbNumeroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbNumeroItemStateChanged
