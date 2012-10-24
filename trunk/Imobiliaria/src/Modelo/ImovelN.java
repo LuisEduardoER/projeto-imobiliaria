@@ -10,10 +10,12 @@ package Modelo;
  */
 public class ImovelN {
     
+    
     int id;
     int idPessoaProprietario;
     int numero;
     int vendido; // 0 - Não Vendido; 1 - Vendido
+    float tamanho;
     String rua;
     String bairro;
     String cidade;
@@ -23,11 +25,12 @@ public class ImovelN {
     public ImovelN() {
 }
 
-    public ImovelN(int id, int idPessoaProprietario, int numero, int vendido, String rua, String bairro, String cidade, float valor) {
+    public ImovelN(int id, int idPessoaProprietario, int numero, int vendido,float tamanho, String rua, String bairro, String cidade, float valor) {
         this.id = id;
         this.idPessoaProprietario = idPessoaProprietario;
         this.numero = numero;
         this.vendido = vendido;
+        this.tamanho = tamanho;
         this.rua = rua;
         this.bairro = bairro;
         this.cidade = cidade;
@@ -58,6 +61,14 @@ public class ImovelN {
         this.numero = numero;
     }
 
+    public void setTamanho(float tamanho){
+        this.tamanho = tamanho;
+    }
+    
+    public float getTamanho(){
+        return tamanho;
+    }
+    
     public String getRua() {
         return rua;
     }

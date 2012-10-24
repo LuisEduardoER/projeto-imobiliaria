@@ -9,6 +9,8 @@ import Controlador.ControladorImovel;
 import Controlador.Mensagens;
 import DAO.ImovelDAO;
 import Modelo.ImovelN;
+import Util.FiltrosDigitacaoLetras;
+import Util.FiltrosDigitacaoNumerico;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 
@@ -34,9 +36,15 @@ public class CadastroImovelN extends javax.swing.JFrame {
     public CadastroImovelN() {
         initComponents();
 
+        jtfTamanho.setDocument(new FiltrosDigitacaoNumerico());
+        jtfValor.setDocument(new FiltrosDigitacaoNumerico());
+
+        jtfRua.setDocument(new FiltrosDigitacaoLetras());
+        jtfBairro.setDocument(new FiltrosDigitacaoLetras());
+        jtfCidade.setDocument(new FiltrosDigitacaoLetras());
 
         jbGravar = c.criaBotaoGravar();
-        jbBuscar = c.criaBotaoGravar();
+        jbBuscar = c.criaBotaoBuscar();
         jbEditar = c.criaBotaoEditar();
         jbCancelar = c.criaBotaoCancelar();
         jbExcluir = c.criaBotaoExcluir();
@@ -60,7 +68,7 @@ public class CadastroImovelN extends javax.swing.JFrame {
         });
 
         jpBotoes.add(jbGravar);
-        jpBotoes.add(jbEditar);
+        jpBotoes.add(jbBuscar);
         jpBotoes.add(jbCancelar);
         jpBotoes.add(jbExcluir);
     }
@@ -145,6 +153,11 @@ public class CadastroImovelN extends javax.swing.JFrame {
         jpTextField.setLayout(new java.awt.GridLayout(4, 1, 0, 5));
 
         jcbNumero.setEditable(true);
+        jcbNumero.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbNumeroItemStateChanged(evt);
+            }
+        });
         jpTextField.add(jcbNumero);
         jpTextField.add(jtfRua);
         jpTextField.add(jtfBairro);
@@ -191,6 +204,21 @@ public class CadastroImovelN extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jcbNumeroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbNumeroItemStateChanged
+        try {
+            imovel = (ImovelN) jcbNumero.getSelectedItem();
+            if (null != imovel) {
+                jtfTamanho.setText(imovel.getTamanho() + "");
+                jtfValor.setText(imovel.getValor() + "");
+                
+                jtfRua.setText(imovel.getRua());
+                jtfBairro.setText(imovel.getBairro());
+                jtfCidade.setText(imovel.getCidade());
+            }
+        } catch (ClassCastException e) {
+        }
+    }//GEN-LAST:event_jcbNumeroItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -267,7 +295,26 @@ public class CadastroImovelN extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     public boolean validaCampos() {
-        return true;
+        if (((null != jcbNumero.getSelectedItem())
+                && ((null != jtfBairro.getText()) && !("".equals(jtfBairro.getText())))
+                && ((null != jtfCidade.getText()) && !("".equals(jtfCidade.getText())))
+                && ((null != jtfRua.getText()) && !("".equals(jtfRua.getText())))
+                && ((null != jtfTamanho.getText()) && !("".equals(jtfTamanho.getText())))
+                && ((null != jtfValor.getText()) && !("".equals(jtfValor.getText()))))){
+            
+            imovel = new ImovelN();
+            
+            imovel.setNumero(Integer.parseInt(jcbNumero.getSelectedItem().toString()));
+            imovel.setRua(jtfRua.getText());
+            imovel.setBairro(jtfBairro.getText());
+            imovel.setCidade(jtfCidade.getText());
+            imovel.setTamanho(Float.parseFloat(jtfTamanho.getText()));
+            imovel.setValor(Float.parseFloat(jtfValor.getText()));
+            imovel.setVendido(0);
+            return true;
+        }else{
+            return false;
+        }
     }
 
     public void acaoGravar() {
@@ -305,7 +352,7 @@ public class CadastroImovelN extends javax.swing.JFrame {
             if (dcbm != null) {
 
                 jcbNumero.setModel(dcbm);
-                if (jcbNumero.getItemCount() > 1) {
+                if (jcbNumero.getItemCount() >= 1) {
                     jcbNumero.setSelectedIndex(-1);
                     jcbNumero.setSelectedIndex(0);
                 }
@@ -332,6 +379,7 @@ public class CadastroImovelN extends javax.swing.JFrame {
     }
 
     public void limparTela() {
+        jcbNumero.setSelectedIndex(-1);
         jtfBairro.setText("");
         jtfCidade.setText("");
         jtfRua.setText("");

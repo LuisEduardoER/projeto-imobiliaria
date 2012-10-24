@@ -151,9 +151,9 @@ public class PessoaDAO implements ControladorPessoa {
             stmt.setString(1, "%" + nome + "%");
             rs = stmt.executeQuery();
 
-            if (rs.first()) {
-                if (rs.next()) {
-                    while (rs.next()) {
+            //
+            
+                     while (rs.next()) {
                         PessoaN resultado = new PessoaN();
 
                         resultado.setId(rs.getInt("id"));
@@ -165,22 +165,40 @@ public class PessoaDAO implements ControladorPessoa {
                         resultado.setCidade(rs.getString("cidade"));
                         vetorPessoa.add(resultado);
                     }
-                } else {
-                    rs.first();
-                    PessoaN resultado = new PessoaN();
-
-                    resultado.setId(rs.getInt("id"));
-                    resultado.setNome(rs.getString("nome"));
-                    resultado.setCPF(rs.getInt("cpf"));
-                    resultado.setNumero(rs.getInt("numero"));
-                    resultado.setRua(rs.getString("rua"));
-                    resultado.setBairro(rs.getString("bairro"));
-                    resultado.setCidade(rs.getString("cidade"));
-                    vetorPessoa.add(resultado);
-                }
-            } else {
-                return null;
-            }
+            //
+            
+            
+            
+//            if (rs.first()) {
+//                if (rs.next()) {
+//                    while (rs.next()) {
+//                        PessoaN resultado = new PessoaN();
+//
+//                        resultado.setId(rs.getInt("id"));
+//                        resultado.setNome(rs.getString("nome"));
+//                        resultado.setCPF(rs.getInt("cpf"));
+//                        resultado.setNumero(rs.getInt("numero"));
+//                        resultado.setRua(rs.getString("rua"));
+//                        resultado.setBairro(rs.getString("bairro"));
+//                        resultado.setCidade(rs.getString("cidade"));
+//                        vetorPessoa.add(resultado);
+//                    }
+//                } else {
+//                    rs.first();
+//                    PessoaN resultado = new PessoaN();
+//
+//                    resultado.setId(rs.getInt("id"));
+//                    resultado.setNome(rs.getString("nome"));
+//                    resultado.setCPF(rs.getInt("cpf"));
+//                    resultado.setNumero(rs.getInt("numero"));
+//                    resultado.setRua(rs.getString("rua"));
+//                    resultado.setBairro(rs.getString("bairro"));
+//                    resultado.setCidade(rs.getString("cidade"));
+//                    vetorPessoa.add(resultado);
+//                }
+//            } else {
+//                return null;
+//            }
 
         } catch (SQLException ex) {
             Logger.getLogger(PessoaDAO.class.getName()).log(Level.SEVERE, null, ex);
