@@ -413,7 +413,7 @@ public class VendaImovelN extends javax.swing.JDialog {
             venda = new Venda();
             venda.setValor(Float.parseFloat(jtfValor.getText()));
             venda.setId(0);
-            
+
             if (0 != pessoa.getId() && !("".equals(pessoa.getId()))) {
                 venda.setIdPessoaProprietario(pessoa.getId());
             } else {
@@ -438,7 +438,7 @@ public class VendaImovelN extends javax.swing.JDialog {
     }
 
     private boolean imovelBuscar() {
-        if (null != jcbNumero.getSelectedItem().toString() && !("".equals(jcbNumero.getSelectedItem().toString()))) {
+        if ((null != jcbNumero.getSelectedItem().toString()) && !("".equals(jcbNumero.getSelectedItem().toString()))) {
 
             controladorImovel = new ImovelDAO();
             int i = Integer.parseInt(jcbNumero.getSelectedItem().toString());
@@ -446,6 +446,7 @@ public class VendaImovelN extends javax.swing.JDialog {
 
             if (dcbm != null) {
                 jcbNumero.setModel(dcbm);
+
                 if (jcbNumero.getItemCount() >= 1) {
                     jcbNumero.setSelectedIndex(-1);
                     jcbNumero.setSelectedIndex(0);
@@ -497,15 +498,21 @@ public class VendaImovelN extends javax.swing.JDialog {
         if (validaCampos()) {
             controladorVenda = new VendaDAO();
 
-            boolean insereVenda = controladorVenda.insereVenda(venda);
+            ImovelN testeVendido = (ImovelN) jcbNumero.getSelectedItem();
 
-            if (insereVenda) {
+            if (0 == testeVendido.getVendido()) {
+                boolean insereVenda = controladorVenda.insereVenda(venda);
+
+                if (insereVenda) {
+                    m = new Mensagens();
+                    m.jopAviso("Venda realizada com sucesso!");
+                }
+                limparTela();
+            } else {
                 m = new Mensagens();
-                m.jopAviso("Venda realizado com sucesso!");
+                m.jopAviso("Este imóvel já foi vendido e não é possível vendê-lo neste estado.\n"
+                        + " Volte o imovel para 'venda' primeiramente.");
             }
-
-            limparTela();
-
         } else {
             m = new Mensagens();
             m.jopAviso("Exitem campos vazios, preencha todos os campos antes de gravar.");
