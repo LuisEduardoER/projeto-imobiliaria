@@ -4,6 +4,9 @@
  */
 package Visao;
 
+import descontinuados.dConexaoTela;
+import descontinuados.dCadastroEmbutido;
+import descontinuados.CadastroPessoal;
 import java.awt.Graphics;
 import javax.swing.JFrame;
 import javax.swing.JPanel;

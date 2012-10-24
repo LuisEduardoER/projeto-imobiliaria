@@ -211,7 +211,7 @@ public class CadastroImovelN extends javax.swing.JFrame {
             if (null != imovel) {
                 jtfTamanho.setText(imovel.getTamanho() + "");
                 jtfValor.setText(imovel.getValor() + "");
-                
+
                 jtfRua.setText(imovel.getRua());
                 jtfBairro.setText(imovel.getBairro());
                 jtfCidade.setText(imovel.getCidade());
@@ -300,10 +300,10 @@ public class CadastroImovelN extends javax.swing.JFrame {
                 && ((null != jtfCidade.getText()) && !("".equals(jtfCidade.getText())))
                 && ((null != jtfRua.getText()) && !("".equals(jtfRua.getText())))
                 && ((null != jtfTamanho.getText()) && !("".equals(jtfTamanho.getText())))
-                && ((null != jtfValor.getText()) && !("".equals(jtfValor.getText()))))){
-            
+                && ((null != jtfValor.getText()) && !("".equals(jtfValor.getText()))))) {
+
             imovel = new ImovelN();
-            
+
             imovel.setNumero(Integer.parseInt(jcbNumero.getSelectedItem().toString()));
             imovel.setRua(jtfRua.getText());
             imovel.setBairro(jtfBairro.getText());
@@ -312,7 +312,7 @@ public class CadastroImovelN extends javax.swing.JFrame {
             imovel.setValor(Float.parseFloat(jtfValor.getText()));
             imovel.setVendido(0);
             return true;
-        }else{
+        } else {
             return false;
         }
     }
@@ -355,6 +355,10 @@ public class CadastroImovelN extends javax.swing.JFrame {
                 if (jcbNumero.getItemCount() >= 1) {
                     jcbNumero.setSelectedIndex(-1);
                     jcbNumero.setSelectedIndex(0);
+                } else {
+                    m = new Mensagens();
+                    m.jopAviso("Nenhum imóvel encontrado.");
+                    return false;
                 }
                 return true;
             } else {

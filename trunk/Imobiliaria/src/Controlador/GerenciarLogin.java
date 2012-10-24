@@ -5,7 +5,7 @@
 package Controlador;
 
 import Modelo.Usuario;
-import Visao.dConexaoTela;
+import descontinuados.dConexaoTela;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;

@@ -8,7 +8,7 @@
  *
  * Created on 13/01/2012, 19:14:06
  */
-package Visao;
+package descontinuados;
 
 /**
  *
