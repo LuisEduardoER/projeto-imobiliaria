@@ -35,13 +35,17 @@ public class Principal extends javax.swing.JFrame {
         } else {
             jlNomeUsuario.setText("-");
         }
-        
+
         if (null != Sessao.getInstance().getUsuario().getNome() && !("".equals(Sessao.getInstance().getUsuario().getNome()))) {
-            jlPerfil.setText(Sessao.getInstance().getUsuario().getPerfil()+"");
+            int perfil = Sessao.getInstance().getUsuario().getPerfil();
+            if (1 == perfil) {
+                jlPerfil.setText(perfil + " - Adiministrador");
+            } else {
+                jlPerfil.setText(perfil + " - Usuário");
+            }
         } else {
             jlPerfil.setText("-");
         }
-        
     }
 
     /**
@@ -66,13 +70,13 @@ public class Principal extends javax.swing.JFrame {
         jmiEmbutidos = new javax.swing.JMenuItem();
         jmProcessos = new javax.swing.JMenu();
         jmiVenda = new javax.swing.JMenuItem();
+        jmiReabilitarVenda = new javax.swing.JMenuItem();
         jmConfiguracoes = new javax.swing.JMenu();
         jmiConexao = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Imob");
         setMinimumSize(new java.awt.Dimension(800, 600));
-        setPreferredSize(new java.awt.Dimension(800, 600));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -180,6 +184,15 @@ public class Principal extends javax.swing.JFrame {
         });
         jmProcessos.add(jmiVenda);
 
+        jmiReabilitarVenda.setText("Reabilitar Venda");
+        jmiReabilitarVenda.setToolTipText("Habilita um Imóvel vendido para venda novamente.");
+        jmiReabilitarVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiReabilitarVendaActionPerformed(evt);
+            }
+        });
+        jmProcessos.add(jmiReabilitarVenda);
+
         jmbBarraMenu.add(jmProcessos);
 
         jmConfiguracoes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/Cofigure_64x64.png"))); // NOI18N
@@ -240,6 +253,11 @@ public class Principal extends javax.swing.JFrame {
         venda.setVisible(true);
     }//GEN-LAST:event_jmiVendaActionPerformed
 
+    private void jmiReabilitarVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiReabilitarVendaActionPerformed
+        ReabilitarVenda rV = new ReabilitarVenda(this, rootPaneCheckingEnabled);
+        rV.setVisible(true);
+    }//GEN-LAST:event_jmiReabilitarVendaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -296,6 +314,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiEmbutidos;
     private javax.swing.JMenuItem jmiImovel;
     private javax.swing.JMenuItem jmiPessoas;
+    private javax.swing.JMenuItem jmiReabilitarVenda;
     private javax.swing.JMenuItem jmiVenda;
     // End of variables declaration//GEN-END:variables
 }
