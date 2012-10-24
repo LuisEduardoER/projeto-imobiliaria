@@ -2,12 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package Visao;
+package descontinuados;
 
 import Util.DocumentSizeFilter;
 import Componentes.Componentes;
 import Controlador.CarregaEndereco;
-import Modelo.Estado;
+import Modelo.Pais;
 import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JTextField;
@@ -17,7 +17,7 @@ import javax.swing.text.AbstractDocument;
  *
  * @author Maycon
  */
-public class CadastroDeCidade extends javax.swing.JFrame {
+public class CadastroDeEstado extends javax.swing.JFrame {
     JButton gravar;
     JButton remover;
     JButton pesquisar;
@@ -28,9 +28,9 @@ public class CadastroDeCidade extends javax.swing.JFrame {
     /**
      * Creates new form CadastroDePais
      */
-    public CadastroDeCidade() {
+    public CadastroDeEstado() {
         initComponents();
-        ((AbstractDocument) ((JTextField) jcbSiglaCidade.getEditor().getEditorComponent()).getDocument())
+        ((AbstractDocument) ((JTextField) jcbSiglaEstado.getEditor().getEditorComponent()).getDocument())
                 .setDocumentFilter(new DocumentSizeFilter(2));
         
         gravar = c.criaBotaoGravar();
@@ -48,7 +48,7 @@ public class CadastroDeCidade extends javax.swing.JFrame {
             }
         });
         
-        jcbNomeCidade.setModel(carregaEndereco.carregaCidade(new Estado()));
+        jcbNomeEstado.setModel(carregaEndereco.carregaEstado(new Pais("BRASIL", "BR", 1)));
         
         jpnControles.add(gravar);
         jpnControles.add(pesquisar);
@@ -70,15 +70,15 @@ public class CadastroDeCidade extends javax.swing.JFrame {
 
         jpPrincipal = new javax.swing.JPanel();
         jpCamponentes = new javax.swing.JPanel();
-        jpLabelCidade = new javax.swing.JPanel();
-        lbNomeCidade = new javax.swing.JLabel();
-        lbSigla = new javax.swing.JLabel();
-        lbCodigoCidade = new javax.swing.JLabel();
-        jpEditoresCidade = new javax.swing.JPanel();
-        jcbNomeCidade = new javax.swing.JComboBox();
+        jpLabelEstado = new javax.swing.JPanel();
+        lbNomeEndereco = new javax.swing.JLabel();
+        lbSiglaEstado = new javax.swing.JLabel();
+        lbCodigoEstado = new javax.swing.JLabel();
+        jpEditoresEstado = new javax.swing.JPanel();
+        jcbNomeEstado = new javax.swing.JComboBox();
         jpnCampoSigla = new javax.swing.JPanel();
-        jcbSiglaCidade = new javax.swing.JComboBox();
-        jtfCodigoCidade = new javax.swing.JTextField();
+        jcbSiglaEstado = new javax.swing.JComboBox();
+        jtfCodigoEstado = new javax.swing.JTextField();
         jpnIDReferencia = new javax.swing.JPanel();
         lbIDReferencia = new javax.swing.JLabel();
         lbID = new javax.swing.JLabel();
@@ -86,52 +86,52 @@ public class CadastroDeCidade extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jpPrincipal.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro De Cidade", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        jpPrincipal.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro De Estado", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         jpCamponentes.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jpLabelCidade.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jpLabelCidade.setMinimumSize(new java.awt.Dimension(52, 70));
-        jpLabelCidade.setPreferredSize(new java.awt.Dimension(52, 70));
-        jpLabelCidade.setLayout(new java.awt.GridLayout(3, 0));
+        jpLabelEstado.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        jpLabelEstado.setMinimumSize(new java.awt.Dimension(52, 70));
+        jpLabelEstado.setPreferredSize(new java.awt.Dimension(52, 70));
+        jpLabelEstado.setLayout(new java.awt.GridLayout(3, 0));
 
-        lbNomeCidade.setText("Nome:");
-        jpLabelCidade.add(lbNomeCidade);
+        lbNomeEndereco.setText("Nome:");
+        jpLabelEstado.add(lbNomeEndereco);
 
-        lbSigla.setText("Sigla:");
-        lbSigla.setMaximumSize(new java.awt.Dimension(31, 14));
-        lbSigla.setMinimumSize(new java.awt.Dimension(31, 14));
-        lbSigla.setPreferredSize(new java.awt.Dimension(31, 14));
-        jpLabelCidade.add(lbSigla);
+        lbSiglaEstado.setText("Sigla:");
+        lbSiglaEstado.setMaximumSize(new java.awt.Dimension(31, 14));
+        lbSiglaEstado.setMinimumSize(new java.awt.Dimension(31, 14));
+        lbSiglaEstado.setPreferredSize(new java.awt.Dimension(31, 14));
+        jpLabelEstado.add(lbSiglaEstado);
 
-        lbCodigoCidade.setText("Código:");
-        jpLabelCidade.add(lbCodigoCidade);
+        lbCodigoEstado.setText("Código:");
+        jpLabelEstado.add(lbCodigoEstado);
 
-        jpEditoresCidade.setLayout(new java.awt.GridLayout(3, 1, 0, 5));
+        jpEditoresEstado.setLayout(new java.awt.GridLayout(3, 1, 0, 5));
 
-        jcbNomeCidade.setEditable(true);
-        jpEditoresCidade.add(jcbNomeCidade);
+        jcbNomeEstado.setEditable(true);
+        jpEditoresEstado.add(jcbNomeEstado);
 
-        jcbSiglaCidade.setEditable(true);
-        jcbSiglaCidade.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "BR", "PT" }));
+        jcbSiglaEstado.setEditable(true);
+        jcbSiglaEstado.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "BR", "PT" }));
 
         javax.swing.GroupLayout jpnCampoSiglaLayout = new javax.swing.GroupLayout(jpnCampoSigla);
         jpnCampoSigla.setLayout(jpnCampoSiglaLayout);
         jpnCampoSiglaLayout.setHorizontalGroup(
             jpnCampoSiglaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnCampoSiglaLayout.createSequentialGroup()
-                .addComponent(jcbSiglaCidade, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jcbSiglaEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 216, Short.MAX_VALUE))
         );
         jpnCampoSiglaLayout.setVerticalGroup(
             jpnCampoSiglaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpnCampoSiglaLayout.createSequentialGroup()
-                .addComponent(jcbSiglaCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jcbSiglaEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jpEditoresCidade.add(jpnCampoSigla);
-        jpEditoresCidade.add(jtfCodigoCidade);
+        jpEditoresEstado.add(jpnCampoSigla);
+        jpEditoresEstado.add(jtfCodigoEstado);
 
         lbIDReferencia.setText("ID de Referência:");
 
@@ -162,9 +162,9 @@ public class CadastroDeCidade extends javax.swing.JFrame {
             .addGroup(jpCamponentesLayout.createSequentialGroup()
                 .addGroup(jpCamponentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpCamponentesLayout.createSequentialGroup()
-                        .addComponent(jpLabelCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jpLabelEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jpEditoresCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jpEditoresEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jpnIDReferencia, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -173,8 +173,8 @@ public class CadastroDeCidade extends javax.swing.JFrame {
             jpCamponentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpCamponentesLayout.createSequentialGroup()
                 .addGroup(jpCamponentesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpLabelCidade, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jpEditoresCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jpLabelEstado, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jpEditoresEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpnIDReferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -243,13 +243,13 @@ public class CadastroDeCidade extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroDeCidade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroDeEstado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroDeCidade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroDeEstado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroDeCidade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroDeEstado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroDeCidade.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroDeEstado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -259,25 +259,25 @@ public class CadastroDeCidade extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new CadastroDeCidade().setVisible(true);
+                new CadastroDeEstado().setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox jcbNomeCidade;
-    private javax.swing.JComboBox jcbSiglaCidade;
+    private javax.swing.JComboBox jcbNomeEstado;
+    private javax.swing.JComboBox jcbSiglaEstado;
     private javax.swing.JPanel jpCamponentes;
-    private javax.swing.JPanel jpEditoresCidade;
-    private javax.swing.JPanel jpLabelCidade;
+    private javax.swing.JPanel jpEditoresEstado;
+    private javax.swing.JPanel jpLabelEstado;
     private javax.swing.JPanel jpPrincipal;
     private javax.swing.JPanel jpnCampoSigla;
     private javax.swing.JPanel jpnControles;
     private javax.swing.JPanel jpnIDReferencia;
-    private javax.swing.JTextField jtfCodigoCidade;
-    private javax.swing.JLabel lbCodigoCidade;
+    private javax.swing.JTextField jtfCodigoEstado;
+    private javax.swing.JLabel lbCodigoEstado;
     private javax.swing.JLabel lbID;
     private javax.swing.JLabel lbIDReferencia;
-    private javax.swing.JLabel lbNomeCidade;
-    private javax.swing.JLabel lbSigla;
+    private javax.swing.JLabel lbNomeEndereco;
+    private javax.swing.JLabel lbSiglaEstado;
     // End of variables declaration//GEN-END:variables
 }

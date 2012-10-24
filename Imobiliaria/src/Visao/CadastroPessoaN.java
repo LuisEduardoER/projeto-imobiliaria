@@ -351,6 +351,10 @@ public class CadastroPessoaN extends javax.swing.JDialog {
                 if (jcbNome.getItemCount() >= 1) {
                     jcbNome.setSelectedIndex(-1);
                     jcbNome.setSelectedIndex(0);
+                } else {
+                    m = new Mensagens();
+                    m.jopAviso("Nenhuma pessoa encontrada.");
+                    return false;
                 }
                 
                 return true;

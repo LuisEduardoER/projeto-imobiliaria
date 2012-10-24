@@ -45,7 +45,7 @@ public class VendaDAO implements ControladorVenda {
                     + "VALUES (?,"
                     + "?,"
                     + "?,"
-                    + " ?);");
+                    + "?);");
 
             stmt.setInt(1, venda.getId());
             stmt.setInt(2, venda.getIdPessoaProprietario());
@@ -59,9 +59,10 @@ public class VendaDAO implements ControladorVenda {
                 // atualiza imóvel para vendido
                 stmt = this.con.prepareStatement(""
                         + "UPDATE `imobiliaria`.`imoveln`"
-                        + "SET `vendido` = 1"  //Vendido = 1, Não Vendido = 0;
-                        + "WHERE `id` = 'id';");
+                        + " SET `vendido` = 1"  //Vendido = 1, Não Vendido = 0;
+                        + " WHERE `id` = ?;");
 
+                stmt.setInt(1, venda.getIdImovel());
                 stmt.execute();
 
                 if (stmt.getUpdateCount() > 0) {//se atualizar o imovel retorna true

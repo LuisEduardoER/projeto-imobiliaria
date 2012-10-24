@@ -44,7 +44,7 @@
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.TitledBorderInfo">
-            <TitledBorder justification="2" title="Cadastro De Pa&#xed;s"/>
+            <TitledBorder justification="2" title="Cadastro De Cidade"/>
           </Border>
         </Property>
       </Properties>
@@ -90,9 +90,9 @@
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <Component id="jpLabelPais" min="-2" max="-2" attributes="0"/>
+                              <Component id="jpLabelCidade" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jpEditoresPais" min="-2" max="-2" attributes="0"/>
+                              <Component id="jpEditoresCidade" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                           <Component id="jpnIDReferencia" max="32767" attributes="0"/>
@@ -105,8 +105,8 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jpLabelPais" max="-2" attributes="0"/>
-                          <Component id="jpEditoresPais" min="-2" max="-2" attributes="0"/>
+                          <Component id="jpLabelCidade" max="-2" attributes="0"/>
+                          <Component id="jpEditoresCidade" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jpnIDReferencia" min="-2" max="-2" attributes="0"/>
@@ -115,10 +115,10 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="javax.swing.JPanel" name="jpLabelPais">
+            <Container class="javax.swing.JPanel" name="jpLabelCidade">
               <Properties>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
-                  <Color id="Cursor Default"/>
+                  <Color id="Cursor padr&#xe3;o"/>
                 </Property>
                 <Property name="minimumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[52, 70]"/>
@@ -133,7 +133,7 @@
                 <Property name="rows" type="int" value="3"/>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="lbNomePais">
+                <Component class="javax.swing.JLabel" name="lbNomeCidade">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Nome:"/>
                   </Properties>
@@ -152,14 +152,14 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JLabel" name="lbCodigoPais">
+                <Component class="javax.swing.JLabel" name="lbCodigoCidade">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="C&#xf3;digo:"/>
                   </Properties>
                 </Component>
               </SubComponents>
             </Container>
-            <Container class="javax.swing.JPanel" name="jpEditoresPais">
+            <Container class="javax.swing.JPanel" name="jpEditoresCidade">
 
               <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
                 <Property name="columns" type="int" value="1"/>
@@ -167,7 +167,7 @@
                 <Property name="rows" type="int" value="3"/>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JComboBox" name="jcbNomePais">
+                <Component class="javax.swing.JComboBox" name="jcbNomeCidade">
                   <Properties>
                     <Property name="editable" type="boolean" value="true"/>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -181,7 +181,7 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jcbSiglaPais" min="-2" pref="123" max="-2" attributes="0"/>
+                              <Component id="jcbSiglaCidade" min="-2" pref="123" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="216" max="32767" attributes="0"/>
                           </Group>
                       </Group>
@@ -189,14 +189,14 @@
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jcbSiglaPais" min="-2" max="-2" attributes="0"/>
+                              <Component id="jcbSiglaCidade" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
                   </Layout>
                   <SubComponents>
-                    <Component class="javax.swing.JComboBox" name="jcbSiglaPais">
+                    <Component class="javax.swing.JComboBox" name="jcbSiglaCidade">
                       <Properties>
                         <Property name="editable" type="boolean" value="true"/>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -209,7 +209,7 @@
                     </Component>
                   </SubComponents>
                 </Container>
-                <Component class="javax.swing.JTextField" name="jtfCodigoEstado">
+                <Component class="javax.swing.JTextField" name="jtfCodigoCidade">
                 </Component>
               </SubComponents>
             </Container>

@@ -8,16 +8,16 @@
  *
  * Created on 13/01/2012, 19:57:40
  */
-package Visao;
+package descontinuados;
 
 /**
  *
  * @author Bruno
  */
-public class CadastroTelhado extends javax.swing.JFrame {
+public class CadastroTeto extends javax.swing.JFrame {
 
     /** Creates new form CadastroEmbutidos */
-    public CadastroTelhado() {
+    public CadastroTeto() {
         initComponents();
     }
 
@@ -40,7 +40,7 @@ public class CadastroTelhado extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Novo Telhado");
 
-        jpCadastroTelhado.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro De Telhados", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        jpCadastroTelhado.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Cadastro De Embutidos", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
         jbCancelar.setText("Cancelar");
 
@@ -58,8 +58,7 @@ public class CadastroTelhado extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jlNome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jtfNome, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jtfNome, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE))
         );
         jpNomeLayout.setVerticalGroup(
             jpNomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -130,13 +129,13 @@ public class CadastroTelhado extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroTelhado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroTeto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroTelhado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroTeto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroTelhado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroTeto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroTelhado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroTeto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -144,7 +143,7 @@ public class CadastroTelhado extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
 
             public void run() {
-                new CadastroTelhado().setVisible(true);
+                new CadastroTeto().setVisible(true);
             }
         });
     }

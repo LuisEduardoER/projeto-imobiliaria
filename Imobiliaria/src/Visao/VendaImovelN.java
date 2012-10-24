@@ -38,10 +38,18 @@ public class VendaImovelN extends javax.swing.JDialog {
     JButton vendaProcurar;
     JButton vendaExcluir;
     Mensagens m;
+    ImovelN imovel;
+    PessoaN pessoa;
+    Venda venda;
 
     public VendaImovelN(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        jlDescricaoBairro.setText("-");
+        jlDescricaoCPF.setText("-");
+        jlDescricaoCidade.setText("-");
+        jlDescricaoRua.setText("-");
 
         imovelProcurar = c.criaBotaoPesquisar();
         jpControleImovel.add(imovelProcurar);
@@ -58,7 +66,6 @@ public class VendaImovelN extends javax.swing.JDialog {
         jpControlesVenda.add(vendaExcluir);
 
         jtfValor.setDocument(new FiltrosDigitacaoNumerico());
-
 
         imovelProcurar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -89,9 +96,6 @@ public class VendaImovelN extends javax.swing.JDialog {
                 vendaBuscarActionPerformed(evt);
             }
         });
-
-
-
     }
 
     /**
@@ -151,6 +155,11 @@ public class VendaImovelN extends javax.swing.JDialog {
         jpITF.setLayout(new java.awt.GridLayout(4, 1, 0, 8));
 
         jcbNumero.setEditable(true);
+        jcbNumero.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbNumeroItemStateChanged(evt);
+            }
+        });
         jpITF.add(jcbNumero);
 
         jlDescricaoRua.setText("(rua)");
@@ -197,6 +206,11 @@ public class VendaImovelN extends javax.swing.JDialog {
         jpCTF.setLayout(new java.awt.GridLayout(2, 1, 0, 8));
 
         jcbNome.setEditable(true);
+        jcbNome.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbNomeItemStateChanged(evt);
+            }
+        });
         jpCTF.add(jcbNome);
 
         jlDescricaoCPF.setText("(cpf)");
@@ -275,6 +289,28 @@ public class VendaImovelN extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jcbNumeroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbNumeroItemStateChanged
+        try {
+            imovel = (ImovelN) jcbNumero.getSelectedItem();
+            if (null != imovel) {
+                jlDescricaoRua.setText(imovel.getRua());
+                jlDescricaoBairro.setText(imovel.getBairro());
+                jlDescricaoCidade.setText(imovel.getCidade());
+            }
+        } catch (ClassCastException e) {
+        }
+    }//GEN-LAST:event_jcbNumeroItemStateChanged
+
+    private void jcbNomeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbNomeItemStateChanged
+        try {
+            pessoa = (PessoaN) jcbNome.getSelectedItem();
+            if (null != pessoa) {
+                jlDescricaoCPF.setText(pessoa.getCPF() + "");
+            }
+        } catch (ClassCastException e) {
+        }
+    }//GEN-LAST:event_jcbNomeItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -367,12 +403,30 @@ public class VendaImovelN extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public boolean validaCampos() {
-        if ((null != jcbNumero.getSelectedItem())
+        if (((null != jcbNumero.getSelectedItem())
                 && (null != jcbNome.getSelectedItem())
-                && (null != jtfValor.getText()) && ("".equals(jtfValor.getText()))) {
+                && ((null != jtfValor.getText()) && !("".equals(jtfValor.getText()))))) {
 
-//            Venda v = new Venda();
-//            v.setValor(Float.parseFloat(jtfValor.getText()));
+            venda = new Venda();
+            venda.setValor(Float.parseFloat(jtfValor.getText()));
+            venda.setId(0);
+            
+            if (0 != pessoa.getId() && !("".equals(pessoa.getId()))) {
+                venda.setIdPessoaProprietario(pessoa.getId());
+            } else {
+                m = new Mensagens();
+                m.jopAlerta("É necessário buscar um proprietário antes de continuar.");
+                return false;
+            }
+
+            if (0 != imovel.getId() && !("".equals(imovel.getId()))) {
+                venda.setIdImovel(imovel.getId());
+            } else {
+                m = new Mensagens();
+                m.jopAlerta("É necessário buscar um imovel antes de continuar.");
+                return false;
+            }
+
             return true;
 
         } else {
@@ -381,21 +435,31 @@ public class VendaImovelN extends javax.swing.JDialog {
     }
 
     private boolean imovelBuscar() {
-        if (validaCampos()) {
+        if (null != jcbNumero.getSelectedItem().toString() && !("".equals(jcbNumero.getSelectedItem().toString()))) {
+
             controladorImovel = new ImovelDAO();
-            DefaultComboBoxModel dcbm = controladorImovel.buscaImovelNumero(Integer.parseInt(jcbNumero.getSelectedItem().toString()));
+            int i = Integer.parseInt(jcbNumero.getSelectedItem().toString());
+            DefaultComboBoxModel dcbm = controladorImovel.buscaImovelNumero(i); // informar o numero do imovel
 
             if (dcbm != null) {
                 jcbNumero.setModel(dcbm);
-                ImovelN imovel = (ImovelN) jcbNumero.getSelectedItem();
-                jtfValor.setText(imovel.getValor()+"");
-                return true;
+                if (jcbNumero.getItemCount() >= 1) {
+                    jcbNumero.setSelectedIndex(-1);
+                    jcbNumero.setSelectedIndex(0);
+                    return true;
+                } else {
+                    m = new Mensagens();
+                    m.jopAviso("Nenhum imóvel encontrado.");
+                    return false;
+                }
             } else {
+                m = new Mensagens();
+                m.jopAviso("Nenhum imóvel encontrado.");
                 return false;
             }
         } else {
             m = new Mensagens();
-            m.jopAviso("Nenhum imóvel encontrado.");
+            m.jopAviso("É nescessário informar o nome da pessoa para efetuar uma busca.");
             return false;
         }
     }
@@ -409,34 +473,41 @@ public class VendaImovelN extends javax.swing.JDialog {
             if (dcbm != null) {
 
                 jcbNome.setModel(dcbm);
+                if (jcbNome.getItemCount() >= 1) {
+                    jcbNome.setSelectedIndex(-1);
+                    jcbNome.setSelectedIndex(0);
+                }
                 return true;
             } else {
-                m =  new Mensagens();
+                m = new Mensagens();
                 m.jopAviso("Nenhuma pessoa encontrada.");
                 return false;
             }
         } else {
-            m =  new Mensagens();
+            m = new Mensagens();
             m.jopAviso("É nescessário informar o nome da pessoa para efetuar uma busca.");
             return false;
         }
     }
 
     private void vendaGravar() {
-        if (validaCampos()){
-            Venda v = new Venda();
-            
-            ImovelN imovel = (ImovelN) jcbNumero.getSelectedItem();
-            PessoaN pessoa = (PessoaN) jcbNome.getSelectedItem();
-                    
-            v.setIdImovel(imovel.getId());
-            v.setIdPessoaProprietario(pessoa.getId());
-            v.setValor(Float.parseFloat(jtfValor.getText()));
-            
+        if (validaCampos()) {
             controladorVenda = new VendaDAO();
-            
-            controladorVenda.insereVenda(v);
+
+            boolean insereVenda = controladorVenda.insereVenda(venda);
+
+            if (insereVenda) {
+                m = new Mensagens();
+                m.jopAviso("Venda realizado com sucesso!");
+            }
+
+            limparTela();
+
+        } else {
+            m = new Mensagens();
+            m.jopAviso("Exitem campos vazios, preencha todos os campos antes de gravar.");
         }
+
     }
 
     private void vendaRemover() {
@@ -450,5 +521,17 @@ public class VendaImovelN extends javax.swing.JDialog {
     public ImovelN montaImovel() {
         ImovelN imovel = new ImovelN();
         return imovel;
+    }
+
+    public void limparTela() {
+        jcbNome.setSelectedIndex(-1);
+        jcbNumero.setSelectedIndex(-1);
+
+        jtfValor.setText("");
+
+        jlDescricaoBairro.setText("-");
+        jlDescricaoCPF.setText("-");
+        jlDescricaoCidade.setText("-");
+        jlDescricaoRua.setText("-");
     }
 }
