@@ -13,6 +13,7 @@ import Util.FiltrosDigitacaoLetras;
 import Util.FiltrosDigitacaoNumerico;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -47,18 +48,21 @@ public class CadastroPessoaN extends javax.swing.JDialog {
         jbExcluir = c.criaBotaoExcluir();
 
         jbGravar.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbGravarActionPerformed(evt);
             }
         });
 
         jbExcluir.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbExcluirActionPerformed(evt);
             }
         });
 
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarActionPerformed(evt);
             }
@@ -227,7 +231,9 @@ public class CadastroPessoaN extends javax.swing.JDialog {
     }
 
     private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {
-        acaoRemover();
+        if (m.jopDeletar("Deseja realmente excluir este imovel?") == JOptionPane.YES_OPTION) {
+            acaoRemover();
+        }
     }
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {
@@ -235,10 +241,14 @@ public class CadastroPessoaN extends javax.swing.JDialog {
     }
 
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
+        /*
+         * Set the Nimbus look and feel
+         */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+        /*
+         * If Nimbus (introduced in Java SE 6) is not available, stay with the
+         * default look and feel. For details see
+         * http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -258,11 +268,15 @@ public class CadastroPessoaN extends javax.swing.JDialog {
         }
         //</editor-fold>
 
-        /* Create and display the dialog */
+        /*
+         * Create and display the dialog
+         */
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 CadastroPessoaN dialog = new CadastroPessoaN(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
@@ -359,7 +373,7 @@ public class CadastroPessoaN extends javax.swing.JDialog {
                     m.jopAviso("Nenhuma pessoa encontrada.");
                     return false;
                 }
-                
+
                 return true;
             } else {
                 m = new Mensagens();

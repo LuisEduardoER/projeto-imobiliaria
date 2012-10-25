@@ -132,9 +132,9 @@ public class ImovelDAO implements ControladorImovel {
 
             stmt = PessoaDAO.con.prepareStatement(""
                     + "DELETE FROM imovelN "
-                    + "WHERE numero = ?");
+                    + "WHERE id = ?");
 
-            stmt.setInt(1, imovel.getNumero());
+            stmt.setInt(1, imovel.getId());
             stmt.execute();
 
             if ((null == (buscaImovel(imovel)))) {
