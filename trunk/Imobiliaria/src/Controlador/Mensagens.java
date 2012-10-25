@@ -26,7 +26,7 @@ public class Mensagens {
     }
 
     public int jopDeletar(String mensagem) {
-        int resposta = JOptionPane.showConfirmDialog(null, mensagem, "Deseja realmente apargar?", JOptionPane.YES_NO_OPTION);
+        int resposta = JOptionPane.showConfirmDialog(null, mensagem, "Cuidado", JOptionPane.YES_NO_OPTION);
         return resposta;
     }
     

@@ -13,6 +13,7 @@ import Util.FiltrosDigitacaoLetras;
 import Util.FiltrosDigitacaoNumerico;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -23,8 +24,6 @@ public class CadastroImovelN extends javax.swing.JFrame {
     Componentes c = new Componentes();
     JButton jbGravar;
     JButton jbBuscar;
-    JButton jbEditar;
-    JButton jbCancelar;
     JButton jbExcluir;
     ImovelN imovel;
     ControladorImovel controladorImovel;
@@ -45,23 +44,24 @@ public class CadastroImovelN extends javax.swing.JFrame {
 
         jbGravar = c.criaBotaoGravar();
         jbBuscar = c.criaBotaoBuscar();
-        jbEditar = c.criaBotaoEditar();
-        jbCancelar = c.criaBotaoCancelar();
         jbExcluir = c.criaBotaoExcluir();
 
         jbGravar.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbGravarActionPerformed(evt);
             }
         });
 
         jbExcluir.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbExcluirActionPerformed(evt);
             }
         });
 
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarActionPerformed(evt);
             }
@@ -69,7 +69,6 @@ public class CadastroImovelN extends javax.swing.JFrame {
 
         jpBotoes.add(jbGravar);
         jpBotoes.add(jbBuscar);
-        jpBotoes.add(jbCancelar);
         jpBotoes.add(jbExcluir);
     }
 
@@ -231,7 +230,10 @@ public class CadastroImovelN extends javax.swing.JFrame {
     }
 
     private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {
-        acaoRemover();
+        if ( m.jopDeletar("Deseja realmente excluir este imovel") == JOptionPane.YES_OPTION) {
+            acaoRemover();
+        }
+
     }
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {
@@ -270,6 +272,7 @@ public class CadastroImovelN extends javax.swing.JFrame {
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
+
             public void run() {
                 new CadastroImovelN().setVisible(true);
             }
