@@ -265,4 +265,8 @@ public class ReabilitarVenda extends javax.swing.JDialog {
     private javax.swing.JPanel jpImovel;
     private javax.swing.JPanel jpiL;
     // End of variables declaration//GEN-END:variables
+
+
+
+
 }
