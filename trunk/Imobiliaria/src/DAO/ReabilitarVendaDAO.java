@@ -14,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -29,7 +30,7 @@ public class ReabilitarVendaDAO implements ControladorReabilitarImovel {
     public static PreparedStatement stmt;
 
     @Override
-    public boolean reabilitaImovel() {
+    public boolean reabilitaImovel(ReabilitaImovelModel reabilitar) {
         try {
             PreparedStatement stmt;
             ResultSet rs;
@@ -46,10 +47,6 @@ public class ReabilitarVendaDAO implements ControladorReabilitarImovel {
 
             return true;
 
-            // UTILIZAR PARA RELATÓRIO DE VENDAS e tela de Reabilitação de Imovéis
-            //                SELECT * FROM venda
-            //INNER JOIN pessoan ON venda.idPessoaProprietario = 16
-            //INNER JOIN imoveln ON venda.idImovel = 1
         } catch (SQLException ex) {
             Logger.getLogger(ReabilitarVendaDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
@@ -57,34 +54,56 @@ public class ReabilitarVendaDAO implements ControladorReabilitarImovel {
 
     }
 
-    public DefaultComboBoxModel listaImóveis(ImovelN imovel) {
+    public DefaultComboBoxModel listaImoveis(ReabilitaImovelModel reabilitar) {
 
         PreparedStatement stmt;
         ResultSet rs;
         Statement st;
-        DefaultComboBoxModel d = new DefaultComboBoxModel();
-        ReabilitaImovelModel reabilitar = new ReabilitaImovelModel();
+        DefaultComboBoxModel d;
+        Vector<ReabilitaImovelModel> vetor = new Vector<ReabilitaImovelModel>();
         
         try {
 
             stmt = this.con.prepareStatement(""
-                    + "SELECT * FROM venda"
-                    + "WHERE idImovel = ? ");
-            stmt.setInt(1, imovel.getId());
-            
-             rs = stmt.executeQuery();
-            
-            while (rs.next()){
-                reabilitar.setIdImovel(Integer.parseInt("idImovel"));
-                reabilitar.setIdPessoaProprietario(Integer.parseInt("idPessoaProprietario"));
-                reabilitar.setIdVenda(Integer.parseInt("id"));
+                    + "SELECT imovel.numero  AS imovelNumero,"
+                    + "  imovel.valor         AS imovelValor,"
+                    + "  imovel.rua           AS imovelRua,"
+                    + "  imovel.bairro        AS imovelBairro,"
+                    + "  imovel.cidade        AS imovelCidade,"
+                    + "  imovel.tamanho       AS imovelTamanho,"
+                    + "  imovel.id            AS imovelId,"
+                    + "  pessoa.nome          AS pessoaNome,"
+                    + "  pessoa.cpf           AS pessoaCPF,"
+                    + "  pessoa.id            AS pessoaId,"
+                    + "  venda.id             AS vendaId"
+                    + " FROM imoveln imovel"
+                    + "  INNER JOIN venda ON imovel.id = venda.idImovel"
+                    + "  INNER JOIN pessoan pessoa ON venda.idPessoaProprietario = pessoa.id"
+                    + " WHERE imovel.numero = ?");
+
+            stmt.setInt(1, reabilitar.getNumero());
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                ReabilitaImovelModel resultado = new ReabilitaImovelModel();
+                resultado.setIdImovel(rs.getInt("imovelId"));
+                resultado.setNumero(rs.getInt("imovelNumero"));
+                resultado.setValor(rs.getFloat("imovelValor"));
+                resultado.setRua(rs.getString("imovelRua"));
+                resultado.setBairro(rs.getString("imovelBairro"));
+                resultado.setCidade(rs.getString("imovelCidade"));
+                resultado.setTamanho(rs.getInt("imovelTamanho"));
+                resultado.setNome(rs.getString("pessoaNome"));
+                resultado.setCPF(rs.getInt("pessoaCPF"));
+                resultado.setIdPessoaProprietario(rs.getInt("pessoaId"));
+                resultado.setIdVenda(rs.getInt("vendaId"));
+                vetor.add(resultado);
             }
-
-
 
         } catch (SQLException ex) {
             Logger.getLogger(ReabilitarVendaDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        d = new DefaultComboBoxModel(vetor);
         return d;
     }
 }

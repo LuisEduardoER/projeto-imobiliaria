@@ -110,4 +110,9 @@ public class ReabilitaImovelModel {
     public void setCidade(String Cidade) {
         this.Cidade = Cidade;
     }
+
+    @Override
+    public String toString() {
+        return numero+"";
+    }
 }

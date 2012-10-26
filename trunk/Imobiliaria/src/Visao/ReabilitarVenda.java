@@ -4,6 +4,17 @@
  */
 package Visao;
 
+import Componentes.Componentes;
+import Controlador.ControladorPessoa;
+import Controlador.ControladorReabilitarImovel;
+import Controlador.Mensagens;
+import DAO.ReabilitarVendaDAO;
+import Modelo.ImovelN;
+import Modelo.PessoaN;
+import Modelo.ReabilitaImovelModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+
 /**
  *
  * @author Bruno
@@ -13,9 +24,16 @@ public class ReabilitarVenda extends javax.swing.JDialog {
     /**
      * Creates new form ReabilitarVenda
      */
+    ControladorReabilitarImovel controlador;
+    ReabilitaImovelModel reabilita;
+    ImovelN imovelN;
+    Mensagens m;
+
     public ReabilitarVenda(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+
     }
 
     /**
@@ -67,6 +85,11 @@ public class ReabilitarVenda extends javax.swing.JDialog {
         jpiL.setLayout(new java.awt.GridLayout(1, 1, 1, 1));
 
         jcbNumero.setEditable(true);
+        jcbNumero.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbNumeroItemStateChanged(evt);
+            }
+        });
         jpiL.add(jcbNumero);
 
         jpDadosImovel.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados"));
@@ -193,8 +216,12 @@ public class ReabilitarVenda extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbProcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbProcessarActionPerformed
-        // TODO add your handling code here:
+        acaoProcessar();
     }//GEN-LAST:event_jbProcessarActionPerformed
+
+    private void jcbNumeroItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbNumeroItemStateChanged
+        acaoBuscar();
+    }//GEN-LAST:event_jcbNumeroItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -207,7 +234,7 @@ public class ReabilitarVenda extends javax.swing.JDialog {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -266,7 +293,43 @@ public class ReabilitarVenda extends javax.swing.JDialog {
     private javax.swing.JPanel jpiL;
     // End of variables declaration//GEN-END:variables
 
+    private boolean validaCampos() {
+        if (null != jcbNumero.getSelectedItem()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 
+    private void acaoProcessar() {
+        if (validaCampos()) {
+            ReabilitaImovelModel reabilitar = new ReabilitaImovelModel();
+            reabilitar.setNumero(Integer.parseInt(jcbNumero.getSelectedItem().toString()));
+            controlador = new ReabilitarVendaDAO();
+            if (controlador.reabilitaImovel(reabilitar)) {
+                m.jopAviso("Imovel disponível para venda novamente.");
+            }
+        }
+    }
 
+    private void acaoBuscar() {
+        ReabilitaImovelModel reabilitar = new ReabilitaImovelModel();
+        reabilitar.setNumero(Integer.parseInt(jcbNumero.getSelectedItem().toString()));
+        controlador = new ReabilitarVendaDAO();
+        DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
+        dcbm = controlador.listaImoveis(reabilitar);
+        jcbNumero.setModel(dcbm);
+        montarTela(reabilitar);
+    }
 
+    public void montarTela(ReabilitaImovelModel reabilitar) {
+        jlDadosMostraCPF.setText(reabilitar.getCPF() + "");
+        jlDadosMostraCidade.setText(reabilitar.getCidade() + "");
+        jlDadosMostrabairro.setText(reabilitar.getBairro());
+        jlDadosMostraNome.setText(reabilitar.getNome() + "");
+        jlDadosMostraNumero.setText(reabilitar.getNumero() + "");
+        jlDadosMostraRua.setText(reabilitar.getRua());
+        jlDadosMostraTamanho.setText(reabilitar.getTamanho() + "");
+        jlDadosMostraValor.setText(reabilitar.getValor() + "");
+    }
 }
