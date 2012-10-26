@@ -5,6 +5,7 @@
 package Controlador;
 
 import Modelo.ImovelN;
+import Modelo.ReabilitaImovelModel;
 import javax.swing.DefaultComboBoxModel;
 
 /**
@@ -13,7 +14,7 @@ import javax.swing.DefaultComboBoxModel;
  */
 public interface ControladorReabilitarImovel {
 
-    public boolean reabilitaImovel();
+    public boolean reabilitaImovel(ReabilitaImovelModel reabilitar);
 
-    public DefaultComboBoxModel listaImóveis(ImovelN imovel);
+    public DefaultComboBoxModel listaImoveis(ReabilitaImovelModel reabilitar);
 }

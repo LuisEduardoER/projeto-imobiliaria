@@ -110,6 +110,9 @@
                   <StringArray count="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jcbNumeroItemStateChanged"/>
+              </Events>
             </Component>
           </SubComponents>
         </Container>
