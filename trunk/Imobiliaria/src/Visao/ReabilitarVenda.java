@@ -4,16 +4,12 @@
  */
 package Visao;
 
-import Componentes.Componentes;
-import Controlador.ControladorPessoa;
 import Controlador.ControladorReabilitarImovel;
 import Controlador.Mensagens;
 import DAO.ReabilitarVendaDAO;
 import Modelo.ImovelN;
-import Modelo.PessoaN;
 import Modelo.ReabilitaImovelModel;
 import javax.swing.DefaultComboBoxModel;
-import javax.swing.JButton;
 
 /**
  *
@@ -32,8 +28,6 @@ public class ReabilitarVenda extends javax.swing.JDialog {
     public ReabilitarVenda(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
-
     }
 
     /**
@@ -307,19 +301,27 @@ public class ReabilitarVenda extends javax.swing.JDialog {
             reabilitar.setNumero(Integer.parseInt(jcbNumero.getSelectedItem().toString()));
             controlador = new ReabilitarVendaDAO();
             if (controlador.reabilitaImovel(reabilitar)) {
+                m = new Mensagens();
                 m.jopAviso("Imovel disponível para venda novamente.");
             }
         }
     }
 
     private void acaoBuscar() {
-        ReabilitaImovelModel reabilitar = new ReabilitaImovelModel();
-        reabilitar.setNumero(Integer.parseInt(jcbNumero.getSelectedItem().toString()));
+        reabilita = new ReabilitaImovelModel();
+        reabilita.setNumero(Integer.parseInt(jcbNumero.getSelectedItem().toString()));
         controlador = new ReabilitarVendaDAO();
         DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
-        dcbm = controlador.listaImoveis(reabilitar);
-        jcbNumero.setModel(dcbm);
-        montarTela(reabilitar);
+        dcbm = controlador.listaImoveis(reabilita);
+        if (dcbm.getSize() > 0) {
+            jcbNumero.setModel(dcbm);
+            montarTela((ReabilitaImovelModel) jcbNumero.getSelectedItem());
+            limparTela();
+        } else {
+            m = new Mensagens();
+            m.jopAviso("Nenhum imóvel com este número encontrado. \n"
+                    + "Número informado: " + jcbNumero.getSelectedItem().toString());
+        }
     }
 
     public void montarTela(ReabilitaImovelModel reabilitar) {
@@ -331,5 +333,17 @@ public class ReabilitarVenda extends javax.swing.JDialog {
         jlDadosMostraRua.setText(reabilitar.getRua());
         jlDadosMostraTamanho.setText(reabilitar.getTamanho() + "");
         jlDadosMostraValor.setText(reabilitar.getValor() + "");
+    }
+
+    public void limparTela() {
+        jlDadosMostraCPF.setText("");
+        jlDadosMostraCidade.setText("");
+        jlDadosMostrabairro.setText("");
+        jlDadosMostraNome.setText("");
+        jlDadosMostraNumero.setText("");
+        jlDadosMostraRua.setText("");
+        jlDadosMostraTamanho.setText("");
+        jlDadosMostraValor.setText("");
+        jcbNumero.setSelectedIndex(-1);
     }
 }
