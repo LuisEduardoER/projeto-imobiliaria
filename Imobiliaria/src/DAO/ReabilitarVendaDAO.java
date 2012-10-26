@@ -6,7 +6,6 @@ package DAO;
 
 import Controlador.Conexao;
 import Controlador.ControladorReabilitarImovel;
-import Modelo.ImovelN;
 import Modelo.ReabilitaImovelModel;
 import Modelo.Venda;
 import java.sql.Connection;
@@ -79,7 +78,8 @@ public class ReabilitarVendaDAO implements ControladorReabilitarImovel {
                     + " FROM imoveln imovel"
                     + "  INNER JOIN venda ON imovel.id = venda.idImovel"
                     + "  INNER JOIN pessoan pessoa ON venda.idPessoaProprietario = pessoa.id"
-                    + " WHERE imovel.numero = ?");
+                    + " WHERE imovel.numero = ?"
+                    + " AND  imovel.vendido = 0;");
 
             stmt.setInt(1, reabilitar.getNumero());
             rs = stmt.executeQuery();
