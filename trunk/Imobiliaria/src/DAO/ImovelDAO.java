@@ -157,7 +157,7 @@ public class ImovelDAO implements ControladorImovel {
         ResultSet rs;
         Mensagens mensagem = new Mensagens();
         PreparedStatement stmt;
-        DefaultComboBoxModel modeloPessoa;
+        DefaultComboBoxModel modeloImovel;
         Vector<ImovelN> vetorImovel = new Vector<ImovelN>();
 
         try {
@@ -190,10 +190,8 @@ public class ImovelDAO implements ControladorImovel {
             mensagem.jopError("Erro ao buscar o cadastro no servidor de banco de dados.\nSQLException: " + ex.getMessage() + "\n buscaImovelNumero");
             return null;
         }
-        modeloPessoa = new DefaultComboBoxModel(vetorImovel);
-        return modeloPessoa;
-
-
+        modeloImovel = new DefaultComboBoxModel(vetorImovel);
+        return modeloImovel;
     }
 
     public ImovelN buscaImovel(ImovelN imovel) {

@@ -73,6 +73,8 @@ public class Principal extends javax.swing.JFrame {
         jmiReabilitarVenda = new javax.swing.JMenuItem();
         jmConfiguracoes = new javax.swing.JMenu();
         jmiConexao = new javax.swing.JMenuItem();
+        jmRelatorios = new javax.swing.JMenu();
+        jmiRImoveis = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Imob");
@@ -208,6 +210,19 @@ public class Principal extends javax.swing.JFrame {
 
         jmbBarraMenu.add(jmConfiguracoes);
 
+        jmRelatorios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/Relatorios_64x64.png"))); // NOI18N
+        jmRelatorios.setText("Relatórios");
+
+        jmiRImoveis.setText("Imóveis");
+        jmiRImoveis.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiRImoveisActionPerformed(evt);
+            }
+        });
+        jmRelatorios.add(jmiRImoveis);
+
+        jmbBarraMenu.add(jmRelatorios);
+
         setJMenuBar(jmbBarraMenu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -257,6 +272,10 @@ public class Principal extends javax.swing.JFrame {
         ReabilitarVenda rV = new ReabilitarVenda(this, rootPaneCheckingEnabled);
         rV.setVisible(true);
     }//GEN-LAST:event_jmiReabilitarVendaActionPerformed
+
+    private void jmiRImoveisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiRImoveisActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jmiRImoveisActionPerformed
 
     /**
      * @param args the command line arguments
@@ -309,11 +328,13 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jmComplementares;
     private javax.swing.JMenu jmConfiguracoes;
     private javax.swing.JMenu jmProcessos;
+    private javax.swing.JMenu jmRelatorios;
     private javax.swing.JMenuBar jmbBarraMenu;
     private javax.swing.JMenuItem jmiConexao;
     private javax.swing.JMenuItem jmiEmbutidos;
     private javax.swing.JMenuItem jmiImovel;
     private javax.swing.JMenuItem jmiPessoas;
+    private javax.swing.JMenuItem jmiRImoveis;
     private javax.swing.JMenuItem jmiReabilitarVenda;
     private javax.swing.JMenuItem jmiVenda;
     // End of variables declaration//GEN-END:variables

@@ -70,4 +70,14 @@ public class Componentes {
         jbEditar.setToolTipText("Ediata um imovel!");
         return jbEditar;
     }
+    
+    public JButton criaBotaoRelatorio(){
+        JButton jbRelatorios = new JButton();
+        jbRelatorios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/Relatorios_16x16.png")));
+        jbRelatorios.setText("Imprimir");
+        jbRelatorios.setToolTipText("Gera um relatório com base nos dados informados!");
+        return jbRelatorios;
+    }
+    
+    
 }
