@@ -29,6 +29,9 @@ public class Principal extends javax.swing.JFrame {
 
         jmProcessos.setVerticalTextPosition(SwingConstants.BOTTOM);
         jmProcessos.setHorizontalTextPosition(SwingConstants.CENTER);
+        
+        jmRelatorios.setVerticalTextPosition(SwingConstants.BOTTOM);
+        jmRelatorios.setHorizontalTextPosition(SwingConstants.CENTER);
 
         if (null != Sessao.getInstance().getUsuario().getNome() && !("".equals(Sessao.getInstance().getUsuario().getNome()))) {
             jlNomeUsuario.setText(Sessao.getInstance().getUsuario().getNome());
@@ -274,7 +277,8 @@ public class Principal extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiReabilitarVendaActionPerformed
 
     private void jmiRImoveisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiRImoveisActionPerformed
-        // TODO add your handling code here:
+        RelatorioImovel rImovel = new RelatorioImovel(this, rootPaneCheckingEnabled);
+        rImovel.setVisible(true);
     }//GEN-LAST:event_jmiRImoveisActionPerformed
 
     /**
