@@ -23,7 +23,7 @@ public class RelatorioImovel extends javax.swing.JDialog {
     Componentes c;
     JButton jbImprimir;
     ImovelN imovel;
-    String SQL;
+    String SQL = "";
     ControladorRelatorioImoveis controladorRelatorio;
 
     public RelatorioImovel(java.awt.Frame parent, boolean modal) {
@@ -33,13 +33,13 @@ public class RelatorioImovel extends javax.swing.JDialog {
         c = new Componentes();
         jbImprimir = c.criaBotaoRelatorio();
 
-        jpControles.add(c.criaBotaoRelatorio());
-
         jbImprimir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbImprimirActionPerformed(evt);
             }
         });
+
+        jpControles.add(jbImprimir);
     }
 
     /**
@@ -73,6 +73,7 @@ public class RelatorioImovel extends javax.swing.JDialog {
         jpControles = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Relatório de Imóveis");
 
         jpAgrupador.setBorder(javax.swing.BorderFactory.createTitledBorder("Relatório de Imóveis"));
 
@@ -141,7 +142,7 @@ public class RelatorioImovel extends javax.swing.JDialog {
                 .addComponent(jpVendido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        jpControles.setLayout(new java.awt.GridLayout());
+        jpControles.setLayout(new java.awt.GridLayout(1, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -163,7 +164,8 @@ public class RelatorioImovel extends javax.swing.JDialog {
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
-        pack();
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-282)/2, (screenSize.height-374)/2, 282, 374);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -240,43 +242,50 @@ public class RelatorioImovel extends javax.swing.JDialog {
         if ((null != jtfNumero.getText()) && !("".equals(jtfNumero.getText()))) {
             SQL = jtfNumero.getText() + ";";
         } else {
-            SQL = "numero" + ";";
+            SQL = SQL + "numero" + ";";
         }
 
         if ((null != jtfRua.getText()) && !("".equals(jtfRua.getText()))) {
             SQL = jtfRua.getText() + ";";
         } else {
-            SQL = "rua" + ";";
+            SQL = SQL + "rua" + ";";
         }
 
         if ((null != jtfBairro.getText()) && !("".equals(jtfBairro.getText()))) {
             SQL = jtfBairro.getText() + ";";
         } else {
-            SQL = "bairro" + ";";
+            SQL = SQL + "bairro" + ";";
         }
 
         if ((null != jtfCidade.getText()) && !("".equals(jtfCidade.getText()))) {
             SQL = jtfCidade.getText() + ";";
         } else {
-            SQL = "cidade" + ";";
+            SQL = SQL + "cidade" + ";";
         }
 
-        if ((null != jtfTamanho.getText()) && !("".equals(jtfTamanho.getText()))) {
-            SQL = jtfTamanho.getText() + ";";
-        } else {
-            SQL = "tamanho" + ";";
-        }
         if ((null != jtfValor.getText()) && !("".equals(jtfValor.getText()))) {
             SQL = jtfValor.getText() + ";";
         } else {
-            SQL = "valor" + ";";
+            SQL = SQL + "valor" + ";";
         }
-
+        
+        //vendido (1 = SIM) (2 = NAO)
         if (jrbSim.isSelected()) {
-            SQL = 1 + "";
+            SQL = SQL + 1 + ";";
         } else {
-            SQL = 0 + "";
+            if(jrbNao.isSelected()){
+                SQL = SQL + 0 + ";";
+            }else{
+                SQL = SQL + "vendido" + ";";
+            }
         }
+        
+        if ((null != jtfTamanho.getText()) && !("".equals(jtfTamanho.getText()))) {
+            SQL = jtfTamanho.getText() + ";";
+        } else {
+            SQL = SQL + "tamanho" + ";";
+        }
+        
         return SQL;
     }
 }

@@ -33,7 +33,6 @@ public class RelatorioImovelDAO implements ControladorRelatorioImoveis {
         Mensagens mensagem = new Mensagens();
 
         Statement sqlst;
-        PreparedStatement stmt;
         PreparedStatement numero;
         PreparedStatement rua;
         PreparedStatement bairro;
@@ -42,12 +41,12 @@ public class RelatorioImovelDAO implements ControladorRelatorioImoveis {
         PreparedStatement valor;
         PreparedStatement vendido;
 
-        String sNumero = "numero";
-        String sRua = "rua";
-        String sBairro = "bairro";
-        String sCidade = "cidade";
+        String sNumero =  "numero";
+        String sRua =     "rua";
+        String sBairro =  "bairro";
+        String sCidade =  "cidade";
         String sTamanho = "tamanho";
-        String sValor = "valor";
+        String sValor =   "valor";
         String sVendido = "vendido";
 
         ArrayList<ImovelN> vetorImovel = new ArrayList<ImovelN>();
@@ -63,9 +62,10 @@ public class RelatorioImovelDAO implements ControladorRelatorioImoveis {
             if ("numero".equals(filtros[0])) {
                 consulta = consulta + "numero";
             } else {
-                numero = con.prepareStatement("?");
-                numero.setInt(1, Integer.parseInt(filtros[0]));
-                consulta = consulta + numero + " ";
+                //numero = this.con.prepareStatement("?");
+                //numero.setInt(1, Integer.parseInt(filtros[0]));
+                //consulta = consulta + numero.toString() + " ";
+                consulta = consulta + filtros[0] + " ";
             }
 
             consulta = consulta + " AND rua = ";
@@ -110,21 +110,22 @@ public class RelatorioImovelDAO implements ControladorRelatorioImoveis {
 
             consulta = consulta + " AND vendido = ";
 
-            if ("vendido".equals(filtros[4])) {
+            if ("vendido".equals(filtros[5])) {
                 consulta = consulta + "vendido";
             } else {
-                vendido = con.prepareStatement("?");
-                vendido.setInt(1, Integer.parseInt(filtros[4]));
-                consulta = consulta + vendido + " ";
+                //vendido = con.prepareStatement("?");
+                //vendido.setInt(1, Integer.parseInt(filtros[5]));
+                //consulta = consulta + vendido + " ";
+                consulta = consulta + filtros[5] + " ";
             }
 
             consulta = consulta + " AND tamanho = ";
 
-            if ("tamanho".equals(filtros[5])) {
+            if ("tamanho".equals(filtros[6])) {
                 consulta = consulta + "tamanho";
             } else {
                 tamanho = con.prepareStatement("?");
-                tamanho.setInt(1, Integer.parseInt(filtros[5]));
+                tamanho.setInt(1, Integer.parseInt(filtros[6]));
                 consulta = consulta + tamanho + " ";
             }
 

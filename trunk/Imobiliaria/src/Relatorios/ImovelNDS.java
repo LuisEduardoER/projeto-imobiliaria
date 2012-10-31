@@ -15,8 +15,9 @@ import net.sf.jasperreports.engine.JRField;
  *
  * @author Bruno
  */
-public class ImovelNDS implements JRDataSource{
-         private final Iterator<ImovelN> iterator;
+public class ImovelNDS implements JRDataSource {
+
+    private final Iterator<ImovelN> iterator;
     private ImovelN selecionado;
 
     public ImovelNDS(ArrayList<ImovelN> lista) {
@@ -55,7 +56,7 @@ public class ImovelNDS implements JRDataSource{
         if ("fCidade".equals(jrf.getName())) {
             return selecionado.getCidade();
         }
-            return "Erro ao Gerar Relatório!";
-        
+        return "Erro ao Gerar Relatório!";
+
     }
 }
