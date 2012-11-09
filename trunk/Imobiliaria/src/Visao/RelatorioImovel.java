@@ -6,9 +6,13 @@ package Visao;
 
 import Componentes.Componentes;
 import Controlador.ControladorRelatorioImoveis;
+import Controlador.Mensagens;
 import DAO.RelatorioImovelDAO;
 import Modelo.ImovelN;
 import Relatorios.ImprimeRelatorio;
+import Util.FiltrosDigitacaoLetras;
+import Util.FiltrosDigitacaoNumerico;
+import java.util.ArrayList;
 import javax.swing.JButton;
 
 /**
@@ -25,10 +29,19 @@ public class RelatorioImovel extends javax.swing.JDialog {
     ImovelN imovel;
     String SQL = "";
     ControladorRelatorioImoveis controladorRelatorio;
+    Mensagens m;
 
     public RelatorioImovel(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        jtfTamanho.setDocument(new FiltrosDigitacaoNumerico());
+        jtfValor.setDocument(new FiltrosDigitacaoNumerico());
+        jtfNumero.setDocument(new FiltrosDigitacaoNumerico());
+
+        jtfRua.setDocument(new FiltrosDigitacaoLetras());
+        jtfCidade.setDocument(new FiltrosDigitacaoLetras());
+        jtfBairro.setDocument(new FiltrosDigitacaoLetras());
 
         c = new Componentes();
         jbImprimir = c.criaBotaoRelatorio();
@@ -173,7 +186,14 @@ public class RelatorioImovel extends javax.swing.JDialog {
      */
     private void jbImprimirActionPerformed(java.awt.event.ActionEvent evt) {
         controladorRelatorio = new RelatorioImovelDAO();
-        ImprimeRelatorio impressao = new ImprimeRelatorio(controladorRelatorio.relatorioImoveis(montaFiltros()), "rImovel");
+        ArrayList<ImovelN> lista = controladorRelatorio.relatorioImoveis(montaFiltros());
+        if (0 == lista.size() || lista == null) {
+            m = new Mensagens();
+            m.jopAlerta("Nenhum dado encontrado.");
+        } else {
+            new ImprimeRelatorio(lista, "rImovel");
+        }
+
     }
 
     public static void main(String args[]) {
@@ -239,53 +259,53 @@ public class RelatorioImovel extends javax.swing.JDialog {
 
     public String montaFiltros() {
 
-        if ((null != jtfNumero.getText()) && !("".equals(jtfNumero.getText()))) {
+        if ((jtfNumero.getText() != null) && (jtfNumero.getText().compareTo("") != 0)) {
             SQL = jtfNumero.getText() + ";";
         } else {
             SQL = SQL + "numero" + ";";
         }
 
-        if ((null != jtfRua.getText()) && !("".equals(jtfRua.getText()))) {
-            SQL = jtfRua.getText() + ";";
+        if ((null != jtfRua.getText()) && (jtfRua.getText().compareTo("") != 0)) {
+            SQL = SQL + jtfRua.getText() + ";";
         } else {
             SQL = SQL + "rua" + ";";
         }
 
-        if ((null != jtfBairro.getText()) && !("".equals(jtfBairro.getText()))) {
-            SQL = jtfBairro.getText() + ";";
+        if ((null != jtfBairro.getText()) && (jtfBairro.getText().compareTo("") != 0)) {
+            SQL = SQL + jtfBairro.getText() + ";";
         } else {
             SQL = SQL + "bairro" + ";";
         }
 
-        if ((null != jtfCidade.getText()) && !("".equals(jtfCidade.getText()))) {
-            SQL = jtfCidade.getText() + ";";
+        if ((null != jtfCidade.getText()) && (jtfCidade.getText().compareTo("") != 0)) {
+            SQL = SQL + jtfCidade.getText() + ";";
         } else {
             SQL = SQL + "cidade" + ";";
         }
 
-        if ((null != jtfValor.getText()) && !("".equals(jtfValor.getText()))) {
-            SQL = jtfValor.getText() + ";";
+        if ((null != jtfValor.getText()) && (jtfValor.getText().compareTo("") != 0)) {
+            SQL = SQL + jtfValor.getText() + ";";
         } else {
             SQL = SQL + "valor" + ";";
         }
-        
+
         //vendido (1 = SIM) (2 = NAO)
         if (jrbSim.isSelected()) {
             SQL = SQL + 1 + ";";
         } else {
-            if(jrbNao.isSelected()){
+            if (jrbNao.isSelected()) {
                 SQL = SQL + 0 + ";";
-            }else{
+            } else {
                 SQL = SQL + "vendido" + ";";
             }
         }
-        
-        if ((null != jtfTamanho.getText()) && !("".equals(jtfTamanho.getText()))) {
-            SQL = jtfTamanho.getText() + ";";
+
+        if ((null != jtfTamanho.getText()) && (jtfTamanho.getText().compareTo("") != 0)) {
+            SQL = SQL + jtfTamanho.getText() + ";";
         } else {
             SQL = SQL + "tamanho" + ";";
         }
-        
+
         return SQL;
     }
 }
