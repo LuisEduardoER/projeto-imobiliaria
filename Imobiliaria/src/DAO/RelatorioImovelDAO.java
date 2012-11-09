@@ -62,9 +62,6 @@ public class RelatorioImovelDAO implements ControladorRelatorioImoveis {
             if ("numero".equals(filtros[0])) {
                 consulta = consulta + "numero";
             } else {
-                //numero = this.con.prepareStatement("?");
-                //numero.setInt(1, Integer.parseInt(filtros[0]));
-                //consulta = consulta + numero.toString() + " ";
                 consulta = consulta + filtros[0] + " ";
             }
 
@@ -73,9 +70,7 @@ public class RelatorioImovelDAO implements ControladorRelatorioImoveis {
             if ("rua".equals(filtros[1])) {
                 consulta = consulta + "rua";
             } else {
-                rua = con.prepareStatement("?");
-                rua.setString(1, filtros[1]);
-                consulta = consulta + rua + " ";
+                consulta = consulta + filtros[1] + " ";
             }
 
             consulta = consulta + " AND bairro = ";
@@ -83,9 +78,7 @@ public class RelatorioImovelDAO implements ControladorRelatorioImoveis {
             if ("bairro".equals(filtros[2])) {
                 consulta = consulta + "bairro";
             } else {
-                bairro = con.prepareStatement("?");
-                bairro.setString(1, filtros[2]);
-                consulta = consulta + bairro + " ";
+                consulta = consulta + filtros[2] + " ";
             }
 
             consulta = consulta + " AND cidade = ";
@@ -93,9 +86,7 @@ public class RelatorioImovelDAO implements ControladorRelatorioImoveis {
             if ("cidade".equals(filtros[3])) {
                 consulta = consulta + "cidade";
             } else {
-                cidade = con.prepareStatement("?");
-                cidade.setString(1, filtros[3]);
-                consulta = consulta + cidade + " ";
+                consulta = consulta + filtros[3] + " ";
             }
 
             consulta = consulta + " AND valor = ";
@@ -103,9 +94,7 @@ public class RelatorioImovelDAO implements ControladorRelatorioImoveis {
             if ("valor".equals(filtros[4])) {
                 consulta = consulta + "valor";
             } else {
-                valor = con.prepareStatement("?");
-                valor.setFloat(1, Float.parseFloat(filtros[4]));
-                consulta = consulta + valor + " ";
+                consulta = consulta + filtros[4] + " ";
             }
 
             consulta = consulta + " AND vendido = ";
@@ -113,9 +102,6 @@ public class RelatorioImovelDAO implements ControladorRelatorioImoveis {
             if ("vendido".equals(filtros[5])) {
                 consulta = consulta + "vendido";
             } else {
-                //vendido = con.prepareStatement("?");
-                //vendido.setInt(1, Integer.parseInt(filtros[5]));
-                //consulta = consulta + vendido + " ";
                 consulta = consulta + filtros[5] + " ";
             }
 
@@ -124,15 +110,12 @@ public class RelatorioImovelDAO implements ControladorRelatorioImoveis {
             if ("tamanho".equals(filtros[6])) {
                 consulta = consulta + "tamanho";
             } else {
-                tamanho = con.prepareStatement("?");
-                tamanho.setInt(1, Integer.parseInt(filtros[6]));
-                consulta = consulta + tamanho + " ";
+                consulta = consulta + filtros[6] + " ";
             }
 
             stmt = con.prepareStatement(consulta);
             rs = stmt.executeQuery();
-
-
+            System.out.println(consulta);
             while (rs.next()) {
                 ImovelN resultado = new ImovelN();
 

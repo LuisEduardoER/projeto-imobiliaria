@@ -38,23 +38,23 @@ public class ImovelNDS implements JRDataSource {
     @Override
     public Object getFieldValue(JRField jrf) throws JRException {
 
-        if ("fNumero".equals(jrf.getName())) {
+        if ("numero".equals(jrf.getName())) {
             return selecionado.getNumero();
         }
-        if ("fTamnho".equals(jrf.getName())) {
-            return selecionado.getTamanho();
-        }
-        if ("fValor".equals(jrf.getName())) {
-            return selecionado.getValor();
-        }
-        if ("fRua".equals(jrf.getName())) {
+        if ("rua".equals(jrf.getName())) {
             return selecionado.getRua();
         }
-        if ("fBairro".equals(jrf.getName())) {
+        if ("bairro".equals(jrf.getName())) {
             return selecionado.getBairro();
         }
-        if ("fCidade".equals(jrf.getName())) {
+        if ("cidade".equals(jrf.getName())) {
             return selecionado.getCidade();
+        }
+        if ("valor".equals(jrf.getName())) {
+            return selecionado.getValor();
+        }
+        if ("tamanho".equals(jrf.getName())) {
+            return selecionado.getTamanho();
         }
         return "Erro ao Gerar Relatório!";
 
