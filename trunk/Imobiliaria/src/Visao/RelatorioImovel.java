@@ -5,6 +5,7 @@
 package Visao;
 
 import Componentes.Componentes;
+import Controlador.ControladorGenerico;
 import Controlador.ControladorRelatorioImoveis;
 import Controlador.Mensagens;
 import DAO.RelatorioImovelDAO;
@@ -28,7 +29,7 @@ public class RelatorioImovel extends javax.swing.JDialog {
     JButton jbImprimir;
     ImovelN imovel;
     String SQL = "";
-    ControladorRelatorioImoveis controladorRelatorio;
+    ControladorGenerico<Object, Object> controladorRelatorio;
     Mensagens m;
 
     public RelatorioImovel(java.awt.Frame parent, boolean modal) {
