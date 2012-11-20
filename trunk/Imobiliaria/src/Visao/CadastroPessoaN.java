@@ -5,6 +5,7 @@
 package Visao;
 
 import Componentes.Componentes;
+import ConstrutoresModelo.ConstrutorPessoaN;
 import Controlador.ControladorPessoa;
 import Controlador.Mensagens;
 import DAO.PessoaDAO;
@@ -30,6 +31,7 @@ public class CadastroPessoaN extends javax.swing.JDialog {
     JButton jbBuscar;
     JButton jbExcluir;
     Mensagens m;
+    ConstrutorPessoaN cP;
     PessoaN p;
 
     public CadastroPessoaN(java.awt.Frame parent, boolean modal) {
@@ -48,21 +50,18 @@ public class CadastroPessoaN extends javax.swing.JDialog {
         jbExcluir = c.criaBotaoExcluir();
 
         jbGravar.addActionListener(new java.awt.event.ActionListener() {
-
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbGravarActionPerformed(evt);
             }
         });
 
         jbExcluir.addActionListener(new java.awt.event.ActionListener() {
-
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbExcluirActionPerformed(evt);
             }
         });
 
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
-
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarActionPerformed(evt);
             }
@@ -272,11 +271,9 @@ public class CadastroPessoaN extends javax.swing.JDialog {
          * Create and display the dialog
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-
             public void run() {
                 CadastroPessoaN dialog = new CadastroPessoaN(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
                         System.exit(0);
@@ -316,14 +313,23 @@ public class CadastroPessoaN extends javax.swing.JDialog {
                 && ((null != jtfBairro.getText()) && !("".equals(jtfBairro.getText())))
                 && ((null != jtfCidade.getText()) && !("".equals(jtfCidade.getText()))))) {
 
-            p = new PessoaN();
+            //Atualização de Desgign Pattern - Fluence Interface - 20/11/2012
+            this.cP = new ConstrutorPessoaN();
 
-            this.p.setBairro(jtfBairro.getText());
-            this.p.setCPF(Integer.parseInt(jtfCPF.getText()));
-            this.p.setCidade(jtfCidade.getText());
-            this.p.setNome(jcbNome.getSelectedItem().toString());
-            this.p.setNumero(Integer.parseInt(jtfNumero.getText()));
-            this.p.setRua(jtfRua.getText());
+            this.p = cP.bairro(jtfBairro.getText())
+                    .cidade(jtfCidade.getText())
+                    .CPF(Integer.parseInt(jtfCPF.getText()))
+                    .nome(jcbNome.getSelectedItem().toString())
+                    .numero(Integer.parseInt(jtfNumero.getText()))
+                    .rua(jtfRua.getText())
+                    .construir();
+
+//            this.p.setBairro(jtfBairro.getText());
+//            this.p.setCPF(Integer.parseInt(jtfCPF.getText()));
+//            this.p.setCidade(jtfCidade.getText());
+//            this.p.setNome(jcbNome.getSelectedItem().toString());
+//            this.p.setNumero(Integer.parseInt(jtfNumero.getText()));
+//            this.p.setRua(jtfRua.getText());
             return true;
 
         } else {

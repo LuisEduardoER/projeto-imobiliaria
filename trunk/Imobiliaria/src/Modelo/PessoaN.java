@@ -20,8 +20,9 @@ public class PessoaN {
 
     public PessoaN() {
     }
-
+    //Atualização de Desgign Pattern - Fluence Interface - 20/11/2012
     public PessoaN(String nome, int CPF, int numero, String bairro, String cidade, String rua, int id) {
+        super();
         this.nome = nome;
         this.CPF = CPF;
         this.numero = numero;
@@ -91,7 +92,4 @@ public class PessoaN {
     public String toString() {
         return nome;
     }
-    
-    
-    
 }
