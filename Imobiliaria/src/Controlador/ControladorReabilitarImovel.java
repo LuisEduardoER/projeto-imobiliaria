@@ -4,7 +4,6 @@
  */
 package Controlador;
 
-import Modelo.ImovelN;
 import Modelo.ReabilitaImovelModel;
 import javax.swing.DefaultComboBoxModel;
 

@@ -29,16 +29,4 @@ public class Mensagens {
         int resposta = JOptionPane.showConfirmDialog(null, mensagem, "Cuidado", JOptionPane.YES_NO_OPTION);
         return resposta;
     }
-    
-    
-
-    public static void main(String args[]) {
-        String teste = "minha nossa senhora";
-        Mensagens app = new Mensagens();
-        app.jopAlerta(teste);
-        app.jopError(teste);
-        app.jopAviso(teste);
-        int x = app.jopDeletar(teste);
-        System.out.println(x);
-    }
-}
+   }

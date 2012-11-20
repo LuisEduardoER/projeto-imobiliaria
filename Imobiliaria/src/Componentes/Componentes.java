@@ -20,6 +20,7 @@ public class Componentes {
         jbGravar.setToolTipText("Insere um novo embutido! (F3)");
         return jbGravar;
     }
+   
     public JButton criaBotaoPesquisar() {
         JButton jbPesquisar = new JButton();
         jbPesquisar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/search_16x16.png")));
