@@ -26,6 +26,7 @@ public class ImovelN {
 }
 
     public ImovelN(int id, int idPessoaProprietario, int numero, int vendido,float tamanho, String rua, String bairro, String cidade, float valor) {
+        super();
         this.id = id;
         this.idPessoaProprietario = idPessoaProprietario;
         this.numero = numero;
