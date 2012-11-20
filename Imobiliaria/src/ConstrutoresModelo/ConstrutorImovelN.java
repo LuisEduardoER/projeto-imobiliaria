@@ -62,6 +62,11 @@ public class ConstrutorImovelN {
         return this;
     }
 
+    public ConstrutorImovelN numero(int numero) {
+        this.numero = numero;
+        return this;
+    }
+    
     public ImovelN construir() {
         return new ImovelN(id, idPessoaProprietario, numero, vendido, tamanho, rua, bairro, cidade, valor);
     }

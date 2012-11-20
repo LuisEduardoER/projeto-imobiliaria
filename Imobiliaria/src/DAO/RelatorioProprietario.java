@@ -24,7 +24,7 @@ import javax.swing.DefaultComboBoxModel;
  *
  * @author Bruno
  */
-public class RelatorioImovelDAO implements ControladorGenerico {
+public class RelatorioProprietario implements ControladorGenerico {
 
     static Conexao c = new Conexao();
     static Connection con = c.conexaoMysql();

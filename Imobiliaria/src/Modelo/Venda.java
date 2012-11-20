@@ -17,10 +17,11 @@ public class Venda {
     public Venda() {
     }
 
-    public Venda(float valor, int idPessoa, int idImovel) {
-        this.valor = valor;
-        this.idPessoaProprietario = idPessoa;
+    public Venda(int id, int idPessoaProprietario, int idImovel, float valor) {
+        this.id = id;
+        this.idPessoaProprietario = idPessoaProprietario;
         this.idImovel = idImovel;
+        this.valor = valor;
     }
 
     public float getValor() {

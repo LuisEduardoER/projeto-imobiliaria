@@ -410,6 +410,7 @@ public class VendaImovelN extends javax.swing.JDialog {
                 && (null != jcbNome.getSelectedItem())
                 && ((null != jtfValor.getText()) && !("".equals(jtfValor.getText()))))) {
 
+
             venda = new Venda();
             venda.setValor(Float.parseFloat(jtfValor.getText()));
             venda.setId(0);
@@ -429,9 +430,7 @@ public class VendaImovelN extends javax.swing.JDialog {
                 m.jopAlerta("É necessário buscar um imovel antes de continuar.");
                 return false;
             }
-
             return true;
-
         } else {
             return false;
         }
@@ -517,7 +516,6 @@ public class VendaImovelN extends javax.swing.JDialog {
             m = new Mensagens();
             m.jopAviso("Exitem campos vazios, preencha todos os campos antes de gravar.");
         }
-
     }
 
     private void vendaRemover() {
