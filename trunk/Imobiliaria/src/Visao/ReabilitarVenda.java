@@ -304,6 +304,7 @@ public class ReabilitarVenda extends javax.swing.JDialog {
                 m = new Mensagens();
                 m.jopAviso("Imovel disponível para venda novamente.");
             }
+                limparTela();
         }
     }
 
@@ -316,7 +317,6 @@ public class ReabilitarVenda extends javax.swing.JDialog {
         if (dcbm.getSize() > 0) {
             jcbNumero.setModel(dcbm);
             montarTela((ReabilitaImovelModel) jcbNumero.getSelectedItem());
-            limparTela();
         } else {
             m = new Mensagens();
             m.jopAviso("Nenhum imóvel com este número encontrado. \n"

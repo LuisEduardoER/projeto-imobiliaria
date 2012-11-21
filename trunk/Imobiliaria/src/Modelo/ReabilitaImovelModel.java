@@ -21,8 +21,25 @@ public class ReabilitaImovelModel {
     String nome;
     String rua;
     String bairro;
-    String Cidade;
+    String cidade;
 
+    public ReabilitaImovelModel() {
+    }
+
+    public ReabilitaImovelModel(int idImovel, int idPessoaProprietario, int idVenda, int numero, int CPF, int tamanho, float valor, String nome, String rua, String bairro, String Cidade) {
+        this.idImovel = idImovel;
+        this.idPessoaProprietario = idPessoaProprietario;
+        this.idVenda = idVenda;
+        this.numero = numero;
+        this.CPF = CPF;
+        this.tamanho = tamanho;
+        this.valor = valor;
+        this.nome = nome;
+        this.rua = rua;
+        this.bairro = bairro;
+        this.cidade = Cidade;
+    }
+    
     public int getIdImovel() {
         return idImovel;
     }
@@ -104,11 +121,11 @@ public class ReabilitaImovelModel {
     }
 
     public String getCidade() {
-        return Cidade;
+        return cidade;
     }
 
     public void setCidade(String Cidade) {
-        this.Cidade = Cidade;
+        this.cidade = Cidade;
     }
 
     @Override
