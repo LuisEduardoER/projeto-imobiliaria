@@ -5,6 +5,7 @@
 package Visao;
 
 import Componentes.Componentes;
+import ConstrutoresModelo.ConstrutorImovelN;
 import Controlador.ControladorImovel;
 import Controlador.Mensagens;
 import DAO.ImovelDAO;
@@ -22,6 +23,7 @@ import javax.swing.JOptionPane;
 public class CadastroImovelN extends javax.swing.JFrame {
 
     Componentes c = new Componentes();
+    ConstrutorImovelN cI;
     JButton jbGravar;
     JButton jbBuscar;
     JButton jbExcluir;
@@ -47,21 +49,18 @@ public class CadastroImovelN extends javax.swing.JFrame {
         jbExcluir = c.criaBotaoExcluir();
 
         jbGravar.addActionListener(new java.awt.event.ActionListener() {
-
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbGravarActionPerformed(evt);
             }
         });
 
         jbExcluir.addActionListener(new java.awt.event.ActionListener() {
-
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbExcluirActionPerformed(evt);
             }
         });
 
         jbBuscar.addActionListener(new java.awt.event.ActionListener() {
-
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbBuscarActionPerformed(evt);
             }
@@ -211,7 +210,8 @@ public class CadastroImovelN extends javax.swing.JFrame {
         try {
             imovel = (ImovelN) jcbNumero.getSelectedItem();
             if (null != imovel) {
-                jtfTamanho.setText(imovel.getTamanho() + "");
+
+                jtfTamanho.setText(new Float(imovel.getTamanho()).toString());
                 jtfValor.setText(imovel.getValor() + "");
 
                 jtfRua.setText(imovel.getRua());
@@ -230,7 +230,7 @@ public class CadastroImovelN extends javax.swing.JFrame {
     }
 
     private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {
-        if ( m.jopDeletar("Deseja realmente excluir este imovel") == JOptionPane.YES_OPTION) {
+        if (m.jopDeletar("Deseja realmente excluir este imovel") == JOptionPane.YES_OPTION) {
             acaoRemover();
         }
 
@@ -272,7 +272,6 @@ public class CadastroImovelN extends javax.swing.JFrame {
          * Create and display the form
          */
         java.awt.EventQueue.invokeLater(new Runnable() {
-
             public void run() {
                 new CadastroImovelN().setVisible(true);
             }
@@ -308,15 +307,15 @@ public class CadastroImovelN extends javax.swing.JFrame {
                 && ((null != jtfTamanho.getText()) && !("".equals(jtfTamanho.getText())))
                 && ((null != jtfValor.getText()) && !("".equals(jtfValor.getText()))))) {
 
-            imovel = new ImovelN();
-
-            imovel.setNumero(Integer.parseInt(jcbNumero.getSelectedItem().toString()));
-            imovel.setRua(jtfRua.getText());
-            imovel.setBairro(jtfBairro.getText());
-            imovel.setCidade(jtfCidade.getText());
-            imovel.setTamanho(Float.parseFloat(jtfTamanho.getText()));
-            imovel.setValor(Float.parseFloat(jtfValor.getText()));
-            imovel.setVendido(0);
+            cI = new ConstrutorImovelN();
+            imovel = cI.numero(Integer.parseInt(jcbNumero.getSelectedItem().toString()))
+                    .rua(jtfRua.getText())
+                    .bairro(jtfBairro.getText())
+                    .cidade(jtfCidade.getText())
+                    .tamanho(Float.parseFloat(jtfTamanho.getText()))
+                    .valor(Float.parseFloat(jtfValor.getText()))
+                    .vendido(0)
+                    .construir();
             return true;
         } else {
             return false;
