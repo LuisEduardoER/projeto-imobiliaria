@@ -428,7 +428,7 @@ public class PessoaDAO implements ControladorPessoa {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(Pessoa.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PessoaDAO.class.getName()).log(Level.SEVERE, null, ex);
             mensagem.jopError("Erro ao remover o cadastro no servidor de banco de dados.\nSQLException: " + ex.getMessage() + "\n removePessoa");
             return false;
         }
