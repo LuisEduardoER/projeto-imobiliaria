@@ -230,6 +230,7 @@ public class CadastroImovelN extends javax.swing.JFrame {
     }
 
     private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {
+        m = new Mensagens();
         if (m.jopDeletar("Deseja realmente excluir este imovel") == JOptionPane.YES_OPTION) {
             acaoRemover();
         }
@@ -383,8 +384,8 @@ public class CadastroImovelN extends javax.swing.JFrame {
             controladorImovel = new ImovelDAO();
             imovel = (ImovelN) jcbNumero.getSelectedItem();
             controladorImovel.removeImovel(imovel);
-            limparTela();
         }
+        limparTela();
     }
 
     public void limparTela() {
