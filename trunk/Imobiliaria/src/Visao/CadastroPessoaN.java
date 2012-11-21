@@ -230,7 +230,8 @@ public class CadastroPessoaN extends javax.swing.JDialog {
     }
 
     private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {
-        if (m.jopDeletar("Deseja realmente excluir este imovel?") == JOptionPane.YES_OPTION) {
+        m = new Mensagens();
+        if (m.jopDeletar("Deseja realmente excluir este cadastro?") == JOptionPane.YES_OPTION) {
             acaoRemover();
         }
     }
