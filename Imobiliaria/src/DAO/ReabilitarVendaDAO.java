@@ -4,6 +4,7 @@
  */
 package DAO;
 
+import ConstrutoresModelo.ConstrutorReabilitaImovel;
 import Controlador.Conexao;
 import Controlador.ControladorReabilitarImovel;
 import Modelo.ReabilitaImovelModel;
@@ -27,6 +28,7 @@ public class ReabilitarVendaDAO implements ControladorReabilitarImovel {
     static Conexao c = new Conexao();
     static Connection con = c.conexaoMysql();
     public static PreparedStatement stmt;
+    ConstrutorReabilitaImovel cR;
 
     @Override
     public boolean reabilitaImovel(ReabilitaImovelModel reabilitar) {
@@ -38,7 +40,7 @@ public class ReabilitarVendaDAO implements ControladorReabilitarImovel {
 
             stmt = this.con.prepareStatement(""
                     + "UPDATE `imobiliaria`.`imoveln`"
-                    + " SET `vendido` =0" //Vendido = 1, Não Vendido = 0;
+                    + " SET `vendido` = 0" //Vendido = 1, Não Vendido = 0;
                     + " WHERE `id` = ?;");
 
             stmt.setInt(1, venda.getIdImovel());
@@ -60,7 +62,7 @@ public class ReabilitarVendaDAO implements ControladorReabilitarImovel {
         Statement st;
         DefaultComboBoxModel d;
         Vector<ReabilitaImovelModel> vetor = new Vector<ReabilitaImovelModel>();
-        
+
         try {
 
             stmt = this.con.prepareStatement(""
@@ -79,24 +81,27 @@ public class ReabilitarVendaDAO implements ControladorReabilitarImovel {
                     + "  INNER JOIN venda ON imovel.id = venda.idImovel"
                     + "  INNER JOIN pessoan pessoa ON venda.idPessoaProprietario = pessoa.id"
                     + " WHERE imovel.numero = ?"
-                    + " AND  imovel.vendido = 0;");
+                    + " AND  imovel.vendido = 1;");
 
             stmt.setInt(1, reabilitar.getNumero());
             rs = stmt.executeQuery();
 
             while (rs.next()) {
+                cR = new ConstrutorReabilitaImovel();
                 ReabilitaImovelModel resultado = new ReabilitaImovelModel();
-                resultado.setIdImovel(rs.getInt("imovelId"));
-                resultado.setNumero(rs.getInt("imovelNumero"));
-                resultado.setValor(rs.getFloat("imovelValor"));
-                resultado.setRua(rs.getString("imovelRua"));
-                resultado.setBairro(rs.getString("imovelBairro"));
-                resultado.setCidade(rs.getString("imovelCidade"));
-                resultado.setTamanho(rs.getInt("imovelTamanho"));
-                resultado.setNome(rs.getString("pessoaNome"));
-                resultado.setCPF(rs.getInt("pessoaCPF"));
-                resultado.setIdPessoaProprietario(rs.getInt("pessoaId"));
-                resultado.setIdVenda(rs.getInt("vendaId"));
+
+                resultado = cR.idImovel(rs.getInt("imovelId"))
+                        .numero(rs.getInt("imovelNumero"))
+                        .valor(rs.getFloat("imovelValor"))
+                        .rua(rs.getString("imovelRua"))
+                        .bairro(rs.getString("imovelBairro"))
+                        .cidade(rs.getString("imovelCidade"))
+                        .tamanho(rs.getInt("imovelTamanho"))
+                        .nome(rs.getString("pessoaNome"))
+                        .CPF(rs.getInt("pessoaCPF"))
+                        .idPessoaProprietario(rs.getInt("pessoaId"))
+                        .idVenda(rs.getInt("vendaId"))
+                        .construir();
                 vetor.add(resultado);
             }
 
