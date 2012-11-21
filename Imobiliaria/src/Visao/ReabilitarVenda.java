@@ -298,7 +298,7 @@ public class ReabilitarVenda extends javax.swing.JDialog {
     private void acaoProcessar() {
         if (validaCampos()) {
             ReabilitaImovelModel reabilitar = new ReabilitaImovelModel();
-            reabilitar.setNumero(Integer.parseInt(jcbNumero.getSelectedItem().toString()));
+            reabilitar = (ReabilitaImovelModel) jcbNumero.getSelectedItem();
             controlador = new ReabilitarVendaDAO();
             if (controlador.reabilitaImovel(reabilitar)) {
                 m = new Mensagens();
@@ -310,6 +310,7 @@ public class ReabilitarVenda extends javax.swing.JDialog {
 
     private void acaoBuscar() {
         reabilita = new ReabilitaImovelModel();
+//        reabilita = (ReabilitaImovelModel) jcbNumero.getSelectedItem();
         reabilita.setNumero(Integer.parseInt(jcbNumero.getSelectedItem().toString()));
         controlador = new ReabilitarVendaDAO();
         DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
@@ -319,7 +320,7 @@ public class ReabilitarVenda extends javax.swing.JDialog {
             montarTela((ReabilitaImovelModel) jcbNumero.getSelectedItem());
         } else {
             m = new Mensagens();
-            m.jopAviso("Nenhum imóvel com este número encontrado. \n"
+            m.jopAviso("Nenhum imóvel vendido com este número encontrado. \n"
                     + "Número informado: " + jcbNumero.getSelectedItem().toString());
         }
     }

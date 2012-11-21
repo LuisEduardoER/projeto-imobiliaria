@@ -36,14 +36,13 @@ public class ReabilitarVendaDAO implements ControladorReabilitarImovel {
             PreparedStatement stmt;
             ResultSet rs;
             Statement st;
-            Venda venda = new Venda();
 
             stmt = this.con.prepareStatement(""
                     + "UPDATE `imobiliaria`.`imoveln`"
                     + " SET `vendido` = 0" //Vendido = 1, Não Vendido = 0;
                     + " WHERE `id` = ?;");
 
-            stmt.setInt(1, venda.getIdImovel());
+            stmt.setInt(1, reabilitar.getIdImovel());
             stmt.execute();
 
             return true;
