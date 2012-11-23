@@ -315,6 +315,7 @@ public class ReabilitarVenda extends javax.swing.JDialog {
         controlador = new ReabilitarVendaDAO();
         DefaultComboBoxModel dcbm = new DefaultComboBoxModel();
         dcbm = controlador.listaImoveis(reabilita);
+        
         if (dcbm.getSize() > 0) {
             jcbNumero.setModel(dcbm);
             montarTela((ReabilitaImovelModel) jcbNumero.getSelectedItem());

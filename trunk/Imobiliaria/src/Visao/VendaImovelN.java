@@ -413,7 +413,7 @@ public class VendaImovelN extends javax.swing.JDialog {
 
             venda = new Venda();
             venda.setValor(Float.parseFloat(jtfValor.getText()));
-            venda.setId(0);
+            venda.setIdVenda(0);
 
             if (0 != pessoa.getId() && !("".equals(pessoa.getId()))) {
                 venda.setIdPessoaProprietario(pessoa.getId());

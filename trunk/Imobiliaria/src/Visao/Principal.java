@@ -74,6 +74,7 @@ public class Principal extends javax.swing.JFrame {
         jmProcessos = new javax.swing.JMenu();
         jmiVenda = new javax.swing.JMenuItem();
         jmiReabilitarVenda = new javax.swing.JMenuItem();
+        jmiRemoverVenda = new javax.swing.JMenuItem();
         jmConfiguracoes = new javax.swing.JMenu();
         jmiConexao = new javax.swing.JMenuItem();
         jmRelatorios = new javax.swing.JMenu();
@@ -198,6 +199,14 @@ public class Principal extends javax.swing.JFrame {
         });
         jmProcessos.add(jmiReabilitarVenda);
 
+        jmiRemoverVenda.setText("Remover Venda");
+        jmiRemoverVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiRemoverVendaActionPerformed(evt);
+            }
+        });
+        jmProcessos.add(jmiRemoverVenda);
+
         jmbBarraMenu.add(jmProcessos);
 
         jmConfiguracoes.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/Cofigure_64x64.png"))); // NOI18N
@@ -237,7 +246,7 @@ public class Principal extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 212, Short.MAX_VALUE)
+                .addGap(0, 211, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -280,6 +289,11 @@ public class Principal extends javax.swing.JFrame {
         RelatorioImovel rImovel = new RelatorioImovel(this, rootPaneCheckingEnabled);
         rImovel.setVisible(true);
     }//GEN-LAST:event_jmiRImoveisActionPerformed
+
+    private void jmiRemoverVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiRemoverVendaActionPerformed
+        dRemoveVenda remover = new dRemoveVenda(this, rootPaneCheckingEnabled);
+        remover.setVisible(true);
+    }//GEN-LAST:event_jmiRemoverVendaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -340,6 +354,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiPessoas;
     private javax.swing.JMenuItem jmiRImoveis;
     private javax.swing.JMenuItem jmiReabilitarVenda;
+    private javax.swing.JMenuItem jmiRemoverVenda;
     private javax.swing.JMenuItem jmiVenda;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,7 +6,6 @@ package Visao;
 
 import Componentes.Componentes;
 import Controlador.ControladorGenerico;
-import Controlador.ControladorRelatorioImoveis;
 import Controlador.Mensagens;
 import DAO.RelatorioImovelDAO;
 import Modelo.ImovelN;
