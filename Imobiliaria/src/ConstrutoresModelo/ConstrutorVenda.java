@@ -5,7 +5,6 @@
 package ConstrutoresModelo;
 
 import Modelo.Venda;
-import Visao.VendaImovelN;
 
 /**
  *
@@ -13,13 +12,16 @@ import Visao.VendaImovelN;
  */
 public class ConstrutorVenda {
 
-    int id;
+    int imovelNumero;
+    int idVenda;
+    String rua;
+    String cidade;
     int idPessoaProprietario;
     int idImovel;
     float valor;
 
-    public ConstrutorVenda id(int id) {
-        this.id = id;
+    public ConstrutorVenda idVenda(int idVenda) {
+        this.idVenda = idVenda;
         return this;
     }
 
@@ -38,7 +40,23 @@ public class ConstrutorVenda {
         return this;
     }
 
+    public ConstrutorVenda cidade(String cidade){
+        this.cidade = cidade;
+        return this;
+    }
+    
+    public ConstrutorVenda rua(String rua){
+        this.rua = rua;
+        return this;
+    }
+    
+    public ConstrutorVenda imovelNumero(int imovelNumero){
+        this.imovelNumero = imovelNumero;
+        return this;
+    }
+            
+    
     public Venda construir() {
-        return new Venda(id, idPessoaProprietario, idImovel, valor);
+        return new Venda(imovelNumero, idVenda, rua, cidade, idPessoaProprietario, idImovel, valor);
     }
 }

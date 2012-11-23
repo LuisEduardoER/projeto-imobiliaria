@@ -22,4 +22,5 @@ public interface ControladorVenda {
     
     public DefaultComboBoxModel buscaVendaImovel(int numero);
     
+    public DefaultComboBoxModel buscaVenda(Venda venda);
 }
