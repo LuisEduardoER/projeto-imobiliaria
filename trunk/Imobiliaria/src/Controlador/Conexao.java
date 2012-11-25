@@ -5,8 +5,8 @@
 package Controlador;
 
 import Modelo.Config;
+import Visao.dConexaoTela;
 
-import descontinuados.ConexaoTela;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -64,7 +64,7 @@ public class Conexao {
 
         } catch (FileNotFoundException ex) {
             JOptionPane.showMessageDialog(null, ex + "\nErro ao procurar pelo arquivo com as configurações do servidor! \nPor favor faça a confirugração do sistema!");
-            ConexaoTela conexao = new ConexaoTela();
+            dConexaoTela conexao = new dConexaoTela(null, true);
             conexao.setVisible(true);
         }
         return null;

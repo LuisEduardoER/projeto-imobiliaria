@@ -8,9 +8,7 @@ import Controlador.Conexao;
 import Controlador.ControladorIncluirBanco;
 import Controlador.ControladorPessoa;
 import Controlador.Mensagens;
-import Modelo.Pessoa;
 import Modelo.PessoaN;
-import Modelo.Telefone;
 import java.sql.*;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -78,61 +76,7 @@ public class PessoaDAO implements ControladorPessoa {
         }
     }
 
-//    public boolean validaCadastroPessoa(Pessoa pessoa) {
-//
-//        ResultSet rs;
-//        Mensagens mensagem = new Mensagens();
-//
-//        try {
-//
-//            stmt = PessoaDAO.con.prepareStatement(""
-//                    + "SELECT * FROM pessoa "
-//                    + "WHERE nome = ? "
-//                    + "AND CPF_CNPJ = ? "
-//                    + "AND RG = ? "
-//                    + "AND nascimento = ?;");
-//
-//            java.sql.Date dataNascimento = new java.sql.Date(pessoa.getNascimento().getTime());
-//
-//            stmt.setString(1, pessoa.getNome());
-//            stmt.setInt(2, pessoa.getCPF_CNPJ());
-//            stmt.setInt(3, pessoa.getRG());
-//            stmt.setDate(4, dataNascimento);
-//            rs = stmt.executeQuery();
-//
-//            if (rs.first()) {
-//
-//                pessoa.setCEP_ZIP(rs.getInt("CEP_ZIP"));
-//                pessoa.setCPF_CNPJ(rs.getInt("CPF_CNPJ"));
-//                pessoa.setCTPS_Numero(rs.getInt("CTPS_Numero"));
-//                pessoa.setCTPS_Serie(rs.getInt("CTPS_Serie"));
-//                pessoa.setCTPS_UF(rs.getString("CTPS_UF"));
-//                pessoa.setIdPessoa(rs.getInt("id"));
-//                pessoa.setComplemento(rs.getString("complemento"));
-//                pessoa.setIdBairro(rs.getInt("id_Bairro"));
-//                pessoa.setIdCidade(rs.getInt("id_Cidade"));
-//                pessoa.setIdEstado(rs.getInt("id_Estado"));
-//                pessoa.setIdLogradouro(rs.getInt("id_Logradouro"));
-//                pessoa.setIdPais(rs.getInt("id_Pais"));
-//                pessoa.setNascimento(rs.getDate("nascimento"));
-//                pessoa.setNome(rs.getString("nome"));
-//                pessoa.setNumero(rs.getInt("numero"));
-//                pessoa.setRG(rs.getInt("rg"));
-//
-//                return true;
-//            } else {
-//                mensagem.jopAlerta("Não foi possível validar a gravação do cadastro.\nCadastro não realizado.");
-//                return false;
-//            }
-//
-//        } catch (SQLException ex) {
-//            Logger.getLogger(TipoImovelDAO.class.getName()).log(Level.SEVERE, null, ex);
-//            mensagem.jopError("Erro ao buscar o cadastro no servidor de banco de dados.\nSQLException: " + ex.getMessage() + "\n validaCadastroPessoa");
-//            return false;
-//        }
-//
-//
-//    }
+
     @Override
     public DefaultComboBoxModel buscaPessoaNome(String nome) {
 
@@ -165,40 +109,6 @@ public class PessoaDAO implements ControladorPessoa {
                         resultado.setCidade(rs.getString("cidade"));
                         vetorPessoa.add(resultado);
                     }
-            //
-            
-            
-            
-//            if (rs.first()) {
-//                if (rs.next()) {
-//                    while (rs.next()) {
-//                        PessoaN resultado = new PessoaN();
-//
-//                        resultado.setId(rs.getInt("id"));
-//                        resultado.setNome(rs.getString("nome"));
-//                        resultado.setCPF(rs.getInt("cpf"));
-//                        resultado.setNumero(rs.getInt("numero"));
-//                        resultado.setRua(rs.getString("rua"));
-//                        resultado.setBairro(rs.getString("bairro"));
-//                        resultado.setCidade(rs.getString("cidade"));
-//                        vetorPessoa.add(resultado);
-//                    }
-//                } else {
-//                    rs.first();
-//                    PessoaN resultado = new PessoaN();
-//
-//                    resultado.setId(rs.getInt("id"));
-//                    resultado.setNome(rs.getString("nome"));
-//                    resultado.setCPF(rs.getInt("cpf"));
-//                    resultado.setNumero(rs.getInt("numero"));
-//                    resultado.setRua(rs.getString("rua"));
-//                    resultado.setBairro(rs.getString("bairro"));
-//                    resultado.setCidade(rs.getString("cidade"));
-//                    vetorPessoa.add(resultado);
-//                }
-//            } else {
-//                return null;
-//            }
 
         } catch (SQLException ex) {
             Logger.getLogger(PessoaDAO.class.getName()).log(Level.SEVERE, null, ex);
@@ -283,125 +193,6 @@ public class PessoaDAO implements ControladorPessoa {
             erro.jopError("Erro ao gravar dados no servidor de banco de dados:\nSQLException: " + ex.getMessage() + "\n alterarPessoa");
 
             return null;
-        }
-    }
-
-    public boolean insereTelefonePessoa(Pessoa pessoa, Telefone telefone) {
-
-        PreparedStatement stmt;
-        ResultSet rs;
-        Statement st;
-
-        try {
-            stmt = this.con.prepareStatement(""
-                    + "INSERT INTO `imobiliaria`.`telefone`"
-                    + "  (`id`,"//id1
-                    + "   `numero`,"//numero2
-                    + "   `DDD`,"//ddd3
-                    + "   `idPessoa`)"
-                    + "VALUES (?,"
-                    + "        ?,"
-                    + "        ?,"
-                    + "        ?);");
-
-            stmt.setInt(1, 0);
-            stmt.setInt(2, telefone.getNumero());
-            stmt.setInt(3, telefone.getDDD());
-            stmt.setInt(4, pessoa.getIdPessoa());
-
-            if (validaCadastroTelefone(telefone, pessoa)) {
-                con.commit();
-                return true;
-            } else {
-                con.rollback();
-                return false;
-
-            }
-        } catch (SQLException ex) {
-
-            Logger.getLogger(ControladorIncluirBanco.class.getName()).log(Level.SEVERE, null, ex);
-            Mensagens erro = new Mensagens();
-            erro.jopError("Erro ao gravar dados no servidor de banco de dados:\nSQLException: " + ex.getMessage() + "\n insereTelefone");
-
-            return false;
-        }
-    }
-
-    public boolean validaCadastroTelefone(Telefone telefone, Pessoa pessoa) {
-        ResultSet rs;
-        Mensagens mensagem = new Mensagens();
-
-        try {
-
-            stmt = PessoaDAO.con.prepareStatement(""
-                    + "SELECT * FROM telefone "
-                    + "WHERE ddd            = ?"
-                    + "  AND numero         = ?"
-                    + "  AND idPessoa       = ?;");
-
-            stmt.setInt(1, telefone.getDDD());
-            stmt.setInt(2, telefone.getNumero());
-            stmt.setInt(3, pessoa.getIdPessoa());
-
-            rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                telefone.setDDD(rs.getInt("ddd"));
-                telefone.setId(rs.getInt("id"));
-                telefone.setIdPessoa(rs.getInt("idPessoa"));
-                telefone.setNumero(rs.getInt("numero"));
-                return true;
-            } else {
-                return false;
-            }
-
-        } catch (SQLException ex) {
-
-            Logger.getLogger(ControladorIncluirBanco.class.getName()).log(Level.SEVERE, null, ex);
-            Mensagens erro = new Mensagens();
-            erro.jopError("Erro ao buscar dados no servidor de banco de dados:\nSQLException: " + ex.getMessage() + "\n validaCadastroTelefone");
-
-            return false;
-
-        }
-    }
-
-    public Telefone buscaTelefone(Telefone telefone, Pessoa pessoa) {
-        ResultSet rs;
-        Mensagens mensagem = new Mensagens();
-
-        try {
-
-            stmt = PessoaDAO.con.prepareStatement(""
-                    + "SELECT * FROM telefone "
-                    + "WHERE ddd            = ?"
-                    + "  AND numero         = ?"
-                    + "  AND idPessoa       = ?;");
-
-            stmt.setInt(1, telefone.getDDD());
-            stmt.setInt(2, telefone.getNumero());
-            stmt.setInt(3, pessoa.getIdPessoa());
-
-            rs = stmt.executeQuery();
-
-            if (rs.next()) {
-                telefone.setDDD(rs.getInt("ddd"));
-                telefone.setId(rs.getInt("id"));
-                telefone.setIdPessoa(rs.getInt("idPessoa"));
-                telefone.setNumero(rs.getInt("numero"));
-                return telefone;
-            } else {
-                return null;
-            }
-
-        } catch (SQLException ex) {
-
-            Logger.getLogger(ControladorIncluirBanco.class.getName()).log(Level.SEVERE, null, ex);
-            Mensagens erro = new Mensagens();
-            erro.jopError("Erro ao buscar dados do no servidor de banco de dados:\nSQLException: " + ex.getMessage() + "\n buscaTelefone");
-
-            return null;
-
         }
     }
 
