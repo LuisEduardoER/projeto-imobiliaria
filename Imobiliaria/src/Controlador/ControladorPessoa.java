@@ -20,4 +20,6 @@ public interface ControladorPessoa {
     public boolean removePessoa(PessoaN pessoa);
     
     public DefaultComboBoxModel buscaPessoaNome(String nome);
+    
+    public DefaultComboBoxModel buscaPessoaId(int id);
 }

@@ -94,8 +94,6 @@ public class PessoaDAO implements ControladorPessoa {
             stmt.setString(1, "%" + nome + "%");
             rs = stmt.executeQuery();
 
-            //
-            
                      while (rs.next()) {
                         PessoaN resultado = new PessoaN();
 
@@ -119,6 +117,47 @@ public class PessoaDAO implements ControladorPessoa {
 
     }
 
+    @Override
+    public DefaultComboBoxModel buscaPessoaId(int id) {
+
+        ResultSet rs;
+        Mensagens mensagem = new Mensagens();
+        PreparedStatement stmt;
+        DefaultComboBoxModel modeloPessoa;
+        Vector<PessoaN> vetorPessoa = new Vector<PessoaN>();
+
+        try {
+
+            stmt = PessoaDAO.con.prepareStatement(""
+                    + "SELECT * FROM pessoaN "
+                    + "WHERE id = ? ");
+
+            stmt.setInt(1, id);
+            rs = stmt.executeQuery();
+
+                     while (rs.next()) {
+                        PessoaN resultado = new PessoaN();
+
+                        resultado.setId(rs.getInt("id"));
+                        resultado.setNome(rs.getString("nome"));
+                        resultado.setCPF(rs.getInt("cpf"));
+                        resultado.setNumero(rs.getInt("numero"));
+                        resultado.setRua(rs.getString("rua"));
+                        resultado.setBairro(rs.getString("bairro"));
+                        resultado.setCidade(rs.getString("cidade"));
+                        vetorPessoa.add(resultado);
+                    }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(PessoaDAO.class.getName()).log(Level.SEVERE, null, ex);
+            mensagem.jopError("Erro ao buscar o cadastro no servidor de banco de dados.\nSQLException: " + ex.getMessage() + "\n buscaPessoaId");
+            return null;
+        }
+        modeloPessoa = new DefaultComboBoxModel(vetorPessoa);
+        return modeloPessoa;
+
+    }
+    
     public PessoaN buscaPessoa(PessoaN pessoa) {
 
         ResultSet rs;
