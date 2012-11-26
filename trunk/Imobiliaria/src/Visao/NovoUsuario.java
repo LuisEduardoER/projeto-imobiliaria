@@ -7,9 +7,11 @@ package Visao;
 import Componentes.Componentes;
 import ConstrutoresModelo.ConstrutorPessoaN;
 import Controlador.ControladorPessoa;
+import Controlador.ControladorUsuario;
 import Controlador.Mensagens;
 import Controlador.Sessao;
 import DAO.PessoaDAO;
+import DAO.UsuarioDAO;
 import Modelo.PessoaN;
 import Modelo.Usuario;
 import javax.swing.DefaultComboBoxModel;
@@ -27,6 +29,7 @@ public class NovoUsuario extends javax.swing.JDialog {
      */
     Componentes c = new Componentes();
     ControladorPessoa controladorPessoa;
+    ControladorUsuario controladorUsuario;
     JButton jbGravar;
     JButton jbBuscar;
     JButton jbExcluir;
@@ -91,7 +94,7 @@ public class NovoUsuario extends javax.swing.JDialog {
         jlNomeUsuario = new javax.swing.JLabel();
         jlSenhaUsuario = new javax.swing.JLabel();
         jpTFUsuario = new javax.swing.JPanel();
-        jtfNomeUsuario = new javax.swing.JTextField();
+        jcbNomeUsuario = new javax.swing.JComboBox();
         jpfSenhaUsuario = new javax.swing.JPasswordField();
         jlTipoUsuario = new javax.swing.JPanel();
         jrbUsuario = new javax.swing.JRadioButton();
@@ -117,7 +120,9 @@ public class NovoUsuario extends javax.swing.JDialog {
         jplUsuario.add(jlSenhaUsuario);
 
         jpTFUsuario.setLayout(new java.awt.GridLayout(2, 1, 0, 5));
-        jpTFUsuario.add(jtfNomeUsuario);
+
+        jcbNomeUsuario.setEditable(true);
+        jpTFUsuario.add(jcbNomeUsuario);
         jpTFUsuario.add(jpfSenhaUsuario);
 
         jlTipoUsuario.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo de Usuario"));
@@ -160,6 +165,11 @@ public class NovoUsuario extends javax.swing.JDialog {
         jpCBCadastroPessoa.setLayout(new java.awt.GridLayout(1, 1));
 
         jcbPessoa.setEditable(true);
+        jcbPessoa.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbPessoaItemStateChanged(evt);
+            }
+        });
         jpCBCadastroPessoa.add(jcbPessoa);
 
         jpLCadastroPessoa.setLayout(new java.awt.GridLayout(1, 1));
@@ -215,6 +225,10 @@ public class NovoUsuario extends javax.swing.JDialog {
         setBounds((screenSize.width-421)/2, (screenSize.height-322)/2, 421, 322);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jcbPessoaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbPessoaItemStateChanged
+        acaoBuscarPessoa();
+    }//GEN-LAST:event_jcbPessoaItemStateChanged
+
     /**
      * @param args the command line arguments
      */
@@ -230,7 +244,7 @@ public class NovoUsuario extends javax.swing.JDialog {
     }
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {
-        acaoBuscar();
+        acaoBuscarUsuario();
     }
 
     public static void main(String args[]) {
@@ -241,7 +255,7 @@ public class NovoUsuario extends javax.swing.JDialog {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -273,6 +287,7 @@ public class NovoUsuario extends javax.swing.JDialog {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgTipoUsuario;
+    private javax.swing.JComboBox jcbNomeUsuario;
     private javax.swing.JComboBox jcbPessoa;
     private javax.swing.JLabel jlNomeUsuario;
     private javax.swing.JLabel jlSenhaUsuario;
@@ -288,12 +303,11 @@ public class NovoUsuario extends javax.swing.JDialog {
     private javax.swing.JPanel jplUsuario;
     private javax.swing.JRadioButton jrbAdm;
     private javax.swing.JRadioButton jrbUsuario;
-    private javax.swing.JTextField jtfNomeUsuario;
     // End of variables declaration//GEN-END:variables
 
     public boolean validaCampos() {
-        if ((jtfNomeUsuario.getText() != null) && (jtfNomeUsuario.getText().compareTo("") > 0)
-                && (jpfSenhaUsuario.toString() != null) && (jtfNomeUsuario.toString().compareTo("") > 0)) {
+        if ((jcbNomeUsuario.getSelectedItem() != null) && (jcbNomeUsuario.getSelectedItem().toString().compareTo("") > 0)
+                && (jpfSenhaUsuario.toString() != null) && (jpfSenhaUsuario.toString().compareTo("") > 0)) {
             return true;
         } else {
             m = new Mensagens();
@@ -302,14 +316,14 @@ public class NovoUsuario extends javax.swing.JDialog {
         }
     }
 
-    public void acaoBuscar() {
+    public void acaoBuscarPessoa() {
         if (jcbPessoa.getSelectedItem() != null) {
             cP = new ConstrutorPessoaN();
             p = new PessoaN();
             p = cP.nome(jcbPessoa.getSelectedItem().toString())
                     .construir();
             controladorPessoa = new PessoaDAO();
-            DefaultComboBoxModel dcbm = controladorPessoa.buscaPessoaNome(jcbPessoa.getSelectedItem().toString());
+            DefaultComboBoxModel dcbm = controladorPessoa.buscaPessoaNome(p.getNome());
             if (dcbm.getSize() > 0) {
                 jcbPessoa.setModel(dcbm);
                 jcbPessoa.setSelectedIndex(0);
@@ -320,10 +334,47 @@ public class NovoUsuario extends javax.swing.JDialog {
         }
     }
 
+    public void acaoBuscarUsuario() {
+        if (jcbNomeUsuario.getSelectedItem() != null) {
+            u = new Usuario();
+            u.setNome(jcbNomeUsuario.getSelectedItem().toString());
+            controladorUsuario = new UsuarioDAO();
+            DefaultComboBoxModel dcbmU = controladorUsuario.buscaUsuarioNome(u.getNome());
+            if (dcbmU.getSize() > 0) {
+                jcbNomeUsuario.setModel(dcbmU);
+                jcbNomeUsuario.setSelectedIndex(0);
+            } else {
+                m = new Mensagens();
+                m.jopAlerta("Nenhum usuário encontrada.");
+            }
+        }
+    }
+
     public void acaoGravar() {
         if (validaCampos()) {
-        
-        
+            u = new Usuario();
+            p = (PessoaN) jcbPessoa.getSelectedItem();
+
+            u.setIdPessoa(p.getId());
+            u.setNome(p.getNome());
+            u.setSenha(jpfSenhaUsuario.toString());
+            u.setLogin(jcbNomeUsuario.getSelectedItem().toString());
+
+            if (jrbAdm.isSelected()) {
+                u.setPerfil(1);
+            } else {
+                u.setPerfil(0);
+            }
+
+            controladorUsuario = new UsuarioDAO();
+            boolean insereUsuario = controladorUsuario.insereUsuario(u);
+            if (insereUsuario) {
+                m = new Mensagens();
+                m.jopAviso("Usuário gravado com suscesso.");
+            }
         }
+    }
+
+    public void acaoRemover() {
     }
 }

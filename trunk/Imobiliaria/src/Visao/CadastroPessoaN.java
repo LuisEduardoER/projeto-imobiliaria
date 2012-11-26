@@ -325,12 +325,6 @@ public class CadastroPessoaN extends javax.swing.JDialog {
                     .rua(jtfRua.getText())
                     .construir();
 
-//            this.p.setBairro(jtfBairro.getText());
-//            this.p.setCPF(Integer.parseInt(jtfCPF.getText()));
-//            this.p.setCidade(jtfCidade.getText());
-//            this.p.setNome(jcbNome.getSelectedItem().toString());
-//            this.p.setNumero(Integer.parseInt(jtfNumero.getText()));
-//            this.p.setRua(jtfRua.getText());
             return true;
 
         } else {

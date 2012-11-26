@@ -69,6 +69,7 @@ public class Principal extends javax.swing.JFrame {
         jmCadastro = new javax.swing.JMenu();
         jmiPessoas = new javax.swing.JMenuItem();
         jmiImovel = new javax.swing.JMenuItem();
+        jmiUsuarios = new javax.swing.JMenuItem();
         jmComplementares = new javax.swing.JMenu();
         jmiEmbutidos = new javax.swing.JMenuItem();
         jmProcessos = new javax.swing.JMenu();
@@ -163,6 +164,14 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         jmCadastro.add(jmiImovel);
+
+        jmiUsuarios.setText("Usuários");
+        jmiUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiUsuariosActionPerformed(evt);
+            }
+        });
+        jmCadastro.add(jmiUsuarios);
 
         jmComplementares.setText("Complementares");
 
@@ -295,6 +304,11 @@ public class Principal extends javax.swing.JFrame {
         remover.setVisible(true);
     }//GEN-LAST:event_jmiRemoverVendaActionPerformed
 
+    private void jmiUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiUsuariosActionPerformed
+        NovoUsuario nU = new NovoUsuario(this, rootPaneCheckingEnabled);
+        nU.setVisible(true);
+    }//GEN-LAST:event_jmiUsuariosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -355,6 +369,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiRImoveis;
     private javax.swing.JMenuItem jmiReabilitarVenda;
     private javax.swing.JMenuItem jmiRemoverVenda;
+    private javax.swing.JMenuItem jmiUsuarios;
     private javax.swing.JMenuItem jmiVenda;
     // End of variables declaration//GEN-END:variables
 }

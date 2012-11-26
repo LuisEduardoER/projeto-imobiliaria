@@ -61,7 +61,6 @@ public class PessoaDAO implements ControladorPessoa {
             stmt.execute();
                         
             if (stmt.getUpdateCount() > 0) {
-                //con.commit();
                 return true;
             } else {
                 return false;
@@ -69,7 +68,7 @@ public class PessoaDAO implements ControladorPessoa {
 
         } catch (SQLException ex) {
 
-            Logger.getLogger(ControladorIncluirBanco.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(UsuarioDAO.class.getName()).log(Level.SEVERE, null, ex);
             Mensagens erro = new Mensagens();
             erro.jopError("Erro ao gravar dados no servidor de banco de dados:\nSQLException: " + ex.getMessage() + "\n inserePessoa");
             return false;
