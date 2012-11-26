@@ -15,6 +15,8 @@ public interface ControladorUsuario {
      public boolean insereUsuario(Usuario usuario);
 
     public Usuario alterarUsuario(Usuario usuario);
+    
+    public Usuario buscaUsuario(Usuario usuario);
 
     public boolean removeUsuario(Usuario usuario);
     
