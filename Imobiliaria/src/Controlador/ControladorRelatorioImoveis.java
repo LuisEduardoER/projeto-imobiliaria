@@ -4,7 +4,7 @@
  */
 package Controlador;
 
-import Modelo.ImovelN;
+import Modelo.Venda;
 import java.util.ArrayList;
 
 /**
@@ -13,6 +13,6 @@ import java.util.ArrayList;
  */
 public interface ControladorRelatorioImoveis {
     
-    public ArrayList<ImovelN> relatorioImoveis(String sql);
+    public ArrayList<Venda> relatorioVendas (String sql);
     
 }

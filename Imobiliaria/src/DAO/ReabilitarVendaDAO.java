@@ -8,7 +8,6 @@ import ConstrutoresModelo.ConstrutorReabilitaImovel;
 import Controlador.Conexao;
 import Controlador.ControladorReabilitarImovel;
 import Modelo.ReabilitaImovelModel;
-import Modelo.Venda;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

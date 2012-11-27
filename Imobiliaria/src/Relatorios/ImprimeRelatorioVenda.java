@@ -1,6 +1,6 @@
 package Relatorios;
 
-import Modelo.ImovelN;
+import Modelo.Venda;
 
 import java.awt.Desktop;
 import java.io.File;
@@ -13,12 +13,12 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 
 
-public class ImprimeRelatorio {
+public class ImprimeRelatorioVenda {
 
-    public static ArrayList<ImovelN> l;
+    public static ArrayList<Venda> l;
     public static String modelo;
 
-    public ImprimeRelatorio(ArrayList<ImovelN> lista, String arquivo) {
+    public ImprimeRelatorioVenda(ArrayList<Venda> lista, String arquivo) {
 
         this.l = lista;
 
@@ -26,8 +26,8 @@ public class ImprimeRelatorio {
         String outFileName = arquivo + ".pdf";
 
         try {
-            if ("rImovel".equals(arquivo)) {
-                JasperPrint print = JasperFillManager.fillReport(fileName, null, new ImovelNDS(l));
+            if ("rVenda".equals(arquivo)) {
+                JasperPrint print = JasperFillManager.fillReport(fileName, null, new VendaDS(l));
                 JRExporter exporter = new net.sf.jasperreports.engine.export.JRPdfExporter();
                 exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
                 exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outFileName);
@@ -49,6 +49,6 @@ public class ImprimeRelatorio {
     }
 
     public static void main(String[] args) {
-        new ImprimeRelatorio(l, modelo);
+        new ImprimeRelatorioVenda(l, modelo);
     }
 }

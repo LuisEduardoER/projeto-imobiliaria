@@ -16,9 +16,11 @@ public class ConstrutorVenda {
     int idVenda;
     String rua;
     String cidade;
+    String comprador;
     int idPessoaProprietario;
     int idImovel;
-    float valor;
+    float valorVenda;
+    float valorImovel;
 
     public ConstrutorVenda idVenda(int idVenda) {
         this.idVenda = idVenda;
@@ -35,13 +37,23 @@ public class ConstrutorVenda {
         return this;
     }
 
-    public ConstrutorVenda valor(float valor) {
-        this.valor = valor;
+    public ConstrutorVenda valorVenda(float valorVenda) {
+        this.valorVenda = valorVenda;
+        return this;
+    }
+    
+    public ConstrutorVenda valorImovel(float valorImovel) {
+        this.valorImovel = valorImovel;
         return this;
     }
 
     public ConstrutorVenda cidade(String cidade){
         this.cidade = cidade;
+        return this;
+    }
+    
+    public ConstrutorVenda comprador(String comprador){
+        this.comprador = comprador;
         return this;
     }
     
@@ -57,6 +69,6 @@ public class ConstrutorVenda {
             
     
     public Venda construir() {
-        return new Venda(imovelNumero, idVenda, rua, cidade, idPessoaProprietario, idImovel, valor);
+        return new Venda(imovelNumero, idVenda, rua, cidade, comprador, idPessoaProprietario, idImovel, valorVenda, valorImovel);
     }
 }

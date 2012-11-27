@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rImovel" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="c157e84c-832f-4c14-8296-701b7306fe55">
-	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.zoom" value="1.1000000000000005"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="0"/>
+	<property name="ireport.y" value="27"/>
 	<field name="numero" class="java.lang.String"/>
 	<field name="rua" class="java.lang.String"/>
 	<field name="bairro" class="java.lang.String"/>
@@ -13,43 +13,54 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch"/>
+		<band height="79" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="e3b352ce-3e95-4a65-ad86-f8a0b78b8079" x="0" y="59" width="555" height="20"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de Imóveis]]></text>
+			</staticText>
+		</band>
 	</title>
 	<pageHeader>
 		<band height="35" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="61" splitType="Stretch">
+		<band height="22" splitType="Stretch">
 			<staticText>
 				<reportElement uuid="80a489fd-93c0-4314-adcd-6f9a0be2c020" x="0" y="0" width="44" height="20"/>
 				<textElement/>
-				<text><![CDATA[numero]]></text>
+				<text><![CDATA[Número]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="7dff335f-8c35-49ae-8f33-5ecb21ff7128" x="65" y="0" width="40" height="20"/>
 				<textElement/>
-				<text><![CDATA[rua]]></text>
+				<text><![CDATA[Rua]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="35c777fd-d846-4f6d-879d-2474e8e938cd" x="127" y="0" width="100" height="20"/>
 				<textElement/>
-				<text><![CDATA[bairro]]></text>
+				<text><![CDATA[Bairro]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="761b07dc-8d50-4486-8314-5b5f57d5d500" x="259" y="0" width="66" height="20"/>
 				<textElement/>
-				<text><![CDATA[cidade]]></text>
+				<text><![CDATA[Cidade]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="6d3b7eb2-e451-400c-9549-b5669c212799" x="358" y="0" width="79" height="20"/>
 				<textElement/>
-				<text><![CDATA[tamanho]]></text>
+				<text><![CDATA[Tamanho]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="e42e226f-b478-41e4-929a-fdddc49c1f57" x="458" y="0" width="100" height="20"/>
 				<textElement/>
-				<text><![CDATA[valor]]></text>
+				<text><![CDATA[Valor]]></text>
 			</staticText>
+			<line>
+				<reportElement uuid="c31e87ba-d2e0-492b-a768-a1512a68fbc1" x="0" y="14" width="555" height="1"/>
+			</line>
 		</band>
 	</columnHeader>
 	<detail>

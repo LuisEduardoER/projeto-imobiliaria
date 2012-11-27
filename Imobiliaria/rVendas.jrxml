@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="rVendas" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="7bcffa97-0a94-4b2d-9c1b-8f602aa91c36">
+	<property name="ireport.zoom" value="2.143588810000002"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="178"/>
+	<field name="comprador" class="java.lang.String"/>
+	<field name="numero" class="java.lang.String"/>
+	<field name="cidade" class="java.lang.String"/>
+	<field name="valorImovel" class="java.lang.String"/>
+	<field name="valorVenda" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="83" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="7d274838-0702-4823-a33c-690216b94ede" x="0" y="59" width="555" height="24"/>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Relatório de Vendas]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="19" splitType="Stretch">
+			<staticText>
+				<reportElement uuid="8e66ac68-5325-4599-9a94-c34940df7424" x="0" y="-3" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Comprador]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="e0a9a4f4-c955-46e3-b69d-f75b6a568777" x="113" y="-3" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Número]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="4b9786d0-7641-4e82-aaf4-26a5f12540a6" x="226" y="-3" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Cidade]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="b7592344-1e15-4fb6-bc9d-86042aded984" x="339" y="-3" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Valor Imóvel]]></text>
+			</staticText>
+			<staticText>
+				<reportElement uuid="bd25db1c-14fe-46c6-b681-18682a83d4a9" x="455" y="-3" width="100" height="20"/>
+				<textElement/>
+				<text><![CDATA[Valor Venda]]></text>
+			</staticText>
+			<line>
+				<reportElement uuid="e97dbb6f-4a5f-45aa-a546-74dd89697841" x="0" y="10" width="555" height="1"/>
+			</line>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch">
+			<textField>
+				<reportElement uuid="4918eb8d-0fe6-456a-97f0-ea6826a186f7" x="0" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{comprador}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="132a9b7f-b3bd-4467-9a42-f640cae41daf" x="113" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{numero}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="0e209f52-5f5c-465c-b76d-52be5ef0ccf3" x="226" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{cidade}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="c1a7d443-035a-40a0-b0e8-a2f03e29359b" x="339" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{valorImovel}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement uuid="5dc2ecc9-e7d6-4b5c-b115-522339d5ddda" x="455" y="0" width="100" height="20"/>
+				<textElement/>
+				<textFieldExpression><![CDATA[$F{valorVenda}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
