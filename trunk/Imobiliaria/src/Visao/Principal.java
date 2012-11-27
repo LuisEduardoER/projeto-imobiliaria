@@ -80,6 +80,7 @@ public class Principal extends javax.swing.JFrame {
         jmiConexao = new javax.swing.JMenuItem();
         jmRelatorios = new javax.swing.JMenu();
         jmiRImoveis = new javax.swing.JMenuItem();
+        jmiRVenda = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Imob");
@@ -242,6 +243,14 @@ public class Principal extends javax.swing.JFrame {
         });
         jmRelatorios.add(jmiRImoveis);
 
+        jmiRVenda.setText("Venda");
+        jmiRVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiRVendaActionPerformed(evt);
+            }
+        });
+        jmRelatorios.add(jmiRVenda);
+
         jmbBarraMenu.add(jmRelatorios);
 
         setJMenuBar(jmbBarraMenu);
@@ -309,6 +318,11 @@ public class Principal extends javax.swing.JFrame {
         nU.setVisible(true);
     }//GEN-LAST:event_jmiUsuariosActionPerformed
 
+    private void jmiRVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiRVendaActionPerformed
+        RelatorioVenda rV = new RelatorioVenda(this, rootPaneCheckingEnabled);
+        rV.setVisible(true);
+    }//GEN-LAST:event_jmiRVendaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -367,6 +381,7 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiImovel;
     private javax.swing.JMenuItem jmiPessoas;
     private javax.swing.JMenuItem jmiRImoveis;
+    private javax.swing.JMenuItem jmiRVenda;
     private javax.swing.JMenuItem jmiReabilitarVenda;
     private javax.swing.JMenuItem jmiRemoverVenda;
     private javax.swing.JMenuItem jmiUsuarios;

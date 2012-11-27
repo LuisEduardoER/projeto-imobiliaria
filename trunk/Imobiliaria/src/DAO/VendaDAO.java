@@ -51,7 +51,7 @@ public class VendaDAO implements ControladorVenda {
             stmt.setInt(1, venda.getIdVenda());
             stmt.setInt(2, venda.getIdPessoaProprietario());
             stmt.setInt(3, venda.getIdImovel());
-            stmt.setFloat(4, venda.getValor());
+            stmt.setFloat(4, venda.getValorVenda());
 
             stmt.execute();
 

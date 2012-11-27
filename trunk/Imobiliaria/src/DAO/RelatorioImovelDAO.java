@@ -278,4 +278,9 @@ public class RelatorioImovelDAO implements ControladorGenerico {
         }
         return vetorImovel;
     }
+
+    @Override
+    public ArrayList relatorioVendas(Object k) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
 }

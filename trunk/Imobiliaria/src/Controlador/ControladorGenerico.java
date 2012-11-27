@@ -6,6 +6,7 @@ package Controlador;
 
 import Modelo.ImovelN;
 import Modelo.PessoaN;
+import Modelo.Venda;
 import java.util.ArrayList;
 import javax.swing.DefaultComboBoxModel;
 
@@ -25,4 +26,6 @@ public interface ControladorGenerico<T, K> {
     public DefaultComboBoxModel busca(K k);
     
     public ArrayList<ImovelN> relatorioImoveis(K k);
+    
+    public ArrayList<Venda> relatorioVendas(K k);
 }
