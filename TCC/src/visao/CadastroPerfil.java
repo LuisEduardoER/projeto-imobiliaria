@@ -6,7 +6,7 @@ package visao;
 
 import Componentes.Componentes;
 import controller.Mensagens;
-import controller.ModuloController;
+//import controller.ModuloController;
 import controller.PerfilController;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,7 +32,7 @@ public class CadastroPerfil extends javax.swing.JDialog {
     PerfilModulopermissao perfilModulopermissao = new PerfilModulopermissao();
     Permissao permissao = new Permissao();
     PerfilController perfilController = new PerfilController();
-    ModuloController moduloController = new ModuloController();
+//    ModuloController moduloController = new ModuloController();
     Componentes c = new Componentes();
     JButton jbGravar;
     JButton jbBuscar;
@@ -71,8 +71,8 @@ public class CadastroPerfil extends javax.swing.JDialog {
         jpControles.add(jbBuscar);
         jpControles.add(jbExcluir);
         jpControles.add(jbGravar);
-        carregaModulos();
-        carregaPerfis();
+//        carregaModulos();
+//        carregaPerfis();
     }
 
     /**
@@ -248,7 +248,7 @@ public class CadastroPerfil extends javax.swing.JDialog {
     }//GEN-LAST:event_jcbPerfilActionPerformed
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {
-        acaoGravar();
+//        acaoGravar();
     }
 
     private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {
@@ -361,12 +361,12 @@ public class CadastroPerfil extends javax.swing.JDialog {
         return permissao;
     }
 
-    public void acaoGravar() {
-        if (perfilController.gravar(perfil)) {
-            m.jopAviso("Perfil gravado com sucesso!");
-            limparTela();
-        }
-    }
+//    public void acaoGravar() {
+//        if (perfilController.gravar(perfil)) {
+//            m.jopAviso("Perfil gravado com sucesso!");
+//            limparTela();
+//        }
+//    }
 
     public void limparTela() {
         jcbModulo.setSelectedIndex(-1);
@@ -397,15 +397,15 @@ public class CadastroPerfil extends javax.swing.JDialog {
         perfil.getPerfilModulopermissaoList().add(perfilModulopermissao);
     }
 
-    private void carregaPerfis() {
-        DefaultComboBoxModel<Perfil> dcbm;
-        dcbm = perfilController.listaPerfil();
-        jcbPerfil.setModel(dcbm);
-    }
-    
-    private void carregaModulos() {
-        DefaultComboBoxModel<Modulo> dcbm;
-        dcbm = moduloController.listaModulo();
-        jcbPerfil.setModel(dcbm);
-    }
+//    private void carregaPerfis() {
+//        DefaultComboBoxModel<Perfil> dcbm;
+//        dcbm = perfilController.listaPerfil();
+//        jcbPerfil.setModel(dcbm);
+//    }
+//    
+//    private void carregaModulos() {
+//        DefaultComboBoxModel<Modulo> dcbm;
+////        dcbm = moduloController.listaModulo();
+//        jcbPerfil.setModel(dcbm);
+//    }
 }
