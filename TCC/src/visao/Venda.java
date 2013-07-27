@@ -302,7 +302,7 @@ public class Venda extends javax.swing.JDialog {
 
     private void buscaProduto() {
         pc = new ProdutoController();
-        produto = pc.buscarProduto(jtfCodigoBarra.getText());
+        produto = pc.buscaNome(jtfCodigoBarra.getText());
         jlValorPrd.setText(produto.getValor().toString());
     }
 

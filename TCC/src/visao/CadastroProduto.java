@@ -5,7 +5,19 @@
 package visao;
 
 import Componentes.Componentes;
+import controller.FabricanteController;
+import controller.FornecedorController;
+import controller.Mensagens;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import modelo.Fabricante;
+import modelo.Fornecedor;
+import modelo.Produto;
+import persistencia.exceptions.NonexistentEntityException;
+import util.ValidaCNPJ;
 
 /**
  *
@@ -16,16 +28,22 @@ public class CadastroProduto extends javax.swing.JDialog {
     /**
      * Creates new form CadastroProduto
      */
-    
     Componentes c = new Componentes();
     JButton jbGravar;
     JButton jbBuscar;
     JButton jbExcluir;
-    
+    Mensagens m;
+    FornecedorController fornecedorController;
+    FabricanteController fabricanteController;
+    String cnpj;
+    Fornecedor fornecedor;
+    Fabricante fabricante;
+    Produto p;
+
     public CadastroProduto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         jbGravar = c.criaBotaoGravar();
         jbBuscar = c.criaBotaoBuscar();
         jbExcluir = c.criaBotaoExcluir();
@@ -72,11 +90,13 @@ public class CadastroProduto extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jtfProdNome = new javax.swing.JTextField();
-        jcbFabricante = new javax.swing.JComboBox();
-        jcbFornecedor = new javax.swing.JComboBox();
+        jcbFabricanteCNPJ = new javax.swing.JComboBox();
+        jcbFornecedorCNPJ = new javax.swing.JComboBox();
         jtfFormatedValor = new javax.swing.JFormattedTextField();
         jtfCodigoBarras = new javax.swing.JTextField();
         jtfQuantidade = new javax.swing.JTextField();
+        jbBuscarFabricante = new javax.swing.JButton();
+        jbBuscarFornecedor = new javax.swing.JButton();
         jpControles = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -105,8 +125,28 @@ public class CadastroProduto extends javax.swing.JDialog {
         jLabel6.setText("Quantidade:");
         jPanel1.add(jLabel6);
 
+        jcbFabricanteCNPJ.setEditable(true);
+
+        jcbFornecedorCNPJ.setEditable(true);
+
         jtfFormatedValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(java.text.NumberFormat.getCurrencyInstance())));
         jtfFormatedValor.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+
+        jbBuscarFabricante.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/search_16x16.png"))); // NOI18N
+        jbBuscarFabricante.setToolTipText("Buscar Fabricante");
+        jbBuscarFabricante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarFabricanteActionPerformed(evt);
+            }
+        });
+
+        jbBuscarFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/search_16x16.png"))); // NOI18N
+        jbBuscarFornecedor.setToolTipText("Buscar Fornecedor");
+        jbBuscarFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarFornecedorActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -116,23 +156,31 @@ public class CadastroProduto extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jtfCodigoBarras)
-                    .addComponent(jcbFornecedor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jcbFabricante, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jcbFornecedorCNPJ, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jtfProdNome)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtfFormatedValor, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 110, Short.MAX_VALUE))))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jcbFabricanteCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jbBuscarFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbBuscarFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jtfProdNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jcbFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jcbFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jcbFabricanteCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbBuscarFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jcbFornecedorCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbBuscarFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfFormatedValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -147,7 +195,7 @@ public class CadastroProduto extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -165,9 +213,9 @@ public class CadastroProduto extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jpControles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jpControles, javax.swing.GroupLayout.PREFERRED_SIZE, 355, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 390, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -177,28 +225,44 @@ public class CadastroProduto extends javax.swing.JDialog {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jpControles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(35, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-391)/2, (screenSize.height-269)/2, 391, 269);
+        setBounds((screenSize.width-426)/2, (screenSize.height-245)/2, 426, 245);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jbBuscarFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarFabricanteActionPerformed
+        acaoBuscarFabricante();
+    }//GEN-LAST:event_jbBuscarFabricanteActionPerformed
+
+    private void jbBuscarFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarFornecedorActionPerformed
+        acaoBuscarFornecedor();
+    }//GEN-LAST:event_jbBuscarFornecedorActionPerformed
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {
         acaoGravar();
     }
 
     private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {
-//        m = new Mensagens();
-//        if (m.jopDeletar("Deseja realmente excluir este fucionário ?") == JOptionPane.YES_OPTION) {
-//            acaoRemover();
-//        }
+        m = new Mensagens();
+        if (p != null) {
+            if (p.getProdutoId() != 0) {
+                if (m.jopDeletar("Deseja realmente excluir este fornecedor ?") == JOptionPane.YES_OPTION) {
+//                    acaoRemover();
+                }
+            } else {
+                m.jopAlerta("Para excluir registro, é nescessário efetuar uma busca.");
+            }
+        } else {
+            m.jopAlerta("Para excluir registro, é nescessário efetuar uma busca.");
+        }
     }
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {
-//        acaoBuscar();
+        //acaoBuscar();
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -250,8 +314,10 @@ public class CadastroProduto extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JComboBox jcbFabricante;
-    private javax.swing.JComboBox jcbFornecedor;
+    private javax.swing.JButton jbBuscarFabricante;
+    private javax.swing.JButton jbBuscarFornecedor;
+    private javax.swing.JComboBox jcbFabricanteCNPJ;
+    private javax.swing.JComboBox jcbFornecedorCNPJ;
     private javax.swing.JPanel jpControles;
     private javax.swing.JTextField jtfCodigoBarras;
     private javax.swing.JFormattedTextField jtfFormatedValor;
@@ -259,7 +325,291 @@ public class CadastroProduto extends javax.swing.JDialog {
     private javax.swing.JTextField jtfQuantidade;
     // End of variables declaration//GEN-END:variables
 
+    public boolean validacampos() {
+        m = new Mensagens();
+        String camposVazios = null;
+        try {
+            if (jtfProdNome.getText() == null && !jtfProdNome.getText().equals("")) {
+
+                camposVazios = "Nome\n";
+                return false;
+            } else if (jcbFabricanteCNPJ.getSelectedItem().toString() == null && !jcbFabricanteCNPJ.getSelectedItem().toString().equals("")) {
+                camposVazios = "Fabricante\n";
+                return false;
+            } else if (jcbFornecedorCNPJ.getSelectedItem().toString() == null && !jcbFornecedorCNPJ.getSelectedItem().toString().equals("")) {
+                camposVazios = "Fornecedor\n";
+                return false;
+            } else if (jtfFormatedValor.getText() == null && !jtfFormatedValor.getText().equals("")) {
+                camposVazios = "Valor\n";
+                return false;
+            } else if (jtfCodigoBarras.getText() == null && !jtfCodigoBarras.getText().equals("")) {
+                camposVazios = "Codigo de Barras\n";
+                return false;
+            } else if (jtfQuantidade.getText() == null && !jtfQuantidade.getText().equals("")) {
+                camposVazios = "Quantidade\n";
+                return false;
+            } else {
+                return true;
+            }
+        } catch (Exception e) {
+            m.jopAlerta("O(s) seguinte(s) campo(s) encontran-se vazios:\n"
+                    + camposVazios
+                    + "\nMensagem do sistema: " + e);
+            return false;
+        }
+    }
+
     private void acaoGravar() {
-        throw new UnsupportedOperationException("Not yet implemented");
+        if (validacampos()) {
+            m = new Mensagens();
+            p = new Produto();
+
+            p.setProdutoNome(jtfProdNome.getText());
+            p.setFabricante(fabricante);
+            p.setFornecedor(fornecedor);
+            p.setProdutoCodigoBarras(jtfCodigoBarras.getText());
+            p.setValor(Float.parseFloat(jtfFormatedValor.getText()));
+            
+            //estoqueController.aumentaEstoque(jtfQuantidade.getText());
+            
+        }
+    }
+        
+
+    private void limparTela() {
+        jtfProdNome.setText("");
+        jcbFabricanteCNPJ.removeAll();
+        jcbFornecedorCNPJ.removeAll();
+        jtfFormatedValor.setText("");
+        jtfCodigoBarras.setText("");
+        jtfQuantidade.setText("");
+    }
+
+//    private boolean acaoBuscar() {
+//        try {
+//            if (jcbFornecedorCNPJ.getSelectedItem() != null) {
+//                if (!jcbFornecedorCNPJ.getSelectedItem().toString().equals("")) {
+//
+//
+//                    fornecedorController = new FornecedorController();
+//                    String s = jcbFornecedorCNPJ.getSelectedItem().toString();
+//                    DefaultComboBoxModel dcbm = fornecedorController.buscar("fornecedorCNPJ", s);
+//
+//                    if (dcbm != null) {
+//                        jcbFornecedorCNPJ.setModel(dcbm);
+//
+//                        if (jcbFornecedorCNPJ.getItemCount() >= 1) {
+//                            jcbFornecedorCNPJ.setSelectedIndex(-1);
+//                            jcbFornecedorCNPJ.setSelectedIndex(0);
+//                            f = (Fornecedor) jcbFornecedorCNPJ.getSelectedItem();
+//                            return true;
+//                        } else {
+//                            m = new Mensagens();
+//                            m.jopAviso("Nenhum fabricante encontrado.");
+//                            return false;
+//                        }
+//                    } else {
+//                        m = new Mensagens();
+//                        m.jopAviso("Nenhum fabricante encontrado.");
+//                        return false;
+//                    }
+//                } else if (!jtfFornecedorNome.getText().equals("")) {
+//                    fornecedorController = new FornecedorController();
+//
+//                    DefaultComboBoxModel dcbm = fornecedorController.buscar("fornecedorNome", jtfFornecedorNome.getText());
+//
+//                    if (dcbm != null) {
+//                        jcbFornecedorCNPJ.setModel(dcbm);
+//
+//                        if (jcbFornecedorCNPJ.getItemCount() >= 1) {
+//                            jcbFornecedorCNPJ.setSelectedIndex(-1);
+//                            jcbFornecedorCNPJ.setSelectedIndex(0);
+//                            f = (Fornecedor) jcbFornecedorCNPJ.getSelectedItem();
+//                            return true;
+//                        } else {
+//                            m = new Mensagens();
+//                            m.jopAviso("Nenhum fornecedor encontrado.");
+//                            f = null;
+//                            fornecedorController = null;
+//                            return false;
+//                        }
+//
+//                    } else {
+//                        m = new Mensagens();
+//                        m.jopAviso("É nescessário informar o CNPJ ou o nome do fornecedor para efetuar uma busca.");
+//                        f = null;
+//                        fornecedorController = null;
+//                        return false;
+//                    }
+//                } else {
+//                    m = new Mensagens();
+//                    m.jopAviso("É nescessário informar o CNPJ ou o nome do fornecedor para efetuar uma busca.");
+//                    f = null;
+//                    fornecedorController = null;
+//                    return false;
+//                }
+//            } else if (!jtfFornecedorNome.getText().equals("")) {
+//                fornecedorController = new FornecedorController();
+//
+//                DefaultComboBoxModel dcbm = fornecedorController.listByField("fornecedorNome", jtfFornecedorNome.getText());
+//
+//                if (dcbm != null) {
+//                    jcbFornecedorCNPJ.setModel(dcbm);
+//
+//                    if (jcbFornecedorCNPJ.getItemCount() >= 1) {
+//                        jcbFornecedorCNPJ.setSelectedIndex(-1);
+//                        jcbFornecedorCNPJ.setSelectedIndex(0);
+//                        f = (Fornecedor) jcbFornecedorCNPJ.getSelectedItem();
+//                        return true;
+//                    } else {
+//                        m = new Mensagens();
+//                        m.jopAviso("Nenhum fornecedor encontrado.");
+//                        f = null;
+//                        fornecedorController = null;
+//                        return false;
+//                    }
+//
+//                } else {
+//                    m = new Mensagens();
+//                    m.jopAviso("É nescessário informar o CNPJ ou o nome do fornecedor para efetuar uma busca.");
+//                    f = null;
+//                    fornecedorController = null;
+//                    return false;
+//                }
+//            } else {
+//                m = new Mensagens();
+//                m.jopAviso("É nescessário informar o CNPJ ou o nome do fornecedor para efetuar uma busca.");
+//                f = null;
+//                fornecedorController = null;
+//                return false;
+//            }
+//        } catch (Exception ex) {
+//            Logger.getLogger(CadastroFabricante.class.getName()).log(Level.SEVERE, null, ex + "\n É nescessário informar o CNPJ ou o nome do fornecedor para efetuar uma busca.");
+//            m = new Mensagens();
+//            m.jopAlerta("É nescessário informar o CNPJ ou o nome do fornecedor para efetuar uma busca.");
+//            return false;
+//        }
+//    }
+//    private void acaoRemover() {
+//        fornecedorController = new FornecedorController();
+//
+//        if (fabricante != null) {
+//            if (fabricante.getFornecedorId() != 0) {
+//                try {
+//                    fornecedorController.setDeleted(fabricante);
+//                    fabricante = null;
+//                    limparTela();
+//                } catch (NonexistentEntityException ex) {
+//                    Logger.getLogger(CadastroFabricante.class.getName()).log(Level.SEVERE, null, ex + "\n Este registro não existe mais em sua base de dados.\n");
+//                    m.jopAlerta("Este registro não existe mais em sua base de dados.");
+//                } catch (Exception ex) {
+//                    Logger.getLogger(CadastroFabricante.class.getName()).log(Level.SEVERE, null, "\n" + ex);
+//                    m.jopAlerta("Para excluir registro, é nescessário efetuar uma busca.");
+//                }
+//            } else {
+//                m.jopAlerta("Para excluir registro, é nescessário efetuar uma busca.");
+//            }
+//        } else {
+//            m.jopAlerta("Para excluir registro, é nescessário efetuar uma busca.");
+//        }
+//    }
+
+    private boolean acaoBuscarFabricante() {
+        try {
+            if (jcbFabricanteCNPJ.getSelectedItem() != null) {
+                if (!jcbFabricanteCNPJ.getSelectedItem().toString().equals("")) {
+
+                    fabricanteController = new FabricanteController();
+                    String s = jcbFabricanteCNPJ.getSelectedItem().toString();
+                    DefaultComboBoxModel dcbm = fabricanteController.buscar("fabricanteCNPJ", s);
+
+                    if (dcbm != null) {
+                        jcbFabricanteCNPJ.setModel(dcbm);
+
+                        if (jcbFabricanteCNPJ.getItemCount() >= 1) {
+                            jcbFabricanteCNPJ.setSelectedIndex(-1);
+                            jcbFabricanteCNPJ.setSelectedIndex(0);
+                            fabricante = (Fabricante) jcbFabricanteCNPJ.getSelectedItem();
+                            return true;
+                        } else {
+                            m = new Mensagens();
+                            m.jopAviso("Nenhum fabricante encontrado.");
+                            return false;
+                        }
+                    } else {
+                        m = new Mensagens();
+                        m.jopAviso("Nenhum fabricante encontrado.");
+                        return false;
+                    }
+                } else {
+                    m = new Mensagens();
+                    m.jopAviso("É nescessário informar o CNPJ ou o nome do fabricante para efetuar uma busca.");
+                    fabricante = null;
+                    fabricanteController = null;
+                    return false;
+                }
+            } else {
+                m = new Mensagens();
+                m.jopAviso("É nescessário informar o CNPJ ou o nome do fabricante para efetuar uma busca.");
+                fabricante = null;
+                fabricanteController = null;
+                return false;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(CadastroFabricante.class.getName()).log(Level.SEVERE, null, ex + "\n É nescessário informar o CNPJ ou o nome do fabricante para efetuar uma busca.");
+            m = new Mensagens();
+            m.jopAlerta("É nescessário informar o CNPJ ou o nome do fabricante para efetuar uma busca.");
+            return false;
+        }
+    }
+
+    private boolean acaoBuscarFornecedor() {
+        try {
+            if (jcbFornecedorCNPJ.getSelectedItem() != null) {
+                if (!jcbFornecedorCNPJ.getSelectedItem().toString().equals("")) {
+
+
+                    fornecedorController = new FornecedorController();
+                    String s = jcbFornecedorCNPJ.getSelectedItem().toString();
+                    DefaultComboBoxModel dcbm = fornecedorController.buscar("fornecedorCNPJ", s);
+
+                    if (dcbm != null) {
+                        jcbFornecedorCNPJ.setModel(dcbm);
+
+                        if (jcbFornecedorCNPJ.getItemCount() >= 1) {
+                            jcbFornecedorCNPJ.setSelectedIndex(-1);
+                            jcbFornecedorCNPJ.setSelectedIndex(0);
+                            fornecedor = (Fornecedor) jcbFornecedorCNPJ.getSelectedItem();
+                            return true;
+                        } else {
+                            m = new Mensagens();
+                            m.jopAviso("Nenhum fornecedor encontrado.");
+                            return false;
+                        }
+                    } else {
+                        m = new Mensagens();
+                        m.jopAviso("Nenhum fornecedor encontrado.");
+                        return false;
+                    }
+                } else {
+                    m = new Mensagens();
+                    m.jopAviso("É nescessário informar o CNPJ do fornecedor para efetuar uma busca.");
+                    fornecedor = null;
+                    fornecedorController = null;
+                    return false;
+                }
+            } else {
+                m = new Mensagens();
+                m.jopAviso("É nescessário informar o CNPJ do fornecedor para efetuar uma busca.");
+                fornecedor = null;
+                fornecedorController = null;
+                return false;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(CadastroFabricante.class.getName()).log(Level.SEVERE, null, ex + "\n É nescessário informar o CNPJ do fornecedor para efetuar uma busca.");
+            m = new Mensagens();
+            m.jopAlerta("É nescessário informar o CNPJ do fornecedor para efetuar uma busca.");
+            return false;
+        }
     }
 }

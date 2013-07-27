@@ -13,8 +13,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -24,8 +22,7 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "modulo")
-@NamedQueries({
-    @NamedQuery(name = "Modulo.findAll", query = "SELECT m FROM Modulo m")})
+
 public class Modulo implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -37,7 +34,13 @@ public class Modulo implements Serializable {
     private String moduloDesc;
     @OneToMany(mappedBy = "modulo", fetch = FetchType.LAZY)
     private List<Modulopermissao> modulopermissaoList;
-
+    @Column(name = "inserted")
+    private String inserted;
+    @Column(name = "updated")
+    private String updated;
+    @Column(name = "deleted")
+    private Character deleted;
+    
     public Modulo() {
     }
 
@@ -89,9 +92,20 @@ public class Modulo implements Serializable {
         return true;
     }
 
+    public void setInserted(String inserted) {
+        this.inserted = inserted;
+    }
+
+    public void setUpdated(String updated) {
+        this.updated = updated;
+    }
+
+    public void setDeleted(Character deleted) {
+        this.deleted = deleted;
+    }
+
     @Override
     public String toString() {
-        return "modelo.Modulo[ moduloId=" + moduloId + " ]";
+        return moduloDesc;
     }
-    
 }

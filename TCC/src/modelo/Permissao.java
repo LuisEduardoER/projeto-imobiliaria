@@ -5,6 +5,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -33,6 +34,12 @@ public class Permissao implements Serializable {
     private Integer permissaoId;
     @Column(name = "permissaoDesc")
     private String permissaoDesc;
+    @Column(name = "inserted")
+    private String inserted;
+    @Column(name = "updated")
+    private String updated;
+    @Column(name = "deleted")
+    private Character deleted;
 
     public Permissao() {
     }
@@ -84,21 +91,47 @@ public class Permissao implements Serializable {
         return hash;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Permissao)) {
-            return false;
-        }
-        Permissao other = (Permissao) object;
-        if ((this.permissaoId == null && other.permissaoId != null) || (this.permissaoId != null && !this.permissaoId.equals(other.permissaoId))) {
-            return false;
-        }
-        return true;
+    public String getInserted() {
+        return inserted;
+    }
+
+    public void setInserted(String inserted) {
+        this.inserted = inserted;
+    }
+
+    public String getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(String updated) {
+        this.updated = updated;
+    }
+
+    public Character getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Character deleted) {
+        this.deleted = deleted;
     }
 
     @Override
     public String toString() {
-        return "modelo.Permissao[ permissaoId=" + permissaoId + " ]";
+        return permissaoDesc;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Permissao other = (Permissao) obj;
+        if (!Objects.equals(this.permissaoId, other.permissaoId)) {
+            return false;
+        }
+        return true;
     }
 }

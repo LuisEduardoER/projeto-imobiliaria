@@ -16,8 +16,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
@@ -50,10 +48,16 @@ public class Produto implements Serializable {
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "valor")
     private Float valor;
-
+    @Column(name = "inserted")
+    private String inserted;
+    @Column(name = "updated")
+    private String updated;
+    @Column(name = "deleted")
+    private Character deleted;
     
     
     public Produto() {
+        this.deleted = 'f';
     }
 
     public Produto(Integer produtoId) {
@@ -122,7 +126,7 @@ public class Produto implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.Produto[ produtoId=" + produtoId + " ]";
+        return produtoNome;
     }
 
     public String getProdutoCodigoBarras() {
@@ -139,6 +143,30 @@ public class Produto implements Serializable {
 
     public void setEstoqueList(List<Estoque> estoqueList) {
         this.estoqueList = estoqueList;
+    }
+
+    public String getInserted() {
+        return inserted;
+    }
+
+    public void setInserted(String inserted) {
+        this.inserted = inserted;
+    }
+
+    public String getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(String updated) {
+        this.updated = updated;
+    }
+
+    public Character getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Character deleted) {
+        this.deleted = deleted;
     }
     
 }

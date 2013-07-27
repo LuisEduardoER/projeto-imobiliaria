@@ -6,6 +6,7 @@ package modelo;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,9 +22,8 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "fornecedor")
-@NamedQueries({
-    @NamedQuery(name = "Fornecedor.findAll", query = "SELECT f FROM Fornecedor f")})
 public class Fornecedor implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @Column(name = "fornecedorId")
@@ -36,6 +36,12 @@ public class Fornecedor implements Serializable {
     private String fornecedorNome;
     @OneToMany(mappedBy = "fornecedor")
     private List<Produto> produtosFornecedores;
+    @Column(name = "inserted")
+    private String inserted;
+    @Column(name = "updated")
+    private String updated;
+    @Column(name = "deleted")
+    private Character deleted;
 
     public Fornecedor() {
     }
@@ -79,14 +85,40 @@ public class Fornecedor implements Serializable {
         this.produtosFornecedores = produtosFornecedores;
     }
 
+    public String getInserted() {
+        return inserted;
+    }
+
+    public void setInserted(String inserted) {
+        this.inserted = inserted;
+    }
+
+    public String getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(String updated) {
+        this.updated = updated;
+    }
+
+    public Character getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Character deleted) {
+        this.deleted = deleted;
+    }
+
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Fornecedor)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        Fornecedor other = (Fornecedor) object;
-        if ((this.fornecedorCNPJ == null && other.fornecedorCNPJ != null) || (this.fornecedorCNPJ != null && !this.fornecedorCNPJ.equals(other.fornecedorCNPJ))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Fornecedor other = (Fornecedor) obj;
+        if (!Objects.equals(this.fornecedorCNPJ, other.fornecedorCNPJ)) {
             return false;
         }
         return true;
@@ -94,7 +126,6 @@ public class Fornecedor implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.Fornecedor[ fornecedorCNPJ=" + fornecedorCNPJ + " ]";
+        return fornecedorCNPJ;
     }
-    
 }

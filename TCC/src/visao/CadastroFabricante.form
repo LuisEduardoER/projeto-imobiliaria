@@ -108,7 +108,7 @@
           <SubComponents>
             <Component class="javax.swing.JTextField" name="jtfFabricanteNome">
             </Component>
-            <Component class="javax.swing.JComboBox" name="jcbCNPJ">
+            <Component class="javax.swing.JComboBox" name="jcbFabricanteCNPJ">
               <Properties>
                 <Property name="editable" type="boolean" value="true"/>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
@@ -116,7 +116,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jcbCNPJItemStateChanged"/>
+                <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="jcbFabricanteCNPJItemStateChanged"/>
               </Events>
             </Component>
           </SubComponents>

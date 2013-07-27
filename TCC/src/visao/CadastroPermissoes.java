@@ -24,7 +24,7 @@ import modelo.Permissao;
  *
  * @author Bruno
  */
-public class CadastroPerfil extends javax.swing.JDialog {
+public class CadastroPermissoes extends javax.swing.JDialog {
 
     Perfil perfil = new Perfil();
     Modulo modulo = new Modulo();
@@ -41,9 +41,9 @@ public class CadastroPerfil extends javax.swing.JDialog {
     private Mensagens m;
 
     /**
-     * Creates new form CadastroPerfil
+     * Creates new form CadastroPermissoes
      */
-    public CadastroPerfil(java.awt.Frame parent, boolean modal) {
+    public CadastroPermissoes(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         jbGravar = c.criaBotaoGravar();
@@ -279,20 +279,20 @@ public class CadastroPerfil extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroPerfil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroPermissoes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroPerfil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroPermissoes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroPerfil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroPermissoes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroPerfil.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroPermissoes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                CadastroPerfil dialog = new CadastroPerfil(new javax.swing.JFrame(), true);
+                CadastroPermissoes dialog = new CadastroPermissoes(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {

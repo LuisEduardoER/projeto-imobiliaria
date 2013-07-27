@@ -8,8 +8,6 @@ import DAO.FabricanteDAO;
 import java.util.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import modelo.Fabricante;
@@ -47,29 +45,18 @@ public class FabricanteController {
     }
 
     public boolean setDeleted(Fabricante fabricante) throws NonexistentEntityException, Exception {
-try{
-        java.util.Date dataUtil = new java.util.Date();    
-java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime());   
-           
-DateFormat dateFormatada = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");    
-Date date = new Date();    
-String dataFormatada = dateFormatada.format(date);   
-//
-//            DateFormat formatter;
-//            Date date = new Date(System.currentTimeMillis());
-//            
-//            formatter = new SimpleDateFormat("yyy-MM-dd HH:mm:ss");
-//            date = (Date) formatter.parse(date.toString());
-//            
-//            java.sql.Timestamp timeStampDate = new Timestamp(date.getTime());
-//            System.out.println("Today is " + timeStampDate);
+        try {
+            java.util.Date dataUtil = new java.util.Date();
+            java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime());
 
+            DateFormat dateFormatada = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+            Date date = new Date();
+            String dataFormatada = dateFormatada.format(date);
 
-
-        fabricante.setUpdated(dataFormatada);
-}catch (Exception e){
-    System.out.println("\n \n \n --------  \n \n \n "+ e);
-}
+            fabricante.setUpdated(dataFormatada);
+        } catch (Exception e) {
+            System.out.println("\n \n \n --------  \n \n \n " + e);
+        }
         fabricante.setDeleted('t');
 
         if (FabricanteDAO.edit(fabricante)) {

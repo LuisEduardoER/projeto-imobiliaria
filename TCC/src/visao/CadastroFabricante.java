@@ -31,10 +31,6 @@ public class CadastroFabricante extends javax.swing.JDialog {
     JButton jbExcluir;
     Mensagens m;
     FabricanteController fabricanteController;
-    int numero;
-    char letras;
-    String letras2;
-    private boolean _ACAO_BUSCAR = false;
     String cnpj;
     Fabricante f;
 
@@ -84,7 +80,7 @@ public class CadastroFabricante extends javax.swing.JDialog {
         jLabel2 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jtfFabricanteNome = new javax.swing.JTextField();
-        jcbCNPJ = new javax.swing.JComboBox();
+        jcbFabricanteCNPJ = new javax.swing.JComboBox();
         jpControles = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -104,13 +100,13 @@ public class CadastroFabricante extends javax.swing.JDialog {
         jPanel3.setLayout(new java.awt.GridLayout(2, 1, 0, 5));
         jPanel3.add(jtfFabricanteNome);
 
-        jcbCNPJ.setEditable(true);
-        jcbCNPJ.addItemListener(new java.awt.event.ItemListener() {
+        jcbFabricanteCNPJ.setEditable(true);
+        jcbFabricanteCNPJ.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                jcbCNPJItemStateChanged(evt);
+                jcbFabricanteCNPJItemStateChanged(evt);
             }
         });
-        jPanel3.add(jcbCNPJ);
+        jPanel3.add(jcbFabricanteCNPJ);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -155,16 +151,16 @@ public class CadastroFabricante extends javax.swing.JDialog {
         setBounds((screenSize.width-416)/2, (screenSize.height-153)/2, 416, 153);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jcbCNPJItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbCNPJItemStateChanged
+    private void jcbFabricanteCNPJItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbFabricanteCNPJItemStateChanged
         try {
-            Fabricante f = (Fabricante) jcbCNPJ.getSelectedItem();
+            Fabricante f = (Fabricante) jcbFabricanteCNPJ.getSelectedItem();
             if (null != f) {
                 jtfFabricanteNome.setText(f.getFabricanteNome());
             }
         } catch (ClassCastException e) {
             System.out.println(e);
         }
-    }//GEN-LAST:event_jcbCNPJItemStateChanged
+    }//GEN-LAST:event_jcbFabricanteCNPJItemStateChanged
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {
         acaoGravar();
@@ -236,15 +232,15 @@ public class CadastroFabricante extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JComboBox jcbCNPJ;
+    private javax.swing.JComboBox jcbFabricanteCNPJ;
     private javax.swing.JPanel jpControles;
     private javax.swing.JTextField jtfFabricanteNome;
     // End of variables declaration//GEN-END:variables
 
     private void acaoGravar() {
         m = new Mensagens();
-        if (null != jcbCNPJ.getSelectedItem() && !jtfFabricanteNome.getText().equals("")) {
-            String cnpj = jcbCNPJ.getSelectedItem().toString();
+        if (null != jcbFabricanteCNPJ.getSelectedItem() && !jtfFabricanteNome.getText().equals("")) {
+            String cnpj = jcbFabricanteCNPJ.getSelectedItem().toString();
             ValidaCNPJ validador = new ValidaCNPJ();
             if (validador.isCNPJ(cnpj)) {
                 Fabricante fabricante = new Fabricante();
@@ -265,26 +261,26 @@ public class CadastroFabricante extends javax.swing.JDialog {
 
     private void limparTela() {
         jtfFabricanteNome.setText("");
-        jcbCNPJ.removeAll();
+        jcbFabricanteCNPJ.removeAll();
     }
 
     private boolean acaoBuscar() {
         try {
-            if (jcbCNPJ.getSelectedItem() != null) {
-                if (!jcbCNPJ.getSelectedItem().toString().equals("")) {
+            if (jcbFabricanteCNPJ.getSelectedItem() != null) {
+                if (!jcbFabricanteCNPJ.getSelectedItem().toString().equals("")) {
 
 
                     fabricanteController = new FabricanteController();
-                    String s = jcbCNPJ.getSelectedItem().toString();
+                    String s = jcbFabricanteCNPJ.getSelectedItem().toString();
                     DefaultComboBoxModel dcbm = fabricanteController.buscar("fabricanteCNPJ", s);
 
                     if (dcbm != null) {
-                        jcbCNPJ.setModel(dcbm);
+                        jcbFabricanteCNPJ.setModel(dcbm);
 
-                        if (jcbCNPJ.getItemCount() >= 1) {
-                            jcbCNPJ.setSelectedIndex(-1);
-                            jcbCNPJ.setSelectedIndex(0);
-                            f = (Fabricante) jcbCNPJ.getSelectedItem();
+                        if (jcbFabricanteCNPJ.getItemCount() >= 1) {
+                            jcbFabricanteCNPJ.setSelectedIndex(-1);
+                            jcbFabricanteCNPJ.setSelectedIndex(0);
+                            f = (Fabricante) jcbFabricanteCNPJ.getSelectedItem();
                             return true;
                         } else {
                             m = new Mensagens();
@@ -302,12 +298,12 @@ public class CadastroFabricante extends javax.swing.JDialog {
                     DefaultComboBoxModel dcbm = fabricanteController.buscar("fabricanteNome", jtfFabricanteNome.getText());
 
                     if (dcbm != null) {
-                        jcbCNPJ.setModel(dcbm);
+                        jcbFabricanteCNPJ.setModel(dcbm);
 
-                        if (jcbCNPJ.getItemCount() >= 1) {
-                            jcbCNPJ.setSelectedIndex(-1);
-                            jcbCNPJ.setSelectedIndex(0);
-                            f = (Fabricante) jcbCNPJ.getSelectedItem();
+                        if (jcbFabricanteCNPJ.getItemCount() >= 1) {
+                            jcbFabricanteCNPJ.setSelectedIndex(-1);
+                            jcbFabricanteCNPJ.setSelectedIndex(0);
+                            f = (Fabricante) jcbFabricanteCNPJ.getSelectedItem();
                             return true;
                         } else {
                             m = new Mensagens();
@@ -337,12 +333,12 @@ public class CadastroFabricante extends javax.swing.JDialog {
                     DefaultComboBoxModel dcbm = fabricanteController.listByField("fabricanteNome", jtfFabricanteNome.getText());
 
                     if (dcbm != null) {
-                        jcbCNPJ.setModel(dcbm);
+                        jcbFabricanteCNPJ.setModel(dcbm);
 
-                        if (jcbCNPJ.getItemCount() >= 1) {
-                            jcbCNPJ.setSelectedIndex(-1);
-                            jcbCNPJ.setSelectedIndex(0);
-                            f = (Fabricante) jcbCNPJ.getSelectedItem();
+                        if (jcbFabricanteCNPJ.getItemCount() >= 1) {
+                            jcbFabricanteCNPJ.setSelectedIndex(-1);
+                            jcbFabricanteCNPJ.setSelectedIndex(0);
+                            f = (Fabricante) jcbFabricanteCNPJ.getSelectedItem();
                             return true;
                         } else {
                             m = new Mensagens();
@@ -397,4 +393,6 @@ public class CadastroFabricante extends javax.swing.JDialog {
             m.jopAlerta("Para excluir registro, é nescessário efetuar uma busca.");
         }
     }
+
+
 }

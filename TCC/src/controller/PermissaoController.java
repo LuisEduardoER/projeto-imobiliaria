@@ -4,52 +4,47 @@
  */
 package controller;
 
-import DAO.ProdutoDAO;
+import DAO.PermissaoDAO;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import modelo.Produto;
+import modelo.Permissao;
 import persistencia.exceptions.NonexistentEntityException;
 
 /**
  *
  * @author Bruno
  */
-public class ProdutoController {
-    
-   public DefaultComboBoxModel<Produto> buscar(String field, String value) {
-        DefaultComboBoxModel<Produto> dcbm = new DefaultComboBoxModel<>();
-        Produto p = ProdutoDAO.buscaByField(field, value);
+public class PermissaoController {
+
+    public DefaultComboBoxModel<Permissao> buscar(String field, String value) {
+        DefaultComboBoxModel<Permissao> dcbm = new DefaultComboBoxModel<>();
+        Permissao p = PermissaoDAO.buscaByField(field, value);
         dcbm.addElement(p);
         return dcbm;
     }
 
-   public Produto buscaNome(String nome){
-       Produto p = ProdutoDAO.buscaNome(nome);
-       return p;
-   }
-   
-    public DefaultComboBoxModel<Produto> listByField(String field, String value) {
-        DefaultComboBoxModel<Produto> dcbm = new DefaultComboBoxModel<>();
-        List<Produto> lista = ProdutoDAO.listByField(field, value);
-        for (Produto produto : lista) {
-            dcbm.addElement(produto);
+    public DefaultComboBoxModel<Permissao> listByField(String field, String value) {
+        DefaultComboBoxModel<Permissao> dcbm = new DefaultComboBoxModel<>();
+        List<Permissao> lista = PermissaoDAO.listByField(field, value);
+        for (Permissao permissao : lista) {
+            dcbm.addElement(permissao);
         }
         return dcbm;
     }
 
-    public boolean gravar(Produto produto) {
+    public boolean gravar(Permissao permissao) {
 
-        if (ProdutoDAO.gravar(produto)) {
+        if (PermissaoDAO.gravar(permissao)) {
             return true;
         } else {
             return false;
         }
     }
 
-    public boolean setDeleted(Produto produto) throws NonexistentEntityException, Exception {
+    public boolean setDeleted(Permissao permissao) throws NonexistentEntityException, Exception {
         try {
             java.util.Date dataUtil = new java.util.Date();
             java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime());
@@ -58,18 +53,17 @@ public class ProdutoController {
             Date date = new Date();
             String dataFormatada = dateFormatada.format(date);
 
-            produto.setUpdated(dataFormatada);
+            permissao.setUpdated(dataFormatada);
         } catch (Exception e) {
             System.out.println("\n \n \n --------  \n \n \n " + e);
         }
-        produto.setDeleted('t');
+        permissao.setDeleted('t');
 
-        if (ProdutoDAO.edit(produto)) {
+        if (PermissaoDAO.edit(permissao)) {
             return true;
         } else {
             return false;
         }
     }
 
-    
 }

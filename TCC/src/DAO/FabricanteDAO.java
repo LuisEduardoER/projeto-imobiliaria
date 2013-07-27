@@ -113,8 +113,8 @@ public class FabricanteDAO implements Serializable {
             Root<Fabricante> f = cq.from(Fabricante.class);
 
             cq.where(cb.equal(f.get("fabricanteNome"), cb.parameter(String.class, "fabricanteNome")),
-                     cb.equal(f.get("deleted"), cb.parameter(String.class, "deleted")));
-            
+                    cb.equal(f.get("deleted"), cb.parameter(String.class, "deleted")));
+
             TypedQuery<Fabricante> query = em.createQuery(cq);
             query.setParameter("fabricanteNome", nome);
             query.setParameter("deleted", "f");
@@ -136,7 +136,7 @@ public class FabricanteDAO implements Serializable {
             CriteriaQuery<Fabricante> cq = cb.createQuery(Fabricante.class);
             Root<Fabricante> f = cq.from(Fabricante.class);
             cq.where(cb.equal(f.get(field), cb.parameter(String.class, field)),
-                     cb.equal(f.get("deleted"), cb.parameter(String.class, "deleted")));
+                    cb.equal(f.get("deleted"), cb.parameter(String.class, "deleted")));
 
             TypedQuery<Fabricante> query = em.createQuery(cq);
             query.setParameter(field, value);
@@ -159,9 +159,9 @@ public class FabricanteDAO implements Serializable {
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery<Fabricante> cq = cb.createQuery(Fabricante.class);
             Root<Fabricante> f = cq.from(Fabricante.class);
-            
+
             cq.where(cb.equal(f.get(field), cb.parameter(String.class, field)),
-                     cb.equal(f.get("deleted"), cb.parameter(String.class, "deleted")));
+                    cb.equal(f.get("deleted"), cb.parameter(String.class, "deleted")));
 
             TypedQuery<Fabricante> query = em.createQuery(cq);
             query.setParameter(field, value);
@@ -172,38 +172,6 @@ public class FabricanteDAO implements Serializable {
         }
     }
 
-//    public boolean alterar(Fabricante f) {
-////        Session session = abreSessao();
-//        try {
-//            em.getTransaction().begin();
-//            em.merge(f);
-//            em.getTransaction().commit();
-//            return true;
-//        } catch (Exception e) {
-//            m = new Mensagens();
-//            m.jopError("Erro ao atualizar Funcionario! \n ERRO: | FuncionarioDAO | alterar() | " + e);
-//            return false;
-//        } finally {
-//            rollbackTransaction();
-//            return false;
-//        }
-//    }
-//    public boolean remover(Fabricante f) {
-////        Session session = abreSessao();
-//        try {
-//            em.getTransaction().begin();
-//            em.remove(f);
-//            em.getTransaction().commit();
-//            return true;
-//        } catch (Exception e) {
-//            m = new Mensagens();
-//            m.jopError("Erro ao remover Fabricante! \n ERRO: | FabricanteDAO | remover() | " + e);
-//            return false;
-//        } finally {
-//            rollbackTransaction();
-//            return false;
-//        }
-//    }
     public static Fabricante findProduto(Integer id) {
         EntityManager em = getEntityManager();
         try {
@@ -212,67 +180,4 @@ public class FabricanteDAO implements Serializable {
             em.close();
         }
     }
-//    public List getListaFuncionarioByField(String field, String value) {
-////        Session session = abreSessao();
-//        Criteria criteria = session.createCriteria(Fabricante.class);
-//
-//        if (!field.equals("") || !value.equals("")) {
-//            criteria.add(Restrictions.eq(field, value));
-//        }
-//        return criteria.list();
-//    }
-//
-//    public Fabricante loadById(int id) {
-//        Criteria criteria = session.createCriteria(Fabricante.class);
-//        criteria.add(Restrictions.eq("idFuncionario", id));
-//        return (Fabricante) criteria.uniqueResult();
-//    }
-//    public List<Fabricante> listar() {
-//        EntityManager em = getEntityManager();
-//         CriteriaBuilder cb;
-//        try {
-//            cb = em.getCriteriaBuilder();
-//            CriteriaQuery<Fabricante> cq = cb.createQuery(Fabricante.class);
-//            cq.select(cq.from(Fabricante.class));
-//            TypedQuery<Fabricante> query = em.createQuery(cq);
-//            List<Fabricante> produtos = query.getResultList();
-//            return produtos;
-//
-//        } finally {
-//            em.close();
-//        }
-//    }
-    //busca por id com criteria
-//    public Produto buscaId(Integer id) {
-//        EntityManager em = getEntityManager();
-//        try {
-//            CriteriaBuilder cb = em.getCriteriaBuilder();
-//            CriteriaQuery<Produto> cq = cb.createQuery(Produto.class);
-//            Root<Produto> prod = cq.from(Produto.class);
-//            cq.where(cb.equal(prod.get("id"), cb.parameter(Integer.class, "id")));
-//
-//            TypedQuery<Produto> query = em.createQuery(cq);
-//            query.setParameter("id", id);
-//            return query.getSingleResult();
-//
-//        } finally {
-//            em.close();
-//        }
-//    }
-//    public Produto buscaNome(String descricao) {
-//        EntityManager em = getEntityManager();
-//        try {
-//            CriteriaBuilder cb = em.getCriteriaBuilder();
-//            CriteriaQuery<Produto> cq = cb.createQuery(Produto.class);
-//            Root<Produto> prod = cq.from(Produto.class);
-//            cq.where(cb.equal(prod.get("descricao"), cb.parameter(String.class, "descricao")));
-//
-//            TypedQuery<Produto> query = em.createQuery(cq);
-//            query.setParameter("descricao", descricao);
-//            return query.getSingleResult();
-//
-//        } finally {
-//            em.close();
-//        }
-//    }
 }

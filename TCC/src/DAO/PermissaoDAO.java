@@ -6,7 +6,6 @@ package DAO;
 
 import controller.EntityManagerFactoryCreator;
 import controller.Mensagens;
-import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -15,19 +14,17 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
-import modelo.Fabricante;
-import modelo.Fornecedor;
+import modelo.Permissao;
 import persistencia.exceptions.NonexistentEntityException;
 
 /**
  *
  * @author Bruno
  */
-public class FornecedorDAO implements Serializable {
-
+public class PermissaoDAO {
     static Mensagens m;
 
-    public FornecedorDAO(EntityManagerFactory emf) {
+    public PermissaoDAO(EntityManagerFactory emf) {
         this.emf = EntityManagerFactoryCreator.getEMF();
     }
     private static EntityManagerFactory emf = null;
@@ -37,17 +34,17 @@ public class FornecedorDAO implements Serializable {
         return emf.createEntityManager();
     }
 
-    public static boolean gravar(Fornecedor f) {
+    public static boolean gravar(Permissao p) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(f);
+            em.persist(p);
             em.getTransaction().commit();
             return true;
         } catch (Exception e) {
             m = new Mensagens();
-            m.jopError("Erro ao gravar Fornecedor! \n ERRO: | FornecedorAO | gravar() | " + e);
+            m.jopError("Erro ao gravar Permissao! \n ERRO: | PermissaoDAO | gravar() | " + e);
             return false;
         } finally {
 //            em.getTransaction().rollback();
@@ -58,20 +55,20 @@ public class FornecedorDAO implements Serializable {
         }
     }
 
-    public static boolean edit(Fornecedor f) throws NonexistentEntityException, Exception {
+    public static boolean edit(Permissao permissao) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            f = em.merge(f);
+            permissao = em.merge(permissao);
             em.getTransaction().commit();
             return true;
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = f.getFornecedorId();
+                Integer id = permissao.getPermissaoId();
                 if (findProduto(id) == null) {
-                    throw new NonexistentEntityException("Fornecedor  " + id + " não existe.");
+                    throw new NonexistentEntityException("Permissao  " + id + " não existe.");
                 }
             }
             throw ex;
@@ -88,14 +85,14 @@ public class FornecedorDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Fabricante fabricante;
+            Permissao permissao;
             try {
-                fabricante = em.getReference(Fabricante.class, id);
-                fabricante.getFabricanteId();
+                permissao = em.getReference(Permissao.class, id);
+                permissao.getPermissaoId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("Fornecedor  " + id + " não existe.", enfe);
+                throw new NonexistentEntityException("Permissao  " + id + " não existe.", enfe);
             }
-            em.remove(fabricante);
+            em.remove(permissao);
             em.getTransaction().commit();
         } finally {
             em.getTransaction().rollback();
@@ -105,19 +102,19 @@ public class FornecedorDAO implements Serializable {
         }
     }
 
-    public static Fornecedor buscaNome(String nome) {
+    public static Permissao buscaNome(String nome) {
         EntityManager em = getEntityManager();
 
         try {
             CriteriaBuilder cb = em.getCriteriaBuilder();
-            CriteriaQuery<Fornecedor> cq = cb.createQuery(Fornecedor.class);
-            Root<Fornecedor> f = cq.from(Fornecedor.class);
+            CriteriaQuery<Permissao> cq = cb.createQuery(Permissao.class);
+            Root<Permissao> permissao = cq.from(Permissao.class);
 
-            cq.where(cb.equal(f.get("fornecedorNome"), cb.parameter(String.class, "fornecedorNome")),
-                    cb.equal(f.get("deleted"), cb.parameter(String.class, "deleted")));
+            cq.where(cb.equal(permissao.get("PermissaoDesc"), cb.parameter(String.class, "PermissaoDesc")),
+                    cb.equal(permissao.get("deleted"), cb.parameter(String.class, "deleted")));
 
-            TypedQuery<Fornecedor> query = em.createQuery(cq);
-            query.setParameter("fornecedorNome", nome);
+            TypedQuery<Permissao> query = em.createQuery(cq);
+            query.setParameter("PermissaoDesc", nome);
             query.setParameter("deleted", "f");
             return query.getSingleResult();
 
@@ -129,17 +126,17 @@ public class FornecedorDAO implements Serializable {
         }
     }
 
-    public static Fornecedor buscaByField(String field, String value) {
+    public static Permissao buscaByField(String field, String value) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             CriteriaBuilder cb = em.getCriteriaBuilder();
-            CriteriaQuery<Fornecedor> cq = cb.createQuery(Fornecedor.class);
-            Root<Fornecedor> f = cq.from(Fornecedor.class);
-            cq.where(cb.equal(f.get(field), cb.parameter(String.class, field)),
-                    cb.equal(f.get("deleted"), cb.parameter(String.class, "deleted")));
+            CriteriaQuery<Permissao> cq = cb.createQuery(Permissao.class);
+            Root<Permissao> permissao = cq.from(Permissao.class);
+            cq.where(cb.equal(permissao.get(field), cb.parameter(String.class, field)),
+                    cb.equal(permissao.get("deleted"), cb.parameter(String.class, "deleted")));
 
-            TypedQuery<Fornecedor> query = em.createQuery(cq);
+            TypedQuery<Permissao> query = em.createQuery(cq);
             query.setParameter(field, value);
             query.setParameter("deleted", "f");
             return query.getSingleResult();
@@ -153,18 +150,18 @@ public class FornecedorDAO implements Serializable {
         }
     }
 
-    public static List<Fornecedor> listByField(String field, String value) {
+    public static List<Permissao> listByField(String field, String value) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             CriteriaBuilder cb = em.getCriteriaBuilder();
-            CriteriaQuery<Fornecedor> cq = cb.createQuery(Fornecedor.class);
-            Root<Fornecedor> f = cq.from(Fornecedor.class);
+            CriteriaQuery<Permissao> cq = cb.createQuery(Permissao.class);
+            Root<Permissao> m = cq.from(Permissao.class);
 
-            cq.where(cb.equal(f.get(field), cb.parameter(String.class, field)),
-                    cb.equal(f.get("deleted"), cb.parameter(String.class, "deleted")));
+            cq.where(cb.equal(m.get(field), cb.parameter(String.class, field)),
+                    cb.equal(m.get("deleted"), cb.parameter(String.class, "deleted")));
 
-            TypedQuery<Fornecedor> query = em.createQuery(cq);
+            TypedQuery<Permissao> query = em.createQuery(cq);
             query.setParameter(field, value);
             query.setParameter("deleted", "f");
             return query.getResultList();
@@ -173,13 +170,12 @@ public class FornecedorDAO implements Serializable {
         }
     }
 
-    public static Fabricante findProduto(Integer id) {
+    public static Permissao findProduto(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Fabricante.class, id);
+            return em.find(Permissao.class, id);
         } finally {
             em.close();
         }
     }
-
 }
