@@ -58,6 +58,7 @@ public class Produto implements Serializable {
     
     public Produto() {
         this.deleted = 'f';
+        this.produtoId = 0;
     }
 
     public Produto(Integer produtoId) {

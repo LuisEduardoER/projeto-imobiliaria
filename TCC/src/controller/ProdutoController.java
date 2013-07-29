@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import modelo.Estoque;
 import modelo.Produto;
 import persistencia.exceptions.NonexistentEntityException;
 
@@ -40,9 +41,15 @@ public class ProdutoController {
         return dcbm;
     }
 
-    public boolean gravar(Produto produto) {
-
+    public boolean gravar(Produto produto, String quantidade) {
+        EstoqueController estoqueController = new EstoqueController();
+        
         if (ProdutoDAO.gravar(produto)) {
+            Estoque estoque = new Estoque();
+            estoque.setProduto(produto);
+            estoque.setFabricante(produto.getFabricante());
+            estoque.setQuantidade(Integer.parseInt(quantidade));
+            estoqueController.aumentarIniciarEstoque(estoque);
             return true;
         } else {
             return false;

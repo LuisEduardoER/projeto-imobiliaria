@@ -19,10 +19,9 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name = "estoque")
-
 public class Estoque implements Serializable {
-    private static final long serialVersionUID = 1L;
 
+    private static final long serialVersionUID = 1L;
     @Id
     protected int estoqueId;
     @Column(name = "quantidade")
@@ -35,8 +34,15 @@ public class Estoque implements Serializable {
     @JoinColumn(name = "produtoId", referencedColumnName = "produtoId", insertable = false, updatable = false)
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Produto produto;
+    @Column(name = "inserted")
+    private String inserted;
+    @Column(name = "updated")
+    private String updated;
+    @Column(name = "deleted")
+    private Character deleted;
 
     public Estoque() {
+        estoqueId = 0;
     }
 
     public Integer getQuantidade() {
@@ -99,5 +105,34 @@ public class Estoque implements Serializable {
             return false;
         }
         return true;
+    }
+
+    public String getInserted() {
+        return inserted;
+    }
+
+    public void setInserted(String inserted) {
+        this.inserted = inserted;
+    }
+
+    public String getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(String updated) {
+        this.updated = updated;
+    }
+
+    public Character getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Character deleted) {
+        this.deleted = deleted;
+    }
+
+    @Override
+    public String toString() {
+        return "Estoque{" + "estoqueId=" + estoqueId + '}';
     }
 }

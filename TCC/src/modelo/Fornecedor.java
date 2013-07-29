@@ -44,6 +44,8 @@ public class Fornecedor implements Serializable {
     private Character deleted;
 
     public Fornecedor() {
+        this.fornecedorId = 0;
+        this.deleted = 'f';
     }
 
     public int getFornecedorId() {

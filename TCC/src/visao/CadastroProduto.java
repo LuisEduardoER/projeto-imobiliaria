@@ -8,6 +8,7 @@ import Componentes.Componentes;
 import controller.FabricanteController;
 import controller.FornecedorController;
 import controller.Mensagens;
+import controller.ProdutoController;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
@@ -16,8 +17,6 @@ import javax.swing.JOptionPane;
 import modelo.Fabricante;
 import modelo.Fornecedor;
 import modelo.Produto;
-import persistencia.exceptions.NonexistentEntityException;
-import util.ValidaCNPJ;
 
 /**
  *
@@ -35,6 +34,7 @@ public class CadastroProduto extends javax.swing.JDialog {
     Mensagens m;
     FornecedorController fornecedorController;
     FabricanteController fabricanteController;
+    ProdutoController produtoController;
     String cnpj;
     Fornecedor fornecedor;
     Fabricante fabricante;
@@ -161,9 +161,9 @@ public class CadastroProduto extends javax.swing.JDialog {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtfFormatedValor, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jtfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jcbFabricanteCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jtfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jcbFabricanteCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jbBuscarFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -225,11 +225,11 @@ public class CadastroProduto extends javax.swing.JDialog {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jpControles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-426)/2, (screenSize.height-245)/2, 426, 245);
+        setBounds((screenSize.width-426)/2, (screenSize.height-271)/2, 426, 271);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbBuscarFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarFabricanteActionPerformed
@@ -370,7 +370,9 @@ public class CadastroProduto extends javax.swing.JDialog {
             p.setProdutoCodigoBarras(jtfCodigoBarras.getText());
             p.setValor(Float.parseFloat(jtfFormatedValor.getText()));
             
-            //estoqueController.aumentaEstoque(jtfQuantidade.getText());
+            produtoController.gravar(p, jtfQuantidade.getText());
+            
+            
             
         }
     }
@@ -490,6 +492,7 @@ public class CadastroProduto extends javax.swing.JDialog {
 //            return false;
 //        }
 //    }
+    
 //    private void acaoRemover() {
 //        fornecedorController = new FornecedorController();
 //
