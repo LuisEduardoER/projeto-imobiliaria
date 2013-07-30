@@ -78,9 +78,11 @@ public class CadastroFabricante extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jtfFabricanteNome = new javax.swing.JTextField();
         jcbFabricanteCNPJ = new javax.swing.JComboBox();
+        jlCodigo = new javax.swing.JLabel();
         jpControles = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -89,7 +91,7 @@ public class CadastroFabricante extends javax.swing.JDialog {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Fabricante"));
 
-        jPanel2.setLayout(new java.awt.GridLayout(2, 1, 0, 13));
+        jPanel2.setLayout(new java.awt.GridLayout(3, 1, 0, 13));
 
         jLabel1.setText("Nome:");
         jPanel2.add(jLabel1);
@@ -97,7 +99,10 @@ public class CadastroFabricante extends javax.swing.JDialog {
         jLabel2.setText("CNPJ:");
         jPanel2.add(jLabel2);
 
-        jPanel3.setLayout(new java.awt.GridLayout(2, 1, 0, 5));
+        jLabel3.setText("Código:");
+        jPanel2.add(jLabel3);
+
+        jPanel3.setLayout(new java.awt.GridLayout(3, 1, 0, 5));
         jPanel3.add(jtfFabricanteNome);
 
         jcbFabricanteCNPJ.setEditable(true);
@@ -107,6 +112,7 @@ public class CadastroFabricante extends javax.swing.JDialog {
             }
         });
         jPanel3.add(jcbFabricanteCNPJ);
+        jPanel3.add(jlCodigo);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -115,7 +121,7 @@ public class CadastroFabricante extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 321, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -144,11 +150,11 @@ public class CadastroFabricante extends javax.swing.JDialog {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpControles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(29, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-416)/2, (screenSize.height-153)/2, 416, 153);
+        setBounds((screenSize.width-416)/2, (screenSize.height-185)/2, 416, 185);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcbFabricanteCNPJItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbFabricanteCNPJItemStateChanged
@@ -156,6 +162,7 @@ public class CadastroFabricante extends javax.swing.JDialog {
             Fabricante f = (Fabricante) jcbFabricanteCNPJ.getSelectedItem();
             if (null != f) {
                 jtfFabricanteNome.setText(f.getFabricanteNome());
+                jlCodigo.setText(f.getFabricanteId()+"");
             }
         } catch (ClassCastException e) {
             System.out.println(e);
@@ -229,10 +236,12 @@ public class CadastroFabricante extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JComboBox jcbFabricanteCNPJ;
+    private javax.swing.JLabel jlCodigo;
     private javax.swing.JPanel jpControles;
     private javax.swing.JTextField jtfFabricanteNome;
     // End of variables declaration//GEN-END:variables
@@ -249,7 +258,7 @@ public class CadastroFabricante extends javax.swing.JDialog {
                 fabricanteController = new FabricanteController();
                 if (fabricanteController.gravar(fabricante)) {
                     m.jopAviso("Gravado com sucesso!");
-                    limparTela();
+                    acaoBuscar();
                 }
             } else {
                 m.jopAviso("CNPJ inválido.");
