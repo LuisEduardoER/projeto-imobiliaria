@@ -14,6 +14,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import modelo.Estoque;
 import persistencia.exceptions.NonexistentEntityException;
+import util.Datas;
 
 /**
  *
@@ -40,7 +41,7 @@ public class EstoqueController {
     }
 
     public boolean gravar(Estoque estoque) {
-
+        estoque.setInserted(Datas.dataAtual());
         if (EstoqueDAO.gravar(estoque)) {
             return true;
         } else {
@@ -49,18 +50,14 @@ public class EstoqueController {
     }
 
     public boolean setDeleted(Estoque estoque) throws NonexistentEntityException, Exception {
-        try {
-            java.util.Date dataUtil = new java.util.Date();
-            java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime());
+//            java.util.Date dataUtil = new java.util.Date();
+//            java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime());
+//
+//            DateFormat dateFormatada = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//            Date date = new Date();
+//            String dataFormatada = dateFormatada.format(date);
 
-            DateFormat dateFormatada = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-            Date date = new Date();
-            String dataFormatada = dateFormatada.format(date);
-
-            estoque.setUpdated(dataFormatada);
-        } catch (Exception e) {
-            System.out.println("\n \n \n --------  \n \n \n " + e);
-        }
+        estoque.setUpdated(Datas.dataAtual());
         estoque.setDeleted('t');
 
         if (EstoqueDAO.edit(estoque)) {
@@ -74,19 +71,19 @@ public class EstoqueController {
 
         try {
             List<Estoque> estoqueList = EstoqueDAO.listByField("produtoId", estoque.getProduto().getProdutoId().toString());
-            if (estoqueList.size() > 0) {
+            if (estoqueList != null) {
                 try {
                     Estoque _estoque = estoqueList.get(0);
                     _estoque.setQuantidade(estoque.getQuantidade() + _estoque.getQuantidade());
 
-                    java.util.Date dataUtil = new java.util.Date();
-                    java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime());
+//                    java.util.Date dataUtil = new java.util.Date();
+//                    java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime());
+//
+//                    DateFormat dateFormatada = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//                    Date date = new Date();
+//                    String dataFormatada = dateFormatada.format(date);
 
-                    DateFormat dateFormatada = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                    Date date = new Date();
-                    String dataFormatada = dateFormatada.format(date);
-
-                    _estoque.setUpdated(dataFormatada);
+                    _estoque.setUpdated(Datas.dataAtual());
 
                     EstoqueDAO.edit(_estoque);
                 } catch (NonexistentEntityException ex) {
@@ -97,14 +94,14 @@ public class EstoqueController {
                     m.jopError("Não foi possível iniciar o estoque para o produto cadastrado.\n" + ex);
                 }
             } else {
-                java.util.Date dataUtil = new java.util.Date();
-                java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime());
+//                java.util.Date dataUtil = new java.util.Date();
+//                java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime());
+//
+//                DateFormat dateFormatada = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+//                Date date = new Date();
+//                String dataFormatada = dateFormatada.format(date);
 
-                DateFormat dateFormatada = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-                Date date = new Date();
-                String dataFormatada = dateFormatada.format(date);
-
-                estoque.setInserted(dataFormatada);
+                estoque.setInserted(Datas.dataAtual());
                 EstoqueDAO.gravar(estoque);
             }
         } catch (Exception e) {

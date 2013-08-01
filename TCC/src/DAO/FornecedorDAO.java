@@ -8,6 +8,8 @@ import controller.EntityManagerFactoryCreator;
 import controller.Mensagens;
 import java.io.Serializable;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityNotFoundException;
@@ -18,6 +20,7 @@ import javax.persistence.criteria.Root;
 import modelo.Fabricante;
 import modelo.Fornecedor;
 import persistencia.exceptions.NonexistentEntityException;
+import util.Datas;
 
 /**
  *
@@ -88,14 +91,20 @@ public class FornecedorDAO implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Fabricante fabricante;
+            Fornecedor fornecedor;
             try {
-                fabricante = em.getReference(Fabricante.class, id);
-                fabricante.getFabricanteId();
+                fornecedor = em.getReference(Fornecedor.class, id);
+                fornecedor.setDeleted('t');
+                fornecedor.setUpdated(Datas.dataAtual());
+                fornecedor.getFornecedorId();
             } catch (EntityNotFoundException enfe) {
                 throw new NonexistentEntityException("Fornecedor  " + id + " não existe.", enfe);
             }
-            em.remove(fabricante);
+            try {
+                edit(fornecedor);
+            } catch (Exception ex) {
+                Logger.getLogger(FornecedorDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
             em.getTransaction().commit();
         } finally {
             em.getTransaction().rollback();
@@ -181,5 +190,4 @@ public class FornecedorDAO implements Serializable {
             em.close();
         }
     }
-
 }

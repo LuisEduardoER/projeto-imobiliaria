@@ -22,8 +22,8 @@ import persistencia.exceptions.NonexistentEntityException;
  *
  * @author Bruno
  */
-public class ProdutoDAO implements Serializable{
-     
+public class ProdutoDAO implements Serializable {
+
     static Mensagens m;
 
     public ProdutoDAO(EntityManagerFactory emf) {
@@ -37,9 +37,8 @@ public class ProdutoDAO implements Serializable{
     }
 
     public static boolean gravar(Produto p) {
-        EntityManager em = null;
         try {
-            em = getEntityManager();
+            EntityManager em = getEntityManager();
             em.getTransaction().begin();
             em.persist(p);
             em.getTransaction().commit();
@@ -48,44 +47,30 @@ public class ProdutoDAO implements Serializable{
             m = new Mensagens();
             m.jopError("Erro ao gravar Produto! \n ERRO: | ProdutoDAO | gravar() | " + e);
             return false;
-        } finally {
-//            em.getTransaction().rollback();
-            if (em != null) {
-                em.close();
-//                return true;
-            }
         }
     }
 
-    public static boolean edit(Produto produto) throws NonexistentEntityException, Exception {
-        EntityManager em = null;
+    public static boolean edit(Produto produto) {
         try {
-            em = getEntityManager();
+            EntityManager em = getEntityManager();
             em.getTransaction().begin();
             produto = em.merge(produto);
             em.getTransaction().commit();
             return true;
-        } catch (Exception ex) {
-            String msg = ex.getLocalizedMessage();
-            if (msg == null || msg.length() == 0) {
-                Integer id = produto.getProdutoId();
-                if (findProduto(id) == null) {
-                    throw new NonexistentEntityException("Produto  " + id + " não existe.");
-                }
+        } catch (Exception e) {
+            Integer id = produto.getProdutoId();
+            if (findProduto(id) == null) {
+                m = new Mensagens();
+                m.jopError("Erro ao alterar Produto! \n ERRO: | ProdutoDAO | edit() | " + e);
+                return false;
             }
-            throw ex;
-//            return false;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
+            return false;
         }
     }
 
     public static void destroy(Integer id) throws NonexistentEntityException {
-        EntityManager em = null;
         try {
-            em = getEntityManager();
+            EntityManager em = getEntityManager();
             em.getTransaction().begin();
             Produto produto;
             try {
@@ -96,11 +81,10 @@ public class ProdutoDAO implements Serializable{
             }
             em.remove(produto);
             em.getTransaction().commit();
-        } finally {
-            em.getTransaction().rollback();
-            if (em != null) {
-                em.close();
-            }
+        } catch (Exception e) {
+            System.out.println(e);
+            m = new Mensagens();
+            m.jopError("Erro ao deletar Produto! \n ERRO: | ProdutoDAO | destroy() | " + e);
         }
     }
 
@@ -120,17 +104,17 @@ public class ProdutoDAO implements Serializable{
             query.setParameter("deleted", "f");
             return query.getSingleResult();
 
-        } finally {
-            if (em != null) {
-                em.close();
-            }
+        } catch (Exception e) {
+            System.out.println(e);
+            m = new Mensagens();
+            m.jopError("Erro ao buscar Produto! \n ERRO: | ProdutoDAO | buscaNome() | " + e);
+            return null;
         }
     }
 
     public static Produto buscaByField(String field, String value) {
-        EntityManager em = null;
         try {
-            em = getEntityManager();
+            EntityManager em = getEntityManager();
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery<Produto> cq = cb.createQuery(Produto.class);
             Root<Produto> produto = cq.from(Produto.class);
@@ -143,18 +127,15 @@ public class ProdutoDAO implements Serializable{
             return query.getSingleResult();
         } catch (Exception e) {
             System.out.println(e);
+            m = new Mensagens();
+            m.jopError("Erro ao buscar Produto! \n ERRO: | ProdutoDAO | buscaByField() | " + e);
             return null;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
         }
     }
 
     public static List<Produto> listByField(String field, String value) {
-        EntityManager em = null;
         try {
-            em = getEntityManager();
+            EntityManager em = getEntityManager();
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery<Produto> cq = cb.createQuery(Produto.class);
             Root<Produto> produto = cq.from(Produto.class);
@@ -166,8 +147,10 @@ public class ProdutoDAO implements Serializable{
             query.setParameter(field, value);
             query.setParameter("deleted", "f");
             return query.getResultList();
-        } finally {
-            em.close();
+        } catch (Exception e) {
+            m = new Mensagens();
+            m.jopError("Erro ao buscar Produto! \n ERRO: | ProdutoDAO | listByField() | " + e);
+            return null;
         }
     }
 
@@ -175,8 +158,10 @@ public class ProdutoDAO implements Serializable{
         EntityManager em = getEntityManager();
         try {
             return em.find(Produto.class, id);
-        } finally {
-            em.close();
+        } catch (Exception e) {
+            m = new Mensagens();
+            m.jopError("Erro ao buscar Produto! \n ERRO: | ProdutoDAO | findProduto() | " + e);
+            return null;
         }
     }
 }

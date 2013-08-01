@@ -65,9 +65,8 @@ public class CadastroFornecedor extends javax.swing.JDialog {
         jpControles.add(jbGravar);
 //jcbCNPJ.getToolkit().
 
-
-
     }
+        
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -203,7 +202,7 @@ public class CadastroFornecedor extends javax.swing.JDialog {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -400,5 +399,4 @@ public class CadastroFornecedor extends javax.swing.JDialog {
             m.jopAlerta("Para excluir registro, é nescessário efetuar uma busca.");
         }
     }
-
 }

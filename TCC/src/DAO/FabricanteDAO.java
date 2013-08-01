@@ -37,9 +37,8 @@ public class FabricanteDAO implements Serializable {
     }
 
     public static boolean gravar(Fabricante f) {
-        EntityManager em = null;
         try {
-            em = getEntityManager();
+            EntityManager em = getEntityManager();
             em.getTransaction().begin();
             em.persist(f);
             em.getTransaction().commit();
@@ -50,17 +49,12 @@ public class FabricanteDAO implements Serializable {
             return false;
         } finally {
 //            em.getTransaction().rollback();
-            if (em != null) {
-                em.close();
-//                return true;
-            }
         }
     }
 
     public static boolean edit(Fabricante f) throws NonexistentEntityException, Exception {
-        EntityManager em = null;
         try {
-            em = getEntityManager();
+            EntityManager em = getEntityManager();
             em.getTransaction().begin();
             f = em.merge(f);
             em.getTransaction().commit();
@@ -69,23 +63,19 @@ public class FabricanteDAO implements Serializable {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
                 Integer id = f.getFabricanteId();
-                if (findProduto(id) == null) {
+                if (findFabricante(id) == null) {
                     throw new NonexistentEntityException("Fabricante  " + id + " não existe.");
                 }
             }
             throw ex;
 //            return false;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
+
         }
     }
 
     public static void destroy(Integer id) throws NonexistentEntityException {
-        EntityManager em = null;
         try {
-            em = getEntityManager();
+            EntityManager em = getEntityManager();
             em.getTransaction().begin();
             Fabricante fabricante;
             try {
@@ -96,11 +86,9 @@ public class FabricanteDAO implements Serializable {
             }
             em.remove(fabricante);
             em.getTransaction().commit();
-        } finally {
-            em.getTransaction().rollback();
-            if (em != null) {
-                em.close();
-            }
+        } catch (Exception e) {
+            m = new Mensagens();
+            m.jopError("Erro ao remover Fabricante! \n ERRO: | FabricanteDAO | destroy() | " + e);
         }
     }
 
@@ -120,18 +108,17 @@ public class FabricanteDAO implements Serializable {
             query.setParameter("deleted", "f");
             return query.getSingleResult();
 
-        } finally {
-            em.getTransaction().rollback();
-            if (em != null) {
-                em.close();
-            }
+        } catch (Exception e) {
+            m = new Mensagens();
+            m.jopError("Erro ao buscar Fabricante! \n ERRO: | FabricanteDAO | buscaNome() | " + e);
+            return null;
         }
+
     }
 
     public static Fabricante buscaByField(String field, String value) {
-        EntityManager em = null;
         try {
-            em = getEntityManager();
+            EntityManager em = getEntityManager();
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery<Fabricante> cq = cb.createQuery(Fabricante.class);
             Root<Fabricante> f = cq.from(Fabricante.class);
@@ -143,19 +130,15 @@ public class FabricanteDAO implements Serializable {
             query.setParameter("deleted", "f");
             return query.getSingleResult();
         } catch (Exception e) {
+            m.jopAviso("Não foram encontrados fabricantes com este cnpj!");
             System.out.println(e);
             return null;
-        } finally {
-            if (em != null) {
-                em.close();
-            }
         }
     }
 
     public static List<Fabricante> listByField(String field, String value) {
-        EntityManager em = null;
         try {
-            em = getEntityManager();
+            EntityManager em = getEntityManager();
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery<Fabricante> cq = cb.createQuery(Fabricante.class);
             Root<Fabricante> f = cq.from(Fabricante.class);
@@ -167,17 +150,21 @@ public class FabricanteDAO implements Serializable {
             query.setParameter(field, value);
             query.setParameter("deleted", "f");
             return query.getResultList();
-        } finally {
-            em.close();
+        }catch (Exception e) {
+            m = new Mensagens();
+            m.jopError("Erro ao buscar Fabricante! \n ERRO: | FabricanteDAO | listByField() | " + e);
+            return null;
         }
     }
 
-    public static Fabricante findProduto(Integer id) {
+    public static Fabricante findFabricante(Integer id) {
         EntityManager em = getEntityManager();
         try {
             return em.find(Fabricante.class, id);
-        } finally {
-            em.close();
+        } catch (Exception e) {
+            m = new Mensagens();
+            m.jopError("Erro ao buscar Fabricante! \n ERRO: | FabricanteDAO | findFabricante() | " + e);
+            return null;
         }
     }
 }

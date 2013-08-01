@@ -28,10 +28,10 @@ public class Estoque implements Serializable {
     private Integer quantidade;
     @Column(name = "quantidadeMIN")
     private Integer quantidadeMIN;
-    @JoinColumn(name = "fabricanteCNPJ", referencedColumnName = "fabricanteCNPJ", insertable = false, updatable = false)
+    @JoinColumn(name = "fabricanteCNPJ", referencedColumnName = "fabricanteCNPJ")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Fabricante fabricante;
-    @JoinColumn(name = "produtoId", referencedColumnName = "produtoId", insertable = false, updatable = false)
+    @JoinColumn(name = "produtoId", referencedColumnName = "produtoId")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Produto produto;
     @Column(name = "inserted")
@@ -42,7 +42,8 @@ public class Estoque implements Serializable {
     private Character deleted;
 
     public Estoque() {
-        estoqueId = 0;
+        this.estoqueId = 0;
+        this.deleted = 'f';
     }
 
     public Integer getQuantidade() {

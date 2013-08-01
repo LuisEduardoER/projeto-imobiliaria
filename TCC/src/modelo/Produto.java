@@ -40,10 +40,10 @@ public class Produto implements Serializable {
     @Column(name = "produtoNome")
     private String produtoNome;
     @JoinColumn(name = "fornecedorCNPJ", referencedColumnName = "fornecedorCNPJ")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Fornecedor fornecedor;
     @JoinColumn(name = "fabricanteCNPJ", referencedColumnName = "fabricanteCNPJ")
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Fabricante fabricante;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "valor")

@@ -166,7 +166,14 @@ public class EstoqueDAO implements Serializable {
             TypedQuery<Estoque> query = em.createQuery(cq);
             query.setParameter(field, value);
             query.setParameter("deleted", "f");
-            return query.getResultList();
+            //implementar rowCount
+            if (query.getResultList().isEmpty()) {
+                return null;
+            } else {
+                return query.getResultList();
+            }
+        } catch (Exception e) {
+            return null;
         } finally {
             em.close();
         }

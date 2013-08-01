@@ -13,6 +13,7 @@ import javax.swing.DefaultComboBoxModel;
 import modelo.Estoque;
 import modelo.Produto;
 import persistencia.exceptions.NonexistentEntityException;
+import util.Datas;
 
 /**
  *
@@ -41,14 +42,21 @@ public class ProdutoController {
         return dcbm;
     }
 
-    public boolean gravar(Produto produto, String quantidade) {
+    public boolean gravar(Produto produto, String quantidade, String quantidadeMin) {
         EstoqueController estoqueController = new EstoqueController();
-        
+        produto.setInserted(Datas.dataAtual());
         if (ProdutoDAO.gravar(produto)) {
             Estoque estoque = new Estoque();
+            
+            String cnpj = produto.getFabricante().getFabricanteCNPJ();
+            
+//            FabricanteController fc = new FabricanteController();
+//            produto.setFabricante(fc.buscaByField("cnpj", cnpj));
+            
             estoque.setProduto(produto);
             estoque.setFabricante(produto.getFabricante());
             estoque.setQuantidade(Integer.parseInt(quantidade));
+            estoque.setQuantidade(Integer.parseInt(quantidadeMin));
             estoqueController.aumentarIniciarEstoque(estoque);
             return true;
         } else {

@@ -144,10 +144,7 @@
                                   <Component id="jcbFornecedorCNPJ" alignment="0" max="32767" attributes="0"/>
                                   <Component id="jtfProdNome" max="32767" attributes="0"/>
                                   <Group type="102" attributes="0">
-                                      <Group type="103" groupAlignment="0" attributes="0">
-                                          <Component id="jtfFormatedValor" min="-2" pref="121" max="-2" attributes="0"/>
-                                          <Component id="jcbFabricanteCNPJ" alignment="0" min="-2" pref="244" max="-2" attributes="0"/>
-                                      </Group>
+                                      <Component id="jcbFabricanteCNPJ" min="-2" pref="244" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -161,6 +158,7 @@
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jtfQuantidade" min="-2" pref="118" max="-2" attributes="0"/>
                                   <Component id="jtfQtdMinima" alignment="0" min="-2" pref="118" max="-2" attributes="0"/>
+                                  <Component id="jtfValor" alignment="0" min="-2" pref="115" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
@@ -183,7 +181,7 @@
                           <Component id="jbBuscarFornecedor" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jtfFormatedValor" min="-2" max="-2" attributes="0"/>
+                      <Component id="jtfValor" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="jtfCodigoBarras" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -214,14 +212,6 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="javax.swing.JFormattedTextField" name="jtfFormatedValor">
-              <Properties>
-                <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-                  <Format subtype="0" type="4"/>
-                </Property>
-                <Property name="horizontalAlignment" type="int" value="2"/>
-              </Properties>
-            </Component>
             <Component class="javax.swing.JTextField" name="jtfCodigoBarras">
             </Component>
             <Component class="javax.swing.JTextField" name="jtfQuantidade">
@@ -249,6 +239,8 @@
               </Events>
             </Component>
             <Component class="javax.swing.JTextField" name="jtfQtdMinima">
+            </Component>
+            <Component class="javax.swing.JTextField" name="jtfValor">
             </Component>
           </SubComponents>
         </Container>
