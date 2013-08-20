@@ -256,7 +256,7 @@ public class CadastroFabricante extends javax.swing.JDialog {
                 fabricante.setFabricanteCNPJ(cnpj);
                 fabricante.setFabricanteNome(jtfFabricanteNome.getText());
                 fabricanteController = new FabricanteController();
-                if (fabricanteController.gravar(fabricante)) {
+                if (fabricanteController.gravar(fabricante) != null) {
                     m.jopAviso("Gravado com sucesso!");
                     acaoBuscar();
                 }

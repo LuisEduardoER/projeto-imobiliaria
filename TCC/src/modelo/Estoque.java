@@ -11,14 +11,12 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.Table;
 
 /**
  *
  * @author Bruno
  */
-@Entity
-@Table(name = "estoque")
+@Entity(name = "estoque")
 public class Estoque implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -28,12 +26,15 @@ public class Estoque implements Serializable {
     private Integer quantidade;
     @Column(name = "quantidadeMIN")
     private Integer quantidadeMIN;
-    @JoinColumn(name = "fabricanteCNPJ", referencedColumnName = "fabricanteCNPJ")
+    
+    @JoinColumn(name = "fabricanteCNPJ")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Fabricante fabricante;
-    @JoinColumn(name = "produtoId", referencedColumnName = "produtoId")
+    
+    @JoinColumn(name = "produtoId")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Produto produto;
+
     @Column(name = "inserted")
     private String inserted;
     @Column(name = "updated")
@@ -42,7 +43,6 @@ public class Estoque implements Serializable {
     private Character deleted;
 
     public Estoque() {
-        this.estoqueId = 0;
         this.deleted = 'f';
     }
 

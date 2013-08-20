@@ -253,7 +253,7 @@ public class CadastroFornecedor extends javax.swing.JDialog {
                 fornecedor.setFornecedorCNPJ(cnpj);
                 fornecedor.setFornecedorNome(jtfFornecedorNome.getText());
                 fornecedorController = new FornecedorController();
-                if (fornecedorController.gravar(fornecedor)) {
+                if (fornecedorController.gravar(fornecedor) != null) {
                     m.jopAviso("Gravado com sucesso!");
                     limparTela();
                 }

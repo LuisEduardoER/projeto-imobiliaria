@@ -19,32 +19,30 @@ import persistencia.exceptions.NonexistentEntityException;
  */
 public class FornecedorController {
 
+    FornecedorDAO dao = new FornecedorDAO();
+    
     public DefaultComboBoxModel<Fornecedor> buscar(String field, String value) {
         DefaultComboBoxModel<Fornecedor> dcbm = new DefaultComboBoxModel<>();
-        Fornecedor f = FornecedorDAO.buscaByField(field, value);
+        Fornecedor f = dao.consultarFornecedor(field, value);
         dcbm.addElement(f);
         return dcbm;
     }
 
     public DefaultComboBoxModel<Fornecedor> listByField(String field, String value) {
         DefaultComboBoxModel<Fornecedor> dcbm = new DefaultComboBoxModel<>();
-        List<Fornecedor> lista = FornecedorDAO.listByField(field, value);
+        List<Fornecedor> lista = dao.consultarTodos();
         for (Fornecedor fornecedor : lista) {
             dcbm.addElement(fornecedor);
         }
         return dcbm;
     }
 
-    public boolean gravar(Fornecedor fornecedor) {
-
-        if (FornecedorDAO.gravar(fornecedor)) {
-            return true;
-        } else {
-            return false;
-        }
+    public Fornecedor gravar(Fornecedor fornecedor) {
+       fornecedor = dao.gravar(fornecedor);
+       return fornecedor;
     }
 
-    public boolean setDeleted(Fornecedor fornecedor) throws NonexistentEntityException, Exception {
+    public Fornecedor setDeleted(Fornecedor fornecedor) throws NonexistentEntityException, Exception {
         try {
             java.util.Date dataUtil = new java.util.Date();
             java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime());
@@ -59,11 +57,8 @@ public class FornecedorController {
         }
         fornecedor.setDeleted('t');
 
-        if (FornecedorDAO.edit(fornecedor)) {
-            return true;
-        } else {
-            return false;
-        }
+        fornecedor = dao.atualizar(fornecedor);
+        return fornecedor;
     }
 
 }

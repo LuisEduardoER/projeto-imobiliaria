@@ -13,15 +13,12 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 /**
  *
  * @author Bruno
  */
-@Entity
-@Table(name = "fabricante")
-
+@Entity(name = "fabricante")
 public class Fabricante implements Serializable {
     @Column(name = "inserted")
     private String inserted;

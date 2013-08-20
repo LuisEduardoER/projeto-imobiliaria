@@ -5,9 +5,6 @@
 package controller;
 
 import DAO.EstoqueDAO;
-import java.util.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,26 +20,27 @@ import util.Datas;
 public class EstoqueController {
 
     Mensagens m;
+    EstoqueDAO dao = new EstoqueDAO();
 
-    public DefaultComboBoxModel<Estoque> buscar(String field, String value) {
-        DefaultComboBoxModel<Estoque> dcbm = new DefaultComboBoxModel<>();
-        Estoque estoque = EstoqueDAO.buscaByField(field, value);
-        dcbm.addElement(estoque);
-        return dcbm;
-    }
-
-    public DefaultComboBoxModel<Estoque> listByField(String field, String value) {
-        DefaultComboBoxModel<Estoque> dcbm = new DefaultComboBoxModel<>();
-        List<Estoque> lista = EstoqueDAO.listByField(field, value);
-        for (Estoque estoque : lista) {
-            dcbm.addElement(estoque);
-        }
-        return dcbm;
-    }
+//    public DefaultComboBoxModel<Estoque> buscar(String field, String value) {
+//        DefaultComboBoxModel<Estoque> dcbm = new DefaultComboBoxModel<>();
+//        Estoque estoque = dao.consultarTodos(field, value);
+//        dcbm.addElement(estoque);
+//        return dcbm;
+//    }
+//
+//    public DefaultComboBoxModel<Estoque> listByField(String field, String value) {
+//        DefaultComboBoxModel<Estoque> dcbm = new DefaultComboBoxModel<>();
+//        List<Estoque> lista = dao.listByField(field, value);
+//        for (Estoque estoque : lista) {
+//            dcbm.addElement(estoque);
+//        }
+//        return dcbm;
+//    }
 
     public boolean gravar(Estoque estoque) {
         estoque.setInserted(Datas.dataAtual());
-        if (EstoqueDAO.gravar(estoque)) {
+        if (dao.gravar(estoque) != null) {
             return true;
         } else {
             return false;
@@ -60,52 +58,37 @@ public class EstoqueController {
         estoque.setUpdated(Datas.dataAtual());
         estoque.setDeleted('t');
 
-        if (EstoqueDAO.edit(estoque)) {
+        if (dao.atualizar(estoque) != null) {
             return true;
         } else {
             return false;
         }
     }
 
-    public void aumentarIniciarEstoque(Estoque estoque) {
-
+    public Estoque aumentarIniciarEstoque(Estoque estoque) {
+        Estoque retorno;
         try {
-            List<Estoque> estoqueList = EstoqueDAO.listByField("produtoId", estoque.getProduto().getProdutoId().toString());
-            if (estoqueList != null) {
+            if (dao.rowCount("produtoId", estoque.getProduto().getProdutoId().toString()) > 0) {
                 try {
-                    Estoque _estoque = estoqueList.get(0);
+                    Estoque _estoque = dao.consultarEstoque("produtoId", estoque.getProduto().toString());
                     _estoque.setQuantidade(estoque.getQuantidade() + _estoque.getQuantidade());
-
-//                    java.util.Date dataUtil = new java.util.Date();
-//                    java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime());
-//
-//                    DateFormat dateFormatada = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-//                    Date date = new Date();
-//                    String dataFormatada = dateFormatada.format(date);
 
                     _estoque.setUpdated(Datas.dataAtual());
 
-                    EstoqueDAO.edit(_estoque);
-                } catch (NonexistentEntityException ex) {
-                    Logger.getLogger(EstoqueController.class.getName()).log(Level.SEVERE, null, ex);
-                    m.jopError("Não foi possível iniciar o estoque para o produto cadastrado, não existe um registro de estoque para o produto. .\n" + ex);
+                    retorno = dao.atualizar(_estoque);
+                    return retorno;
                 } catch (Exception ex) {
                     Logger.getLogger(EstoqueController.class.getName()).log(Level.SEVERE, null, ex);
                     m.jopError("Não foi possível iniciar o estoque para o produto cadastrado.\n" + ex);
                 }
             } else {
-//                java.util.Date dataUtil = new java.util.Date();
-//                java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime());
-//
-//                DateFormat dateFormatada = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-//                Date date = new Date();
-//                String dataFormatada = dateFormatada.format(date);
-
                 estoque.setInserted(Datas.dataAtual());
-                EstoqueDAO.gravar(estoque);
+                retorno = dao.gravar(estoque);
+                return retorno;
             }
         } catch (Exception e) {
             m.jopError("Não foi possível iniciar o estoque para o produto cadastrado.\n" + e);
         }
+        return  null;
     }
 }

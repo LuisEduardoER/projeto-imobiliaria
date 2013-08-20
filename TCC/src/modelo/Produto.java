@@ -6,43 +6,38 @@ package modelo;
 
 import java.io.Serializable;
 import java.util.List;
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 /**
  *
  * @author Bruno
  */
-@Entity
-@Table(name = "produto")
-
+@Entity(name = "produto")
 public class Produto implements Serializable {
+
     @Column(name = "produtoCodigoBarras")
     private String produtoCodigoBarras;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto", fetch = FetchType.LAZY)
     private List<Estoque> estoqueList;
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
+    @GeneratedValue
     @Column(name = "produtoId")
     private Integer produtoId;
     @Column(name = "produtoNome")
     private String produtoNome;
-    @JoinColumn(name = "fornecedorCNPJ", referencedColumnName = "fornecedorCNPJ")
+    @JoinColumn(name = "fornecedorCNPJ")
     @ManyToOne(fetch = FetchType.LAZY)
     private Fornecedor fornecedor;
-    @JoinColumn(name = "fabricanteCNPJ", referencedColumnName = "fabricanteCNPJ")
+    @JoinColumn(name = "fabricanteCNPJ")
     @ManyToOne(fetch = FetchType.LAZY)
     private Fabricante fabricante;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
@@ -54,8 +49,7 @@ public class Produto implements Serializable {
     private String updated;
     @Column(name = "deleted")
     private Character deleted;
-    
-    
+
     public Produto() {
         this.deleted = 'f';
         this.produtoId = 0;
@@ -169,5 +163,4 @@ public class Produto implements Serializable {
     public void setDeleted(Character deleted) {
         this.deleted = deleted;
     }
-    
 }

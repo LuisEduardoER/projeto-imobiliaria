@@ -4,15 +4,16 @@
  */
 package modelo;
 
-import java.util.List;
 import org.joda.time.DateTime;
-
+import java.util.List;
 /**
  *
  * @author Bruno
  */
+
 public class Venda {
     
+    private int idVenda;
     private float valor;
     private List<Produto> itens;
     private Funcionario vendedor;

@@ -14,10 +14,10 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
+import modelo.Estoque;
 import modelo.Fabricante;
 import modelo.Fornecedor;
 import modelo.Produto;
-import modelo.Estoque;
 
 /**
  *
@@ -388,7 +388,7 @@ public class CadastroProduto extends javax.swing.JDialog {
             p.setValor(Float.parseFloat(jtfValor.getText()));
             
             produtoController = new ProdutoController();
-           if(produtoController.gravar(p, jtfQuantidade.getText(), jtfQtdMinima.getText())){
+           if(produtoController.gravar(p, jtfQuantidade.getText(), jtfQtdMinima.getText()) != null){
                m =new Mensagens();
                m.jopAviso("Produto gravado com sucesso!");
            }
@@ -579,8 +579,9 @@ public class CadastroProduto extends javax.swing.JDialog {
             }
         } catch (Exception ex) {
             Logger.getLogger(CadastroFabricante.class.getName()).log(Level.SEVERE, null, ex + "\n É nescessário informar o CNPJ ou o nome do fabricante para efetuar uma busca.");
+            System.out.println("exception >>>>>>>>>>>>>>>>>>>>>"+ex);
             m = new Mensagens();
-            m.jopAlerta("É nescessário informar o CNPJ ou o nome do fabricante para efetuar uma busca.");
+            m.jopAlerta("É nescessário informar o CNPJ ou o nome do fabricante para efetuar uma busca.\n"+ex);
             return false;
         }
     }

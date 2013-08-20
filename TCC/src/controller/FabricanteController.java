@@ -5,9 +5,6 @@
 package controller;
 
 import DAO.FabricanteDAO;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import modelo.Fabricante;
@@ -20,16 +17,18 @@ import util.Datas;
  */
 public class FabricanteController {
 
+    FabricanteDAO dao = new FabricanteDAO();
+
     public DefaultComboBoxModel<Fabricante> buscar(String field, String value) {
         DefaultComboBoxModel<Fabricante> dcbm = new DefaultComboBoxModel<>();
-        Fabricante f = FabricanteDAO.buscaByField(field, value);
+        Fabricante f = dao.consultarFabricante(field, value);
         dcbm.addElement(f);
         return dcbm;
     }
 
     public DefaultComboBoxModel<Fabricante> listByField(String field, String value) {
         DefaultComboBoxModel<Fabricante> dcbm = new DefaultComboBoxModel<>();
-        List<Fabricante> lista = FabricanteDAO.listByField(field, value);
+        List<Fabricante> lista = dao.consultarTodos();
         for (Fabricante fabricante : lista) {
             dcbm.addElement(fabricante);
         }
@@ -37,34 +36,22 @@ public class FabricanteController {
     }
 
     public Fabricante buscaByField(String field, String value) {
-        Fabricante fabricante = FabricanteDAO.buscaByField(field, value);
+        Fabricante fabricante = dao.consultarFabricante(field, value);
         return fabricante;
     }
 
-    public boolean gravar(Fabricante fabricante) {
+    public Fabricante gravar(Fabricante fabricante) {
         fabricante.setInserted(Datas.dataAtual());
-        if (FabricanteDAO.gravar(fabricante)) {
-            return true;
-        } else {
-            return false;
-        }
+        fabricante = dao.gravar(fabricante);
+        return fabricante;
     }
 
-    public boolean setDeleted(Fabricante fabricante) throws NonexistentEntityException, Exception {
-//            java.util.Date dataUtil = new java.util.Date();
-//            java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime());
-//
-//            DateFormat dateFormatada = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-//            Date date = new Date();
-//            String dataFormatada = dateFormatada.format(date);
-
+    public Fabricante setDeleted(Fabricante fabricante) throws NonexistentEntityException, Exception {
         fabricante.setUpdated(Datas.dataAtual());
         fabricante.setDeleted('t');
 
-        if (FabricanteDAO.edit(fabricante)) {
-            return true;
-        } else {
-            return false;
-        }
+        fabricante = dao.atualizar(fabricante);
+        return fabricante;
+
     }
 }
