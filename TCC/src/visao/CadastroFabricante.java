@@ -86,7 +86,7 @@ public class CadastroFabricante extends javax.swing.JDialog {
         jpControles = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de Fornecedor");
+        setTitle("Cadastro de Fabricante");
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Fabricante"));
@@ -373,8 +373,9 @@ public class CadastroFabricante extends javax.swing.JDialog {
                 }
         } catch (Exception ex) {
             Logger.getLogger(CadastroFabricante.class.getName()).log(Level.SEVERE, null, ex + "\n É nescessário informar o CNPJ ou o nome do fabricante para efetuar uma busca.");
+            ex.printStackTrace();
             m = new Mensagens();
-            m.jopAlerta("É nescessário informar o CNPJ ou o nome do fabricante para efetuar uma busca.");
+            m.jopAlerta("É nescessário informar o CNPJ ou o nome do fabricante para efetuar uma busca. \n"+ex);
             return false;
         }
     }

@@ -7,59 +7,71 @@ package modelo;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDateTime;
 
 /**
  *
  * @author Bruno
  */
-@Entity(name = "fabricante")
+@Entity
+@Table(name = "fabricante")
+@NamedQueries({
+    @NamedQuery(name = "Fabricante.findAll", query = "SELECT f FROM Fabricante f")})
 public class Fabricante implements Serializable {
+
     @Column(name = "inserted")
-    private String inserted;
+    @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
+    private LocalDateTime inserted;
     @Column(name = "updated")
-    private String updated;
-    @Column(name = "deleted")
-    private Character deleted;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fabricante", fetch = FetchType.LAZY)
-    private List<Estoque> estoqueList;
+    @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
+    private LocalDateTime updated;
     private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "fabricanteId")
-    private int fabricanteId;
+    private Integer fabricanteId;
     @Column(name = "fabricanteNome")
     private String fabricanteNome;
-    @Id
     @Basic(optional = false)
     @Column(name = "fabricanteCNPJ")
     private String fabricanteCNPJ;
-    @OneToMany(mappedBy = "fabricante")
-    private List<Produto> produtosFabricantes;
+    @Column(name = "deleted")
+    private String deleted;
+    @OneToMany(mappedBy = "fabricanteId", fetch = FetchType.LAZY)
+    private List<Produto> produtoList;
+    @OneToMany(mappedBy = "fabricanteId", fetch = FetchType.LAZY)
+    private List<Estoque> estoqueList;
 
     public Fabricante() {
-        this.fabricanteId = 0;
-        this.deleted = 'f';
+        this.deleted = "f";
     }
 
-    public Fabricante(String fabricanteCNPJ) {
-        this.fabricanteCNPJ = fabricanteCNPJ;
-    }
-
-    public Fabricante(String fabricanteCNPJ, int fabricanteId) {
-        this.fabricanteCNPJ = fabricanteCNPJ;
+    public Fabricante(Integer fabricanteId) {
         this.fabricanteId = fabricanteId;
     }
 
-    public int getFabricanteId() {
+    public Fabricante(Integer fabricanteId, String fabricanteCNPJ) {
+        this.fabricanteId = fabricanteId;
+        this.fabricanteCNPJ = fabricanteCNPJ;
+    }
+
+    public Integer getFabricanteId() {
         return fabricanteId;
     }
 
-    public void setFabricanteId(int fabricanteId) {
+    public void setFabricanteId(Integer fabricanteId) {
         this.fabricanteId = fabricanteId;
     }
 
@@ -79,29 +91,36 @@ public class Fabricante implements Serializable {
         this.fabricanteCNPJ = fabricanteCNPJ;
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (fabricanteCNPJ != null ? fabricanteCNPJ.hashCode() : 0);
-        return hash;
+    public LocalDateTime getInserted() {
+        return inserted;
     }
 
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Fabricante)) {
-            return false;
-        }
-        Fabricante other = (Fabricante) object;
-        if ((this.fabricanteCNPJ == null && other.fabricanteCNPJ != null) || (this.fabricanteCNPJ != null && !this.fabricanteCNPJ.equals(other.fabricanteCNPJ))) {
-            return false;
-        }
-        return true;
+    public void setInserted(LocalDateTime inserted) {
+        this.inserted = inserted;
     }
 
-    @Override
-    public String toString() {
-        return fabricanteCNPJ;
+    public LocalDateTime getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(LocalDateTime updated) {
+        this.updated = updated;
+    }
+
+    public String getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(String deleted) {
+        this.deleted = deleted;
+    }
+
+    public List<Produto> getProdutoList() {
+        return produtoList;
+    }
+
+    public void setProdutoList(List<Produto> produtoList) {
+        this.produtoList = produtoList;
     }
 
     public List<Estoque> getEstoqueList() {
@@ -112,28 +131,28 @@ public class Fabricante implements Serializable {
         this.estoqueList = estoqueList;
     }
 
-    public String getInserted() {
-        return inserted;
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (fabricanteId != null ? fabricanteId.hashCode() : 0);
+        return hash;
     }
 
-    public void setInserted(String inserted) {
-        this.inserted = inserted;
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Fabricante)) {
+            return false;
+        }
+        Fabricante other = (Fabricante) object;
+        if ((this.fabricanteId == null && other.fabricanteId != null) || (this.fabricanteId != null && !this.fabricanteId.equals(other.fabricanteId))) {
+            return false;
+        }
+        return true;
     }
 
-    public String getUpdateed() {
-        return updated;
+    @Override
+    public String toString() {
+        return fabricanteCNPJ;
     }
-
-    public void setUpdated(String updated) {
-        this.updated = updated;
-    }
-
-    public Character getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Character deleted) {
-        this.deleted = deleted;
-    }
-    
 }

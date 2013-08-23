@@ -11,7 +11,9 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import modelo.Fornecedor;
+import org.joda.time.LocalDateTime;
 import persistencia.exceptions.NonexistentEntityException;
+import util.Datas;
 
 /**
  *
@@ -20,11 +22,21 @@ import persistencia.exceptions.NonexistentEntityException;
 public class FornecedorController {
 
     FornecedorDAO dao = new FornecedorDAO();
-    
+
     public DefaultComboBoxModel<Fornecedor> buscar(String field, String value) {
+        Fornecedor fornecedor = new Fornecedor();
         DefaultComboBoxModel<Fornecedor> dcbm = new DefaultComboBoxModel<>();
-        Fornecedor f = dao.consultarFornecedor(field, value);
-        dcbm.addElement(f);
+        List<Object[]> fornecedorObject = dao.consultarFornecedor(field, value);
+        if (!fornecedorObject.isEmpty()) {
+            fornecedor.setFornecedorId((int) fornecedorObject.get(0)[0]);
+            fornecedor.setFornecedorNome((String) fornecedorObject.get(0)[1]);
+            fornecedor.setFornecedorCNPJ((String) fornecedorObject.get(0)[2]);
+            fornecedor.setInserted((LocalDateTime) fornecedorObject.get(0)[3]);
+            fornecedor.setUpdated((LocalDateTime) fornecedorObject.get(0)[4]);
+            fornecedor.setDeleted((Character) fornecedorObject.get(0)[5]);
+        }
+
+        dcbm.addElement(fornecedor);
         return dcbm;
     }
 
@@ -38,8 +50,8 @@ public class FornecedorController {
     }
 
     public Fornecedor gravar(Fornecedor fornecedor) {
-       fornecedor = dao.gravar(fornecedor);
-       return fornecedor;
+        fornecedor = dao.gravar(fornecedor);
+        return fornecedor;
     }
 
     public Fornecedor setDeleted(Fornecedor fornecedor) throws NonexistentEntityException, Exception {
@@ -51,7 +63,7 @@ public class FornecedorController {
             Date date = new Date();
             String dataFormatada = dateFormatada.format(date);
 
-            fornecedor.setUpdated(dataFormatada);
+            fornecedor.setUpdated(Datas.dataAtualDateTime());
         } catch (Exception e) {
             System.out.println("\n \n \n --------  \n \n \n " + e);
         }
@@ -60,5 +72,4 @@ public class FornecedorController {
         fornecedor = dao.atualizar(fornecedor);
         return fornecedor;
     }
-
 }

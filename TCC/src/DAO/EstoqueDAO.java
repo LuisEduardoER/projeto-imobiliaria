@@ -24,10 +24,11 @@ public class EstoqueDAO implements Serializable {
     static Mensagens m;
     EntityManager em;
     private Criteria select;
-    Session session = (Session) em.getDelegate();
+    Session session;
     
     public EstoqueDAO() {
         em = new EntityManagerFactory().getEntityManager();
+        session = (Session) em.getDelegate();
     }
 
     public Estoque gravar(Estoque estoque) {
@@ -70,14 +71,16 @@ public class EstoqueDAO implements Serializable {
         Criteria criteria = session.createCriteria(Estoque.class, "estoque");
         
         if(searchField != null && !searchField.equals("") && searchString != null && !searchString.equals("")){
-            criteria.add(Restrictions.ilike(searchField, searchString, MatchMode.ANYWHERE));
+            criteria.add(Restrictions.like("estoque."+searchField, searchString));
         }
         
         return criteria;
     }    
     
     public Integer rowCount(String searchField, String searchString) {
-        Criteria criteria = montarCriteria(searchField, searchString);
+//        Criteria criteria = montarCriteria(searchField, searchString);
+        Criteria criteria = session.createCriteria(Estoque.class, "estoque");
+        criteria.add(Restrictions.eq("estoque."+searchField, searchString));
         criteria.setProjection(Projections.rowCount());
         return ((Integer) criteria.uniqueResult()).intValue();
     }

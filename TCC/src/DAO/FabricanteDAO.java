@@ -13,6 +13,7 @@ import modelo.Produto;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
@@ -61,11 +62,20 @@ public class FabricanteDAO implements Serializable {
     }
 
     @SuppressWarnings("unchecked")
-    public Fabricante consultarFabricante(String searchField, String searchString) {
+    public List<Object[]> consultarFabricante(String searchField, String searchString) {
 //        Session session = (Session) em.getDelegate();
         Criteria criteria = montarCriteria(searchField, searchString);
-
-        return (Fabricante) criteria.uniqueResult();
+        ProjectionList p = Projections.projectionList();
+        
+        p.add(Projections.groupProperty("fabricante.fabricanteId"));
+        p.add(Projections.groupProperty("fabricante.fabricanteNome"));
+        p.add(Projections.groupProperty("fabricante.fabricanteCNPJ"));
+        p.add(Projections.groupProperty("fabricante.inserted"));
+        p.add(Projections.groupProperty("fabricante.updated"));
+        p.add(Projections.groupProperty("fabricante.deleted"));
+        criteria.setProjection(p);
+        
+        return criteria.list();
     }
 
     private Criteria montarCriteria(String searchField, String searchString) {
@@ -73,10 +83,11 @@ public class FabricanteDAO implements Serializable {
 
         if (searchField != null && !searchField.equals("") && searchString != null && !searchString.equals("")) {
             if (searchField.toLowerCase().contains("cnpj")) {
-                criteria.add(Restrictions.eq(searchField, searchString));
+                criteria.add(Restrictions.eq("fabricante."+searchField, searchString));
             } else {
                 criteria.add(Restrictions.like(searchField, searchString, MatchMode.ANYWHERE));
             }
+            criteria.add(Restrictions.eq("fabricante.deleted", "f"));
         }
 
         return criteria;

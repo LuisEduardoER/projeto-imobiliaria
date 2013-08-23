@@ -14,11 +14,11 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import modelo.Modulo;
-import modelo.Modulopermissao;
-import modelo.Perfil;
-import modelo.PerfilModulopermissao;
-import modelo.Permissao;
+//import modelo.Modulo;
+//import modelo.Modulopermissao;
+//import modelo.Perfil;
+//import modelo.PerfilModulopermissao;
+//import modelo.Permissao;
 
 /**
  *
@@ -26,18 +26,18 @@ import modelo.Permissao;
  */
 public class CadastroPermissoes extends javax.swing.JDialog {
 
-    Perfil perfil = new Perfil();
-    Modulo modulo = new Modulo();
-    Modulopermissao modulopermissao = new Modulopermissao();
-    PerfilModulopermissao perfilModulopermissao = new PerfilModulopermissao();
-    Permissao permissao = new Permissao();
+//    Perfil perfil = new Perfil();
+//    Modulo modulo = new Modulo();
+//    Modulopermissao modulopermissao = new Modulopermissao();
+//    PerfilModulopermissao perfilModulopermissao = new PerfilModulopermissao();
+//    Permissao permissao = new Permissao();
     PerfilController perfilController = new PerfilController();
 //    ModuloController moduloController = new ModuloController();
     Componentes c = new Componentes();
     JButton jbGravar;
     JButton jbBuscar;
     JButton jbExcluir;
-    List<PerfilModulopermissao> perfilModulopermissaoList = new ArrayList<>();
+//    List<PerfilModulopermissao> perfilModulopermissaoList = new ArrayList<>();
     private Mensagens m;
 
     /**
@@ -240,7 +240,7 @@ public class CadastroPermissoes extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGravarPermissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarPermissaoActionPerformed
-        vinculaPermissaoModulo();
+//        vinculaPermissaoModulo();
     }//GEN-LAST:event_jbGravarPermissaoActionPerformed
 
     private void jcbPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPerfilActionPerformed
@@ -330,36 +330,36 @@ public class CadastroPermissoes extends javax.swing.JDialog {
         jpControles.add(jbGravar);
     }
 
-    public Permissao configuraCheckBoxPermissao() {
-        if (!jchkbAlterar.isSelected()
-                && !jchkbExcluir.isSelected()
-                && !jchkbGravar.isSelected()
-                && !jchckConsultar.isSelected()) {
-            Permissao permissao;
-            m = new Mensagens();
-            int resposta = JOptionPane.showConfirmDialog(null, "A configuração efetuada resultará "
-                    + "em um perfil sem permissões para o módulo "
-                    + "escolhido.",
-                    "Cuidado",
-                    JOptionPane.YES_NO_OPTION);
-            if (resposta == JOptionPane.NO_OPTION) {
-                permissao = new Permissao();
-                if (jchkbAlterar.isSelected()) {
-                    permissao.setPermissaoAlterar();
-                }
-                if (jchkbExcluir.isSelected()) {
-                    permissao.setPermissaoExcluir();
-                }
-                if (jchkbGravar.isSelected()) {
-                    permissao.setPermissaoGravar();
-                }
-                if (jchckConsultar.isSelected()) {
-                    permissao.setPermissaoVisualizar();
-                }
-            }
-        }
-        return permissao;
-    }
+//    public Permissao configuraCheckBoxPermissao() {
+//        if (!jchkbAlterar.isSelected()
+//                && !jchkbExcluir.isSelected()
+//                && !jchkbGravar.isSelected()
+//                && !jchckConsultar.isSelected()) {
+//            Permissao permissao;
+//            m = new Mensagens();
+//            int resposta = JOptionPane.showConfirmDialog(null, "A configuração efetuada resultará "
+//                    + "em um perfil sem permissões para o módulo "
+//                    + "escolhido.",
+//                    "Cuidado",
+//                    JOptionPane.YES_NO_OPTION);
+//            if (resposta == JOptionPane.NO_OPTION) {
+//                permissao = new Permissao();
+//                if (jchkbAlterar.isSelected()) {
+//                    permissao.setPermissaoAlterar();
+//                }
+//                if (jchkbExcluir.isSelected()) {
+//                    permissao.setPermissaoExcluir();
+//                }
+//                if (jchkbGravar.isSelected()) {
+//                    permissao.setPermissaoGravar();
+//                }
+//                if (jchckConsultar.isSelected()) {
+//                    permissao.setPermissaoVisualizar();
+//                }
+//            }
+//        }
+//        return permissao;
+//    }
 
 //    public void acaoGravar() {
 //        if (perfilController.gravar(perfil)) {
@@ -377,25 +377,25 @@ public class CadastroPermissoes extends javax.swing.JDialog {
         jchkbGravar.setSelected(false);
     }
 
-    private void vinculaPermissaoModulo() {
-        Modulo modulo;
-        Permissao permissao;
-
-        modulo = (Modulo) jcbModulo.getSelectedItem();
-        permissao = configuraCheckBoxPermissao();
-
-        adicionaListaPermissoesModulos(modulo, permissao);
-
-    }
-
-    public void adicionaListaPermissoesModulos(Modulo modulo, Permissao permissao) {
-        modulopermissao = new Modulopermissao();
-        modulopermissao.setModulo(modulo);
-        modulopermissao.setPermissao(permissao);
-        perfilModulopermissao.setModulopermissao(modulopermissao);
-        perfilModulopermissaoList.add(perfilModulopermissao);
-        perfil.getPerfilModulopermissaoList().add(perfilModulopermissao);
-    }
+//    private void vinculaPermissaoModulo() {
+//        Modulo modulo;
+//        Permissao permissao;
+//
+//        modulo = (Modulo) jcbModulo.getSelectedItem();
+//        permissao = configuraCheckBoxPermissao();
+//
+//        adicionaListaPermissoesModulos(modulo, permissao);
+//
+//    }
+//
+//    public void adicionaListaPermissoesModulos(Modulo modulo, Permissao permissao) {
+//        modulopermissao = new Modulopermissao();
+//        modulopermissao.setModulo(modulo);
+//        modulopermissao.setPermissao(permissao);
+//        perfilModulopermissao.setModulopermissao(modulopermissao);
+//        perfilModulopermissaoList.add(perfilModulopermissao);
+//        perfil.getPerfilModulopermissaoList().add(perfilModulopermissao);
+//    }
 
 //    private void carregaPerfis() {
 //        DefaultComboBoxModel<Perfil> dcbm;

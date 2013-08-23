@@ -12,6 +12,7 @@ import modelo.Fornecedor;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
@@ -62,11 +63,19 @@ public class FornecedorDAO implements Serializable {
     }
     
     @SuppressWarnings("unchecked")
-    public Fornecedor consultarFornecedor(String searchField, String searchString) {
-//        Session session = (Session) em.getDelegate();
-        Criteria criteria = montarCriteria(searchField, searchString);
+    public List<Object[]> consultarFornecedor(String searchField, String searchString) {
+       Criteria criteria = montarCriteria(searchField, searchString);
+        ProjectionList p = Projections.projectionList();
         
-        return  (Fornecedor) criteria.uniqueResult();
+        p.add(Projections.groupProperty("fornecedor.fornecedorId"));
+        p.add(Projections.groupProperty("fornecedor.fornecedorNome"));
+        p.add(Projections.groupProperty("fornecedor.fornecedorCNPJ"));
+        p.add(Projections.groupProperty("fornecedor.inserted"));
+        p.add(Projections.groupProperty("fornecedor.updated"));
+        p.add(Projections.groupProperty("fornecedor.deleted"));
+        criteria.setProjection(p);
+        
+        return criteria.list();
     }
 
     private Criteria montarCriteria(String searchField, String searchString) {

@@ -5,45 +5,69 @@
 package modelo;
 
 import java.io.Serializable;
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDateTime;
 
 /**
  *
  * @author Bruno
  */
-@Entity(name = "estoque")
+@Entity
+@Table(name = "estoque")
+@NamedQueries({
+    @NamedQuery(name = "Estoque.findAll", query = "SELECT e FROM Estoque e")})
 public class Estoque implements Serializable {
 
-    private static final long serialVersionUID = 1L;
     @Id
-    protected int estoqueId;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "estoqueId")
+    private Integer estoqueId;
+    @Column(name = "inserted")
+    @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
+    private LocalDateTime inserted;
+    @Column(name = "updated")
+    @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
+    private LocalDateTime updated;
+    private static final long serialVersionUID = 1L;
+    @Column(name = "fabricanteCNPJ")
+    private String fabricanteCNPJ;
     @Column(name = "quantidade")
     private Integer quantidade;
     @Column(name = "quantidadeMIN")
     private Integer quantidadeMIN;
-    
-    @JoinColumn(name = "fabricanteCNPJ")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Fabricante fabricante;
+    @Column(name = "deleted")
+    private String deleted;
     
     @JoinColumn(name = "produtoId")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    private Produto produto;
-
-    @Column(name = "inserted")
-    private String inserted;
-    @Column(name = "updated")
-    private String updated;
-    @Column(name = "deleted")
-    private Character deleted;
+    public Produto produto;
+    
+    @JoinColumn(name = "fabricanteId", referencedColumnName = "fabricanteId")
+    @ManyToOne(fetch = FetchType.LAZY)
+    public Fabricante fabricanteId;
 
     public Estoque() {
-        this.deleted = 'f';
+    }
+
+    public String getFabricanteCNPJ() {
+        return fabricanteCNPJ;
+    }
+
+    public void setFabricanteCNPJ(String fabricanteCNPJ) {
+        this.fabricanteCNPJ = fabricanteCNPJ;
     }
 
     public Integer getQuantidade() {
@@ -62,12 +86,12 @@ public class Estoque implements Serializable {
         this.quantidadeMIN = quantidadeMIN;
     }
 
-    public Fabricante getFabricante() {
-        return fabricante;
+    public String getDeleted() {
+        return deleted;
     }
 
-    public void setFabricante(Fabricante fabricante) {
-        this.fabricante = fabricante;
+    public void setDeleted(String deleted) {
+        this.deleted = deleted;
     }
 
     public Produto getProduto() {
@@ -78,62 +102,64 @@ public class Estoque implements Serializable {
         this.produto = produto;
     }
 
-    public int getEstoqueId() {
+    public Fabricante getFabricanteId() {
+        return fabricanteId;
+    }
+
+    public void setFabricanteId(Fabricante fabricanteId) {
+        this.fabricanteId = fabricanteId;
+    }
+
+    public Estoque(Integer estoqueId) {
+        this.estoqueId = estoqueId;
+    }
+
+    public Integer getEstoqueId() {
         return estoqueId;
     }
 
-    public void setEstoqueId(int estoqueId) {
+    public void setEstoqueId(Integer estoqueId) {
         this.estoqueId = estoqueId;
+    }
+
+    public LocalDateTime getInserted() {
+        return inserted;
+    }
+
+    public void setInserted(LocalDateTime inserted) {
+        this.inserted = inserted;
+    }
+
+    public LocalDateTime getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(LocalDateTime updated) {
+        this.updated = updated;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 17 * hash + this.estoqueId;
+        int hash = 0;
+        hash += (estoqueId != null ? estoqueId.hashCode() : 0);
         return hash;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Estoque)) {
             return false;
         }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Estoque other = (Estoque) obj;
-        if (this.estoqueId != other.estoqueId) {
+        Estoque other = (Estoque) object;
+        if ((this.estoqueId == null && other.estoqueId != null) || (this.estoqueId != null && !this.estoqueId.equals(other.estoqueId))) {
             return false;
         }
         return true;
     }
 
-    public String getInserted() {
-        return inserted;
-    }
-
-    public void setInserted(String inserted) {
-        this.inserted = inserted;
-    }
-
-    public String getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(String updated) {
-        this.updated = updated;
-    }
-
-    public Character getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Character deleted) {
-        this.deleted = deleted;
-    }
-
     @Override
     public String toString() {
-        return "Estoque{" + "estoqueId=" + estoqueId + '}';
+        return estoqueId+"";
     }
 }

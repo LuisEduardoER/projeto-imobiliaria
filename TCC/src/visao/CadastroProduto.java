@@ -382,8 +382,8 @@ public class CadastroProduto extends javax.swing.JDialog {
             p = new Produto();
 
             p.setProdutoNome(jtfProdNome.getText());
-            p.setFabricante(fabricante);
-            p.setFornecedor(fornecedor);
+            p.setFabricanteId(fabricante);
+            p.setFornecedorId(fornecedor);
             p.setProdutoCodigoBarras(jtfCodigoBarras.getText());
             p.setValor(Float.parseFloat(jtfValor.getText()));
             

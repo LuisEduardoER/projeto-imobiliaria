@@ -6,57 +6,75 @@ package modelo;
 
 import java.io.Serializable;
 import java.util.List;
+import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDateTime;
 
 /**
  *
  * @author Bruno
  */
-@Entity(name = "produto")
+@Entity
+@Table(name = "produto")
+@NamedQueries({
+    @NamedQuery(name = "Produto.findAll", query = "SELECT p FROM Produto p")})
 public class Produto implements Serializable {
 
-    @Column(name = "produtoCodigoBarras")
-    private String produtoCodigoBarras;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto", fetch = FetchType.LAZY)
-    private List<Estoque> estoqueList;
+    @Column(name = "inserted")
+    @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
+    private LocalDateTime inserted;
+    @Column(name = "updated")
+    @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
+    private LocalDateTime updated;
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
     @Column(name = "produtoId")
     private Integer produtoId;
+    @Basic(optional = false)
     @Column(name = "produtoNome")
     private String produtoNome;
-    @JoinColumn(name = "fornecedorCNPJ")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Fornecedor fornecedor;
-    @JoinColumn(name = "fabricanteCNPJ")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Fabricante fabricante;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "valor")
     private Float valor;
-    @Column(name = "inserted")
-    private String inserted;
-    @Column(name = "updated")
-    private String updated;
+    @Column(name = "produtoCodigoBarras")
+    private String produtoCodigoBarras;
     @Column(name = "deleted")
     private Character deleted;
+    @JoinColumn(name = "fornecedorId", referencedColumnName = "fornecedorId")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Fornecedor fornecedorId;
+    @JoinColumn(name = "fabricanteId", referencedColumnName = "fabricanteId")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Fabricante fabricanteId;
+    
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto", fetch = FetchType.LAZY)
+    public List<Estoque> estoqueList;
 
     public Produto() {
-        this.deleted = 'f';
-        this.produtoId = 0;
     }
 
     public Produto(Integer produtoId) {
         this.produtoId = produtoId;
+    }
+
+    public Produto(Integer produtoId, String produtoNome) {
+        this.produtoId = produtoId;
+        this.produtoNome = produtoNome;
     }
 
     public Integer getProdutoId() {
@@ -75,28 +93,68 @@ public class Produto implements Serializable {
         this.produtoNome = produtoNome;
     }
 
-    public Fornecedor getFornecedor() {
-        return fornecedor;
-    }
-
-    public void setFornecedor(Fornecedor fornecedor) {
-        this.fornecedor = fornecedor;
-    }
-
-    public Fabricante getFabricante() {
-        return fabricante;
-    }
-
-    public void setFabricante(Fabricante fabricante) {
-        this.fabricante = fabricante;
-    }
-
     public Float getValor() {
         return valor;
     }
 
     public void setValor(Float valor) {
         this.valor = valor;
+    }
+
+    public String getProdutoCodigoBarras() {
+        return produtoCodigoBarras;
+    }
+
+    public void setProdutoCodigoBarras(String produtoCodigoBarras) {
+        this.produtoCodigoBarras = produtoCodigoBarras;
+    }
+
+    public LocalDateTime getInserted() {
+        return inserted;
+    }
+
+    public void setInserted(LocalDateTime inserted) {
+        this.inserted = inserted;
+    }
+
+    public LocalDateTime getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(LocalDateTime updated) {
+        this.updated = updated;
+    }
+
+    public Character getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Character deleted) {
+        this.deleted = deleted;
+    }
+
+    public Fornecedor getFornecedorId() {
+        return fornecedorId;
+    }
+
+    public void setFornecedorId(Fornecedor fornecedorId) {
+        this.fornecedorId = fornecedorId;
+    }
+
+    public Fabricante getFabricanteId() {
+        return fabricanteId;
+    }
+
+    public void setFabricanteId(Fabricante fabricanteId) {
+        this.fabricanteId = fabricanteId;
+    }
+
+    public List<Estoque> getEstoqueList() {
+        return estoqueList;
+    }
+
+    public void setEstoqueList(List<Estoque> estoqueList) {
+        this.estoqueList = estoqueList;
     }
 
     @Override
@@ -122,45 +180,5 @@ public class Produto implements Serializable {
     @Override
     public String toString() {
         return produtoNome;
-    }
-
-    public String getProdutoCodigoBarras() {
-        return produtoCodigoBarras;
-    }
-
-    public void setProdutoCodigoBarras(String produtoCodigoBarras) {
-        this.produtoCodigoBarras = produtoCodigoBarras;
-    }
-
-    public List<Estoque> getEstoqueList() {
-        return estoqueList;
-    }
-
-    public void setEstoqueList(List<Estoque> estoqueList) {
-        this.estoqueList = estoqueList;
-    }
-
-    public String getInserted() {
-        return inserted;
-    }
-
-    public void setInserted(String inserted) {
-        this.inserted = inserted;
-    }
-
-    public String getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(String updated) {
-        this.updated = updated;
-    }
-
-    public Character getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Character deleted) {
-        this.deleted = deleted;
     }
 }

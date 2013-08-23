@@ -5,6 +5,7 @@
 package util;
 
 import org.joda.time.DateTime;
+import org.joda.time.LocalDateTime;
 
 /**
  *
@@ -13,9 +14,14 @@ import org.joda.time.DateTime;
 public class Datas {
 
     public static DateTime data;
-
+    public static LocalDateTime dataDateTime;
+    
     public static String dataAtual() {
         data = new DateTime();
         return data.toString("YYYY-MM-dd HH:mm:ss");
+    }
+    public static LocalDateTime dataAtualDateTime() {
+        dataDateTime = new LocalDateTime();
+        return dataDateTime;
     }
 }

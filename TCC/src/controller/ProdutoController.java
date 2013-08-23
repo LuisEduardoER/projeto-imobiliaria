@@ -47,28 +47,28 @@ public class ProdutoController {
     public Produto gravar(Produto produto, String quantidade, String quantidadeMin) {
         EstoqueController estoqueController = new EstoqueController();
 
-        produto.setInserted(Datas.dataAtual());
+        produto.setInserted(Datas.dataAtualDateTime());
 
         produto = dao.gravar(produto);
         Estoque estoque = new Estoque();
 
-        String cnpj = produto.getFabricante().getFabricanteCNPJ();
+//        String cnpj = produto.getFabricanteId().getFabricanteCNPJ();
 
 //            FabricanteController fc = new FabricanteController();
 //            produto.setFabricante(fc.buscaByField("cnpj", cnpj));
 
         estoque.setProduto(produto);
-        estoque.setFabricante(produto.getFabricante());
+        estoque.setFabricanteId(produto.getFabricanteId());
         estoque.setQuantidade(Integer.parseInt(quantidade));
         estoque.setQuantidade(Integer.parseInt(quantidadeMin));
-        estoqueController.aumentarIniciarEstoque(estoque);
+        estoqueController.aumentarIniciarEstoque(estoque, produto.getProdutoId());
 
         return produto;
 
     }
 
     public Produto setDeleted(Produto produto) throws NonexistentEntityException, Exception {
-        produto.setUpdated(Datas.dataAtual());
+        produto.setUpdated(Datas.dataAtualDateTime());
         produto.setDeleted('t');
 
         produto = dao.atualizar(produto);

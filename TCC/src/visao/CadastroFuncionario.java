@@ -5,15 +5,15 @@
 package visao;
 
 import Componentes.Componentes;
-import ConstrutoresModelo.ConstrutorFuncionario;
+//import ConstrutoresModelo.ConstrutorFuncionario;
 import controller.FuncionarioController;
 import controller.Mensagens;
 import controller.PerfilController;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import modelo.Funcionario;
+//import modelo.Funcionario;
 
-import modelo.Perfil;
+//import modelo.Perfil;
 
 /**
  *
@@ -25,12 +25,12 @@ public class CadastroFuncionario extends javax.swing.JDialog {
     JButton jbGravar  = c.criaBotaoGravar();
     JButton jbBuscar  = c.criaBotaoBuscar();
     JButton jbExcluir = c.criaBotaoExcluir();
-    Funcionario f;
+//    Funcionario f;
     FuncionarioController fController;
     PerfilController pController;
     Mensagens m;
-    ConstrutorFuncionario cF;
-    DefaultComboBoxModel<Perfil> modeloPerfil;
+//    ConstrutorFuncionario cF;
+//    DefaultComboBoxModel<Perfil> modeloPerfil;
 
     /**
      * Creates new form CadastroFuncionario
