@@ -77,10 +77,10 @@ public class EstoqueDAO implements Serializable {
         return criteria;
     }    
     
-    public Integer rowCount(String searchField, String searchString) {
+    public Integer rowCount(String searchField, Integer searchString) {
 //        Criteria criteria = montarCriteria(searchField, searchString);
         Criteria criteria = session.createCriteria(Estoque.class, "estoque");
-        criteria.add(Restrictions.eq("estoque."+searchField, searchString));
+        criteria.add(Restrictions.eq("estoque.estqprodutoId.produto_id", searchString));
         criteria.setProjection(Projections.rowCount());
         return ((Integer) criteria.uniqueResult()).intValue();
     }

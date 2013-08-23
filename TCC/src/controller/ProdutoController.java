@@ -57,11 +57,12 @@ public class ProdutoController {
 //            FabricanteController fc = new FabricanteController();
 //            produto.setFabricante(fc.buscaByField("cnpj", cnpj));
 
-        estoque.setProduto(produto);
+        estoque.setEstqprodutoId(produto);
         estoque.setFabricanteId(produto.getFabricanteId());
         estoque.setQuantidade(Integer.parseInt(quantidade));
         estoque.setQuantidade(Integer.parseInt(quantidadeMin));
-        estoqueController.aumentarIniciarEstoque(estoque, produto.getProdutoId());
+        
+        estoqueController.aumentarIniciarEstoque(estoque, produto.getProduto_id());
 
         return produto;
 

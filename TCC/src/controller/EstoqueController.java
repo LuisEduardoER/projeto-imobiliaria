@@ -69,11 +69,11 @@ public class EstoqueController {
         Estoque retorno;
         try {
             
-           Integer estoques = dao.rowCount("produto", String.valueOf(produtoId));
+           Integer estoques = dao.rowCount("estqprodutoId", produtoId);
             
             if (estoques > 0) {
                 try {
-                    Estoque _estoque = dao.consultarEstoque("produtoId", estoque.getProduto().toString());
+                    Estoque _estoque = dao.consultarEstoque("estqprodutoId", String.valueOf(estoque.getEstqprodutoId()));
                     _estoque.setQuantidade(estoque.getQuantidade() + _estoque.getQuantidade());
 
                     _estoque.setUpdated(Datas.dataAtualDateTime());

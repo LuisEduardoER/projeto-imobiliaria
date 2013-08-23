@@ -5,6 +5,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -20,6 +21,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 
@@ -32,19 +35,26 @@ import org.joda.time.LocalDateTime;
 @NamedQueries({
     @NamedQuery(name = "Produto.findAll", query = "SELECT p FROM Produto p")})
 public class Produto implements Serializable {
-
     @Column(name = "inserted")
     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
     private LocalDateTime inserted;
     @Column(name = "updated")
     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
     private LocalDateTime updated;
+    @JoinColumn(name = "fornecedorId", referencedColumnName = "fornecedorId")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Fornecedor fornecedorId;
+    @JoinColumn(name = "fabricanteId", referencedColumnName = "fabricanteId")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Fabricante fabricanteId;
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "produtoId")
-    private Integer produtoId;
+    @Column(name = "produto_id")
+    private Integer produto_id;
+    
     @Basic(optional = false)
     @Column(name = "produtoNome")
     private String produtoNome;
@@ -55,34 +65,28 @@ public class Produto implements Serializable {
     private String produtoCodigoBarras;
     @Column(name = "deleted")
     private Character deleted;
-    @JoinColumn(name = "fornecedorId", referencedColumnName = "fornecedorId")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Fornecedor fornecedorId;
-    @JoinColumn(name = "fabricanteId", referencedColumnName = "fabricanteId")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Fabricante fabricanteId;
     
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produto", fetch = FetchType.LAZY)
-    public List<Estoque> estoqueList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "estqprodutoId", fetch = FetchType.LAZY)
+    private List<Estoque> estoqueList;
 
     public Produto() {
     }
 
     public Produto(Integer produtoId) {
-        this.produtoId = produtoId;
+        this.produto_id = produtoId;
     }
 
     public Produto(Integer produtoId, String produtoNome) {
-        this.produtoId = produtoId;
+        this.produto_id = produtoId;
         this.produtoNome = produtoNome;
     }
 
-    public Integer getProdutoId() {
-        return produtoId;
+    public Integer getProduto_id() {
+        return produto_id;
     }
 
     public void setProdutoId(Integer produtoId) {
-        this.produtoId = produtoId;
+        this.produto_id = produtoId;
     }
 
     public String getProdutoNome() {
@@ -109,6 +113,47 @@ public class Produto implements Serializable {
         this.produtoCodigoBarras = produtoCodigoBarras;
     }
 
+    public Character getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Character deleted) {
+        this.deleted = deleted;
+    }
+
+    public List<Estoque> getEstoqueList() {
+        return estoqueList;
+    }
+
+    public void setEstoqueList(List<Estoque> estoqueList) {
+        this.estoqueList = estoqueList;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 0;
+        hash += (produto_id != null ? produto_id.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Produto)) {
+            return false;
+        }
+        Produto other = (Produto) object;
+        if ((this.produto_id == null && other.produto_id != null) || (this.produto_id != null && !this.produto_id.equals(other.produto_id))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "modelo.Produto[ produtoId=" + produto_id + " ]";
+    }
+
     public LocalDateTime getInserted() {
         return inserted;
     }
@@ -123,14 +168,6 @@ public class Produto implements Serializable {
 
     public void setUpdated(LocalDateTime updated) {
         this.updated = updated;
-    }
-
-    public Character getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Character deleted) {
-        this.deleted = deleted;
     }
 
     public Fornecedor getFornecedorId() {
@@ -148,37 +185,5 @@ public class Produto implements Serializable {
     public void setFabricanteId(Fabricante fabricanteId) {
         this.fabricanteId = fabricanteId;
     }
-
-    public List<Estoque> getEstoqueList() {
-        return estoqueList;
-    }
-
-    public void setEstoqueList(List<Estoque> estoqueList) {
-        this.estoqueList = estoqueList;
-    }
-
-    @Override
-    public int hashCode() {
-        int hash = 0;
-        hash += (produtoId != null ? produtoId.hashCode() : 0);
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Produto)) {
-            return false;
-        }
-        Produto other = (Produto) object;
-        if ((this.produtoId == null && other.produtoId != null) || (this.produtoId != null && !this.produtoId.equals(other.produtoId))) {
-            return false;
-        }
-        return true;
-    }
-
-    @Override
-    public String toString() {
-        return produtoNome;
-    }
+    
 }

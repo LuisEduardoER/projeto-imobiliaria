@@ -11,6 +11,7 @@ public class EntityManagerFactory {
 		
 		//o paramentro é mesmo nome usado na tag <persistence-unit> no arquivo persistence.xml 
 		factory = Persistence.createEntityManagerFactory("TCCPU");
+                System.out.println("");
 	}
 	
 	public EntityManager getEntityManager(){

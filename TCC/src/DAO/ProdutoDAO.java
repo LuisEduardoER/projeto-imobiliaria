@@ -47,7 +47,7 @@ public class ProdutoDAO implements Serializable {
 
     public void apagar(Produto produto) {
         em.getTransaction().begin();
-        produto = em.getReference(Produto.class, produto.getProdutoId());
+        produto = em.getReference(Produto.class, produto.getProduto_id());
         em.remove(produto);
         em.getTransaction().commit();
     }

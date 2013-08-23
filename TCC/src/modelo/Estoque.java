@@ -30,44 +30,49 @@ import org.joda.time.LocalDateTime;
     @NamedQuery(name = "Estoque.findAll", query = "SELECT e FROM Estoque e")})
 public class Estoque implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "estoqueId")
-    private Integer estoqueId;
     @Column(name = "inserted")
     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
     private LocalDateTime inserted;
     @Column(name = "updated")
     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
     private LocalDateTime updated;
+    @JoinColumn(name = "fabricanteId", referencedColumnName = "fabricanteId")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Fabricante fabricanteId;
     private static final long serialVersionUID = 1L;
-    @Column(name = "fabricanteCNPJ")
-    private String fabricanteCNPJ;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "estoqueId")
+    private Integer estoqueId;
     @Column(name = "quantidade")
     private Integer quantidade;
     @Column(name = "quantidadeMIN")
     private Integer quantidadeMIN;
     @Column(name = "deleted")
     private String deleted;
-    
-    @JoinColumn(name = "produtoId")
+    @JoinColumn(name = "estq_produtoId", referencedColumnName = "produto_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
-    public Produto produto;
-    
-    @JoinColumn(name = "fabricanteId", referencedColumnName = "fabricanteId")
-    @ManyToOne(fetch = FetchType.LAZY)
-    public Fabricante fabricanteId;
+    private Produto estqprodutoId;
 
     public Estoque() {
     }
 
-    public String getFabricanteCNPJ() {
-        return fabricanteCNPJ;
+    public Estoque(Integer estoqueId) {
+        this.estoqueId = estoqueId;
     }
 
-    public void setFabricanteCNPJ(String fabricanteCNPJ) {
-        this.fabricanteCNPJ = fabricanteCNPJ;
+    public Estoque(Integer estoqueId, Fabricante fabricanteId) {
+        this.estoqueId = estoqueId;
+        this.fabricanteId = fabricanteId;
+    }
+
+    public Integer getEstoqueId() {
+        return estoqueId;
+    }
+
+    public void setEstoqueId(Integer estoqueId) {
+        this.estoqueId = estoqueId;
     }
 
     public Integer getQuantidade() {
@@ -94,48 +99,12 @@ public class Estoque implements Serializable {
         this.deleted = deleted;
     }
 
-    public Produto getProduto() {
-        return produto;
+    public Produto getEstqprodutoId() {
+        return estqprodutoId;
     }
 
-    public void setProduto(Produto produto) {
-        this.produto = produto;
-    }
-
-    public Fabricante getFabricanteId() {
-        return fabricanteId;
-    }
-
-    public void setFabricanteId(Fabricante fabricanteId) {
-        this.fabricanteId = fabricanteId;
-    }
-
-    public Estoque(Integer estoqueId) {
-        this.estoqueId = estoqueId;
-    }
-
-    public Integer getEstoqueId() {
-        return estoqueId;
-    }
-
-    public void setEstoqueId(Integer estoqueId) {
-        this.estoqueId = estoqueId;
-    }
-
-    public LocalDateTime getInserted() {
-        return inserted;
-    }
-
-    public void setInserted(LocalDateTime inserted) {
-        this.inserted = inserted;
-    }
-
-    public LocalDateTime getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(LocalDateTime updated) {
-        this.updated = updated;
+    public void setEstqprodutoId(Produto estqprodutoId) {
+        this.estqprodutoId = estqprodutoId;
     }
 
     @Override
@@ -160,6 +129,30 @@ public class Estoque implements Serializable {
 
     @Override
     public String toString() {
-        return estoqueId+"";
+        return "modelo.Estoque[ estoqueId=" + estoqueId + " ]";
+    }
+
+    public LocalDateTime getInserted() {
+        return inserted;
+    }
+
+    public void setInserted(LocalDateTime inserted) {
+        this.inserted = inserted;
+    }
+
+    public LocalDateTime getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(LocalDateTime updated) {
+        this.updated = updated;
+    }
+
+    public Fabricante getFabricanteId() {
+        return fabricanteId;
+    }
+
+    public void setFabricanteId(Fabricante fabricanteId) {
+        this.fabricanteId = fabricanteId;
     }
 }

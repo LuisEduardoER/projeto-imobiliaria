@@ -262,7 +262,7 @@ public class CadastroProduto extends javax.swing.JDialog {
     private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {
         m = new Mensagens();
         if (p != null) {
-            if (p.getProdutoId() != 0) {
+            if (p.getProduto_id() != 0) {
                 if (m.jopDeletar("Deseja realmente excluir este fornecedor ?") == JOptionPane.YES_OPTION) {
 //                    acaoRemover();
                 }
