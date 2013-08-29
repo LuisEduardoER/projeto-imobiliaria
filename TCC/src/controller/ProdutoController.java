@@ -5,11 +5,11 @@
 package controller;
 
 import DAO.ProdutoDAO;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.sql.Array;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import modelo.Compra;
 import modelo.Estoque;
 import modelo.Produto;
 import persistencia.exceptions.NonexistentEntityException;
@@ -29,7 +29,12 @@ public class ProdutoController {
         dcbm.addElement(p);
         return dcbm;
     }
-
+    
+    public List<Produto> buscaTodos(){
+        List<Produto> lista = dao.buscarTodos();
+        return lista;
+    }
+    
     public Produto buscaNome(String nome) {
         Produto p = dao.consultarProduto("produtoNome", nome);
         return p;
@@ -44,26 +49,34 @@ public class ProdutoController {
         return dcbm;
     }
 
-    public Produto gravar(Produto produto, String quantidade, String quantidadeMin) {
+    public Produto gravar(Produto produto, Estoque estoque, Compra compra) {
         EstoqueController estoqueController = new EstoqueController();
+        CompraController compraController = new CompraController();
 
         produto.setInserted(Datas.dataAtualDateTime());
-
-        produto = dao.gravar(produto);
-        Estoque estoque = new Estoque();
+        try {
+            produto = dao.gravar(produto);
 
 //        String cnpj = produto.getFabricanteId().getFabricanteCNPJ();
 
 //            FabricanteController fc = new FabricanteController();
 //            produto.setFabricante(fc.buscaByField("cnpj", cnpj));
 
-        estoque.setEstqprodutoId(produto);
-        estoque.setFabricanteId(produto.getFabricanteId());
-        estoque.setQuantidade(Integer.parseInt(quantidade));
-        estoque.setQuantidade(Integer.parseInt(quantidadeMin));
-        
-        estoqueController.aumentarIniciarEstoque(estoque, produto.getProduto_id());
+            estoque.setEstqprodutoId(produto);
+            estoque.setInserted(Datas.dataAtualDateTime());
+//        estoque.setFabricanteId(produto.getFabricanteId());
+//        estoque.setQuantidade(Integer.parseInt(quantidade));
+//        estoque.setQuantidade(Integer.parseInt(quantidadeMin));
 
+            estoqueController.aumentarIniciarEstoque(estoque, produto.getProduto_id());
+
+            compraController.gravar(compra);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            Mensagens m = new Mensagens();
+            m.jopError(e.getMessage());
+        }
         return produto;
 
     }

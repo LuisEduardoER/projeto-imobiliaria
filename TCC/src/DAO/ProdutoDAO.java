@@ -12,6 +12,7 @@ import org.hibernate.Criteria;
 import org.hibernate.Session;
 import modelo.Produto;
 import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
@@ -65,6 +66,21 @@ public class ProdutoDAO implements Serializable {
         Criteria criteria = montarCriteria(searchField, searchString);
         
         return  (Produto) criteria.uniqueResult();
+    }
+    
+    @SuppressWarnings("unchecked")
+    public List<Produto> buscarTodos() {
+        Criteria criteria = session.createCriteria(Produto.class, "produto");
+        criteria.createCriteria("produto.fornecedorId", "frn");
+        criteria.createCriteria("produto.fabricanteId", "fbr");
+        
+        ProjectionList p = Projections.projectionList();
+        p.add(Projections.groupProperty("frn.fornecedorNome"));
+        p.add(Projections.groupProperty("fbr.fabricanteNome"));
+        
+        criteria.add(Restrictions.eq("produto.deleted", "f"));
+        
+        return  criteria.list();
     }
 
     private Criteria montarCriteria(String searchField, String searchString) {

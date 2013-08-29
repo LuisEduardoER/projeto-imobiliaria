@@ -4,8 +4,9 @@
  */
 package modelo;
 
+import java.beans.PropertyChangeListener;
+import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.CascadeType;
@@ -21,8 +22,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 
@@ -35,12 +35,16 @@ import org.joda.time.LocalDateTime;
 @NamedQueries({
     @NamedQuery(name = "Produto.findAll", query = "SELECT p FROM Produto p")})
 public class Produto implements Serializable {
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     @Column(name = "inserted")
     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
     private LocalDateTime inserted;
     @Column(name = "updated")
     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
     private LocalDateTime updated;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtoId", fetch = FetchType.LAZY)
+    private List<Compra> compraList;
     @JoinColumn(name = "fornecedorId", referencedColumnName = "fornecedorId")
     @ManyToOne(fetch = FetchType.LAZY)
     private Fornecedor fornecedorId;
@@ -94,7 +98,9 @@ public class Produto implements Serializable {
     }
 
     public void setProdutoNome(String produtoNome) {
+        String oldProdutoNome = this.produtoNome;
         this.produtoNome = produtoNome;
+        changeSupport.firePropertyChange("produtoNome", oldProdutoNome, produtoNome);
     }
 
     public Float getValor() {
@@ -102,7 +108,9 @@ public class Produto implements Serializable {
     }
 
     public void setValor(Float valor) {
+        Float oldValor = this.valor;
         this.valor = valor;
+        changeSupport.firePropertyChange("valor", oldValor, valor);
     }
 
     public String getProdutoCodigoBarras() {
@@ -110,7 +118,9 @@ public class Produto implements Serializable {
     }
 
     public void setProdutoCodigoBarras(String produtoCodigoBarras) {
+        String oldProdutoCodigoBarras = this.produtoCodigoBarras;
         this.produtoCodigoBarras = produtoCodigoBarras;
+        changeSupport.firePropertyChange("produtoCodigoBarras", oldProdutoCodigoBarras, produtoCodigoBarras);
     }
 
     public Character getDeleted() {
@@ -118,7 +128,9 @@ public class Produto implements Serializable {
     }
 
     public void setDeleted(Character deleted) {
+        Character oldDeleted = this.deleted;
         this.deleted = deleted;
+        changeSupport.firePropertyChange("deleted", oldDeleted, deleted);
     }
 
     public List<Estoque> getEstoqueList() {
@@ -154,28 +166,14 @@ public class Produto implements Serializable {
         return "modelo.Produto[ produtoId=" + produto_id + " ]";
     }
 
-    public LocalDateTime getInserted() {
-        return inserted;
-    }
-
-    public void setInserted(LocalDateTime inserted) {
-        this.inserted = inserted;
-    }
-
-    public LocalDateTime getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(LocalDateTime updated) {
-        this.updated = updated;
-    }
-
     public Fornecedor getFornecedorId() {
         return fornecedorId;
     }
 
     public void setFornecedorId(Fornecedor fornecedorId) {
+        Fornecedor oldFornecedorId = this.fornecedorId;
         this.fornecedorId = fornecedorId;
+        changeSupport.firePropertyChange("fornecedorId", oldFornecedorId, fornecedorId);
     }
 
     public Fabricante getFabricanteId() {
@@ -183,7 +181,45 @@ public class Produto implements Serializable {
     }
 
     public void setFabricanteId(Fabricante fabricanteId) {
+        Fabricante oldFabricanteId = this.fabricanteId;
         this.fabricanteId = fabricanteId;
+        changeSupport.firePropertyChange("fabricanteId", oldFabricanteId, fabricanteId);
+    }
+
+    public LocalDateTime getInserted() {
+        return inserted;
+    }
+
+    public void setInserted(LocalDateTime inserted) {
+        LocalDateTime oldInserted = this.inserted;
+        this.inserted = inserted;
+        changeSupport.firePropertyChange("inserted", oldInserted, inserted);
+    }
+
+    public LocalDateTime getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(LocalDateTime updated) {
+        LocalDateTime oldUpdated = this.updated;
+        this.updated = updated;
+        changeSupport.firePropertyChange("updated", oldUpdated, updated);
+    }
+
+    public List<Compra> getCompraList() {
+        return compraList;
+    }
+
+    public void setCompraList(List<Compra> compraList) {
+        this.compraList = compraList;
+    }
+
+    public void addPropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.addPropertyChangeListener(listener);
+    }
+
+    public void removePropertyChangeListener(PropertyChangeListener listener) {
+        changeSupport.removePropertyChangeListener(listener);
     }
     
 }

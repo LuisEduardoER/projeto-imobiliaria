@@ -5,9 +5,9 @@
 package modelo;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,8 +18,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 
@@ -39,6 +37,8 @@ public class Fornecedor implements Serializable {
     @Column(name = "updated")
     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
     private LocalDateTime updated;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fornecedorId", fetch = FetchType.LAZY)
+    private List<Compra> compraList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -146,5 +146,13 @@ public class Fornecedor implements Serializable {
 
     public void setUpdated(LocalDateTime updated) {
         this.updated = updated;
+    }
+
+    public List<Compra> getCompraList() {
+        return compraList;
+    }
+
+    public void setCompraList(List<Compra> compraList) {
+        this.compraList = compraList;
     }
 }
