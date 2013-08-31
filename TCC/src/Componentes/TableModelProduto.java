@@ -18,6 +18,8 @@ public class TableModelProduto extends AbstractTableModel {
     // Lista de Sócios a serem exibidos na tabela
     private List<Produto> linhas;
 
+    
+    
     // Cria um SocioTableModel sem nenhuma linha
     public TableModelProduto() {
         linhas = new ArrayList<Produto>();

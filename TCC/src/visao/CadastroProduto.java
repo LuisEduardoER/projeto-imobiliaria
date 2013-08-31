@@ -17,7 +17,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
+import javax.swing.table.TableModel;
 import modelo.Compra;
 import modelo.Estoque;
 import modelo.Fabricante;
@@ -81,9 +81,9 @@ public class CadastroProduto extends javax.swing.JDialog {
         jpControles.add(jbExcluir);
         jpControles.add(jbGravar);
         produtoList = produtoController.buscaTodos();
-        modeloProduto = new TableModelProduto(produtoList);
-//        jTable1 = new JTable();
+        modeloProduto = new TableModelProduto();
         jTable1.setModel(modeloProduto);
+        modeloProduto.addListaDeProdutos(produtoList);
         jTable1.updateUI();
     }
 

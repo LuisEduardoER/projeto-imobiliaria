@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
 import modelo.Compra;
-import modelo.Produto;
 
 /**
  *
@@ -87,46 +86,43 @@ public class TableModelCompra extends AbstractTableModel {
         }
     }
 
-    @Override
-    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
-        // Pega o sócio referente a linha especificada.
-        Compra compra = linhas.get(rowIndex);
+//    @Override
+//    public void setValueAt(Object aValue, int rowIndex, int columnIndex) {
+//        // Pega o sócio referente a linha especificada.
+//        Compra compra = linhas.get(rowIndex);
+//
+//        switch (columnIndex) {
+//
+//            case PRODUTO:
+//                produto.setProdutoNome((String) aValue);
+//            case VALOR:
+//                produto.setValor((Float) aValue);
+//                break;
+//            default:
+//                throw new IndexOutOfBoundsException("columnIndex out of bounds");
+//        }
+//        fireTableCellUpdated(rowIndex, columnIndex);
+//    }
 
-        switch (columnIndex) {
-
-            case CODIGO_BARRAS:
-                produto.setProdutoCodigoBarras((String) aValue);
-                break;
-            case PRODUTO:
-                produto.setProdutoNome((String) aValue);
-            case VALOR:
-                produto.setValor((Float) aValue);
-                break;
-            default:
-                throw new IndexOutOfBoundsException("columnIndex out of bounds");
-        }
-        fireTableCellUpdated(rowIndex, columnIndex);
-    }
-
-    public Produto getProduto(int indiceLinha) {
+    public Compra getCompra(int indiceLinha) {
         return linhas.get(indiceLinha);
     }
 
-    public void addProduto(Produto produto) {
-        linhas.add(produto);
+    public void addComrpa(Compra compra) {
+        linhas.add(compra);
         int ultimoIndice = getRowCount() - 1;
         fireTableRowsInserted(ultimoIndice, ultimoIndice);
     }
 
-    public void removeProduto(int indiceLinha) {
+    public void removeCompra(int indiceLinha) {
         linhas.remove(indiceLinha);
         fireTableRowsDeleted(indiceLinha, indiceLinha);
     }
 
-    public void addListaDeProdutos(List<Produto> produtos) {
+    public void addListaDeCompras(List<Compra> compra) {
         int indice = getRowCount();
-        linhas.addAll(produtos);
-        fireTableRowsInserted(indice, indice + produtos.size());
+        linhas.addAll(compra);
+        fireTableRowsInserted(indice, indice + compra.size());
     }
 
     public void limpar() {

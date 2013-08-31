@@ -8,7 +8,9 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,6 +21,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -66,6 +69,9 @@ public class Compra implements Serializable {
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Fornecedor fornecedorId;
 
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "compraId", fetch = FetchType.LAZY)
+    private List<Titulopagar> titulopagarList;
+    
     public Compra() {
         this.deleted = 'f';
     }
@@ -117,6 +123,14 @@ public class Compra implements Serializable {
         Fornecedor oldFornecedorId = this.fornecedorId;
         this.fornecedorId = fornecedorId;
         changeSupport.firePropertyChange("fornecedorId", oldFornecedorId, fornecedorId);
+    }
+
+    public List<Titulopagar> getTitulopagarList() {
+        return titulopagarList;
+    }
+
+    public void setTitulopagarList(List<Titulopagar> titulopagarList) {
+        this.titulopagarList = titulopagarList;
     }
 
     @Override
