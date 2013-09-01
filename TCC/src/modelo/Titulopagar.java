@@ -55,6 +55,7 @@ public class Titulopagar implements Serializable {
     private Compra compraId;
 
     public Titulopagar() {
+        this.baixado = 'f';
     }
 
     public Titulopagar(Integer tituloId) {

@@ -8,8 +8,7 @@ import controller.Mensagens;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
-import modelo.Compra;
-import modelo.Produto;
+import modelo.Titulopagar;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
@@ -20,56 +19,56 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author Bruno
  */
-public class CompraDAO implements Serializable {
+public class TituloPagarDAO implements Serializable {
 
     static Mensagens m;
     EntityManager em;
     private Criteria select;
     Session session; 
     
-    public CompraDAO() {
+    public TituloPagarDAO() {
         em = new EntityManagerFactory().getEntityManager();
         session = (Session) em.getDelegate();
     }
 
-    public Compra gravar(Compra compra) {
+    public Titulopagar gravar(Titulopagar tituloPagar) {
         em.getTransaction().begin();
-        compra = em.merge(compra);
+        tituloPagar = em.merge(tituloPagar);
         em.getTransaction().commit();
-        return compra;
+        return tituloPagar;
     }
 
-    public Compra atualizar(Compra compra) {
+    public Titulopagar atualizar(Titulopagar tituloPagar) {
         em.getTransaction().begin();
-        compra = em.merge(compra);
+        tituloPagar = em.merge(tituloPagar);
         em.getTransaction().commit();
-        return compra;
+        return tituloPagar;
     }
 
-    public void apagar(Compra compra) {
+    public void apagar(Titulopagar tituloPagar) {
         em.getTransaction().begin();
-        compra = em.getReference(Compra.class, compra.getCompraId());
-        em.remove(compra);
+        tituloPagar = em.getReference(Titulopagar.class, tituloPagar.getCompraId());
+        em.remove(tituloPagar);
         em.getTransaction().commit();
     }
 
     @SuppressWarnings("unchecked")
-    public List<Compra> consultarTodos() {
-       Criteria criteria = session.createCriteria(Compra.class, "compra");
+    public List<Titulopagar> consultarTodos() {
+       Criteria criteria = session.createCriteria(Titulopagar.class, "compra");
         criteria.createCriteria("compra.fornecedorId", "frn");
         criteria.createCriteria("compra.produtoId", "prd");
-        return criteria.list();
+        return select.list();
     }
     
     @SuppressWarnings("unchecked")
-    public Compra consultarCompra(String searchField, String searchString) {
+    public Titulopagar consultarCompra(String searchField, String searchString) {
         Criteria criteria = montarCriteria(searchField, searchString);
         
-        return  (Compra) criteria.uniqueResult();
+        return  (Titulopagar) criteria.uniqueResult();
     }
 
     private Criteria montarCriteria(String searchField, String searchString) {
-        Criteria criteria = session.createCriteria(Compra.class, "compra");
+        Criteria criteria = session.createCriteria(Titulopagar.class, "tituloPagar");
         
         if(searchField != null && !searchField.equals("") && searchString != null && !searchString.equals("")){
             criteria.add(Restrictions.ilike(searchField, searchString, MatchMode.ANYWHERE));

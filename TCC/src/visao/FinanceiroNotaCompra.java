@@ -4,6 +4,21 @@
  */
 package visao;
 
+import Componentes.Componentes;
+import Componentes.TableModelCompra;
+import controller.CompraController;
+import controller.FornecedorController;
+import controller.Mensagens;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import modelo.Compra;
+import modelo.Fornecedor;
+import modelo.Produto;
+
 /**
  *
  * @author Bruno
@@ -13,9 +28,56 @@ public class FinanceiroNotaCompra extends javax.swing.JDialog {
     /**
      * Creates new form FinanceiroNotaCompra
      */
+    
+    Componentes c = new Componentes();
+    JButton jbGravar;
+    JButton jbBuscar;
+    JButton jbExcluir;
+    Mensagens m;
+    Produto produto;
+    Compra compra;
+    Fornecedor fornecedor;
+    FornecedorController fornecedorController;
+    List<Compra> compraList;
+    TableModelCompra modeloCompra;
+    CompraController compraController;
+    
     public FinanceiroNotaCompra(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+        compraController = new CompraController();
+        jbGravar = c.criaBotaoGravar();
+        jbBuscar = c.criaBotaoBuscar();
+        jbExcluir = c.criaBotaoExcluir();
+
+        jbGravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGravarActionPerformed(evt);
+            }
+        });
+
+        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarActionPerformed(evt);
+            }
+        });
+        
+        jbExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbExcluirActionPerformed(evt);
+            }
+        });
+
+        jpControles.add(jbBuscar);
+        jpControles.add(jbGravar);
+        jpControles.add(jbExcluir);
+        compraList = compraController.buscaTodos();
+        modeloCompra = new TableModelCompra();
+        jTable1.setModel(modeloCompra);
+        modeloCompra.addListaDeCompras(compraList);
+        jTable1.updateUI();
+        
     }
 
     /**
@@ -39,14 +101,17 @@ public class FinanceiroNotaCompra extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jcbFornecedor = new javax.swing.JComboBox();
+        jcbFornecedorCNPJ = new javax.swing.JComboBox();
         jcbProduto = new javax.swing.JComboBox();
         jtfValor = new javax.swing.JTextField();
         jtfQuantidade = new javax.swing.JTextField();
+        jbBuscarFornecedor = new javax.swing.JButton();
+        jbBuscarProduto = new javax.swing.JButton();
         jpControles = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nota de Entrada");
+        setResizable(false);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -111,6 +176,22 @@ public class FinanceiroNotaCompra extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jbBuscarFornecedor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/search_16x16.png"))); // NOI18N
+        jbBuscarFornecedor.setToolTipText("Buscar Fornecedor");
+        jbBuscarFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarFornecedorActionPerformed(evt);
+            }
+        });
+
+        jbBuscarProduto.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/search_16x16.png"))); // NOI18N
+        jbBuscarProduto.setToolTipText("Buscar Produto");
+        jbBuscarProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbBuscarProdutoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -118,19 +199,27 @@ public class FinanceiroNotaCompra extends javax.swing.JDialog {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jcbFornecedor, 0, 283, Short.MAX_VALUE)
+                    .addComponent(jcbFornecedorCNPJ, 0, 283, Short.MAX_VALUE)
                     .addComponent(jcbProduto, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jtfValor)
                     .addComponent(jtfQuantidade))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jbBuscarFornecedor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbBuscarProduto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jcbFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jcbFornecedorCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbBuscarFornecedor))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jcbProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jcbProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jbBuscarProduto))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -143,11 +232,10 @@ public class FinanceiroNotaCompra extends javax.swing.JDialog {
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 335, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,15 +252,15 @@ public class FinanceiroNotaCompra extends javax.swing.JDialog {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(272, Short.MAX_VALUE))
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 439, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(250, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(84, Short.MAX_VALUE))
+                .addContainerGap(74, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Cadastro", jPanel2);
@@ -199,12 +287,45 @@ public class FinanceiroNotaCompra extends javax.swing.JDialog {
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 277, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpControles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(56, Short.MAX_VALUE))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
-        pack();
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-740)/2, (screenSize.height-362)/2, 740, 362);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jbBuscarFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarFornecedorActionPerformed
+        acaoBuscarFornecedor();
+    }//GEN-LAST:event_jbBuscarFornecedorActionPerformed
+
+    private void jbBuscarProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbBuscarProdutoActionPerformed
+        acaoBuscarProduto();
+    }//GEN-LAST:event_jbBuscarProdutoActionPerformed
+
+    
+     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {
+        acaoGravar();
+    }
+
+    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {
+        //acaoBuscar();
+    }
+    
+    private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {
+        m = new Mensagens();
+        if (p != null) {
+            if (p.getProduto_id() != 0) {
+                if (m.jopDeletar("Deseja realmente excluir este fornecedor ?") == JOptionPane.YES_OPTION) {
+//                    acaoRemover();
+                }
+            } else {
+                m.jopAlerta("Para excluir registro, é nescessário efetuar uma busca.");
+            }
+        } else {
+            m.jopAlerta("Para excluir registro, é nescessário efetuar uma busca.");
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -216,7 +337,7 @@ public class FinanceiroNotaCompra extends javax.swing.JDialog {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -246,6 +367,7 @@ public class FinanceiroNotaCompra extends javax.swing.JDialog {
             }
         });
     }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -259,10 +381,80 @@ public class FinanceiroNotaCompra extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JComboBox jcbFornecedor;
+    private javax.swing.JButton jbBuscarFornecedor;
+    private javax.swing.JButton jbBuscarProduto;
+    private javax.swing.JComboBox jcbFornecedorCNPJ;
     private javax.swing.JComboBox jcbProduto;
     private javax.swing.JPanel jpControles;
     private javax.swing.JTextField jtfQuantidade;
     private javax.swing.JTextField jtfValor;
     // End of variables declaration//GEN-END:variables
+
+    private void acaoGravar() {
+        compra = new Compra();
+        StringBuilder sb = new StringBuilder();
+        
+        if(fornecedor.getFornecedorCNPJ() != null){
+            compra.setFornecedorId(fornecedor);
+        }else{
+            sb.append("Fornecedor não pode ser vazio!");    
+        }
+        
+        if(pro)
+        
+    }
+
+    private boolean acaoBuscarFornecedor() {
+        try {
+            if (jcbFornecedorCNPJ.getSelectedItem() != null) {
+                if (!jcbFornecedorCNPJ.getSelectedItem().toString().equals("")) {
+
+
+                    fornecedorController = new FornecedorController();
+                    String s = jcbFornecedorCNPJ.getSelectedItem().toString();
+                    DefaultComboBoxModel dcbm = fornecedorController.buscar("fornecedorCNPJ", s);
+
+                    if (dcbm != null) {
+                        jcbFornecedorCNPJ.setModel(dcbm);
+
+                        if (jcbFornecedorCNPJ.getItemCount() >= 1) {
+                            jcbFornecedorCNPJ.setSelectedIndex(-1);
+                            jcbFornecedorCNPJ.setSelectedIndex(0);
+                            fornecedor = (Fornecedor) jcbFornecedorCNPJ.getSelectedItem();
+                            return true;
+                        } else {
+                            m = new Mensagens();
+                            m.jopAviso("Nenhum fornecedor encontrado.");
+                            return false;
+                        }
+                    } else {
+                        m = new Mensagens();
+                        m.jopAviso("Nenhum fornecedor encontrado.");
+                        return false;
+                    }
+                } else {
+                    m = new Mensagens();
+                    m.jopAviso("É nescessário informar o CNPJ do fornecedor para efetuar uma busca.");
+                    fornecedor = null;
+                    fornecedorController = null;
+                    return false;
+                }
+            } else {
+                m = new Mensagens();
+                m.jopAviso("É nescessário informar o CNPJ do fornecedor para efetuar uma busca.");
+                fornecedor = null;
+                fornecedorController = null;
+                return false;
+            }
+        } catch (Exception ex) {
+            Logger.getLogger(CadastroFabricante.class.getName()).log(Level.SEVERE, null, ex + "\n É nescessário informar o CNPJ do fornecedor para efetuar uma busca.");
+            m = new Mensagens();
+            m.jopAlerta("É nescessário informar o CNPJ do fornecedor para efetuar uma busca.");
+            return false;
+        }
+    }
+
+    private void acaoBuscarProduto() {
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
 }

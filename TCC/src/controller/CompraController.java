@@ -8,6 +8,7 @@ import DAO.CompraDAO;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import modelo.Compra;
+import modelo.Titulopagar;
 import persistencia.exceptions.NonexistentEntityException;
 import util.Datas;
 
@@ -26,6 +27,11 @@ public class CompraController {
         return dcbm;
     }
 
+    public List<Compra> buscaTodos(){
+        List<Compra> lista = dao.consultarTodos();
+        return lista;
+    }
+    
     public Compra buscaNome(String nome) {
         Compra c = dao.consultarCompra("compra", nome);
         return c;
@@ -40,10 +46,18 @@ public class CompraController {
         return dcbm;
     }
 
-    public Compra gravar(Compra compra) {
+    public Titulopagar gravar(Compra compra) {
         compra.setInserted(Datas.dataAtualDateTime());
         compra = dao.gravar(compra);
-        return compra;
+        
+        TituloPagarController tituloController = new TituloPagarController();
+        Titulopagar tP = new Titulopagar();
+        
+        tP.setCompraId(compra);
+        
+        tP = tituloController.gravar(tP);
+        
+        return tP;
     }
 
     public Compra setDeleted(Compra compra) throws NonexistentEntityException, Exception {
