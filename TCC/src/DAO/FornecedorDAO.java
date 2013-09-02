@@ -86,6 +86,17 @@ public class FornecedorDAO implements Serializable {
         }
         
         return criteria;
+    }  
+    
+    public Fornecedor buscarFornecedor(String searchField, String searchString) {
+        Criteria criteria = session.createCriteria(Fornecedor.class, "fornecedor");
+        
+        if(searchField != null && !searchField.equals("") && searchString != null && !searchString.equals("")){
+            criteria.add(Restrictions.ilike(searchField, searchString, MatchMode.ANYWHERE));
+        }
+            criteria.add(Restrictions.eq("fornecedor.deleted", "f"));
+        
+        return (Fornecedor) criteria.uniqueResult();
     }    
     
     public Integer rowCount(String searchField, String searchString) {

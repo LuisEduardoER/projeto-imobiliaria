@@ -34,6 +34,14 @@ public class ProdutoController {
         List<Produto> lista = dao.buscarTodos();
         return lista;
     }
+    public DefaultComboBoxModel<Produto> buscaTodosDCBM(){
+        DefaultComboBoxModel<Produto> dcbm = new DefaultComboBoxModel<>();
+        List<Produto> lista = dao.buscarTodos();
+        for (Produto produto : lista) {
+            dcbm.addElement(produto);
+        }
+        return dcbm;
+    }
     
     public Produto buscaNome(String nome) {
         Produto p = dao.consultarProduto("produtoNome", nome);

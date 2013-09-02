@@ -61,7 +61,7 @@ public class TituloPagarDAO implements Serializable {
     }
     
     @SuppressWarnings("unchecked")
-    public Titulopagar consultarCompra(String searchField, String searchString) {
+    public Titulopagar consultarTituloPagar(String searchField, String searchString) {
         Criteria criteria = montarCriteria(searchField, searchString);
         
         return  (Titulopagar) criteria.uniqueResult();
@@ -71,8 +71,9 @@ public class TituloPagarDAO implements Serializable {
         Criteria criteria = session.createCriteria(Titulopagar.class, "tituloPagar");
         
         if(searchField != null && !searchField.equals("") && searchString != null && !searchString.equals("")){
-            criteria.add(Restrictions.ilike(searchField, searchString, MatchMode.ANYWHERE));
+            criteria.add(Restrictions.ilike(searchField, searchString, MatchMode.EXACT));
         }
+            criteria.add(Restrictions.eq("tituloPagar.deleted", "f"));
         
         return criteria;
     }    

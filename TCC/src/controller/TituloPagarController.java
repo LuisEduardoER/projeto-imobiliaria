@@ -19,15 +19,15 @@ public class TituloPagarController {
 
     TituloPagarDAO dao = new TituloPagarDAO();
 
-    public DefaultComboBoxModel<Titulopagar> buscar(String field, String value) {
-        DefaultComboBoxModel<Titulopagar> dcbm = new DefaultComboBoxModel<>();
-        Titulopagar titulo = dao.consultarCompra(field, value);
-        dcbm.addElement(titulo);
-        return dcbm;
-    }
+//    public DefaultComboBoxModel<Titulopagar> buscar(String field, String value) {
+//        DefaultComboBoxModel<Titulopagar> dcbm = new DefaultComboBoxModel<>();
+//        Titulopagar titulo = dao.consultarCompra(field, value);
+//        dcbm.addElement(titulo);
+//        return dcbm;
+//    }
 
-    public Titulopagar buscaNome(String nome) {
-        Titulopagar tituloPagar = dao.consultarCompra("tituloPagar", nome);
+    public Titulopagar buscaTituloPagar(String searchField, String searchString) {
+        Titulopagar tituloPagar = dao.consultarTituloPagar(searchField, searchString);
         return tituloPagar;
     }
 
@@ -43,6 +43,14 @@ public class TituloPagarController {
     public Titulopagar gravar(Titulopagar tituloPagar) {
         tituloPagar.setInserted(Datas.dataAtualDateTime());
         tituloPagar = dao.gravar(tituloPagar);
+        return tituloPagar;
+    }
+    
+    public Titulopagar baixarTituloPagar(Titulopagar tituloPagar) {
+        tituloPagar.setUpdated(Datas.dataAtualDateTime());
+        tituloPagar.setDataBaixado(Datas.dataAtualDateTime());
+        tituloPagar.setBaixado('t');
+        tituloPagar = dao.atualizar(tituloPagar);
         return tituloPagar;
     }
 

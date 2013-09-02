@@ -48,6 +48,11 @@ public class FornecedorController {
         }
         return dcbm;
     }
+    
+    public Fornecedor buscarFornecedor(String field, String value) {
+        Fornecedor fornecedor = dao.buscarFornecedor(field,value);
+        return fornecedor;
+    }
 
     public Fornecedor gravar(Fornecedor fornecedor) {
         fornecedor = dao.gravar(fornecedor);
