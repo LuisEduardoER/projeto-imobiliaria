@@ -163,7 +163,7 @@ public class Produto implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.Produto[ produtoId=" + produto_id + " ]";
+        return produtoNome;
     }
 
     public Fornecedor getFornecedorId() {
