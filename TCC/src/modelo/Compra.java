@@ -41,7 +41,7 @@ import org.joda.time.LocalDateTime;
 public class Compra implements Serializable {
     @Transient
     private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
-    @Basic(optional = false)
+    @Basic(optional = true)
     @Column(name = "dataCompra")
     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDate")
     private LocalDate dataCompra;

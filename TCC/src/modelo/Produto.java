@@ -74,6 +74,7 @@ public class Produto implements Serializable {
     private List<Estoque> estoqueList;
 
     public Produto() {
+        this.deleted = 'f';
     }
 
     public Produto(Integer produtoId) {

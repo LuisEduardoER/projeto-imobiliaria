@@ -99,8 +99,8 @@ public class TableModelProduto extends AbstractTableModel {
                 }
 
             case FORNECEDOR:
-                if (produto.getFabricanteId().getFabricanteNome() != null) {
-                    return produto.getFabricanteId().getFabricanteNome();
+                if (produto.getFornecedorId().getFornecedorNome() != null) {
+                    return produto.getFornecedorId().getFornecedorNome();
                 } else {
                     return "";
                 }
