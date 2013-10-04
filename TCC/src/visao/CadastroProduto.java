@@ -17,7 +17,6 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import javax.swing.table.TableModel;
 import modelo.Compra;
 import modelo.Estoque;
 import modelo.Fabricante;

@@ -47,6 +47,11 @@ public class ProdutoController {
         Produto p = dao.consultarProduto("produtoNome", nome);
         return p;
     }
+    
+    public Produto buscaCodigoBarra(String codigoBarra) {
+        Produto p = dao.consultarProduto("produtoCodigoBarras", codigoBarra);
+        return p;
+    }
 
     public DefaultComboBoxModel<Produto> listByField(String field, String value) {
         DefaultComboBoxModel<Produto> dcbm = new DefaultComboBoxModel<>();
@@ -77,7 +82,8 @@ public class ProdutoController {
 //        estoque.setQuantidade(Integer.parseInt(quantidadeMin));
 
             estoqueController.aumentarIniciarEstoque(estoque, produto.getProduto_id());
-
+            
+            compra.setProdutoId(produto);
             compraController.gravar(compra);
             
         } catch (Exception e) {

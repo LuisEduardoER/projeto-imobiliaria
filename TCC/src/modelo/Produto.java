@@ -35,14 +35,17 @@ import org.joda.time.LocalDateTime;
 @NamedQueries({
     @NamedQuery(name = "Produto.findAll", query = "SELECT p FROM Produto p")})
 public class Produto implements Serializable {
-    @Transient
-    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
+
     @Column(name = "inserted")
     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
     private LocalDateTime inserted;
     @Column(name = "updated")
     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
     private LocalDateTime updated;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtoId", fetch = FetchType.LAZY)
+    private List<Itemvenda> itemvendaList;
+    @Transient
+    private PropertyChangeSupport changeSupport = new PropertyChangeSupport(this);
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "produtoId", fetch = FetchType.LAZY)
     private List<Compra> compraList;
     @JoinColumn(name = "fornecedorId", referencedColumnName = "fornecedorId")
@@ -52,13 +55,11 @@ public class Produto implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private Fabricante fabricanteId;
     private static final long serialVersionUID = 1L;
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "produto_id")
     private Integer produto_id;
-    
     @Basic(optional = false)
     @Column(name = "produtoNome")
     private String produtoNome;
@@ -69,7 +70,6 @@ public class Produto implements Serializable {
     private String produtoCodigoBarras;
     @Column(name = "deleted")
     private Character deleted;
-    
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estqprodutoId", fetch = FetchType.LAZY)
     private List<Estoque> estoqueList;
 
@@ -134,6 +134,38 @@ public class Produto implements Serializable {
         changeSupport.firePropertyChange("deleted", oldDeleted, deleted);
     }
 
+    public LocalDateTime getInserted() {
+        return inserted;
+    }
+
+    public void setInserted(LocalDateTime inserted) {
+        this.inserted = inserted;
+    }
+
+    public LocalDateTime getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(LocalDateTime updated) {
+        this.updated = updated;
+    }
+
+    public List<Itemvenda> getItemvendaList() {
+        return itemvendaList;
+    }
+
+    public void setItemvendaList(List<Itemvenda> itemvendaList) {
+        this.itemvendaList = itemvendaList;
+    }
+
+    public PropertyChangeSupport getChangeSupport() {
+        return changeSupport;
+    }
+
+    public void setChangeSupport(PropertyChangeSupport changeSupport) {
+        this.changeSupport = changeSupport;
+    }
+
     public List<Estoque> getEstoqueList() {
         return estoqueList;
     }
@@ -187,26 +219,6 @@ public class Produto implements Serializable {
         changeSupport.firePropertyChange("fabricanteId", oldFabricanteId, fabricanteId);
     }
 
-    public LocalDateTime getInserted() {
-        return inserted;
-    }
-
-    public void setInserted(LocalDateTime inserted) {
-        LocalDateTime oldInserted = this.inserted;
-        this.inserted = inserted;
-        changeSupport.firePropertyChange("inserted", oldInserted, inserted);
-    }
-
-    public LocalDateTime getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(LocalDateTime updated) {
-        LocalDateTime oldUpdated = this.updated;
-        this.updated = updated;
-        changeSupport.firePropertyChange("updated", oldUpdated, updated);
-    }
-
     public List<Compra> getCompraList() {
         return compraList;
     }
@@ -222,5 +234,4 @@ public class Produto implements Serializable {
     public void removePropertyChangeListener(PropertyChangeListener listener) {
         changeSupport.removePropertyChangeListener(listener);
     }
-    
 }

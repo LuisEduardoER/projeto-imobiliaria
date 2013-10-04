@@ -4,9 +4,13 @@
  */
 package visao;
 
+import controller.Mensagens;
 import controller.ProdutoController;
 import java.awt.event.KeyEvent;
-import javax.swing.JTextField;
+import java.util.Enumeration;
+import javax.swing.AbstractButton;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
 import modelo.Produto;
 
 /**
@@ -18,12 +22,15 @@ public class Venda extends javax.swing.JDialog {
     ProdutoController pc;
     Produto produto;
     Float totalVenda = Float.MIN_VALUE;
+    Mensagens m;
+
     /**
      * Creates new form Venda
      */
     public Venda(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        jtaLista.append("\n");
     }
 
     /**
@@ -35,6 +42,7 @@ public class Venda extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        pagamentoRbg = new javax.swing.ButtonGroup();
         jpTotais = new javax.swing.JPanel();
         jpTotaisL_JTF = new javax.swing.JPanel();
         jlTotal = new javax.swing.JLabel();
@@ -56,6 +64,10 @@ public class Venda extends javax.swing.JDialog {
         jpListaProds = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jtaLista = new javax.swing.JTextArea();
+        jpPagamento = new javax.swing.JPanel();
+        jrbDinheiro = new javax.swing.JRadioButton();
+        jrbCheque = new javax.swing.JRadioButton();
+        jrbCartao = new javax.swing.JRadioButton();
 
         setTitle("Venda");
         setResizable(false);
@@ -64,10 +76,15 @@ public class Venda extends javax.swing.JDialog {
 
         jlTotal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jlTotal.setForeground(new java.awt.Color(0, 153, 51));
-        jlTotal.setText("R$ 0,0000");
+        jlTotal.setText("R$ 0.0000");
         jpTotaisL_JTF.add(jlTotal);
 
         jtfDinheiro.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jtfDinheiro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtfDinheiroKeyPressed(evt);
+            }
+        });
         jpTotaisL_JTF.add(jtfDinheiro);
 
         jlTroco.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -81,7 +98,7 @@ public class Venda extends javax.swing.JDialog {
         jpTotaisL.add(jLabel4);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel5.setText("Dinheiro (R$):");
+        jLabel5.setText("Total Pago (R$):");
         jpTotaisL.add(jLabel5);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -180,21 +197,73 @@ public class Venda extends javax.swing.JDialog {
         );
         jpListaProdsLayout.setVerticalGroup(
             jpListaProdsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+        );
+
+        jpPagamento.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo de Pagamento"));
+
+        pagamentoRbg.add(jrbDinheiro);
+        jrbDinheiro.setSelected(true);
+        jrbDinheiro.setText("Dinheiro");
+        jrbDinheiro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbDinheiroActionPerformed(evt);
+            }
+        });
+
+        pagamentoRbg.add(jrbCheque);
+        jrbCheque.setText("Cheque");
+        jrbCheque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbChequeActionPerformed(evt);
+            }
+        });
+
+        pagamentoRbg.add(jrbCartao);
+        jrbCartao.setText("Cartão");
+        jrbCartao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbCartaoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jpPagamentoLayout = new javax.swing.GroupLayout(jpPagamento);
+        jpPagamento.setLayout(jpPagamentoLayout);
+        jpPagamentoLayout.setHorizontalGroup(
+            jpPagamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpPagamentoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jpPagamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jrbDinheiro)
+                    .addComponent(jrbCheque)
+                    .addComponent(jrbCartao))
+                .addContainerGap(120, Short.MAX_VALUE))
+        );
+        jpPagamentoLayout.setVerticalGroup(
+            jpPagamentoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpPagamentoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jrbDinheiro)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jrbCheque)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jrbCartao)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jpListaProds, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(0, 399, Short.MAX_VALUE)
-                        .addComponent(jpTotais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jpDetalhesProd, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jpListaProds, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpDetalhesProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jpPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
+                        .addComponent(jpTotais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -204,9 +273,11 @@ public class Venda extends javax.swing.JDialog {
                 .addComponent(jpDetalhesProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jpListaProds, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(jpTotais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jpTotais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jpPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18))
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
@@ -220,6 +291,28 @@ public class Venda extends javax.swing.JDialog {
     private void jtfQuantidadeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfQuantidadeKeyPressed
         setPreviousFocus(evt);
     }//GEN-LAST:event_jtfQuantidadeKeyPressed
+
+    private void jtfDinheiroKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfDinheiroKeyPressed
+        finalizaVenda(evt);
+    }//GEN-LAST:event_jtfDinheiroKeyPressed
+
+    private void jrbDinheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbDinheiroActionPerformed
+        if (jrbDinheiro.isSelected()) {
+            jtfDinheiro.setEnabled(true);
+        }
+    }//GEN-LAST:event_jrbDinheiroActionPerformed
+
+    private void jrbChequeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbChequeActionPerformed
+        if (jrbCheque.isSelected()) {
+            jtfDinheiro.setEnabled(false);
+        }
+    }//GEN-LAST:event_jrbChequeActionPerformed
+
+    private void jrbCartaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbCartaoActionPerformed
+        if (jrbCartao.isSelected()) {
+            jtfDinheiro.setEnabled(false);
+        }
+    }//GEN-LAST:event_jrbCartaoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -277,13 +370,18 @@ public class Venda extends javax.swing.JDialog {
     private javax.swing.JPanel jpDetalheProdL;
     private javax.swing.JPanel jpDetalhesProd;
     private javax.swing.JPanel jpListaProds;
+    private javax.swing.JPanel jpPagamento;
     private javax.swing.JPanel jpTotais;
     private javax.swing.JPanel jpTotaisL;
     private javax.swing.JPanel jpTotaisL_JTF;
+    private javax.swing.JRadioButton jrbCartao;
+    private javax.swing.JRadioButton jrbCheque;
+    private javax.swing.JRadioButton jrbDinheiro;
     private javax.swing.JTextArea jtaLista;
     private javax.swing.JTextField jtfCodigoBarra;
     private javax.swing.JTextField jtfDinheiro;
     private javax.swing.JTextField jtfQuantidade;
+    private javax.swing.ButtonGroup pagamentoRbg;
     // End of variables declaration//GEN-END:variables
 
     private void setNextFocus(KeyEvent evt) {
@@ -302,34 +400,83 @@ public class Venda extends javax.swing.JDialog {
 
     private void buscaProduto() {
         pc = new ProdutoController();
-        produto = pc.buscaNome(jtfCodigoBarra.getText());
-        jlValorPrd.setText(produto.getValor().toString());
+        produto = pc.buscaCodigoBarra(jtfCodigoBarra.getText());
+        if(produto != null){
+            jlValorPrd.setText(produto.getValor().toString());
+        }else{
+            m = new Mensagens();
+            m.jopAlerta("Não foram encontrados produtos com este código de barras");
+            jtfCodigoBarra.requestFocus();
+        }
     }
 
     private void atualizaVenda() {
-        totalVenda = Float.parseFloat(jlTotal.getText());
-        
-        if (!jtfQuantidade.getText().equals("") && jtfQuantidade.getText() != null) {
+
+        if (!jtfQuantidade.getText().equals("") && jtfQuantidade.getText() != null && !jtfCodigoBarra.getText().equals("") && jtfCodigoBarra.getText() != null) {
             if (produto.getValor() != null && produto.getValor() > 0) {
-                Float valorAtual =Float.parseFloat(jlValorPrd.getText());
-                
+
                 float valor = produto.getValor();
                 Float qtd = new Float(jtfQuantidade.getText());
-                Float total = (valor * qtd)+valorAtual;
-                
+                Float total = valor * qtd;
+
                 jlValorPrd.setText("R$ " + total);
-                totalVenda = totalVenda+total;
+                totalVenda = totalVenda + total;
                 jlTotal.setText(totalVenda.toString());
-                
+
                 jtaLista.append("\n");
+                jtaLista.append(produto.getProdutoNome() + " R$ " + produto.getValor().toString() + " x " + jtfQuantidade.getText());
                 jtaLista.append("\n");
-                jtaLista.append(produto.getProdutoNome());
+                jtaLista.append("Sub-Total: R$ " + total);
                 jtaLista.append("\n");
-                jtaLista.append(produto.getValor().toString());
-                
+                jtaLista.append("----------------------------------");
+                jtaLista.append("\n");
+
+                limpaTela();
             }
         } else {
             jlValorPrd.setText(jlValorPrd.getText());
         }
+    }
+
+    public void limpaTela() {
+        jtfCodigoBarra.setText("");
+        jtfQuantidade.setText("");
+        jlValorPrd.setText("");
+    }
+
+    private void finalizaVenda(KeyEvent evt) {
+        
+        if (evt.getKeyChar() == 13 || evt.getKeyChar() == 10) {
+        
+            m = new Mensagens();
+            int i = 0;
+            if (totalVenda > Float.MIN_VALUE) {
+                i = JOptionPane.showConfirmDialog(null, "Deseja finalizar esta venda ?\n"
+                                                       + "Total: " + totalVenda +"\n"
+                                                       + "Forma de pagamento: " + getSelectedPagamento(pagamentoRbg)+"\n",
+                                                         "Finalizar", JOptionPane.YES_NO_OPTION);
+                if (i == JOptionPane.YES_OPTION) {
+                    
+                    jpPagamento.setVisible(true);
+                    
+                    
+                } else {
+                    jtfCodigoBarra.requestFocus();
+                }
+            } else {
+                m.jopAlerta("Para finalizar a venda o valor deve ser superior à 0(zero).");
+            }
+        }
+    }
+
+    public String getSelectedPagamento(ButtonGroup buttonGroup) {
+        for (Enumeration<AbstractButton> buttons = buttonGroup.getElements(); buttons.hasMoreElements();) {
+            AbstractButton button = buttons.nextElement();
+
+            if (button.isSelected()) {
+                return button.getText();
+            }
+        }
+        return null;
     }
 }

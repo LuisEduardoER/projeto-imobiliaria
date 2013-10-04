@@ -142,7 +142,7 @@ public class Fabricante implements Serializable {
 
     public LocalDateTime getInserted() {
         return inserted;
-    }
+}
 
     public void setInserted(LocalDateTime inserted) {
         this.inserted = inserted;

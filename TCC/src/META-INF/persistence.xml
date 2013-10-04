@@ -8,6 +8,9 @@
     <class>modelo.Produto</class>
     <class>modelo.Compra</class>
     <class>modelo.Titulopagar</class>
+    <class>modelo.Venda</class>
+    <class>modelo.Itemvenda</class>
+    <class>modelo.Tipopagamento</class>
     <properties>
       <!--            <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>-->
       <property name="hibernate.connection.username" value="root"/>

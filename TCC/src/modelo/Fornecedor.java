@@ -150,7 +150,7 @@ public class Fornecedor implements Serializable {
 
     public List<Compra> getCompraList() {
         return compraList;
-    }
+}
 
     public void setCompraList(List<Compra> compraList) {
         this.compraList = compraList;

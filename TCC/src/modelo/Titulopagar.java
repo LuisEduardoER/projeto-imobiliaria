@@ -56,6 +56,7 @@ public class Titulopagar implements Serializable {
 
     public Titulopagar() {
         this.baixado = 'f';
+        this.deleted = 'f';
     }
 
     public Titulopagar(Integer tituloId) {

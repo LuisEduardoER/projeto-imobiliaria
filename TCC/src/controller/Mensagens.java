@@ -29,4 +29,10 @@ public class Mensagens {
         int resposta = JOptionPane.showConfirmDialog(null, mensagem, "Cuidado", JOptionPane.YES_NO_OPTION);
         return resposta;
     }
+    
+    public int jopFinalizarVenda(String mensagem) {
+        int resposta = JOptionPane.showConfirmDialog(null, mensagem, "Finalizar", JOptionPane.YES_NO_OPTION);
+        return resposta;
+    }
+    
    }
