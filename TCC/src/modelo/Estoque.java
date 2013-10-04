@@ -46,16 +46,17 @@ public class Estoque implements Serializable {
     @Column(name = "estoqueId")
     private Integer estoqueId;
     @Column(name = "quantidade")
-    private Integer quantidade;
+    private Float quantidade;
     @Column(name = "quantidadeMIN")
-    private Integer quantidadeMIN;
+    private Float quantidadeMIN;
     @Column(name = "deleted")
-    private String deleted;
+    private Character deleted;
     @JoinColumn(name = "estq_produtoId", referencedColumnName = "produto_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Produto estqprodutoId;
 
     public Estoque() {
+        this.deleted = 'f';
     }
 
     public Estoque(Integer estoqueId) {
@@ -75,27 +76,27 @@ public class Estoque implements Serializable {
         this.estoqueId = estoqueId;
     }
 
-    public Integer getQuantidade() {
+    public Float getQuantidade() {
         return quantidade;
     }
 
-    public void setQuantidade(Integer quantidade) {
+    public void setQuantidade(Float quantidade) {
         this.quantidade = quantidade;
     }
 
-    public Integer getQuantidadeMIN() {
+    public Float getQuantidadeMIN() {
         return quantidadeMIN;
     }
 
-    public void setQuantidadeMIN(Integer quantidadeMIN) {
+    public void setQuantidadeMIN(Float quantidadeMIN) {
         this.quantidadeMIN = quantidadeMIN;
     }
 
-    public String getDeleted() {
+    public Character getDeleted() {
         return deleted;
     }
 
-    public void setDeleted(String deleted) {
+    public void setDeleted(Character deleted) {
         this.deleted = deleted;
     }
 

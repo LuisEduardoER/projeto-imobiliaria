@@ -11,7 +11,6 @@ import javax.persistence.EntityManager;
 import modelo.Estoque;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 

@@ -10,6 +10,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import modelo.Estoque;
+import modelo.Produto;
 import persistencia.exceptions.NonexistentEntityException;
 import util.Datas;
 
@@ -37,7 +38,6 @@ public class EstoqueController {
 //        }
 //        return dcbm;
 //    }
-
     public boolean gravar(Estoque estoque) {
         estoque.setInserted(Datas.dataAtualDateTime());
         if (dao.gravar(estoque) != null) {
@@ -56,7 +56,7 @@ public class EstoqueController {
 //            String dataFormatada = dateFormatada.format(date);
 
         estoque.setUpdated(Datas.dataAtualDateTime());
-        estoque.setDeleted("t");
+        estoque.setDeleted('t');
 
         if (dao.atualizar(estoque) != null) {
             return true;
@@ -65,12 +65,22 @@ public class EstoqueController {
         }
     }
 
+    public Estoque atualizar(Estoque estoque){
+       estoque = dao.atualizar(estoque);
+        return estoque;
+    }
+    
+    public Estoque verificaQuantidade(Produto produto) {
+        Estoque estoque = dao.consultarEstoque("estqprodutoId", produto.getProduto_id().toString());
+        return estoque;
+    }
+
     public Estoque aumentarIniciarEstoque(Estoque estoque, Integer produtoId) {
         Estoque retorno;
         try {
-            
-           Integer estoques = dao.rowCount("estqprodutoId", produtoId);
-            
+
+            Integer estoques = dao.rowCount("estqprodutoId", produtoId);
+
             if (estoques > 0) {
                 try {
                     Estoque _estoque = dao.consultarEstoque("estqprodutoId", String.valueOf(estoque.getEstqprodutoId()));
@@ -93,6 +103,6 @@ public class EstoqueController {
             e.printStackTrace();
             m.jopError("Não foi possível iniciar o estoque para o produto cadastrado.\n" + e);
         }
-        return  null;
+        return null;
     }
 }

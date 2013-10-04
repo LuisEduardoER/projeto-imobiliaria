@@ -43,15 +43,15 @@ public class Venda implements Serializable {
     private Float valorTotal;
     @Column(name = "totalPago")
     private Float totalPago;
-    @Basic(optional = false)
+    @Basic(optional = true)
     @Column(name = "dataVenda")
     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
     private LocalDateTime dataVenda;
-    @Basic(optional = false)
+    @Basic(optional = true)
     @Column(name = "inserted")
     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
     private LocalDateTime inserted;
-    @Basic(optional = false)
+    @Basic(optional = true)
     @Column(name = "updated")
     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
     private LocalDateTime updated;

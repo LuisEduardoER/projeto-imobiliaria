@@ -6,31 +6,48 @@ package visao;
 
 import controller.Mensagens;
 import controller.ProdutoController;
+import controller.VendaController;
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.List;
 import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
+import modelo.Itemvenda;
 import modelo.Produto;
+import modelo.Tipopagamento;
+import modelo.Venda;
+import util.Datas;
 
 /**
  *
  * @author Bruno
  */
-public class Venda extends javax.swing.JDialog {
+public class VendaTela extends javax.swing.JDialog {
 
     ProdutoController pc;
+    VendaController vendaController;
     Produto produto;
     Float totalVenda = Float.MIN_VALUE;
     Mensagens m;
-
+    Venda venda = new Venda();
+    Itemvenda itemvenda;
+    List<Itemvenda> itens = new ArrayList<>();
+    Tipopagamento tipopagamento = new Tipopagamento();
+    final int DINHEIRO = 1;
+    final int CHEQUES = 2;
+    final int CARTAO = 3;
+    
+    
     /**
      * Creates new form Venda
      */
-    public Venda(java.awt.Frame parent, boolean modal) {
+    public VendaTela(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         jtaLista.append("\n");
+        tipopagamento.setTipoPagamentoId(DINHEIRO);
     }
 
     /**
@@ -298,18 +315,21 @@ public class Venda extends javax.swing.JDialog {
 
     private void jrbDinheiroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbDinheiroActionPerformed
         if (jrbDinheiro.isSelected()) {
+            tipopagamento.setTipoPagamentoId(DINHEIRO);
             jtfDinheiro.setEnabled(true);
         }
     }//GEN-LAST:event_jrbDinheiroActionPerformed
 
     private void jrbChequeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbChequeActionPerformed
         if (jrbCheque.isSelected()) {
+            tipopagamento.setTipoPagamentoId(CHEQUES);
             jtfDinheiro.setEnabled(false);
         }
     }//GEN-LAST:event_jrbChequeActionPerformed
 
     private void jrbCartaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbCartaoActionPerformed
         if (jrbCartao.isSelected()) {
+            tipopagamento.setTipoPagamentoId(CARTAO);
             jtfDinheiro.setEnabled(false);
         }
     }//GEN-LAST:event_jrbCartaoActionPerformed
@@ -331,20 +351,20 @@ public class Venda extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Venda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VendaTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Venda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VendaTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Venda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VendaTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Venda.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VendaTela.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                Venda dialog = new Venda(new javax.swing.JFrame(), true);
+                VendaTela dialog = new VendaTela(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -430,7 +450,14 @@ public class Venda extends javax.swing.JDialog {
                 jtaLista.append("\n");
                 jtaLista.append("----------------------------------");
                 jtaLista.append("\n");
-
+                
+                itemvenda = new Itemvenda();
+                itemvenda.setProdutoId(produto);
+                itemvenda.setQuantidade(qtd);
+                itemvenda.setValorItemVenda(valor);
+                
+                itens.add(itemvenda);
+                
                 limpaTela();
             }
         } else {
@@ -457,8 +484,13 @@ public class Venda extends javax.swing.JDialog {
                                                          "Finalizar", JOptionPane.YES_NO_OPTION);
                 if (i == JOptionPane.YES_OPTION) {
                     
-                    jpPagamento.setVisible(true);
+                    venda.setDataVenda(Datas.dataDateTime);
+                    venda.setValorTotal(totalVenda);
+                    venda.setTotalPago(Float.parseFloat(jtfDinheiro.getText()));
+                    venda.setTipoPagamentoId(tipopagamento);
                     
+                    vendaController = new VendaController();
+                    vendaController.gravar(venda, itens);
                     
                 } else {
                     jtfCodigoBarra.requestFocus();

@@ -8,7 +8,8 @@ import controller.Mensagens;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
-import modelo.Compra;
+import modelo.Itemvenda;
+import modelo.Venda;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
@@ -19,56 +20,55 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author Bruno
  */
-public class CompraDAO implements Serializable {
+public class ItemVendaDAO implements Serializable {
 
     static Mensagens m;
     EntityManager em;
     private Criteria select;
     Session session; 
     
-    public CompraDAO() {
+    public ItemVendaDAO() {
         em = new EntityManagerFactory().getEntityManager();
         session = (Session) em.getDelegate();
     }
 
-    public Compra gravar(Compra compra) {
+    public Itemvenda gravar(Itemvenda itemVenda) {
         em.getTransaction().begin();
-        compra = em.merge(compra);
+        itemVenda = em.merge(itemVenda);
         em.getTransaction().commit();
-        return compra;
+        return itemVenda;
     }
 
-    public Compra atualizar(Compra compra) {
+    public Itemvenda atualizar(Itemvenda itemVenda) {
         em.getTransaction().begin();
-        compra = em.merge(compra);
+        itemVenda = em.merge(itemVenda);
         em.getTransaction().commit();
-        return compra;
+        return itemVenda;
     }
 
-    public void apagar(Compra compra) {
+    public void apagar(Itemvenda itemVenda) {
         em.getTransaction().begin();
-        compra = em.getReference(Compra.class, compra.getCompraId());
-        em.remove(compra);
+        itemVenda = em.getReference(Itemvenda.class, itemVenda.getItemVendaId());
+        em.remove(itemVenda);
         em.getTransaction().commit();
     }
 
     @SuppressWarnings("unchecked")
-    public List<Compra> consultarTodos() {
-       Criteria criteria = session.createCriteria(Compra.class, "compra");
-        criteria.createCriteria("compra.fornecedorId", "frn");
-        criteria.createCriteria("compra.produtoId", "prd");
+    public List<Itemvenda> consultarTodos() {
+       Criteria criteria = session.createCriteria(Itemvenda.class, "venda");
+        criteria.createCriteria("venda.vendaId", "venda");
         return criteria.list();
     }
     
     @SuppressWarnings("unchecked")
-    public Compra consultarCompra(String searchField, String searchString) {
+    public Itemvenda consultarItemVenda(String searchField, String searchString) {
         Criteria criteria = montarCriteria(searchField, searchString);
         
-        return  (Compra) criteria.uniqueResult();
+        return  (Itemvenda) criteria.uniqueResult();
     }
 
     private Criteria montarCriteria(String searchField, String searchString) {
-        Criteria criteria = session.createCriteria(Compra.class, "compra");
+        Criteria criteria = session.createCriteria(Itemvenda.class, "itemVenda");
         
         if(searchField != null && !searchField.equals("") && searchString != null && !searchString.equals("")){
             criteria.add(Restrictions.ilike(searchField, searchString, MatchMode.ANYWHERE));

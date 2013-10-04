@@ -556,8 +556,8 @@ public class CadastroProduto extends javax.swing.JDialog {
             p.setValor(Float.parseFloat(jtfValor.getText()));
             
             e.setFabricanteId(fabricante);
-            e.setQuantidade(new Integer(jtfQuantidade.getText()));
-            e.setQuantidadeMIN(new Integer(jtfQtdMinima.getText()));
+            e.setQuantidade(new Float(jtfQuantidade.getText()));
+            e.setQuantidadeMIN(new Float(jtfQtdMinima.getText()));
             
             compra.setFornecedorId(fornecedor);
             
