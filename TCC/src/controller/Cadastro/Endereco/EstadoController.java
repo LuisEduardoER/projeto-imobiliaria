@@ -5,6 +5,7 @@
 package controller.Cadastro.Endereco;
 
 import DAO.Cadastro.Endereco.CepDAO;
+import DAO.Cadastro.Endereco.EstadoDAO;
 import DAO.Cadastro.Endereco.PaisDAO;
 import controller.Mensagens;
 import java.text.DateFormat;
@@ -13,6 +14,7 @@ import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import modelo.Cep;
+import modelo.Estado;
 import modelo.Pais;
 import persistencia.exceptions.NonexistentEntityException;
 import util.Datas;
@@ -21,54 +23,55 @@ import util.Datas;
  *
  * @author Bruno
  */
-public class CepController {
+public class EstadoController {
 
-    CepDAO dao = new CepDAO();
+    EstadoDAO dao = new EstadoDAO();
 
-    public DefaultComboBoxModel<Cep> buscar(String field, String value) {
-        Cep cep = new Cep();
-        DefaultComboBoxModel<Cep> dcbm = new DefaultComboBoxModel<>();
-        List<Object[]> cepObject = dao.consultarCep(field, value);
-        if (!cepObject.isEmpty()) {
-            cep.setCepID((int) cepObject.get(0)[0]);
-            cep.setCep((Integer) cepObject.get(0)[1]);
+    public DefaultComboBoxModel<Estado> buscar(String field, String value) {
+        Estado estado = new Estado();
+        DefaultComboBoxModel<Estado> dcbm = new DefaultComboBoxModel<>();
+        List<Object[]> esatdoObject = dao.consultarEstado(field, value);
+        if (!esatdoObject.isEmpty()) {
+            estado.setEstadoId((int) esatdoObject.get(0)[0]);
+            estado.setEstadoNome((String) esatdoObject.get(0)[1]);
+            estado.setEstadoUF((String) esatdoObject.get(0)[2]);
         }
-        dcbm.addElement(cep);
+        dcbm.addElement(estado);
         return dcbm;
     }
 
-    public DefaultComboBoxModel<Cep> listByField(String field, String value) {
-        DefaultComboBoxModel<Cep> dcbm = new DefaultComboBoxModel<>();
-        List<Cep> lista = dao.consultarTodos();
-        for (Cep cep : lista) {
-            dcbm.addElement(cep);
+    public DefaultComboBoxModel<Estado> listByField(String field, String value) {
+        DefaultComboBoxModel<Estado> dcbm = new DefaultComboBoxModel<>();
+        List<Estado> lista = dao.consultarTodos();
+        for (Estado estado : lista) {
+            dcbm.addElement(estado);
         }
         return dcbm;
     }
 
-    public Cep buscarPais(String field, String value) {
-        Cep cep = dao.buscarCep(field, value);
-        return cep;
+    public Estado buscarPais(String field, String value) {
+        Estado estado = dao.buscarEstado(field, value);
+        return estado;
     }
 
-    public Cep gravar(Cep cep) {
+    public Estado gravar(Estado estado) {
         
-        Integer ceps = dao.rowCount("cep.cep", cep.getCep().toString());
-        if (ceps > 0) {
+        Integer estados = dao.rowCount("estado.estadoNome", estado.getEstadoNome());
+        if (estados > 0) {
             Mensagens m = new Mensagens();
-            m.jopAlerta("Este CEP Já existe.");
+            m.jopAlerta("Este Estado já existe.");
         }else{
-            cep = dao.gravar(cep);
+            estado = dao.gravar(estado);
         }
-        return cep;
+        return estado;
     }
 
-    public Cep setDeleted(Cep cep) throws NonexistentEntityException, Exception {
-        cep.setUpdated(Datas.dataAtualDateTime());
-        cep.setDeleted('t');
+    public Estado setDeleted(Estado esatdo) throws NonexistentEntityException, Exception {
+        esatdo.setUpdated(Datas.dataAtualDateTime());
+        esatdo.setDeleted('t');
 
-        cep = dao.atualizar(cep);
+        esatdo = dao.atualizar(esatdo);
 
-        return cep;
+        return esatdo;
     }
 }

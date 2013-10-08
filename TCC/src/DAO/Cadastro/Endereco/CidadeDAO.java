@@ -9,9 +9,7 @@ import controller.Mensagens;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
-import modelo.Cep;
-import modelo.Estado;
-import modelo.Pais;
+import modelo.Cidade;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
@@ -23,48 +21,48 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author Bruno
  */
-public class EstadoDAO implements Serializable {
+public class CidadeDAO implements Serializable {
 
     static Mensagens m;
     EntityManager em;
     private Criteria select;
     Session session;
 
-    public EstadoDAO() {
+    public CidadeDAO() {
         em = new EntityManagerFactory().getEntityManager();
         session = (Session) em.getDelegate();
     }
 
-    public Estado gravar(Estado estado) {
+    public Cidade gravar(Cidade cidade) {
+        em.getTransaction().begin();
+        cidade = em.merge(cidade);
+        em.getTransaction().commit();
+        return cidade;
+    }
+
+    public Cidade atualizar(Cidade estado) {
         em.getTransaction().begin();
         estado = em.merge(estado);
         em.getTransaction().commit();
         return estado;
     }
 
-    public Estado atualizar(Estado estado) {
+    public void apagar(Cidade estado) {
         em.getTransaction().begin();
-        estado = em.merge(estado);
-        em.getTransaction().commit();
-        return estado;
-    }
-
-    public void apagar(Estado estado) {
-        em.getTransaction().begin();
-        estado = em.getReference(Estado.class, estado.getEstadoId());
+        estado = em.getReference(Cidade.class, estado.getEstadoId());
         em.remove(estado);
         em.getTransaction().commit();
     }
 
     @SuppressWarnings("unchecked")
-    public List<Estado> consultarTodos() {
+    public List<Cidade> consultarTodos() {
 //        Session session = (Session) em.getDelegate();
-        select = session.createCriteria(Estado.class);
+        select = session.createCriteria(Cidade.class);
         return select.list();
     }
 
     @SuppressWarnings("unchecked")
-    public List<Object[]> consultarEstado(String searchField, String searchString) {
+    public List<Object[]> consultarCidade(String searchField, String searchString) {
         Criteria criteria = montarCriteria(searchField, searchString);
         ProjectionList p = Projections.projectionList();
 
@@ -77,7 +75,7 @@ public class EstadoDAO implements Serializable {
     }
 
     private Criteria montarCriteria(String searchField, String searchString) {
-        Criteria criteria = session.createCriteria(Estado.class, "estado");
+        Criteria criteria = session.createCriteria(Cidade.class, "estado");
 
         if (searchField != null && !searchField.equals("") && searchString != null && !searchString.equals("")) {
             criteria.add(Restrictions.ilike(searchField, searchString, MatchMode.ANYWHERE));
@@ -86,24 +84,24 @@ public class EstadoDAO implements Serializable {
         return criteria;
     }
 
-    public Estado buscarEstado(String searchField, String searchString) {
-        Criteria criteria = session.createCriteria(Estado.class, "estado");
+    public Cidade buscarCidade(String searchField, String searchString) {
+        Criteria criteria = session.createCriteria(Cidade.class, "estado");
 
         if (searchField != null && !searchField.equals("") && searchString != null && !searchString.equals("")) {
             criteria.add(Restrictions.ilike(searchField, searchString, MatchMode.ANYWHERE));
         }
         criteria.add(Restrictions.eq("estado.deleted", "f"));
 
-        return (Estado) criteria.uniqueResult();
+        return (Cidade) criteria.uniqueResult();
     }
 
     public Integer rowCount(String searchField, String searchString) {
-        Criteria criteria = session.createCriteria(Estado.class, "estado");
+        Criteria criteria = session.createCriteria(Cidade.class, "cidade");
 
         if (searchField != null && !searchField.equals("") && searchString != null && !searchString.equals("")) {
             criteria.add(Restrictions.ilike(searchField, searchString, MatchMode.EXACT));
         }
-        criteria.add(Restrictions.eq("estado.deleted", "f"));
+        criteria.add(Restrictions.eq("cidade.deleted", "f"));
         criteria.setProjection(Projections.rowCount());
         return ((Integer) criteria.uniqueResult()).intValue();
     }
