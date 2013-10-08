@@ -92,7 +92,7 @@ public class PaisDAO implements Serializable {
         if(searchField != null && !searchField.equals("") && searchString != null && !searchString.equals("")){
             criteria.add(Restrictions.ilike(searchField, searchString, MatchMode.ANYWHERE));
         }
-            criteria.add(Restrictions.eq("fornecedor.deleted", "f"));
+            criteria.add(Restrictions.eq("pais.deleted", "f"));
         
         return (Pais) criteria.uniqueResult();
     }    

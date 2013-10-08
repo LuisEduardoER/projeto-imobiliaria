@@ -2,7 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package visao;
+package visao.Cadastro;
+
+import Componentes.Componentes;
+import javax.swing.JButton;
 
 /**
  *
@@ -13,6 +16,12 @@ public class CadastroPais extends javax.swing.JDialog {
     /**
      * Creates new form CadastroPais
      */
+    
+    Componentes c = new Componentes();
+    JButton jbGravar  = c.criaBotaoGravar();
+    JButton jbBuscar  = c.criaBotaoBuscar();
+    JButton jbExcluir = c.criaBotaoExcluir();
+    
     public CadastroPais(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();

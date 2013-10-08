@@ -88,8 +88,8 @@
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
             <Property name="columns" type="int" value="1"/>
             <Property name="horizontalGap" type="int" value="2"/>
-            <Property name="verticalGap" type="int" value="13"/>
             <Property name="rows" type="int" value="2"/>
+            <Property name="verticalGap" type="int" value="13"/>
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JLabel" name="jLabel1">
@@ -109,8 +109,8 @@
           <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
             <Property name="columns" type="int" value="0"/>
             <Property name="horizontalGap" type="int" value="3"/>
-            <Property name="verticalGap" type="int" value="8"/>
             <Property name="rows" type="int" value="2"/>
+            <Property name="verticalGap" type="int" value="8"/>
           </Layout>
           <SubComponents>
             <Component class="javax.swing.JTextField" name="jtfFornecedorNome">
@@ -135,8 +135,8 @@
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignGridLayout">
         <Property name="columns" type="int" value="3"/>
         <Property name="horizontalGap" type="int" value="3"/>
-        <Property name="verticalGap" type="int" value="3"/>
         <Property name="rows" type="int" value="1"/>
+        <Property name="verticalGap" type="int" value="3"/>
       </Layout>
     </Container>
   </SubComponents>

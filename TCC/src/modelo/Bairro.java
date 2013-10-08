@@ -5,6 +5,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -19,6 +20,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -29,6 +32,17 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Bairro.findAll", query = "SELECT b FROM Bairro b")})
 public class Bairro implements Serializable {
+    @Column(name = "inserted")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date inserted;
+    @Column(name = "updated")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date updated;
+    @Column(name = "deleted")
+    private Character deleted;
+    @JoinColumn(name = "usuarioId", referencedColumnName = "usuarioID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Usuario usuarioId;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -105,6 +119,38 @@ public class Bairro implements Serializable {
     @Override
     public String toString() {
         return "modelo.Bairro[ bairroId=" + bairroId + " ]";
+    }
+
+    public Date getInserted() {
+        return inserted;
+    }
+
+    public void setInserted(Date inserted) {
+        this.inserted = inserted;
+    }
+
+    public Date getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(Date updated) {
+        this.updated = updated;
+    }
+
+    public Character getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Character deleted) {
+        this.deleted = deleted;
+    }
+
+    public Usuario getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(Usuario usuarioId) {
+        this.usuarioId = usuarioId;
     }
     
 }

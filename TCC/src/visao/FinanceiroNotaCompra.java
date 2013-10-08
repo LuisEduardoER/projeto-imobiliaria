@@ -4,6 +4,7 @@
  */
 package visao;
 
+import visao.Cadastro.CadastroFabricante;
 import Componentes.Componentes;
 import Componentes.TableModelCompra;
 import controller.CompraController;

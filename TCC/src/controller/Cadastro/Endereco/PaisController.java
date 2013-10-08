@@ -12,6 +12,7 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import modelo.Pais;
 import persistencia.exceptions.NonexistentEntityException;
+import util.Datas;
 
 /**
  *
@@ -42,9 +43,9 @@ public class PaisController {
         }
         return dcbm;
     }
-    
+
     public Pais buscarPais(String field, String value) {
-        Pais pais = dao.buscarPais(field,value);
+        Pais pais = dao.buscarPais(field, value);
         return pais;
     }
 
@@ -54,21 +55,11 @@ public class PaisController {
     }
 
     public Pais setDeleted(Pais pais) throws NonexistentEntityException, Exception {
-        try {
-            java.util.Date dataUtil = new java.util.Date();
-            java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime());
-
-            DateFormat dateFormatada = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
-            Date date = new Date();
-            String dataFormatada = dateFormatada.format(date);
-
-//            pais.setUpdated(Datas.dataAtualDateTime());
-        } catch (Exception e) {
-            System.out.println("\n \n \n --------  \n \n \n " + e);
-        }
-//        pais.setDeleted('t');
-
+        pais.setUpdated(Datas.dataAtualDateTime());
+        pais.setDeleted('t');
+        
         pais = dao.atualizar(pais);
+        
         return pais;
     }
 }

@@ -5,6 +5,7 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
@@ -14,6 +15,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 /**
@@ -25,6 +27,18 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")})
 public class Usuario implements Serializable {
+    @OneToMany(mappedBy = "usuarioId", fetch = FetchType.LAZY)
+    private List<Bairro> bairroList;
+    @OneToMany(mappedBy = "usuarioId", fetch = FetchType.LAZY)
+    private List<Cidade> cidadeList;
+    @OneToMany(mappedBy = "usuarioId", fetch = FetchType.LAZY)
+    private List<Cep> cepList;
+    @OneToMany(mappedBy = "usuarioId", fetch = FetchType.LAZY)
+    private List<Estado> estadoList;
+    @OneToMany(mappedBy = "usuarioId", fetch = FetchType.LAZY)
+    private List<Pais> paisList;
+    @OneToMany(mappedBy = "usuarioId", fetch = FetchType.LAZY)
+    private List<Rua> ruaList;
     private static final long serialVersionUID = 1L;
     @EmbeddedId
     protected UsuarioPK usuarioPK;
@@ -119,6 +133,54 @@ public class Usuario implements Serializable {
     @Override
     public String toString() {
         return "modelo.Usuario[ usuarioPK=" + usuarioPK + " ]";
+    }
+
+    public List<Bairro> getBairroList() {
+        return bairroList;
+    }
+
+    public void setBairroList(List<Bairro> bairroList) {
+        this.bairroList = bairroList;
+    }
+
+    public List<Cidade> getCidadeList() {
+        return cidadeList;
+    }
+
+    public void setCidadeList(List<Cidade> cidadeList) {
+        this.cidadeList = cidadeList;
+    }
+
+    public List<Cep> getCepList() {
+        return cepList;
+    }
+
+    public void setCepList(List<Cep> cepList) {
+        this.cepList = cepList;
+    }
+
+    public List<Estado> getEstadoList() {
+        return estadoList;
+    }
+
+    public void setEstadoList(List<Estado> estadoList) {
+        this.estadoList = estadoList;
+    }
+
+    public List<Pais> getPaisList() {
+        return paisList;
+    }
+
+    public void setPaisList(List<Pais> paisList) {
+        this.paisList = paisList;
+    }
+
+    public List<Rua> getRuaList() {
+        return ruaList;
+    }
+
+    public void setRuaList(List<Rua> ruaList) {
+        this.ruaList = ruaList;
     }
     
 }
