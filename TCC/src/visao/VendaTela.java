@@ -492,6 +492,8 @@ public class VendaTela extends javax.swing.JDialog {
                     vendaController = new VendaController();
                     vendaController.gravar(venda, itens);
                     
+                    vendaController.imprimeCupomFiscal(venda);
+                    
                 } else {
                     jtfCodigoBarra.requestFocus();
                 }

@@ -80,5 +80,13 @@ public class Componentes {
         return jbRelatorios;
     }
     
+    public JButton criaBotaoNovo(){
+        JButton jbNovo = new JButton();
+        jbNovo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ico/plus.png")));
+        jbNovo.setText("Novo");
+        jbNovo.setToolTipText("Gera um relatório com base nos dados informados!");
+        return jbNovo;
+    }
+    
     
 }

@@ -5,11 +5,12 @@
 package controller;
 
 import DAO.VendaDAO;
+import bemajava.Bematech;
+import java.util.ArrayList;
 import java.util.List;
+import javax.print.PrintService;
 import javax.swing.DefaultComboBoxModel;
-import modelo.Compra;
 import modelo.Itemvenda;
-import modelo.Titulopagar;
 import modelo.Venda;
 import persistencia.exceptions.NonexistentEntityException;
 import util.Datas;
@@ -22,7 +23,9 @@ public class VendaController {
 
     VendaDAO dao = new VendaDAO();
     ItemVendaController itemVendaController;
-            
+    ImpressaoCupomController impressao;
+    Mensagens m;
+
     public DefaultComboBoxModel<Venda> buscar(String field, String value) {
         DefaultComboBoxModel<Venda> dcbm = new DefaultComboBoxModel<>();
         Venda p = dao.consultarCompra(field, value);
@@ -33,21 +36,21 @@ public class VendaController {
     public Venda gravar(Venda venda, List<Itemvenda> itens) {
         venda.setInserted(Datas.dataAtualDateTime());
         venda.setDataVenda(Datas.dataAtualDateTime());
-        
+
         venda = dao.gravar(venda);
         venda.setItemvendaList(itens);
-        
+
         itemVendaController = new ItemVendaController();
         venda = itemVendaController.gravar(venda);
-        
+
         return venda;
     }
-    
-    public List<Venda> buscaTodos(){
+
+    public List<Venda> buscaTodos() {
         List<Venda> lista = dao.consultarTodos();
         return lista;
     }
-    
+
     public Venda buscaNome(String nome) {
         Venda c = dao.consultarCompra("venda", nome);
         return c;
@@ -68,10 +71,28 @@ public class VendaController {
         venda = dao.atualizar(venda);
         return venda;
     }
-    
-    public List<Venda> buscarTodos(){
-       List<Venda> lista = dao.consultarTodos();
-       return lista;
+
+    public List<Venda> buscarTodos() {
+        List<Venda> lista = dao.consultarTodos();
+        return lista;
     }
+
+    public void imprimeCupomFiscal(Venda venda) {
+
+        impressao = new ImpressaoCupomController();
+
+        List<String> impressoras = new ArrayList<>();
+        impressoras = impressao.retornaImressoras();
+
+        if (impressoras.isEmpty()) {
+            m = new Mensagens();
+            m.jopAviso("Nenhuma impressora encotrada!");
+        } else {
+//            impressoras.get(0).
+//            PrintService impressora = impressao.detectaImpressoras(impressoras);
+        }
+        //Bematech.AbrePortaSerial();
+//        Bematech.AbreCupom("");
+        }
     
 }

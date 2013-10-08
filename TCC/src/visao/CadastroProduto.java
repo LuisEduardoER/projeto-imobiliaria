@@ -10,6 +10,9 @@ import controller.FabricanteController;
 import controller.FornecedorController;
 import controller.Mensagens;
 import controller.ProdutoController;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -36,6 +39,7 @@ public class CadastroProduto extends javax.swing.JDialog {
     JButton jbGravar;
     JButton jbBuscar;
     JButton jbExcluir;
+    JButton jbNovo;
     Mensagens m;
     FornecedorController fornecedorController;
     FabricanteController fabricanteController;
@@ -48,7 +52,7 @@ public class CadastroProduto extends javax.swing.JDialog {
     Compra compra;
     List<Produto> produtoList;
     TableModelProduto modeloProduto;
-    
+
     public CadastroProduto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -57,6 +61,7 @@ public class CadastroProduto extends javax.swing.JDialog {
         jbGravar = c.criaBotaoGravar();
         jbBuscar = c.criaBotaoBuscar();
         jbExcluir = c.criaBotaoExcluir();
+        jbNovo = c.criaBotaoNovo();
 
         jbGravar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -75,15 +80,30 @@ public class CadastroProduto extends javax.swing.JDialog {
                 jbBuscarActionPerformed(evt);
             }
         });
+        
+        jbNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNovoActionPerformed(evt);
+            }
+        });
 
         jpControles.add(jbBuscar);
         jpControles.add(jbExcluir);
         jpControles.add(jbGravar);
+        jpControles.add(jbNovo);
         produtoList = produtoController.buscaTodos();
         modeloProduto = new TableModelProduto();
-        jTable1.setModel(modeloProduto);
+        jtProdutos.setModel(modeloProduto);
         modeloProduto.addListaDeProdutos(produtoList);
-        jTable1.updateUI();
+        jtProdutos.updateUI();
+
+        jtProdutos.setDefaultEditor(Object.class, null);  // ou usar um TableModel nao  editavel  
+        jtProdutos.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                jtProdutosMouseClicked(e);
+//                System.out.printf("row: %d    col: %d\n", row, col); 
+            }
+        });
     }
 
     /**
@@ -95,12 +115,12 @@ public class CadastroProduto extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel7 = new javax.swing.JPanel();
+        jtpAbas = new javax.swing.JTabbedPane();
+        jpConsultaProdutos = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jPanel2 = new javax.swing.JPanel();
+        jtProdutos = new javax.swing.JTable();
+        jpCadastroProdutos = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -116,7 +136,7 @@ public class CadastroProduto extends javax.swing.JDialog {
         jbBuscarFabricante = new javax.swing.JButton();
         jtfQtdMinima = new javax.swing.JTextField();
         jtfValor = new javax.swing.JTextField();
-        jPanel4 = new javax.swing.JPanel();
+        jpDadosCompra = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
@@ -132,7 +152,7 @@ public class CadastroProduto extends javax.swing.JDialog {
         setTitle("Cadastro de Produto");
         setResizable(false);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -143,7 +163,7 @@ public class CadastroProduto extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtProdutos);
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -161,26 +181,26 @@ public class CadastroProduto extends javax.swing.JDialog {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
+        javax.swing.GroupLayout jpConsultaProdutosLayout = new javax.swing.GroupLayout(jpConsultaProdutos);
+        jpConsultaProdutos.setLayout(jpConsultaProdutosLayout);
+        jpConsultaProdutosLayout.setHorizontalGroup(
+            jpConsultaProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpConsultaProdutosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
+        jpConsultaProdutosLayout.setVerticalGroup(
+            jpConsultaProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpConsultaProdutosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Produtos", jPanel7);
+        jtpAbas.addTab("Produtos", jpConsultaProdutos);
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Produto"));
+        jpCadastroProdutos.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados do Produto"));
 
         jPanel1.setLayout(new java.awt.GridLayout(7, 1, 4, 13));
 
@@ -254,30 +274,30 @@ public class CadastroProduto extends javax.swing.JDialog {
                 .addContainerGap(101, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout jpCadastroProdutosLayout = new javax.swing.GroupLayout(jpCadastroProdutos);
+        jpCadastroProdutos.setLayout(jpCadastroProdutosLayout);
+        jpCadastroProdutosLayout.setHorizontalGroup(
+            jpCadastroProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpCadastroProdutosLayout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jpCadastroProdutosLayout.setVerticalGroup(
+            jpCadastroProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpCadastroProdutosLayout.createSequentialGroup()
+                .addGroup(jpCadastroProdutosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(jpCadastroProdutosLayout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Cadastrar Produto", jPanel2);
+        jtpAbas.addTab("Cadastrar Produto", jpCadastroProdutos);
 
-        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados da Compra", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, null, java.awt.Color.black));
+        jpDadosCompra.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados da Compra", 0, 0, null, java.awt.Color.black));
 
         jLabel8.setText("Data:");
         jLabel8.setEnabled(false);
@@ -347,11 +367,11 @@ public class CadastroProduto extends javax.swing.JDialog {
             }
         });
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout jpDadosCompraLayout = new javax.swing.GroupLayout(jpDadosCompra);
+        jpDadosCompra.setLayout(jpDadosCompraLayout);
+        jpDadosCompraLayout.setHorizontalGroup(
+            jpDadosCompraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpDadosCompraLayout.createSequentialGroup()
                 .addGap(2, 2, 2)
                 .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -360,17 +380,17 @@ public class CadastroProduto extends javax.swing.JDialog {
                 .addComponent(jbBuscarFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        jpDadosCompraLayout.setVerticalGroup(
+            jpDadosCompraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jpDadosCompraLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jbBuscarFornecedor, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+            .addGroup(jpDadosCompraLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                 .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Dados da Compra", jPanel4);
+        jtpAbas.addTab("Dados da Compra", jpDadosCompra);
 
         jpControles.setLayout(new java.awt.GridLayout(1, 3, 3, 0));
 
@@ -381,7 +401,7 @@ public class CadastroProduto extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane1)
+                    .addComponent(jtpAbas)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jpControles, javax.swing.GroupLayout.PREFERRED_SIZE, 400, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -391,7 +411,7 @@ public class CadastroProduto extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(jtpAbas)
                 .addGap(18, 18, 18)
                 .addComponent(jpControles, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -430,6 +450,23 @@ public class CadastroProduto extends javax.swing.JDialog {
 
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {
         //acaoBuscar();
+    }
+    private void jbNovoActionPerformed(java.awt.event.ActionEvent evt) {
+        acaoNovo();
+    }
+
+    private void jtProdutosMouseClicked(java.awt.event.MouseEvent e) {
+        // TODO add your handling code here:  
+        if (e.getClickCount() == 2) {
+            Point p = e.getPoint();
+            int row = jtProdutos.rowAtPoint(p);
+            int col = jtProdutos.columnAtPoint(p);
+
+            Produto produto = new Produto();
+            produto = modeloProduto.getProduto(row);
+
+            alterar(produto);
+        }
     }
 
     /**
@@ -484,21 +521,20 @@ public class CadastroProduto extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton jbBuscarFabricante;
     private javax.swing.JButton jbBuscarFornecedor;
     private javax.swing.JComboBox jcbFabricanteCNPJ;
     private javax.swing.JComboBox jcbFornecedorCNPJ;
+    private javax.swing.JPanel jpCadastroProdutos;
+    private javax.swing.JPanel jpConsultaProdutos;
     private javax.swing.JPanel jpControles;
+    private javax.swing.JPanel jpDadosCompra;
+    private javax.swing.JTable jtProdutos;
     private javax.swing.JTextField jtfCodigoBarras;
     private javax.swing.JTextField jtfDataCompra;
     private javax.swing.JTextField jtfProdNome;
@@ -506,6 +542,7 @@ public class CadastroProduto extends javax.swing.JDialog {
     private javax.swing.JTextField jtfQuantidade;
     private javax.swing.JTextField jtfValor;
     private javax.swing.JTextField jtfValorCompra;
+    private javax.swing.JTabbedPane jtpAbas;
     // End of variables declaration//GEN-END:variables
 
     public boolean validacampos() {
@@ -548,40 +585,41 @@ public class CadastroProduto extends javax.swing.JDialog {
             e = new Estoque();
             compra = new Compra();
             Date data = new Date();
-            
+
             p.setProdutoNome(jtfProdNome.getText());
             p.setFabricanteId(fabricante);
             p.setFornecedorId(fornecedor);
             p.setProdutoCodigoBarras(jtfCodigoBarras.getText());
             p.setValor(Float.parseFloat(jtfValor.getText()));
-            
+
             e.setFabricanteId(fabricante);
             e.setQuantidade(new Float(jtfQuantidade.getText()));
             e.setQuantidadeMIN(new Float(jtfQtdMinima.getText()));
-            
+
             compra.setFornecedorId(fornecedor);
-            
+
 //            SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");    
 //            try {   
 //                data = (Date) fmt.parse(jtfDataCompra.getText());
 //            } catch (ParseException ex) {
 //                Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
 //            }
-            
+
 //            LocalDate dataCompra = new LocalDate(data.toString());
             compra.setValorCompra(Float.parseFloat(jtfValorCompra.getText()));
-            
+
 //            compra.setDataCompra(new LocalDate(dataCompra));
-            
+
             produtoController = new ProdutoController();
-           if(produtoController.gravar(p, e, compra) != null){
-               m =new Mensagens();
-               m.jopAviso("Produto gravado com sucesso!");
-           }
-            
+            if (produtoController.gravar(p, e, compra) != null) {
+                m = new Mensagens();
+                m.jopAviso("Produto gravado com sucesso!");
+                gerenciaCampos(false);
+                setAba(0);
+            }
+
         }
     }
-        
 
     private void limparTela() {
         jtfProdNome.setText("");
@@ -592,6 +630,17 @@ public class CadastroProduto extends javax.swing.JDialog {
         jtfQuantidade.setText("");
     }
 
+    private void alterar(Produto p) {
+        jtfCodigoBarras.setText(p.getProdutoCodigoBarras());
+        jtfProdNome.setText(p.getProdutoNome());
+        jtfValor.setText(p.getValor().toString());
+        jcbFabricanteCNPJ.setSelectedItem(p.getFabricanteId());
+        jcbFornecedorCNPJ.setSelectedItem(p.getFornecedorId());
+//        jtfQtdMinima.setText();
+//        jtfValorCompra.setText();
+        gerenciaCampos(true);
+        setAba(1);
+    }
 //    private boolean acaoBuscar() {
 //        try {
 //            if (jcbFornecedorCNPJ.getSelectedItem() != null) {
@@ -697,7 +746,6 @@ public class CadastroProduto extends javax.swing.JDialog {
 //            return false;
 //        }
 //    }
-    
 //    private void acaoRemover() {
 //        fornecedorController = new FornecedorController();
 //
@@ -765,9 +813,9 @@ public class CadastroProduto extends javax.swing.JDialog {
             }
         } catch (Exception ex) {
             Logger.getLogger(CadastroFabricante.class.getName()).log(Level.SEVERE, null, ex + "\n É nescessário informar o CNPJ ou o nome do fabricante para efetuar uma busca.");
-            System.out.println("exception >>>>>>>>>>>>>>>>>>>>>"+ex);
+            System.out.println("exception >>>>>>>>>>>>>>>>>>>>>" + ex);
             m = new Mensagens();
-            m.jopAlerta("É nescessário informar o CNPJ ou o nome do fabricante para efetuar uma busca.\n"+ex);
+            m.jopAlerta("É nescessário informar o CNPJ ou o nome do fabricante para efetuar uma busca.\n" + ex);
             return false;
         }
     }
@@ -821,4 +869,24 @@ public class CadastroProduto extends javax.swing.JDialog {
             return false;
         }
     }
+
+    private void acaoNovo() {
+        limparTela();
+        gerenciaCampos(true);
+        setAba(1);
+    }
+    
+    private void gerenciaCampos(boolean abilitaDesabilita) {
+        jtfCodigoBarras.setEnabled(abilitaDesabilita);
+        jtfProdNome.setEnabled(abilitaDesabilita);
+        jtfQtdMinima.setEnabled(abilitaDesabilita);
+        jtfQuantidade.setEnabled(abilitaDesabilita);
+        jtfValor.setEnabled(abilitaDesabilita);
+        jtfValorCompra.setEnabled(abilitaDesabilita);
+    }
+
+    private void setAba(int i) {
+        jtpAbas.setSelectedIndex(i);
+    }
+
 }

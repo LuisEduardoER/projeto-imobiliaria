@@ -33,24 +33,32 @@ public class Estoque implements Serializable {
     @Column(name = "inserted")
     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
     private LocalDateTime inserted;
+    
     @Column(name = "updated")
     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
     private LocalDateTime updated;
+    
     @JoinColumn(name = "fabricanteId", referencedColumnName = "fabricanteId")
     @ManyToOne(fetch = FetchType.LAZY)
     private Fabricante fabricanteId;
+    
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "estoqueId")
     private Integer estoqueId;
+    
     @Column(name = "quantidade")
     private Float quantidade;
+    
     @Column(name = "quantidadeMIN")
     private Float quantidadeMIN;
+    
     @Column(name = "deleted")
     private Character deleted;
+    
     @JoinColumn(name = "estq_produtoId", referencedColumnName = "produto_id")
     @ManyToOne(optional = false, fetch = FetchType.LAZY)
     private Produto estqprodutoId;

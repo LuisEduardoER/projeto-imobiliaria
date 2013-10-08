@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import modelo.Estoque;
 import modelo.Itemvenda;
+import modelo.Produto;
 import modelo.Venda;
 import persistencia.exceptions.NonexistentEntityException;
 import util.Datas;
@@ -47,7 +48,10 @@ public class ItemVendaController {
             
             //atualiza a qunatidade em estoque, ainda sem finalidade
             estoqueController = new EstoqueController();
-            Estoque estoque = estoqueController.verificaQuantidade(item.getProdutoId());
+            
+            Produto produto = item.getProdutoId();
+            
+            Estoque estoque = estoqueController.verificaQuantidade(produto);
             estoque.setQuantidade(estoque.getQuantidade()-item.getQuantidade());
             estoqueController.atualizar(estoque);
             // implementar esta verificação apenas no caso de compras por delivery!

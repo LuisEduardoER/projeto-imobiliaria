@@ -9,6 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import modelo.Estoque;
+import modelo.Produto;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
@@ -56,6 +57,17 @@ public class EstoqueDAO implements Serializable {
 //        Session session = (Session) em.getDelegate();
         select = session.createCriteria(Estoque.class);
         return select.list();
+    }
+    
+    @SuppressWarnings("unchecked")
+    public Estoque consultarEstoqueByProduto(Produto produto) {
+//        Session session = (Session) em.getDelegate();
+        Criteria criteria = session.createCriteria(Estoque.class, "estoque");
+        criteria.createCriteria("estoque.estqprodutoId", "produto");
+        
+        criteria.add(Restrictions.eq("produto.produto_id", produto.getProduto_id()));
+        
+        return  (Estoque) criteria.uniqueResult();
     }
     
     @SuppressWarnings("unchecked")

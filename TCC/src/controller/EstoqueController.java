@@ -71,7 +71,7 @@ public class EstoqueController {
     }
     
     public Estoque verificaQuantidade(Produto produto) {
-        Estoque estoque = dao.consultarEstoque("estqprodutoId", produto.getProduto_id().toString());
+        Estoque estoque = dao.consultarEstoqueByProduto(produto);
         return estoque;
     }
 
