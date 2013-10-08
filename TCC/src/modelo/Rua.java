@@ -57,6 +57,7 @@ public class Rua implements Serializable {
     private Bairro bairroID;
 
     public Rua() {
+        this.deleted = 'f';
     }
 
     public Rua(Integer ruaId) {

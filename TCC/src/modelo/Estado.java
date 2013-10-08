@@ -60,6 +60,7 @@ public class Estado implements Serializable {
     private Pais paisId;
 
     public Estado() {
+        this.deleted = 'f';
     }
 
     public Estado(Integer estadoId) {

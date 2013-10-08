@@ -56,6 +56,7 @@ import org.joda.time.LocalDateTime;
     private List<Estado> estadoList;
 
     public Pais() {
+        this.deleted = 'f';
     }
 
     public Pais(Integer paisID) {

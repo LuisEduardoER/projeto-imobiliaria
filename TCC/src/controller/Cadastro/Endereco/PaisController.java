@@ -5,6 +5,7 @@
 package controller.Cadastro.Endereco;
 
 import DAO.Cadastro.Endereco.PaisDAO;
+import controller.Mensagens;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -50,16 +51,23 @@ public class PaisController {
     }
 
     public Pais gravar(Pais pais) {
-        pais = dao.gravar(pais);
+        
+        Integer paises = dao.rowCount("pais.paisNome", pais.getPaisNome());
+        if (paises > 0) {
+            Mensagens m = new Mensagens();
+            m.jopAlerta("Já existe um país cadastrado com este nome!");
+        }else{
+            pais = dao.gravar(pais);
+        }
         return pais;
     }
 
     public Pais setDeleted(Pais pais) throws NonexistentEntityException, Exception {
         pais.setUpdated(Datas.dataAtualDateTime());
         pais.setDeleted('t');
-        
+
         pais = dao.atualizar(pais);
-        
+
         return pais;
     }
 }

@@ -9,6 +9,7 @@ import controller.Mensagens;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
+import modelo.Cep;
 import modelo.Pais;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -21,61 +22,60 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author Bruno
  */
-public class PaisDAO implements Serializable {
+public class CepDAO implements Serializable {
 
     static Mensagens m;
     EntityManager em;
     private Criteria select;
     Session session;
 
-    public PaisDAO() {
+    public CepDAO() {
         em = new EntityManagerFactory().getEntityManager();
         session = (Session) em.getDelegate();
     }
 
-    public Pais gravar(Pais pais) {
+    public Cep gravar(Cep cep) {
         em.getTransaction().begin();
-        pais = em.merge(pais);
+        cep = em.merge(cep);
         em.getTransaction().commit();
-        return pais;
+        return cep;
     }
 
-    public Pais atualizar(Pais pais) {
+    public Cep atualizar(Cep cep) {
         em.getTransaction().begin();
-        pais = em.merge(pais);
+        cep = em.merge(cep);
         em.getTransaction().commit();
-        return pais;
+        return cep;
     }
 
-    public void apagar(Pais pais) {
+    public void apagar(Cep cep) {
         em.getTransaction().begin();
-        pais = em.getReference(Pais.class, pais.getPaisID());
-        em.remove(pais);
+        cep = em.getReference(Cep.class, cep.getCepID());
+        em.remove(cep);
         em.getTransaction().commit();
     }
 
     @SuppressWarnings("unchecked")
-    public List<Pais> consultarTodos() {
+    public List<Cep> consultarTodos() {
 //        Session session = (Session) em.getDelegate();
-        select = session.createCriteria(Pais.class);
+        select = session.createCriteria(Cep.class);
         return select.list();
     }
 
     @SuppressWarnings("unchecked")
-    public List<Object[]> consultarPais(String searchField, String searchString) {
+    public List<Object[]> consultarCep(String searchField, String searchString) {
         Criteria criteria = montarCriteria(searchField, searchString);
         ProjectionList p = Projections.projectionList();
 
-        p.add(Projections.groupProperty("pais.paisId"));
-        p.add(Projections.groupProperty("pais.paisNome"));
-        p.add(Projections.groupProperty("pais.paisCod"));
+        p.add(Projections.groupProperty("cep.cepId"));
+        p.add(Projections.groupProperty("cep.cep"));
         criteria.setProjection(p);
 
         return criteria.list();
     }
 
     private Criteria montarCriteria(String searchField, String searchString) {
-        Criteria criteria = session.createCriteria(Pais.class, "pais");
+        Criteria criteria = session.createCriteria(Cep.class, "cep");
 
         if (searchField != null && !searchField.equals("") && searchString != null && !searchString.equals("")) {
             criteria.add(Restrictions.ilike(searchField, searchString, MatchMode.ANYWHERE));
@@ -84,24 +84,24 @@ public class PaisDAO implements Serializable {
         return criteria;
     }
 
-    public Pais buscarPais(String searchField, String searchString) {
-        Criteria criteria = session.createCriteria(Pais.class, "pais");
+    public Cep buscarCep(String searchField, String searchString) {
+        Criteria criteria = session.createCriteria(Cep.class, "cep");
 
         if (searchField != null && !searchField.equals("") && searchString != null && !searchString.equals("")) {
             criteria.add(Restrictions.ilike(searchField, searchString, MatchMode.ANYWHERE));
         }
-        criteria.add(Restrictions.eq("pais.deleted", "f"));
+        criteria.add(Restrictions.eq("cep.deleted", "f"));
 
-        return (Pais) criteria.uniqueResult();
+        return (Cep) criteria.uniqueResult();
     }
 
     public Integer rowCount(String searchField, String searchString) {
-        Criteria criteria = session.createCriteria(Pais.class, "pais");
+        Criteria criteria = session.createCriteria(Cep.class, "cep");
 
         if (searchField != null && !searchField.equals("") && searchString != null && !searchString.equals("")) {
             criteria.add(Restrictions.ilike(searchField, searchString, MatchMode.EXACT));
         }
-        criteria.add(Restrictions.eq("pais.deleted", "f"));
+        criteria.add(Restrictions.eq("cep.deleted", "f"));
         criteria.setProjection(Projections.rowCount());
         return ((Integer) criteria.uniqueResult()).intValue();
     }

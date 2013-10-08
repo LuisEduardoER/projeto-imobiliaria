@@ -57,6 +57,7 @@ public class Cep implements Serializable {
     private List<Funcionario> funcionarioList;
 
     public Cep() {
+        this.deleted = 'f';
     }
 
     public Cep(Integer cepID) {

@@ -4,6 +4,18 @@
  */
 package visao.Cadastro;
 
+import Componentes.Componentes;
+import controller.Cadastro.Endereco.PaisController;
+import controller.Mensagens;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import modelo.Bairro;
+import modelo.Cep;
+import modelo.Cidade;
+import modelo.Estado;
+import modelo.Pais;
+import modelo.Rua;
+
 /**
  *
  * @author Bruno
@@ -13,9 +25,56 @@ public class CadastroEstados extends javax.swing.JDialog {
     /**
      * Creates new form CadastroEstados
      */
+    Componentes c = new Componentes();
+    Mensagens m;
+    JButton jbGravar = c.criaBotaoGravar();
+    JButton jbExcluir = c.criaBotaoExcluir();
+    PaisController paisController;
+    Pais p;
+
     public CadastroEstados(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        paisController = new PaisController();
+        jbGravar = c.criaBotaoGravar();
+        jbExcluir = c.criaBotaoExcluir();
+
+        jbGravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGravarActionPerformed(evt);
+            }
+        });
+
+        jbExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbExcluirActionPerformed(evt);
+            }
+        });
+
+
+        jpControles.add(jbExcluir);
+        jpControles.add(jbGravar);
+
+    }
+
+    private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {
+        acaoGravar();
+    }
+
+    private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {
+        m = new Mensagens();
+        if (p != null) {
+            if (p.getPaisID() != 0) {
+                if (m.jopDeletar("Deseja realmente excluir este Pais ?") == JOptionPane.YES_OPTION) {
+//                    acaoRemover();
+                }
+            } else {
+                m.jopAlerta("Para excluir registro, é nescessário efetuar uma busca.");
+            }
+        } else {
+            m.jopAlerta("Para excluir registro, é nescessário efetuar uma busca.");
+        }
     }
 
     /**
@@ -34,9 +93,11 @@ public class CadastroEstados extends javax.swing.JDialog {
         jcbPais = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         jtfSigla = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
+        jcControles = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel1.setText("Estado:");
 
@@ -79,14 +140,14 @@ public class CadastroEstados extends javax.swing.JDialog {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout jcControlesLayout = new javax.swing.GroupLayout(jcControles);
+        jcControles.setLayout(jcControlesLayout);
+        jcControlesLayout.setHorizontalGroup(
+            jcControlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        jcControlesLayout.setVerticalGroup(
+            jcControlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 41, Short.MAX_VALUE)
         );
 
@@ -98,7 +159,7 @@ public class CadastroEstados extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jcControles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -107,7 +168,7 @@ public class CadastroEstados extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jcControles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -160,9 +221,46 @@ public class CadastroEstados extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jcControles;
     private javax.swing.JComboBox jcbPais;
     private javax.swing.JTextField jtfEstado;
     private javax.swing.JTextField jtfSigla;
     // End of variables declaration//GEN-END:variables
+
+    private void acaoGravar() {
+        String avisos = "";
+        Pais p = (Pais) jcbPais.getSelectedItem();
+
+        if (p.getPaisID() == null) {
+            avisos = avisos + "Pais não pode ser vazio \n";
+        }
+
+        if (jtfEstado.getText().equals("")) {
+            avisos = avisos + "O nome do estado não pode ser vazio \n";
+        }
+
+        if (jtfSigla.getText().equals("")) {
+            avisos = avisos + "Sigla não pode ser vazio \n";
+        }
+        if (jtfSigla.getText().length() > 2) {
+            avisos = avisos + "Sigla não pode ter mais de dois caracteres \n";
+        }
+
+        if (avisos.equals("")) {
+//            cep = new PaisController();
+            cep = new Cep();
+
+            p.setPaisNome(jtfPais.getText());
+            p = paisController.gravar(p);
+
+            if (p.getPaisID() != null) {
+                m = new Mensagens();
+                m.jopAviso("País " + p.getPaisNome() + " - ID: " + p.getPaisID() + " gravado com sucesso!");
+            }
+        } else {
+            m = new Mensagens();
+            m.jopAlerta("O(s) campo(s) " + avisos + "não pode(m) ser vazio(s)!");
+            jtfPais.requestFocus();
+        }
+    }
 }

@@ -24,7 +24,6 @@ public class CadastroPais extends javax.swing.JDialog {
     Componentes c = new Componentes();
     Mensagens m;
     JButton jbGravar  = c.criaBotaoGravar();
-    JButton jbBuscar  = c.criaBotaoBuscar();
     JButton jbExcluir = c.criaBotaoExcluir();
     PaisController paisController;
     Pais p;
@@ -35,7 +34,6 @@ public class CadastroPais extends javax.swing.JDialog {
         
         paisController = new PaisController();
         jbGravar = c.criaBotaoGravar();
-        jbBuscar = c.criaBotaoBuscar();
         jbExcluir = c.criaBotaoExcluir();
 
         jbGravar.addActionListener(new java.awt.event.ActionListener() {
@@ -50,13 +48,7 @@ public class CadastroPais extends javax.swing.JDialog {
             }
         });
 
-        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbBuscarActionPerformed(evt);
-            }
-        });
         
-        jpControles.add(jbBuscar);
         jpControles.add(jbExcluir);
         jpControles.add(jbGravar);
         
@@ -82,10 +74,6 @@ public class CadastroPais extends javax.swing.JDialog {
         }
     }
 
-    private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {
-        //acaoBuscar();
-    }
-    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -101,6 +89,10 @@ public class CadastroPais extends javax.swing.JDialog {
         jpControles = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro de Países");
+        setResizable(false);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel1.setText("Pais:");
 
@@ -125,7 +117,7 @@ public class CadastroPais extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jpControles.setLayout(new java.awt.GridLayout(1, 0, 4, 0));
+        jpControles.setLayout(new java.awt.GridLayout(1, 0, 2, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -145,10 +137,11 @@ public class CadastroPais extends javax.swing.JDialog {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpControles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
-        pack();
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-358)/2, (screenSize.height-151)/2, 358, 151);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -205,6 +198,11 @@ public class CadastroPais extends javax.swing.JDialog {
             p =new Pais();
             p.setPaisNome(jtfPais.getText());
             p = paisController.gravar(p);
+            
+            if(p.getPaisID()!=null){
+                m = new Mensagens();
+                m.jopAviso("País " + p.getPaisNome() + " - ID: " + p.getPaisID() + " gravado com sucesso!");
+            }
         }else{
             m = new Mensagens();
             m.jopAlerta("O nome do País deve ser informado!");

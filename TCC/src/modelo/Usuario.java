@@ -66,6 +66,9 @@ public class Usuario implements Serializable {
     private Perfil usuarioPerfil;
 
     public Usuario() {
+//        this.deleted = 'f';
+        this.ativo = 1;
+               
     }
 
     public String getUsuarioSenha() {

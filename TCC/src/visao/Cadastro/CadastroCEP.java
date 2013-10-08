@@ -4,6 +4,18 @@
  */
 package visao.Cadastro;
 
+import Componentes.Componentes;
+import controller.Cadastro.Endereco.PaisController;
+import controller.Mensagens;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import modelo.Bairro;
+import modelo.Cep;
+import modelo.Cidade;
+import modelo.Estado;
+import modelo.Pais;
+import modelo.Rua;
+
 /**
  *
  * @author Bruno
@@ -13,9 +25,56 @@ public class CadastroCEP extends javax.swing.JDialog {
     /**
      * Creates new form CadastroCEP
      */
+    Componentes c = new Componentes();
+    Mensagens m;
+    JButton jbGravar = c.criaBotaoGravar();
+    JButton jbExcluir = c.criaBotaoExcluir();
+    PaisController paisController;
+    Pais p;
+    Cep cep;
+
     public CadastroCEP(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        paisController = new PaisController();
+        jbGravar = c.criaBotaoGravar();
+        jbExcluir = c.criaBotaoExcluir();
+
+        jbGravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGravarActionPerformed(evt);
+            }
+        });
+
+        jbExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbExcluirActionPerformed(evt);
+            }
+        });
+
+
+        jpControles.add(jbExcluir);
+        jpControles.add(jbGravar);
+
+    }
+
+    private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {
+        acaoGravar();
+    }
+
+    private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {
+        m = new Mensagens();
+        if (p != null) {
+            if (p.getPaisID() != 0) {
+                if (m.jopDeletar("Deseja realmente excluir este Pais ?") == JOptionPane.YES_OPTION) {
+//                    acaoRemover();
+                }
+            } else {
+                m.jopAlerta("Para excluir registro, é nescessário efetuar uma busca.");
+            }
+        } else {
+            m.jopAlerta("Para excluir registro, é nescessário efetuar uma busca.");
+        }
     }
 
     /**
@@ -27,6 +86,7 @@ public class CadastroCEP extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel4 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -41,9 +101,11 @@ public class CadastroCEP extends javax.swing.JDialog {
         jcbBairro = new javax.swing.JComboBox();
         jcbRua = new javax.swing.JComboBox();
         jtfCEP = new javax.swing.JTextField();
-        jPanel3 = new javax.swing.JPanel();
+        jpControles = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+
+        jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
         jLabel1.setText("Pais:");
 
@@ -100,7 +162,7 @@ public class CadastroCEP extends javax.swing.JDialog {
                     .addComponent(jcbBairro, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jcbCidade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jcbEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jcbPais, javax.swing.GroupLayout.Alignment.TRAILING, 0, 307, Short.MAX_VALUE)
+                    .addComponent(jcbPais, javax.swing.GroupLayout.Alignment.TRAILING, 0, 297, Short.MAX_VALUE)
                     .addComponent(jtfCEP))
                 .addContainerGap())
         );
@@ -122,15 +184,37 @@ public class CadastroCEP extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+        jpControles.setLayout(new java.awt.GridLayout(1, 0, 2, 0));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addContainerGap()
+                    .addComponent(jpControles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addContainerGap()))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 42, Short.MAX_VALUE)
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(43, Short.MAX_VALUE))
+            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGap(214, 214, 214)
+                    .addComponent(jpControles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -139,23 +223,14 @@ public class CadastroCEP extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -212,12 +287,58 @@ public class CadastroCEP extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JComboBox jcbBairro;
     private javax.swing.JComboBox jcbCidade;
     private javax.swing.JComboBox jcbEstado;
     private javax.swing.JComboBox jcbPais;
     private javax.swing.JComboBox jcbRua;
+    private javax.swing.JPanel jpControles;
     private javax.swing.JTextField jtfCEP;
     // End of variables declaration//GEN-END:variables
+
+    private void acaoGravar() {
+        String avisos = "";
+       Pais p = (Pais) jcbPais.getSelectedItem();
+       Estado esta = (Estado)  jcbEstado.getSelectedItem();
+       Cidade cida = (Cidade) jcbCidade.getSelectedItem();
+       Bairro bairro = (Bairro) jcbBairro.getSelectedItem();
+       Rua rua = (Rua) jcbRua.getSelectedItem();
+       
+       if(p.getPaisID() == null){
+           avisos = avisos + "Pais não pode ser vazio \n";
+       }
+       
+       if(esta.getEstadoId() == null){
+           avisos = avisos + "Estado não pode ser vazio \n";
+       }
+       
+       if(cida.getCidade() == null){
+           avisos = avisos + "Cidade não pode ser vazio \n";
+       }
+       
+       if(bairro.getBairroId() == null){
+           avisos = avisos + "Bairro não pode ser vazio \n";
+       }
+       
+       if(rua.getRuaId() == null){
+           avisos = avisos + "Rua não pode ser vazio \n";
+       }
+       if(avisos.equals("")){
+//            cep = new PaisController();
+            cep = new Cep();
+            
+            p.setPaisNome(jtfPais.getText());
+            p = paisController.gravar(p);
+
+            if (p.getPaisID() != null) {
+                m = new Mensagens();
+                m.jopAviso("País " + p.getPaisNome() + " - ID: " + p.getPaisID() + " gravado com sucesso!");
+            }
+        } else {
+            m = new Mensagens();
+            m.jopAlerta("O(s) campo(s) "+ avisos +"não pode(m) ser vazio(s)!");
+            jtfPais.requestFocus();
+        }
+    }
 }
