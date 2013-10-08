@@ -2,9 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controller.Cadastro;
 
-import DAO.ProdutoDAO;
+import DAO.Cadastro.ProdutoDAO;
+import controller.CompraController;
+import controller.Mensagens;
 import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;

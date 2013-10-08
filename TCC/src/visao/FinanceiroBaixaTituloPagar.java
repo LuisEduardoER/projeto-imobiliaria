@@ -5,7 +5,7 @@
 package visao;
 
 import Componentes.Componentes;
-import controller.FornecedorController;
+import controller.Cadastro.FornecedorController;
 import controller.Mensagens;
 import controller.TituloPagarController;
 import javax.swing.JButton;

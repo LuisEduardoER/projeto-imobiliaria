@@ -6,10 +6,10 @@ package visao;
 
 import Componentes.Componentes;
 import Componentes.TableModelProduto;
-import controller.FabricanteController;
-import controller.FornecedorController;
+import controller.Cadastro.FabricanteController;
+import controller.Cadastro.FornecedorController;
 import controller.Mensagens;
-import controller.ProdutoController;
+import controller.Cadastro.ProdutoController;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

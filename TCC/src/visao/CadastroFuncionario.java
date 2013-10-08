@@ -6,7 +6,7 @@ package visao;
 
 import Componentes.Componentes;
 //import ConstrutoresModelo.ConstrutorFuncionario;
-import controller.FuncionarioController;
+import controller.Cadastro.FuncionarioController;
 import controller.Mensagens;
 import controller.PerfilController;
 import javax.swing.DefaultComboBoxModel;

@@ -2,7 +2,7 @@
 // * To change this template, choose Tools | Templates
 // * and open the template in the editor.
 // */
-package controller;
+package controller.Cadastro;
 //
 //import DAO.FuncionarioDAO;
 //import java.util.List;

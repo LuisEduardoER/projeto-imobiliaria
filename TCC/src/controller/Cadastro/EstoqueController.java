@@ -2,9 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package controller;
+package controller.Cadastro;
 
 import DAO.EstoqueDAO;
+import controller.Mensagens;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;

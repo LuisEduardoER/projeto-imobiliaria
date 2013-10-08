@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package DAO;
+package DAO.Cadastro;
 
+import DAO.EntityManagerFactory;
 import controller.Mensagens;
 import java.io.Serializable;
 import java.util.List;

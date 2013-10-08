@@ -29,6 +29,11 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Funcionario.findAll", query = "SELECT f FROM Funcionario f")})
 public class Funcionario implements Serializable {
+    @Column(name = "enderecoID")
+    private Integer enderecoID;
+    @JoinColumn(name = "cepId", referencedColumnName = "cepID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Cep cepId;
     private static final long serialVersionUID = 1L;
     @Column(name = "nome")
     private String nome;
@@ -53,9 +58,6 @@ public class Funcionario implements Serializable {
     private Integer idUsuario;
     @OneToMany(mappedBy = "funcionarioId", fetch = FetchType.LAZY)
     private List<Usuario> usuarioList;
-    @JoinColumn(name = "enderecoID", referencedColumnName = "enderecoID")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Endereco enderecoID;
 
     public Funcionario() {
     }
@@ -142,14 +144,6 @@ public class Funcionario implements Serializable {
         this.usuarioList = usuarioList;
     }
 
-    public Endereco getEnderecoID() {
-        return enderecoID;
-    }
-
-    public void setEnderecoID(Endereco enderecoID) {
-        this.enderecoID = enderecoID;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
@@ -173,6 +167,22 @@ public class Funcionario implements Serializable {
     @Override
     public String toString() {
         return "modelo.Funcionario[ idFuncionario=" + idFuncionario + " ]";
+    }
+
+    public Integer getEnderecoID() {
+        return enderecoID;
+    }
+
+    public void setEnderecoID(Integer enderecoID) {
+        this.enderecoID = enderecoID;
+    }
+
+    public Cep getCepId() {
+        return cepId;
+    }
+
+    public void setCepId(Cep cepId) {
+        this.cepId = cepId;
     }
     
 }

@@ -18,6 +18,12 @@
     <class>modelo.Modulo</class>
     <class>modelo.Funcionario</class>
     <class>modelo.Endereco</class>
+    <class>modelo.Estado</class>
+    <class>modelo.Cep</class>
+    <class>modelo.Bairro</class>
+    <class>modelo.Cidade</class>
+    <class>modelo.Rua</class>
+    <class>modelo.Pais</class>
     <properties>
       <!--            <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>-->
       <property name="hibernate.connection.username" value="root"/>
