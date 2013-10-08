@@ -11,6 +11,13 @@
     <class>modelo.Venda</class>
     <class>modelo.Itemvenda</class>
     <class>modelo.Tipopagamento</class>
+    <class>modelo.Permissao</class>
+    <class>modelo.Modulopermissao</class>
+    <class>modelo.Perfil</class>
+    <class>modelo.Usuario</class>
+    <class>modelo.Modulo</class>
+    <class>modelo.Funcionario</class>
+    <class>modelo.Endereco</class>
     <properties>
       <!--            <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>-->
       <property name="hibernate.connection.username" value="root"/>
