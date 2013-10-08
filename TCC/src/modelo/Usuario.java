@@ -6,11 +6,15 @@ package modelo;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
@@ -39,14 +43,21 @@ public class Usuario implements Serializable {
     private List<Pais> paisList;
     @OneToMany(mappedBy = "usuarioId", fetch = FetchType.LAZY)
     private List<Rua> ruaList;
-    private static final long serialVersionUID = 1L;
-    @EmbeddedId
-    protected UsuarioPK usuarioPK;
+    
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "usuarioId")
+    private Integer usuarioId;
+    
     @Column(name = "usuarioSenha")
     private String usuarioSenha;
     @Basic(optional = false)
     @Column(name = "ativo")
     private int ativo;
+    @Basic(optional = false)
+    @Column(name = "usuarioName")
+    private int usuarioName;
     @JoinColumn(name = "funcionarioId", referencedColumnName = "idFuncionario")
     @ManyToOne(fetch = FetchType.LAZY)
     private Funcionario funcionarioId;
@@ -55,27 +66,6 @@ public class Usuario implements Serializable {
     private Perfil usuarioPerfil;
 
     public Usuario() {
-    }
-
-    public Usuario(UsuarioPK usuarioPK) {
-        this.usuarioPK = usuarioPK;
-    }
-
-    public Usuario(UsuarioPK usuarioPK, int ativo) {
-        this.usuarioPK = usuarioPK;
-        this.ativo = ativo;
-    }
-
-    public Usuario(int usuarioID, String usuarioName) {
-        this.usuarioPK = new UsuarioPK(usuarioID, usuarioName);
-    }
-
-    public UsuarioPK getUsuarioPK() {
-        return usuarioPK;
-    }
-
-    public void setUsuarioPK(UsuarioPK usuarioPK) {
-        this.usuarioPK = usuarioPK;
     }
 
     public String getUsuarioSenha() {
@@ -112,19 +102,21 @@ public class Usuario implements Serializable {
 
     @Override
     public int hashCode() {
-        int hash = 0;
-        hash += (usuarioPK != null ? usuarioPK.hashCode() : 0);
+        int hash = 7;
+        hash = 41 * hash + Objects.hashCode(this.usuarioId);
         return hash;
     }
 
     @Override
-    public boolean equals(Object object) {
-        // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Usuario)) {
+    public boolean equals(Object obj) {
+        if (obj == null) {
             return false;
         }
-        Usuario other = (Usuario) object;
-        if ((this.usuarioPK == null && other.usuarioPK != null) || (this.usuarioPK != null && !this.usuarioPK.equals(other.usuarioPK))) {
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Usuario other = (Usuario) obj;
+        if (!Objects.equals(this.usuarioId, other.usuarioId)) {
             return false;
         }
         return true;
@@ -132,7 +124,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.Usuario[ usuarioPK=" + usuarioPK + " ]";
+        return "Usuario{" + "usuarioId=" + usuarioId + ", usuarioName=" + usuarioName + '}';
     }
 
     public List<Bairro> getBairroList() {

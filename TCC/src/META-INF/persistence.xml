@@ -2,37 +2,36 @@
 <persistence version="1.0" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_1_0.xsd">
   <persistence-unit name="TCCPU" transaction-type="RESOURCE_LOCAL">
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
+    <class>modelo.Bairro</class>
+    <class>modelo.Cep</class>
+    <class>modelo.Cidade</class>
+    <class>modelo.Compra</class>
+    <class>modelo.Estado</class>
     <class>modelo.Estoque</class>
     <class>modelo.Fabricante</class>
     <class>modelo.Fornecedor</class>
-    <class>modelo.Produto</class>
-    <class>modelo.Compra</class>
-    <class>modelo.Titulopagar</class>
-    <class>modelo.Venda</class>
-    <class>modelo.Itemvenda</class>
-    <class>modelo.Tipopagamento</class>
-    <class>modelo.Permissao</class>
-    <class>modelo.Modulopermissao</class>
-    <class>modelo.Perfil</class>
-    <class>modelo.Usuario</class>
-    <class>modelo.Modulo</class>
     <class>modelo.Funcionario</class>
-    <class>modelo.Endereco</class>
-    <class>modelo.Estado</class>
-    <class>modelo.Cep</class>
-    <class>modelo.Bairro</class>
-    <class>modelo.Cidade</class>
-    <class>modelo.Rua</class>
+    <class>modelo.Itemvenda</class>
+    <class>modelo.Modulo</class>
+    <class>modelo.Modulopermissao</class>
     <class>modelo.Pais</class>
+    <class>modelo.Perfil</class>
+    <class>modelo.Permissao</class>
+    <class>modelo.Produto</class>
+    <class>modelo.Rua</class>
+    <class>modelo.Tipopagamento</class>
+    <class>modelo.Titulopagar</class>
+    <class>modelo.Usuario</class>
+    <class>modelo.Venda</class>
     <properties>
       <!--            <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>-->
+      <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
+      <property name="hibernate.show_sql" value="true"/>
+      <property name="hibernate.format_sql" value="true"/>
       <property name="hibernate.connection.username" value="root"/>
       <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
       <property name="hibernate.connection.password" value="root"/>
       <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/tcc?zeroDateTimeBehavior=convertToNull"/>
-      <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
-      <property name="hibernate.show_sql" value="true"/>
-      <property name="hibernate.format_sql" value="true"/>
     </properties>
   </persistence-unit>
 </persistence>

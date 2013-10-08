@@ -29,8 +29,6 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Funcionario.findAll", query = "SELECT f FROM Funcionario f")})
 public class Funcionario implements Serializable {
-    @Column(name = "enderecoID")
-    private Integer enderecoID;
     @JoinColumn(name = "cepId", referencedColumnName = "cepID")
     @ManyToOne(fetch = FetchType.LAZY)
     private Cep cepId;
@@ -167,14 +165,6 @@ public class Funcionario implements Serializable {
     @Override
     public String toString() {
         return "modelo.Funcionario[ idFuncionario=" + idFuncionario + " ]";
-    }
-
-    public Integer getEnderecoID() {
-        return enderecoID;
-    }
-
-    public void setEnderecoID(Integer enderecoID) {
-        this.enderecoID = enderecoID;
     }
 
     public Cep getCepId() {

@@ -5,10 +5,8 @@
 package controller;
 
 import DAO.VendaDAO;
-import bemajava.Bematech;
 import java.util.ArrayList;
 import java.util.List;
-import javax.print.PrintService;
 import javax.swing.DefaultComboBoxModel;
 import modelo.Itemvenda;
 import modelo.Venda;
