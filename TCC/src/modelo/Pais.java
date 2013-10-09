@@ -117,7 +117,7 @@ import org.joda.time.LocalDateTime;
 
     @Override
     public String toString() {
-        return "modelo.Pais[ paisID=" + paisID + " ]";
+        return paisNome;
     }
 
     public LocalDateTime getInserted() {

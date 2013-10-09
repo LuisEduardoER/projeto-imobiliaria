@@ -4,18 +4,11 @@
  */
 package controller.Cadastro.Endereco;
 
-import DAO.Cadastro.Endereco.CepDAO;
 import DAO.Cadastro.Endereco.EstadoDAO;
-import DAO.Cadastro.Endereco.PaisDAO;
 import controller.Mensagens;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import modelo.Cep;
 import modelo.Estado;
-import modelo.Pais;
 import persistencia.exceptions.NonexistentEntityException;
 import util.Datas;
 
@@ -40,7 +33,7 @@ public class EstadoController {
         return dcbm;
     }
 
-    public DefaultComboBoxModel<Estado> listByField(String field, String value) {
+    public DefaultComboBoxModel<Estado> listEstados() {
         DefaultComboBoxModel<Estado> dcbm = new DefaultComboBoxModel<>();
         List<Estado> lista = dao.consultarTodos();
         for (Estado estado : lista) {
@@ -49,18 +42,27 @@ public class EstadoController {
         return dcbm;
     }
 
-    public Estado buscarPais(String field, String value) {
-        Estado estado = dao.buscarEstado(field, value);
+    public DefaultComboBoxModel<Estado> listEstadosByPais(Integer paisId) {
+        DefaultComboBoxModel<Estado> dcbm = new DefaultComboBoxModel<>();
+        List<Estado> lista = dao.buscarEstadoByPais(paisId);
+        for (Estado estado : lista) {
+            dcbm.addElement(estado);
+        }
+        return dcbm;
+    }
+
+    public Estado buscarEstado(Integer estadoId) {
+        Estado estado = dao.buscarEstadoById(estadoId);
         return estado;
     }
 
     public Estado gravar(Estado estado) {
-        
+
         Integer estados = dao.rowCount("estado.estadoNome", estado.getEstadoNome());
         if (estados > 0) {
             Mensagens m = new Mensagens();
             m.jopAlerta("Este Estado já existe.");
-        }else{
+        } else {
             estado = dao.gravar(estado);
         }
         return estado;

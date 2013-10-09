@@ -5,6 +5,7 @@
 package visao.Cadastro;
 
 import Componentes.Componentes;
+import controller.Cadastro.Endereco.CepController;
 import controller.Cadastro.Endereco.PaisController;
 import controller.Mensagens;
 import javax.swing.JButton;
@@ -30,6 +31,7 @@ public class CadastroCEP extends javax.swing.JDialog {
     JButton jbGravar = c.criaBotaoGravar();
     JButton jbExcluir = c.criaBotaoExcluir();
     PaisController paisController;
+    CepController cepController;
     Pais p;
     Cep cep;
 
@@ -299,46 +301,53 @@ public class CadastroCEP extends javax.swing.JDialog {
 
     private void acaoGravar() {
         String avisos = "";
-       Pais p = (Pais) jcbPais.getSelectedItem();
-       Estado esta = (Estado)  jcbEstado.getSelectedItem();
-       Cidade cida = (Cidade) jcbCidade.getSelectedItem();
-       Bairro bairro = (Bairro) jcbBairro.getSelectedItem();
-       Rua rua = (Rua) jcbRua.getSelectedItem();
-       
-       if(p.getPaisID() == null){
-           avisos = avisos + "Pais não pode ser vazio \n";
-       }
-       
-       if(esta.getEstadoId() == null){
-           avisos = avisos + "Estado não pode ser vazio \n";
-       }
-       
-       if(cida.getCidade() == null){
-           avisos = avisos + "Cidade não pode ser vazio \n";
-       }
-       
-       if(bairro.getBairroId() == null){
-           avisos = avisos + "Bairro não pode ser vazio \n";
-       }
-       
-       if(rua.getRuaId() == null){
-           avisos = avisos + "Rua não pode ser vazio \n";
-       }
-       if(avisos.equals("")){
-//            cep = new PaisController();
-            cep = new Cep();
-            
-            p.setPaisNome(jtfPais.getText());
-            p = paisController.gravar(p);
+        Pais p = (Pais) jcbPais.getSelectedItem();
+        Estado esta = (Estado) jcbEstado.getSelectedItem();
+        Cidade cida = (Cidade) jcbCidade.getSelectedItem();
+        Bairro bairro = (Bairro) jcbBairro.getSelectedItem();
+        Rua rua = (Rua) jcbRua.getSelectedItem();
 
-            if (p.getPaisID() != null) {
+        if (p.getPaisID() == null) {
+            avisos = avisos + "Pais não pode ser vazio \n";
+        }
+
+        if (esta.getEstadoId() == null) {
+            avisos = avisos + "Estado não pode ser vazio \n";
+        }
+
+        if (cida.getCidade() == null) {
+            avisos = avisos + "Cidade não pode ser vazio \n";
+        }
+
+        if (bairro.getBairroId() == null) {
+            avisos = avisos + "Bairro não pode ser vazio \n";
+        }
+
+        if (rua.getRuaId() == null) {
+            avisos = avisos + "Rua não pode ser vazio \n";
+        }
+
+        if (!avisos.equals("")) {
+
+            esta.setPaisId(p);
+            cida.setEstadoId(esta);
+            bairro.setCidadeId(cida);
+            rua.setBairroID(bairro);
+            cep = new Cep();
+            cep.setRuaID(rua);
+            cep.setCep(new Integer(jtfCEP.getText()));
+
+            cepController = new CepController();
+            cep = cepController.gravar(cep);
+
+            if (cep.getCepID() != null) {
                 m = new Mensagens();
-                m.jopAviso("País " + p.getPaisNome() + " - ID: " + p.getPaisID() + " gravado com sucesso!");
+                m.jopAviso("Cep " + cep.getCep() + " - ID: " + cep.getCepID() + " gravado com sucesso!");
             }
         } else {
             m = new Mensagens();
-            m.jopAlerta("O(s) campo(s) "+ avisos +"não pode(m) ser vazio(s)!");
-            jtfPais.requestFocus();
+            m.jopAlerta("O(s) campo(s) " + avisos + "não pode(m) ser vazio(s)!");
+            jtfCEP.requestFocus();
         }
     }
 }

@@ -86,11 +86,21 @@ public class EstadoDAO implements Serializable {
         return criteria;
     }
 
-    public Estado buscarEstado(String searchField, String searchString) {
+    public List<Estado> buscarEstadoByPais(Integer paisId) {
+        Criteria criteria = session.createCriteria(Estado.class, "estado");
+        criteria.createCriteria("estado.paisId", "pais");
+
+        criteria.add(Restrictions.eq("pais.paisID", paisId));
+        criteria.add(Restrictions.eq("estado.deleted", "f"));
+
+        return criteria.list();
+    }
+
+    public Estado buscarEstadoById(Integer estadoId) {
         Criteria criteria = session.createCriteria(Estado.class, "estado");
 
-        if (searchField != null && !searchField.equals("") && searchString != null && !searchString.equals("")) {
-            criteria.add(Restrictions.ilike(searchField, searchString, MatchMode.ANYWHERE));
+        if (estadoId != null) {
+            criteria.add(Restrictions.eq("estado.estadoId", estadoId));
         }
         criteria.add(Restrictions.eq("estado.deleted", "f"));
 

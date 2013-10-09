@@ -5,16 +5,13 @@
 package visao.Cadastro;
 
 import Componentes.Componentes;
+import controller.Cadastro.Endereco.EstadoController;
 import controller.Cadastro.Endereco.PaisController;
 import controller.Mensagens;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import modelo.Bairro;
-import modelo.Cep;
-import modelo.Cidade;
 import modelo.Estado;
 import modelo.Pais;
-import modelo.Rua;
 
 /**
  *
@@ -29,8 +26,9 @@ public class CadastroEstados extends javax.swing.JDialog {
     Mensagens m;
     JButton jbGravar = c.criaBotaoGravar();
     JButton jbExcluir = c.criaBotaoExcluir();
+    EstadoController estadoController;
     PaisController paisController;
-    Pais p;
+    Estado estado;
 
     public CadastroEstados(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -52,7 +50,9 @@ public class CadastroEstados extends javax.swing.JDialog {
             }
         });
 
-
+        jcbPais.setModel(paisController.listPaises());
+        jcbPais.updateUI();
+        
         jpControles.add(jbExcluir);
         jpControles.add(jbGravar);
 
@@ -64,9 +64,9 @@ public class CadastroEstados extends javax.swing.JDialog {
 
     private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {
         m = new Mensagens();
-        if (p != null) {
-            if (p.getPaisID() != 0) {
-                if (m.jopDeletar("Deseja realmente excluir este Pais ?") == JOptionPane.YES_OPTION) {
+        if (estado != null) {
+            if (estado.getEstadoId() != 0) {
+                if (m.jopDeletar("Deseja realmente excluir este Estado ?") == JOptionPane.YES_OPTION) {
 //                    acaoRemover();
                 }
             } else {
@@ -93,9 +93,11 @@ public class CadastroEstados extends javax.swing.JDialog {
         jcbPais = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
         jtfSigla = new javax.swing.JTextField();
-        jcControles = new javax.swing.JPanel();
+        jpControles = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro de Estados");
+        setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -140,16 +142,7 @@ public class CadastroEstados extends javax.swing.JDialog {
                 .addContainerGap(17, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout jcControlesLayout = new javax.swing.GroupLayout(jcControles);
-        jcControles.setLayout(jcControlesLayout);
-        jcControlesLayout.setHorizontalGroup(
-            jcControlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jcControlesLayout.setVerticalGroup(
-            jcControlesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 41, Short.MAX_VALUE)
-        );
+        jpControles.setLayout(new java.awt.GridLayout(1, 0, 2, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -159,7 +152,7 @@ public class CadastroEstados extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jcControles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jpControles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -168,11 +161,12 @@ public class CadastroEstados extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jcControles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jpControles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
-        pack();
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-466)/2, (screenSize.height-223)/2, 466, 223);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -186,7 +180,7 @@ public class CadastroEstados extends javax.swing.JDialog {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -221,8 +215,8 @@ public class CadastroEstados extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jcControles;
     private javax.swing.JComboBox jcbPais;
+    private javax.swing.JPanel jpControles;
     private javax.swing.JTextField jtfEstado;
     private javax.swing.JTextField jtfSigla;
     // End of variables declaration//GEN-END:variables
@@ -232,35 +226,36 @@ public class CadastroEstados extends javax.swing.JDialog {
         Pais p = (Pais) jcbPais.getSelectedItem();
 
         if (p.getPaisID() == null) {
-            avisos = avisos + "Pais não pode ser vazio \n";
+            avisos = avisos + "\n Pais não pode ser vazio";
         }
 
         if (jtfEstado.getText().equals("")) {
-            avisos = avisos + "O nome do estado não pode ser vazio \n";
+            avisos = avisos + "\n Nome do estado não pode ser vazio";
         }
 
         if (jtfSigla.getText().equals("")) {
-            avisos = avisos + "Sigla não pode ser vazio \n";
+            avisos = avisos + "\n Sigla não pode ser vazio";
         }
         if (jtfSigla.getText().length() > 2) {
-            avisos = avisos + "Sigla não pode ter mais de dois caracteres \n";
+            avisos = avisos + "\n Sigla não pode ter mais de dois caracteres";
         }
 
         if (avisos.equals("")) {
-//            cep = new PaisController();
-            cep = new Cep();
-
-            p.setPaisNome(jtfPais.getText());
-            p = paisController.gravar(p);
-
-            if (p.getPaisID() != null) {
+            estadoController = new EstadoController();
+            estado = new Estado();
+            estado.setPaisId(p);
+            estado.setEstadoNome(jtfEstado.getText());
+            estado.setEstadoUF(jtfSigla.getText());
+            estado = estadoController.gravar(estado);
+            
+            if (estado.getEstadoId() != null) {
                 m = new Mensagens();
-                m.jopAviso("País " + p.getPaisNome() + " - ID: " + p.getPaisID() + " gravado com sucesso!");
+                m.jopAviso("Estado " + estado.getEstadoNome() + " - ID: " + estado.getEstadoId() + " gravado com sucesso!");
             }
         } else {
             m = new Mensagens();
-            m.jopAlerta("O(s) campo(s) " + avisos + "não pode(m) ser vazio(s)!");
-            jtfPais.requestFocus();
+            m.jopAlerta("Verifique: " + avisos);
+            jtfEstado.requestFocus();
         }
     }
 }

@@ -105,4 +105,17 @@ public class CepDAO implements Serializable {
         criteria.setProjection(Projections.rowCount());
         return ((Integer) criteria.uniqueResult()).intValue();
     }
+    
+    public Integer checaCepExiste(Cep cep) {
+        Criteria criteria = session.createCriteria(Cep.class, "cep");
+        criteria.createCriteria("cep.ruaId", "rua");
+
+        criteria.add(Restrictions.eq("cep.cep", cep.getCep()));
+        criteria.add(Restrictions.eq("rua.ruaId",   cep.getRuaID().getRuaId()));
+        criteria.add(Restrictions.eq("cep.deleted", "f"));
+        
+        criteria.setProjection(Projections.rowCount());
+        return ((Integer) criteria.uniqueResult()).intValue();
+    }
+    
 }

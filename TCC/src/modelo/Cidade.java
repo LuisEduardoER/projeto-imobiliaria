@@ -57,6 +57,7 @@ public class Cidade implements Serializable {
     private Estado estadoId;
 
     public Cidade() {
+        this.deleted = 'f';
     }
 
     public Cidade(Integer cidade) {
@@ -117,7 +118,7 @@ public class Cidade implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.Cidade[ cidade=" + cidade + " ]";
+        return cidadeNome;
     }
 
     public LocalDateTime getInserted() {

@@ -36,7 +36,7 @@ public class PaisController {
         return dcbm;
     }
 
-    public DefaultComboBoxModel<Pais> listByField(String field, String value) {
+    public DefaultComboBoxModel<Pais> listPaises() {
         DefaultComboBoxModel<Pais> dcbm = new DefaultComboBoxModel<>();
         List<Pais> lista = dao.consultarTodos();
         for (Pais pais : lista) {

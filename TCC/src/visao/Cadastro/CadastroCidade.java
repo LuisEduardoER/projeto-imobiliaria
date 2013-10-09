@@ -4,6 +4,17 @@
  */
 package visao.Cadastro;
 
+import Componentes.Componentes;
+import controller.Cadastro.Endereco.CidadeController;
+import controller.Cadastro.Endereco.EstadoController;
+import controller.Cadastro.Endereco.PaisController;
+import controller.Mensagens;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import modelo.Cidade;
+import modelo.Estado;
+import modelo.Pais;
+
 /**
  *
  * @author Bruno
@@ -13,9 +24,65 @@ public class CadastroCidade extends javax.swing.JDialog {
     /**
      * Creates new form CadastroCidade
      */
+    Componentes c = new Componentes();
+    Mensagens m;
+    JButton jbGravar = c.criaBotaoGravar();
+    JButton jbExcluir = c.criaBotaoExcluir();
+    EstadoController estadoController;
+    PaisController paisController;
+    CidadeController cidadeController;
+    Pais p;
+    Estado estado;
+    Cidade cidade;
+
     public CadastroCidade(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        paisController = new PaisController();
+        estadoController = new EstadoController();
+        jbGravar = c.criaBotaoGravar();
+        jbExcluir = c.criaBotaoExcluir();
+
+        jbGravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGravarActionPerformed(evt);
+            }
+        });
+
+        jbExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbExcluirActionPerformed(evt);
+            }
+        });
+
+        jcbPais.setModel(paisController.listPaises());
+        jcbPais.updateUI();
+
+        jcbEstados.setModel(estadoController.listEstados());
+        jcbEstados.updateUI();
+        
+        jpControles.add(jbExcluir);
+        jpControles.add(jbGravar);
+
+    }
+
+    private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {
+        acaoGravar();
+    }
+
+    private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {
+        m = new Mensagens();
+        if (estado != null) {
+            if (estado.getEstadoId() != 0) {
+                if (m.jopDeletar("Deseja realmente excluir este Estado ?") == JOptionPane.YES_OPTION) {
+//                    acaoRemover();
+                }
+            } else {
+                m.jopAlerta("Para excluir registro, é nescessário efetuar uma busca.");
+            }
+        } else {
+            m.jopAlerta("Para excluir registro, é nescessário efetuar uma busca.");
+        }
     }
 
     /**
@@ -27,6 +94,7 @@ public class CadastroCidade extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel3 = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -35,9 +103,11 @@ public class CadastroCidade extends javax.swing.JDialog {
         jcbPais = new javax.swing.JComboBox();
         jcbEstados = new javax.swing.JComboBox();
         jtfCidade = new javax.swing.JTextField();
-        jPanel3 = new javax.swing.JPanel();
+        jpControles = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro de Cidades");
+        setResizable(false);
 
         jLabel1.setText("Pais:");
 
@@ -69,6 +139,12 @@ public class CadastroCidade extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jcbPais.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbPaisItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -93,15 +169,33 @@ public class CadastroCidade extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jpControles.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        jpControles.setLayout(new java.awt.GridLayout(1, 0, 2, 0));
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jpControles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 39, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jpControles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -109,29 +203,27 @@ public class CadastroCidade extends javax.swing.JDialog {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(0, 7, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 6, Short.MAX_VALUE))
         );
 
-        pack();
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-416)/2, (screenSize.height-215)/2, 416, 215);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jcbPaisItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbPaisItemStateChanged
+        p = (Pais) jcbPais.getSelectedItem();
+        jcbEstados.setModel(estadoController.listEstadosByPais(p.getPaisID()));
+        jcbEstados.updateUI();
+    }//GEN-LAST:event_jcbPaisItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -144,7 +236,7 @@ public class CadastroCidade extends javax.swing.JDialog {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -183,6 +275,47 @@ public class CadastroCidade extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JComboBox jcbEstados;
     private javax.swing.JComboBox jcbPais;
+    private javax.swing.JPanel jpControles;
     private javax.swing.JTextField jtfCidade;
     // End of variables declaration//GEN-END:variables
+
+    private void acaoGravar() {
+        String avisos = "";
+        Pais p = (Pais) jcbPais.getSelectedItem();
+        estado = (Estado) jcbEstados.getSelectedItem();
+        cidade = new Cidade();
+        cidadeController = new CidadeController();
+        
+        if (p.getPaisID() == null) {
+            avisos = avisos + "\n Pais não pode ser vazio";
+        }
+
+        if (estado == null || estado.getEstadoId() == null) {
+            avisos = avisos + "\n Estado não pode ser vazio";
+        }
+
+        if (jtfCidade.getText().equals("")) {
+            avisos = avisos + "\n Nome da cidade não pode ser vazio";
+        }
+
+        if (avisos.equals("")) {
+            estadoController = new EstadoController();
+            cidade = new Cidade();
+            estado.setPaisId(p);
+
+            cidade.setEstadoId(estado);
+            cidade.setCidadeNome(jtfCidade.getText());
+
+            cidade = cidadeController.gravar(cidade);
+
+            if (cidade.getCidade() != null) {
+                m = new Mensagens();
+                m.jopAviso("Cidade " + cidade.getCidadeNome() + " - ID: " + cidade.getCidade() + " gravado com sucesso!");
+            }
+        } else {
+            m = new Mensagens();
+            m.jopAlerta("Verifique: " + avisos);
+            jtfCidade.requestFocus();
+        }
+    }
 }
