@@ -41,6 +41,15 @@ public class RuaController {
         return dcbm;
     }
 
+    public DefaultComboBoxModel<Rua> listRuaByBairro(Integer barirroId) {
+        DefaultComboBoxModel<Rua> dcbm = new DefaultComboBoxModel<>();
+        List<Rua> lista = dao.buscarRuaByBairro(barirroId);
+        for (Rua rua : lista) {
+            dcbm.addElement(rua);
+        }
+        return dcbm;
+    }
+    
     public Rua buscarRua(String field, String value) {
         Rua rua = dao.buscarRua(field, value);
         return rua;

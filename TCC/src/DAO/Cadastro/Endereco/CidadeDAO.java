@@ -80,6 +80,7 @@ public class CidadeDAO implements Serializable {
         criteria.createCriteria("cidade.estadoId", "estado");
 
         criteria.add(Restrictions.eq("estado.estadoId", estadoId));
+        criteria.add(Restrictions.eq("estado.deleted", "f"));
         criteria.add(Restrictions.eq("cidade.deleted", "f"));
 
         return criteria.list();

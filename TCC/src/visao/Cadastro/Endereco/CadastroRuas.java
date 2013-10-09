@@ -9,6 +9,7 @@ import controller.Cadastro.Endereco.BairroController;
 import controller.Cadastro.Endereco.CidadeController;
 import controller.Cadastro.Endereco.EstadoController;
 import controller.Cadastro.Endereco.PaisController;
+import controller.Cadastro.Endereco.RuaController;
 import controller.Mensagens;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -16,6 +17,7 @@ import modelo.Bairro;
 import modelo.Cidade;
 import modelo.Estado;
 import modelo.Pais;
+import modelo.Rua;
 
 /**
  *
@@ -26,7 +28,6 @@ public class CadastroRuas extends javax.swing.JDialog {
     /**
      * Creates new form CadastroRuas
      */
-    
     Componentes c = new Componentes();
     Mensagens m;
     JButton jbGravar = c.criaBotaoGravar();
@@ -35,16 +36,20 @@ public class CadastroRuas extends javax.swing.JDialog {
     PaisController paisController;
     CidadeController cidadeController;
     BairroController bairroController;
+    RuaController ruaController;
     Pais p;
     Estado estado;
     Cidade cidade;
     Bairro bairro;
-    
+    Rua rua;
+
     public CadastroRuas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-    paisController = new PaisController();
+        jtfRua.requestFocus();
+        paisController = new PaisController();
         estadoController = new EstadoController();
+        bairroController = new BairroController();
         jbGravar = c.criaBotaoGravar();
         jbExcluir = c.criaBotaoExcluir();
 
@@ -71,7 +76,19 @@ public class CadastroRuas extends javax.swing.JDialog {
             jcbCidade.setModel(cidadeController.listCidadesByEstado(((Estado) jcbEstados.getSelectedItem()).getEstadoId()));
             jcbCidade.updateUI();
         }
-
+        
+        if ((Cidade) jcbCidade.getSelectedItem() != null) {
+            cidade = (Cidade) jcbCidade.getSelectedItem();
+            jcbBairro.setModel(bairroController.listBairroByCidade(cidade.getCidade()));
+            jcbBairro.updateUI();
+        }
+        
+//        if ((Bairro) jcbBairro.getSelectedItem() != null) {
+//            bairro = (Bairro) jcbBairro.getSelectedItem();
+//            jcbBairro.setModel(bairroController.listBairroByCidade(bairro.getBairroId()));
+//            jcbBairro.updateUI();
+//        }
+        
         jpControles.add(jbExcluir);
         jpControles.add(jbGravar);
 
@@ -121,6 +138,7 @@ public class CadastroRuas extends javax.swing.JDialog {
         jpControles = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro de Rua");
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -257,23 +275,30 @@ public class CadastroRuas extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpControles, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addComponent(jpControles, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pack();
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-430)/2, (screenSize.height-287)/2, 430, 287);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jcbPaisItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbPaisItemStateChanged
-        // TODO add your handling code here:
+        p = (Pais) jcbPais.getSelectedItem();
+        jcbEstados.setModel(estadoController.listEstadosByPais(p.getPaisID()));
+        jcbEstados.updateUI();
     }//GEN-LAST:event_jcbPaisItemStateChanged
 
     private void jcbEstadosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbEstadosItemStateChanged
-        // TODO add your handling code here:
+        estado = (Estado) jcbEstados.getSelectedItem();
+        jcbCidade.setModel(cidadeController.listCidadesByEstado(estado.getEstadoId()));
+        jcbCidade.updateUI();
     }//GEN-LAST:event_jcbEstadosItemStateChanged
 
     private void jcbCidadeItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbCidadeItemStateChanged
-        // TODO add your handling code here:
+        cidade = (Cidade) jcbCidade.getSelectedItem();
+        jcbBairro.setModel(cidadeController.listCidadesByEstado(cidade.getCidade()));
+        jcbBairro.updateUI();
     }//GEN-LAST:event_jcbCidadeItemStateChanged
 
     /**
@@ -287,7 +312,7 @@ public class CadastroRuas extends javax.swing.JDialog {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -339,7 +364,9 @@ public class CadastroRuas extends javax.swing.JDialog {
         Pais p = (Pais) jcbPais.getSelectedItem();
         estado = (Estado) jcbEstados.getSelectedItem();
         cidade = (Cidade) jcbCidade.getSelectedItem();
-
+        bairro = (Bairro) jcbBairro.getSelectedItem();
+        rua = new Rua();
+        
         if (p.getPaisID() == null) {
             avisos = avisos + "\n Pais não pode ser vazio";
         }
@@ -352,30 +379,34 @@ public class CadastroRuas extends javax.swing.JDialog {
             avisos = avisos + "\n Cidade não pode ser vazio";
         }
 
-        if (jtfBairro.getText().equals("")) {
-            avisos = avisos + "\n Nome do bairro não pode ser vazio";
+        if (bairro == null || bairro.getBairroId() == null) {
+            avisos = avisos + "\n Bairro não pode ser vazio";
+        }
+
+        if (jtfRua.getText().equals("")) {
+            avisos = avisos + "\n Nome da Rua não pode ser vazio";
         }
 
         if (avisos.equals("")) {
-            bairroController = new BairroController();
+            ruaController = new RuaController();
             bairro = new Bairro();
 
             estado.setPaisId(p);
             cidade.setEstadoId(estado);
             bairro.setCidadeId(cidade);
+            rua.setBairroID(bairro);
+            
+            rua.setRuaNome(jtfRua.getText());
+            rua = ruaController.gravar(rua);
 
-            bairro.setBairroNome(jtfBairro.getText());
-            bairro = bairroController.gravar(bairro);
-
-            if (bairro.getBairroId() != null) {
+            if (rua.getRuaId() != null) {
                 m = new Mensagens();
-                m.jopAviso("Bairro " + bairro.getBairroNome() + " - ID: " + bairro.getBairroId() + " gravado com sucesso!");
+                m.jopAviso("Rua " + rua.getRuaNome() + " - ID: " + rua.getRuaId() + " gravado com sucesso!");
             }
         } else {
             m = new Mensagens();
             m.jopAlerta("Verifique: " + avisos);
-            jtfBairro.requestFocus();
+            jtfRua.requestFocus();
         }
     }
-    
 }

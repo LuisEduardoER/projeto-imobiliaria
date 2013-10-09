@@ -33,7 +33,8 @@ public class CadastroEstados extends javax.swing.JDialog {
     public CadastroEstados(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
+        jtfEstado.requestFocus();
+        
         paisController = new PaisController();
         jbGravar = c.criaBotaoGravar();
         jbExcluir = c.criaBotaoExcluir();
@@ -162,11 +163,11 @@ public class CadastroEstados extends javax.swing.JDialog {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jpControles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-466)/2, (screenSize.height-223)/2, 466, 223);
+        setBounds((screenSize.width-466)/2, (screenSize.height-202)/2, 466, 202);
     }// </editor-fold>//GEN-END:initComponents
 
     /**

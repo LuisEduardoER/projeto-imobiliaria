@@ -118,7 +118,7 @@ public class Cep implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.Cep[ cepID=" + cepID + " ]";
+        return cep.toString();
     }
 
     public LocalDateTime getInserted() {

@@ -42,8 +42,10 @@ public class CadastroBairro extends javax.swing.JDialog {
     public CadastroBairro(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        jtfBairro.requestFocus();
         paisController = new PaisController();
         estadoController = new EstadoController();
+        bairroController = new BairroController();
         jbGravar = c.criaBotaoGravar();
         jbExcluir = c.criaBotaoExcluir();
 
@@ -70,8 +72,13 @@ public class CadastroBairro extends javax.swing.JDialog {
             jcbCidade.setModel(cidadeController.listCidadesByEstado(((Estado) jcbEstados.getSelectedItem()).getEstadoId()));
             jcbCidade.updateUI();
         }
-
-
+        
+        if ((Cidade) jcbCidade.getSelectedItem() != null) {
+            cidade = (Cidade) jcbCidade.getSelectedItem();
+            jcbCidade.setModel(cidadeController.listCidadesByEstado(cidade.getCidade()));
+            jcbCidade.updateUI();
+        }
+        
         jpControles.add(jbExcluir);
         jpControles.add(jbGravar);
 

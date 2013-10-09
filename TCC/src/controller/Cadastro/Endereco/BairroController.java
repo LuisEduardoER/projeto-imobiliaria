@@ -43,6 +43,16 @@ public class BairroController {
         return dcbm;
     }
 
+    public DefaultComboBoxModel<Bairro> listBairroByCidade(Integer cidadeId) {
+        DefaultComboBoxModel<Bairro> dcbm = new DefaultComboBoxModel<>();
+        List<Bairro> lista = dao.buscarCidadeByEstado(cidadeId);
+        for (Bairro bairro : lista) {
+            dcbm.addElement(bairro);
+        }
+        return dcbm;
+    }
+    
+    
     public Bairro buscarPais(String field, String value) {
         Bairro bairro = dao.buscarBairro(field, value);
         return bairro;

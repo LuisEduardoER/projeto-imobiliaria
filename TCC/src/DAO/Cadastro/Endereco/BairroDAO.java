@@ -74,6 +74,17 @@ public class BairroDAO implements Serializable {
         return criteria.list();
     }
 
+    public List<Bairro> buscarCidadeByEstado(Integer cidadeId) {
+        Criteria criteria = session.createCriteria(Bairro.class, "bairro");
+        criteria.createCriteria("bairro.cidadeId", "cidade");
+
+        criteria.add(Restrictions.eq("cidade.cidade", cidadeId));
+        criteria.add(Restrictions.eq("cidade.deleted", "f"));
+        criteria.add(Restrictions.eq("bairro.deleted", "f"));
+
+        return criteria.list();
+    }
+    
     private Criteria montarCriteria(String searchField, String searchString) {
         Criteria criteria = session.createCriteria(Bairro.class, "bairro");
 

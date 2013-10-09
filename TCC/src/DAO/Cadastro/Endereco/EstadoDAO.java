@@ -91,6 +91,7 @@ public class EstadoDAO implements Serializable {
         criteria.createCriteria("estado.paisId", "pais");
 
         criteria.add(Restrictions.eq("pais.paisID", paisId));
+        criteria.add(Restrictions.eq("pais.deleted", "f"));
         criteria.add(Restrictions.eq("estado.deleted", "f"));
 
         return criteria.list();

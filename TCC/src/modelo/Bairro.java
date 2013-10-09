@@ -118,7 +118,7 @@ public class Bairro implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.Bairro[ bairroId=" + bairroId + " ]";
+        return bairroNome;
     }
 
     public LocalDateTime getInserted() {

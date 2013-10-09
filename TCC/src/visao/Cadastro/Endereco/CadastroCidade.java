@@ -38,6 +38,8 @@ public class CadastroCidade extends javax.swing.JDialog {
     public CadastroCidade(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        jtfCidade.requestFocus();
+        
         paisController = new PaisController();
         estadoController = new EstadoController();
         jbGravar = c.criaBotaoGravar();

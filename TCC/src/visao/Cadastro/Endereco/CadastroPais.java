@@ -31,6 +31,7 @@ public class CadastroPais extends javax.swing.JDialog {
     public CadastroPais(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        jtfPais.requestFocus();
         
         paisController = new PaisController();
         jbGravar = c.criaBotaoGravar();

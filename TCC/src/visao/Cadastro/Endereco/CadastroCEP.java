@@ -5,8 +5,12 @@
 package visao.Cadastro.Endereco;
 
 import Componentes.Componentes;
+import controller.Cadastro.Endereco.BairroController;
 import controller.Cadastro.Endereco.CepController;
+import controller.Cadastro.Endereco.CidadeController;
+import controller.Cadastro.Endereco.EstadoController;
 import controller.Cadastro.Endereco.PaisController;
+import controller.Cadastro.Endereco.RuaController;
 import controller.Mensagens;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -30,15 +34,26 @@ public class CadastroCEP extends javax.swing.JDialog {
     Mensagens m;
     JButton jbGravar = c.criaBotaoGravar();
     JButton jbExcluir = c.criaBotaoExcluir();
+    EstadoController estadoController;
     PaisController paisController;
+    CidadeController cidadeController;
+    BairroController bairroController;
     CepController cepController;
+    RuaController ruaController;
     Pais p;
+    Estado estado;
+    Cidade cidade;
+    Bairro bairro;
     Cep cep;
 
     public CadastroCEP(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        jtfCEP.requestFocus();
         paisController = new PaisController();
+        estadoController = new EstadoController();
+        bairroController = new BairroController();
+        ruaController = new RuaController();
         jbGravar = c.criaBotaoGravar();
         jbExcluir = c.criaBotaoExcluir();
 
@@ -54,6 +69,23 @@ public class CadastroCEP extends javax.swing.JDialog {
             }
         });
 
+        if ((Estado) jcbEstados.getSelectedItem() != null) {
+            cidadeController = new CidadeController();
+            jcbCidade.setModel(cidadeController.listCidadesByEstado(((Estado) jcbEstados.getSelectedItem()).getEstadoId()));
+            jcbCidade.updateUI();
+        }
+        
+        if ((Cidade) jcbCidade.getSelectedItem() != null) {
+            cidade = (Cidade) jcbCidade.getSelectedItem();
+            jcbCidade.setModel(cidadeController.listCidadesByEstado(cidade.getCidade()));
+            jcbCidade.updateUI();
+        }
+        
+        if ((Bairro) jcbBairro.getSelectedItem() != null) {
+            bairro = (Bairro) jcbBairro.getSelectedItem();
+            jcbRua.setModel(ruaController.listRuaByBairro(bairro.getBairroId()));
+            jcbRua.updateUI();
+        }
 
         jpControles.add(jbExcluir);
         jpControles.add(jbGravar);
@@ -98,7 +130,7 @@ public class CadastroCEP extends javax.swing.JDialog {
         jLabel6 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jcbPais = new javax.swing.JComboBox();
-        jcbEstado = new javax.swing.JComboBox();
+        jcbEstados = new javax.swing.JComboBox();
         jcbCidade = new javax.swing.JComboBox();
         jcbBairro = new javax.swing.JComboBox();
         jcbRua = new javax.swing.JComboBox();
@@ -163,7 +195,7 @@ public class CadastroCEP extends javax.swing.JDialog {
                     .addComponent(jcbRua, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jcbBairro, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jcbCidade, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jcbEstado, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jcbEstados, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jcbPais, javax.swing.GroupLayout.Alignment.TRAILING, 0, 297, Short.MAX_VALUE)
                     .addComponent(jtfCEP))
                 .addContainerGap())
@@ -174,7 +206,7 @@ public class CadastroCEP extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jcbPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jcbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jcbEstados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jcbCidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -292,7 +324,7 @@ public class CadastroCEP extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JComboBox jcbBairro;
     private javax.swing.JComboBox jcbCidade;
-    private javax.swing.JComboBox jcbEstado;
+    private javax.swing.JComboBox jcbEstados;
     private javax.swing.JComboBox jcbPais;
     private javax.swing.JComboBox jcbRua;
     private javax.swing.JPanel jpControles;
@@ -302,7 +334,7 @@ public class CadastroCEP extends javax.swing.JDialog {
     private void acaoGravar() {
         String avisos = "";
         Pais p = (Pais) jcbPais.getSelectedItem();
-        Estado esta = (Estado) jcbEstado.getSelectedItem();
+        Estado esta = (Estado) jcbEstados.getSelectedItem();
         Cidade cida = (Cidade) jcbCidade.getSelectedItem();
         Bairro bairro = (Bairro) jcbBairro.getSelectedItem();
         Rua rua = (Rua) jcbRua.getSelectedItem();

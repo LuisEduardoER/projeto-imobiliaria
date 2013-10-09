@@ -95,9 +95,20 @@ public class RuaDAO implements Serializable {
         return (Rua) criteria.uniqueResult();
     }
 
+    public List<Rua> buscarRuaByBairro(Integer bairroId) {
+        Criteria criteria = session.createCriteria(Rua.class, "rua");
+        criteria.createCriteria("rua.bairroId", "bairro");
+
+        criteria.add(Restrictions.eq("bairro.bairroId", bairroId));
+        criteria.add(Restrictions.eq("bairro.deleted", "f"));
+        criteria.add(Restrictions.eq("rua.deleted", "f"));
+
+        return criteria.list();
+    }
+    
     public Integer checaRuaExiste(Rua rua) {
         Criteria criteria = session.createCriteria(Rua.class, "rua");
-        criteria.createCriteria("bairro.bairroId", "bairro");
+        criteria.createCriteria("rua.bairroId", "bairro");
 
         criteria.add(Restrictions.eq("rua.ruaNome", rua.getRuaNome()));
         criteria.add(Restrictions.eq("bairro.bairroId",   rua.getBairroID().getBairroId()));
