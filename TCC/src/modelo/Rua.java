@@ -118,7 +118,7 @@ public class Rua implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.Rua[ ruaId=" + ruaId + " ]";
+        return ruaNome;
     }
 
     public LocalDateTime getInserted() {

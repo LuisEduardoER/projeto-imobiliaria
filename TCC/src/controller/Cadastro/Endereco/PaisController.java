@@ -6,9 +6,6 @@ package controller.Cadastro.Endereco;
 
 import DAO.Cadastro.Endereco.PaisDAO;
 import controller.Mensagens;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import modelo.Pais;
@@ -57,6 +54,7 @@ public class PaisController {
             Mensagens m = new Mensagens();
             m.jopAlerta("Já existe um país cadastrado com este nome!");
         }else{
+            pais.setInserted(Datas.dataAtualDateTime());
             pais = dao.gravar(pais);
         }
         return pais;

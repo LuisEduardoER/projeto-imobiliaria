@@ -55,8 +55,9 @@ public class CepController {
         Integer bairros = dao.checaCepExiste(cep);
         if (bairros > 0) {
             Mensagens m = new Mensagens();
-            m.jopAlerta("Esta Cep já existe nesta cep.");
+            m.jopAlerta("Esta Cep já existe nesta rua.");
         }else{
+            cep.setInserted(Datas.dataAtualDateTime());
             cep = dao.gravar(cep);
         }
         return cep;

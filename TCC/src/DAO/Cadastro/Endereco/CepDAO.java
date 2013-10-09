@@ -108,7 +108,7 @@ public class CepDAO implements Serializable {
     
     public Integer checaCepExiste(Cep cep) {
         Criteria criteria = session.createCriteria(Cep.class, "cep");
-        criteria.createCriteria("cep.ruaId", "rua");
+        criteria.createCriteria("cep.ruaID", "rua");
 
         criteria.add(Restrictions.eq("cep.cep", cep.getCep()));
         criteria.add(Restrictions.eq("rua.ruaId",   cep.getRuaID().getRuaId()));

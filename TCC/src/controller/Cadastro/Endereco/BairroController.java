@@ -65,6 +65,7 @@ public class BairroController {
             Mensagens m = new Mensagens();
             m.jopAlerta("Este Bairro já existe nesta cidade.");
         }else{
+            bairro.setInserted(Datas.dataAtualDateTime());
             bairro = dao.gravar(bairro);
         }
         return bairro;

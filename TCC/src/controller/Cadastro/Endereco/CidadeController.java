@@ -72,6 +72,7 @@ public class CidadeController {
             Mensagens m = new Mensagens();
             m.jopAlerta("Esta Cidade já existe neste estado.");
         }else{
+            cidade.setInserted(Datas.dataAtualDateTime());
             cidade = dao.gravar(cidade);
         }
         return cidade;

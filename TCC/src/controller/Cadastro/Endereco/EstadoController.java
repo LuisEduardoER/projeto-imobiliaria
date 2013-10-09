@@ -63,6 +63,7 @@ public class EstadoController {
             Mensagens m = new Mensagens();
             m.jopAlerta("Este Estado já existe.");
         } else {
+            estado.setInserted(Datas.dataAtualDateTime());
             estado = dao.gravar(estado);
         }
         return estado;

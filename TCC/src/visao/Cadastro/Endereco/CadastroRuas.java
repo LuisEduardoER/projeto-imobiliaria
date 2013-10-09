@@ -389,11 +389,12 @@ public class CadastroRuas extends javax.swing.JDialog {
 
         if (avisos.equals("")) {
             ruaController = new RuaController();
-            bairro = new Bairro();
+            rua = new Rua();
 
             estado.setPaisId(p);
             cidade.setEstadoId(estado);
             bairro.setCidadeId(cidade);
+            
             rua.setBairroID(bairro);
             
             rua.setRuaNome(jtfRua.getText());

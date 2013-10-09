@@ -62,6 +62,7 @@ public class RuaController {
             Mensagens m = new Mensagens();
             m.jopAlerta("Esta Rua já existe neste bairro.");
         }else{
+            rua.setInserted(Datas.dataAtualDateTime());
             rua = dao.gravar(rua);
         }
         return rua;

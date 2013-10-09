@@ -69,6 +69,12 @@ public class CadastroCEP extends javax.swing.JDialog {
             }
         });
 
+        jcbPais.setModel(paisController.listPaises());
+        jcbPais.updateUI();
+
+        jcbEstados.setModel(estadoController.listEstados());
+        jcbEstados.updateUI();
+        
         if ((Estado) jcbEstados.getSelectedItem() != null) {
             cidadeController = new CidadeController();
             jcbCidade.setModel(cidadeController.listCidadesByEstado(((Estado) jcbEstados.getSelectedItem()).getEstadoId()));
@@ -77,8 +83,8 @@ public class CadastroCEP extends javax.swing.JDialog {
         
         if ((Cidade) jcbCidade.getSelectedItem() != null) {
             cidade = (Cidade) jcbCidade.getSelectedItem();
-            jcbCidade.setModel(cidadeController.listCidadesByEstado(cidade.getCidade()));
-            jcbCidade.updateUI();
+            jcbBairro.setModel(bairroController.listBairroByCidade(cidade.getCidade()));
+            jcbBairro.updateUI();
         }
         
         if ((Bairro) jcbBairro.getSelectedItem() != null) {
@@ -138,6 +144,7 @@ public class CadastroCEP extends javax.swing.JDialog {
         jpControles = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro de CEP");
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -268,7 +275,8 @@ public class CadastroCEP extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pack();
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-430)/2, (screenSize.height-317)/2, 430, 317);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -282,7 +290,7 @@ public class CadastroCEP extends javax.swing.JDialog {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -359,17 +367,22 @@ public class CadastroCEP extends javax.swing.JDialog {
             avisos = avisos + "Rua não pode ser vazio \n";
         }
 
-        if (!avisos.equals("")) {
+        if (jtfCEP.getText().equals("")) {
+            avisos = avisos + "\n CEP não pode ser vazio";
+        }
+        
+        if (avisos.equals("")) {
+            cepController = new CepController();
+            cep = new Cep();
 
             esta.setPaisId(p);
             cida.setEstadoId(esta);
             bairro.setCidadeId(cida);
             rua.setBairroID(bairro);
-            cep = new Cep();
+
             cep.setRuaID(rua);
             cep.setCep(new Integer(jtfCEP.getText()));
 
-            cepController = new CepController();
             cep = cepController.gravar(cep);
 
             if (cep.getCepID() != null) {

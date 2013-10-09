@@ -39,7 +39,6 @@ public class RuaDAO implements Serializable {
         em.getTransaction().commit();
         return rua;
     }
-
     public Rua atualizar(Rua rua) {
         em.getTransaction().begin();
         rua = em.merge(rua);
@@ -97,7 +96,7 @@ public class RuaDAO implements Serializable {
 
     public List<Rua> buscarRuaByBairro(Integer bairroId) {
         Criteria criteria = session.createCriteria(Rua.class, "rua");
-        criteria.createCriteria("rua.bairroId", "bairro");
+        criteria.createCriteria("rua.bairroID", "bairro");
 
         criteria.add(Restrictions.eq("bairro.bairroId", bairroId));
         criteria.add(Restrictions.eq("bairro.deleted", "f"));
@@ -108,7 +107,7 @@ public class RuaDAO implements Serializable {
     
     public Integer checaRuaExiste(Rua rua) {
         Criteria criteria = session.createCriteria(Rua.class, "rua");
-        criteria.createCriteria("rua.bairroId", "bairro");
+        criteria.createCriteria("rua.bairroID", "bairro");
 
         criteria.add(Restrictions.eq("rua.ruaNome", rua.getRuaNome()));
         criteria.add(Restrictions.eq("bairro.bairroId",   rua.getBairroID().getBairroId()));
