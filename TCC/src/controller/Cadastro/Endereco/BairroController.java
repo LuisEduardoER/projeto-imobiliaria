@@ -53,7 +53,7 @@ public class BairroController {
         Integer bairros = dao.checaBairroExiste(bairro);
         if (bairros > 0) {
             Mensagens m = new Mensagens();
-            m.jopAlerta("Esta Bairro já existe nesta bairro.");
+            m.jopAlerta("Este Bairro já existe nesta cidade.");
         }else{
             bairro = dao.gravar(bairro);
         }

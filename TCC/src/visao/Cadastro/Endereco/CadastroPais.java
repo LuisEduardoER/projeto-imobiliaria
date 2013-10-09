@@ -2,38 +2,36 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package visao.Cadastro;
+package visao.Cadastro.Endereco;
 
 import Componentes.Componentes;
-import controller.Cadastro.Endereco.EstadoController;
 import controller.Cadastro.Endereco.PaisController;
 import controller.Mensagens;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import modelo.Estado;
 import modelo.Pais;
 
 /**
  *
  * @author Bruno
  */
-public class CadastroEstados extends javax.swing.JDialog {
+public class CadastroPais extends javax.swing.JDialog {
 
     /**
-     * Creates new form CadastroEstados
+     * Creates new form CadastroPais
      */
+    
     Componentes c = new Componentes();
     Mensagens m;
-    JButton jbGravar = c.criaBotaoGravar();
+    JButton jbGravar  = c.criaBotaoGravar();
     JButton jbExcluir = c.criaBotaoExcluir();
-    EstadoController estadoController;
     PaisController paisController;
-    Estado estado;
-
-    public CadastroEstados(java.awt.Frame parent, boolean modal) {
+    Pais p;
+    
+    public CadastroPais(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
+        
         paisController = new PaisController();
         jbGravar = c.criaBotaoGravar();
         jbExcluir = c.criaBotaoExcluir();
@@ -50,23 +48,22 @@ public class CadastroEstados extends javax.swing.JDialog {
             }
         });
 
-        jcbPais.setModel(paisController.listPaises());
-        jcbPais.updateUI();
         
         jpControles.add(jbExcluir);
         jpControles.add(jbGravar);
-
+        
     }
 
+    
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {
         acaoGravar();
     }
 
     private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {
         m = new Mensagens();
-        if (estado != null) {
-            if (estado.getEstadoId() != 0) {
-                if (m.jopDeletar("Deseja realmente excluir este Estado ?") == JOptionPane.YES_OPTION) {
+        if (p != null) {
+            if (p.getPaisID() != 0) {
+                if (m.jopDeletar("Deseja realmente excluir este Pais ?") == JOptionPane.YES_OPTION) {
 //                    acaoRemover();
                 }
             } else {
@@ -88,24 +85,16 @@ public class CadastroEstados extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jtfEstado = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
-        jcbPais = new javax.swing.JComboBox();
-        jLabel3 = new javax.swing.JLabel();
-        jtfSigla = new javax.swing.JTextField();
+        jtfPais = new javax.swing.JTextField();
         jpControles = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de Estados");
+        setTitle("Cadastro de Países");
         setResizable(false);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
-        jLabel1.setText("Estado:");
-
-        jLabel2.setText("Pais:");
-
-        jLabel3.setText("Sigla:");
+        jLabel1.setText("Pais:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -113,33 +102,19 @@ public class CadastroEstados extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jtfEstado)
-                    .addComponent(jcbPais, 0, 172, Short.MAX_VALUE)
-                    .addComponent(jtfSigla))
-                .addContainerGap(197, Short.MAX_VALUE))
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jtfPais, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jcbPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jtfEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jtfSigla, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(17, Short.MAX_VALUE))
+                    .addComponent(jtfPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jpControles.setLayout(new java.awt.GridLayout(1, 0, 2, 0));
@@ -150,23 +125,23 @@ public class CadastroEstados extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpControles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jpControles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpControles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(52, Short.MAX_VALUE))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-466)/2, (screenSize.height-223)/2, 466, 223);
+        setBounds((screenSize.width-358)/2, (screenSize.height-151)/2, 358, 151);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -186,20 +161,20 @@ public class CadastroEstados extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroEstados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroPais.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroEstados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroPais.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroEstados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroPais.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroEstados.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroPais.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                CadastroEstados dialog = new CadastroEstados(new javax.swing.JFrame(), true);
+                CadastroPais dialog = new CadastroPais(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -212,50 +187,26 @@ public class CadastroEstados extends javax.swing.JDialog {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JComboBox jcbPais;
     private javax.swing.JPanel jpControles;
-    private javax.swing.JTextField jtfEstado;
-    private javax.swing.JTextField jtfSigla;
+    private javax.swing.JTextField jtfPais;
     // End of variables declaration//GEN-END:variables
 
     private void acaoGravar() {
-        String avisos = "";
-        Pais p = (Pais) jcbPais.getSelectedItem();
-
-        if (p.getPaisID() == null) {
-            avisos = avisos + "\n Pais não pode ser vazio";
-        }
-
-        if (jtfEstado.getText().equals("")) {
-            avisos = avisos + "\n Nome do estado não pode ser vazio";
-        }
-
-        if (jtfSigla.getText().equals("")) {
-            avisos = avisos + "\n Sigla não pode ser vazio";
-        }
-        if (jtfSigla.getText().length() > 2) {
-            avisos = avisos + "\n Sigla não pode ter mais de dois caracteres";
-        }
-
-        if (avisos.equals("")) {
-            estadoController = new EstadoController();
-            estado = new Estado();
-            estado.setPaisId(p);
-            estado.setEstadoNome(jtfEstado.getText());
-            estado.setEstadoUF(jtfSigla.getText());
-            estado = estadoController.gravar(estado);
+        if(!jtfPais.getText().equals("")){
+            paisController = new PaisController();
+            p =new Pais();
+            p.setPaisNome(jtfPais.getText());
+            p = paisController.gravar(p);
             
-            if (estado.getEstadoId() != null) {
+            if(p.getPaisID()!=null){
                 m = new Mensagens();
-                m.jopAviso("Estado " + estado.getEstadoNome() + " - ID: " + estado.getEstadoId() + " gravado com sucesso!");
+                m.jopAviso("País " + p.getPaisNome() + " - ID: " + p.getPaisID() + " gravado com sucesso!");
             }
-        } else {
+        }else{
             m = new Mensagens();
-            m.jopAlerta("Verifique: " + avisos);
-            jtfEstado.requestFocus();
+            m.jopAlerta("O nome do País deve ser informado!");
+            jtfPais.requestFocus();
         }
     }
 }
