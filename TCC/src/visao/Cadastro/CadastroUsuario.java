@@ -4,6 +4,29 @@
  */
 package visao.Cadastro;
 
+import Componentes.Componentes;
+import controller.Cadastro.Endereco.BairroController;
+import controller.Cadastro.Endereco.CepController;
+import controller.Cadastro.Endereco.CidadeController;
+import controller.Cadastro.Endereco.EnderecoController;
+import controller.Cadastro.Endereco.EstadoController;
+import controller.Cadastro.Endereco.PaisController;
+import controller.Cadastro.Endereco.RuaController;
+import controller.Cadastro.FuncionarioController;
+import controller.Cadastro.UsuarioController;
+import controller.Mensagens;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
+import modelo.Bairro;
+import modelo.Cep;
+import modelo.Cidade;
+import modelo.Endereco;
+import modelo.Estado;
+import modelo.Funcionario;
+import modelo.Pais;
+import modelo.Rua;
+import modelo.Usuario;
+
 /**
  *
  * @author Bruno
@@ -13,9 +36,100 @@ public class CadastroUsuario extends javax.swing.JDialog {
     /**
      * Creates new form CadastroUsuario
      */
+    Componentes c = new Componentes();
+    Mensagens m;
+    JButton jbGravar = c.criaBotaoGravar();
+    JButton jbExcluir = c.criaBotaoExcluir();
+    
+    EstadoController estadoController;
+    PaisController paisController;
+    CidadeController cidadeController;
+    BairroController bairroController;
+    CepController cepController;
+    RuaController ruaController;
+    EnderecoController enderecoController;
+    FuncionarioController funcionarioController;
+    UsuarioController usuarioController;
+    
+    Pais p;
+    Estado estado;
+    Cidade cidade;
+    Bairro bairro;
+    Cep cep;
+    Usuario usuario;
+    Funcionario funcionario;
+    Endereco endereco;
+    
     public CadastroUsuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        jtfNome.requestFocus();
+        
+        paisController = new PaisController();
+        estadoController = new EstadoController();
+        bairroController = new BairroController();
+        ruaController = new RuaController();
+        jbGravar = c.criaBotaoGravar();
+        jbExcluir = c.criaBotaoExcluir();
+
+        jbGravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGravarActionPerformed(evt);
+            }
+        });
+
+        jbExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbExcluirActionPerformed(evt);
+            }
+        });
+
+        jcbPais.setModel(paisController.listPaises());
+        jcbPais.updateUI();
+
+        jcbEstados.setModel(estadoController.listEstados());
+        jcbEstados.updateUI();
+        
+        if ((Estado) jcbEstados.getSelectedItem() != null) {
+            cidadeController = new CidadeController();
+            jcbCidade.setModel(cidadeController.listCidadesByEstado(((Estado) jcbEstados.getSelectedItem()).getEstadoId()));
+            jcbCidade.updateUI();
+        }
+        
+        if ((Cidade) jcbCidade.getSelectedItem() != null) {
+            cidade = (Cidade) jcbCidade.getSelectedItem();
+            jcbBairro.setModel(bairroController.listBairroByCidade(cidade.getCidade()));
+            jcbBairro.updateUI();
+        }
+        
+        if ((Bairro) jcbBairro.getSelectedItem() != null) {
+            bairro = (Bairro) jcbBairro.getSelectedItem();
+            jcbRua.setModel(ruaController.listRuaByBairro(bairro.getBairroId()));
+            jcbRua.updateUI();
+        }
+
+        jpControles.add(jbExcluir);
+        jpControles.add(jbGravar);
+
+    }
+
+    private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {
+        acaoGravar();
+    }
+
+    private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {
+        m = new Mensagens();
+        if (p != null) {
+            if (p.getPaisID() != 0) {
+                if (m.jopDeletar("Deseja realmente excluir este Pais ?") == JOptionPane.YES_OPTION) {
+//                    acaoRemover();
+                }
+            } else {
+                m.jopAlerta("Para excluir registro, é nescessário efetuar uma busca.");
+            }
+        } else {
+            m.jopAlerta("Para excluir registro, é nescessário efetuar uma busca.");
+        }
     }
 
     /**
@@ -50,7 +164,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
         jpEndereco = new javax.swing.JPanel();
         jpTextFieldEndereco = new javax.swing.JPanel();
         jcbPais = new javax.swing.JComboBox();
-        jcbEstado = new javax.swing.JComboBox();
+        jcbEstados = new javax.swing.JComboBox();
         jcbCidade = new javax.swing.JComboBox();
         jpLabelEndereco = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -76,6 +190,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
+        jpControles = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Usuários");
@@ -106,7 +221,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
             jpConsultaFuncionariosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpConsultaFuncionariosLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 361, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 354, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -173,7 +288,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
 
         jpTextFieldEndereco.add(jcbPais);
 
-        jpTextFieldEndereco.add(jcbEstado);
+        jpTextFieldEndereco.add(jcbEstados);
 
         jpTextFieldEndereco.add(jcbCidade);
 
@@ -358,10 +473,12 @@ public class CadastroUsuario extends javax.swing.JDialog {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jpUsuarioLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jpDadosPessoais1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(238, Short.MAX_VALUE))
+                .addContainerGap(231, Short.MAX_VALUE))
         );
 
         jtpFuncionario.addTab("Dados Usuário", jpUsuario);
+
+        jpControles.setLayout(new java.awt.GridLayout(1, 0, 3, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -369,19 +486,23 @@ public class CadastroUsuario extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jtpFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jtpFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
+                    .addComponent(jpControles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jtpFuncionario)
-                .addContainerGap())
+                .addComponent(jtpFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jpControles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-695)/2, (screenSize.height-456)/2, 695, 456);
+        setBounds((screenSize.width-695)/2, (screenSize.height-518)/2, 695, 518);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -448,11 +569,12 @@ public class CadastroUsuario extends javax.swing.JDialog {
     private javax.swing.JComboBox jcbBairro;
     private javax.swing.JComboBox jcbCEP;
     private javax.swing.JComboBox jcbCidade;
-    private javax.swing.JComboBox jcbEstado;
+    private javax.swing.JComboBox jcbEstados;
     private javax.swing.JComboBox jcbPais;
     private javax.swing.JComboBox jcbPerfil;
     private javax.swing.JComboBox jcbRua;
     private javax.swing.JPanel jpConsultaFuncionarios;
+    private javax.swing.JPanel jpControles;
     private javax.swing.JPanel jpDadosPessoais;
     private javax.swing.JPanel jpDadosPessoais1;
     private javax.swing.JPanel jpEndereco;
@@ -476,4 +598,95 @@ public class CadastroUsuario extends javax.swing.JDialog {
     private javax.swing.JTextField jtfUserName;
     private javax.swing.JTabbedPane jtpFuncionario;
     // End of variables declaration//GEN-END:variables
+
+    private void acaoGravar() {
+        String avisos = "";
+        Pais p = (Pais) jcbPais.getSelectedItem();
+        Estado esta = (Estado) jcbEstados.getSelectedItem();
+        Cidade cida = (Cidade) jcbCidade.getSelectedItem();
+        Bairro bairro = (Bairro) jcbBairro.getSelectedItem();
+        Rua rua = (Rua) jcbRua.getSelectedItem();
+        Cep cep = (Cep) jcbCEP.getSelectedItem();
+        
+        funcionario = new Funcionario();
+        usuario = new Usuario();
+        endereco = new Endereco();
+        enderecoController = new EnderecoController();
+        funcionarioController = new FuncionarioController();
+        
+        if (p.getPaisID() == null) {
+            avisos = avisos + "Pais não pode ser vazio \n";
+        }
+
+        if (esta.getEstadoId() == null) {
+            avisos = avisos + "Estado não pode ser vazio \n";
+        }
+
+        if (cida.getCidade() == null) {
+            avisos = avisos + "Cidade não pode ser vazio \n";
+        }
+
+        if (bairro.getBairroId() == null) {
+            avisos = avisos + "Bairro não pode ser vazio \n";
+        }
+
+        if (rua.getRuaId() == null) {
+            avisos = avisos + "Rua não pode ser vazio \n";
+        }
+        
+        if (cep.getCepID() == null) {
+            avisos = avisos + "Cep não pode ser vazio \n";
+        }
+        if(jtfNome.getText().equals("")){
+            avisos = avisos + "Nome não pode ser vazio \n";
+        }
+        
+        if(jtfCPF.getText().equals("")){
+            avisos = avisos + "CPF não pode ser vazio \n";
+        }
+       
+        if(jtfRG.getText().equals("")){
+            avisos = avisos + "RG não pode ser vazio \n";
+        }
+        
+        if (avisos.equals("")) {
+            endereco.setPais(p);
+            endereco.setEstado(estado);
+            endereco.setCidade(cidade);
+            endereco.setBairro(bairro);
+            endereco.setRua(rua);
+            endereco.setCep(cep);
+            
+            endereco = enderecoController.gravar(endereco);
+            
+            if(!jtfUserName.equals("") && !jpfSenha.getPassword().toString().equals("")){
+                usuario.setUsuarioName(jtfUserName.getText());
+                usuario.setUsuarioSenha(jpfSenha.getPassword().toString());
+                
+                usuarioController = new UsuarioController();
+                usuario = usuarioController.gravar(usuario);
+                funcionario.setIdUsuario(usuario);
+            }
+            
+            funcionario.setEnderecoID(endereco);
+            funcionario.setCpfCnpj(new Integer(jtfCPF.getText()));
+            funcionario.setCtps(jtfCPF.getText());
+            funcionario.setEmail(jtfEmail.getText());
+            funcionario.setNome(jtfNome.getText());
+            funcionario.setRg(new Integer(jtfRG.getText()));
+            funcionario.setTelefone(jtfTelefone.getText());
+            
+            funcionario = funcionarioController.gravar(funcionario);
+
+            if (funcionario.getIdFuncionario() != null) {
+                m = new Mensagens();
+                m.jopAviso("Funcionario " + funcionario.getNome() + " - CPF: " + funcionario.getCpfCnpj() + " gravado com sucesso!");
+            }
+        } else {
+            m = new Mensagens();
+            m.jopAlerta("O(s) campo(s) " + avisos + "não pode(m) ser vazio(s)!");
+            jtfNome.requestFocus();
+        }
+    }
+
 }

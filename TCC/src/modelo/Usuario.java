@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -21,6 +20,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDateTime;
 
 /**
  *
@@ -31,7 +32,10 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")})
 public class Usuario implements Serializable {
-    @OneToMany(mappedBy = "usuarioId", fetch = FetchType.LAZY)
+//    @EmbeddedId
+//    protected modelo.UsuarioPK usuarioPK;
+//    @OneToMany(mappedBy = "usuarioId", fetch = FetchType.LAZY)
+
     private List<Bairro> bairroList;
     @OneToMany(mappedBy = "usuarioId", fetch = FetchType.LAZY)
     private List<Cidade> cidadeList;
@@ -43,13 +47,11 @@ public class Usuario implements Serializable {
     private List<Pais> paisList;
     @OneToMany(mappedBy = "usuarioId", fetch = FetchType.LAZY)
     private List<Rua> ruaList;
-    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "usuarioId")
     private Integer usuarioId;
-    
     @Column(name = "usuarioSenha")
     private String usuarioSenha;
     @Basic(optional = false)
@@ -57,18 +59,23 @@ public class Usuario implements Serializable {
     private int ativo;
     @Basic(optional = false)
     @Column(name = "usuarioName")
-    private int usuarioName;
-    @JoinColumn(name = "funcionarioId", referencedColumnName = "idFuncionario")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Funcionario funcionarioId;
+    private String usuarioName;
     @JoinColumn(name = "usuarioPerfil", referencedColumnName = "perfilID")
     @ManyToOne(fetch = FetchType.LAZY)
     private Perfil usuarioPerfil;
+    @Column(name = "inserted")
+    @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
+    private LocalDateTime inserted;
+    @Column(name = "updated")
+    @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
+    private LocalDateTime updated;
+    @Column(name = "deleted")
+    private Character deleted;
 
     public Usuario() {
-//        this.deleted = 'f';
+        this.deleted = 'f';
         this.ativo = 1;
-               
+
     }
 
     public String getUsuarioSenha() {
@@ -87,14 +94,6 @@ public class Usuario implements Serializable {
         this.ativo = ativo;
     }
 
-    public Funcionario getFuncionarioId() {
-        return funcionarioId;
-    }
-
-    public void setFuncionarioId(Funcionario funcionarioId) {
-        this.funcionarioId = funcionarioId;
-    }
-
     public Perfil getUsuarioPerfil() {
         return usuarioPerfil;
     }
@@ -103,11 +102,53 @@ public class Usuario implements Serializable {
         this.usuarioPerfil = usuarioPerfil;
     }
 
+    
+    
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 41 * hash + Objects.hashCode(this.usuarioId);
         return hash;
+    }
+
+    public Integer getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(Integer usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
+    public LocalDateTime getInserted() {
+        return inserted;
+    }
+
+    public void setInserted(LocalDateTime inserted) {
+        this.inserted = inserted;
+    }
+
+    public LocalDateTime getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(LocalDateTime updated) {
+        this.updated = updated;
+    }
+
+    public Character getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Character deleted) {
+        this.deleted = deleted;
+    }
+
+    public String getUsuarioName() {
+        return usuarioName;
+    }
+
+    public void setUsuarioName(String usuarioName) {
+        this.usuarioName = usuarioName;
     }
 
     @Override
@@ -127,7 +168,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Usuario{" + "usuarioId=" + usuarioId + ", usuarioName=" + usuarioName + '}';
+        return usuarioName;
     }
 
     public List<Bairro> getBairroList() {
@@ -177,5 +218,4 @@ public class Usuario implements Serializable {
     public void setRuaList(List<Rua> ruaList) {
         this.ruaList = ruaList;
     }
-    
 }

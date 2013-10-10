@@ -5,12 +5,10 @@
 package controller.Cadastro.Endereco;
 
 import DAO.Cadastro.Endereco.BairroDAO;
-import DAO.Cadastro.Endereco.CidadeDAO;
 import controller.Mensagens;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import modelo.Bairro;
-import modelo.Cidade;
 import persistencia.exceptions.NonexistentEntityException;
 import util.Datas;
 

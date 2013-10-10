@@ -2,14 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package DAO.Cadastro;
+package DAO.Cadastro.Endereco;
 
 import DAO.EntityManagerFactory;
 import controller.Mensagens;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
-import modelo.Funcionario;
+import modelo.Endereco;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
@@ -21,51 +21,52 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author Bruno
  */
-public class FuncionarioDAO implements Serializable {
+public class EnderecoDAO implements Serializable {
 
     static Mensagens m;
     EntityManager em;
     private Criteria select;
     Session session;
 
-    public FuncionarioDAO() {
+    public EnderecoDAO() {
         em = new EntityManagerFactory().getEntityManager();
         session = (Session) em.getDelegate();
     }
 
-    public Funcionario gravar(Funcionario funcionario) {
+    public Endereco gravar(Endereco endereco) {
         em.getTransaction().begin();
-        funcionario = em.merge(funcionario);
+        endereco = em.merge(endereco);
         em.getTransaction().commit();
-        return funcionario;
+        return endereco;
     }
 
-    public Funcionario atualizar(Funcionario funcionario) {
+    public Endereco atualizar(Endereco endereco) {
         em.getTransaction().begin();
-        funcionario = em.merge(funcionario);
+        endereco = em.merge(endereco);
         em.getTransaction().commit();
-        return funcionario;
+        return endereco;
     }
 
-    public void apagar(Funcionario funcionario) {
+    public void apagar(Endereco endereco) {
         em.getTransaction().begin();
-        funcionario = em.getReference(Funcionario.class, funcionario.getIdFuncionario());
-        em.remove(funcionario);
+        endereco = em.getReference(Endereco.class, endereco.getEnderecoID());
+        em.remove(endereco);
         em.getTransaction().commit();
     }
 
     @SuppressWarnings("unchecked")
-    public List<Funcionario> consultarTodos() {
-        select = session.createCriteria(Funcionario.class);
+    public List<Endereco> consultarTodos() {
+//        Session session = (Session) em.getDelegate();
+        select = session.createCriteria(Endereco.class);
         return select.list();
     }
 
     @SuppressWarnings("unchecked")
-    public List<Object[]> consultarFuncionario(String searchField, String searchString) {
+    public List<Object[]> consultarEndereco(String searchField, String searchString) {
         Criteria criteria = montarCriteria(searchField, searchString);
         ProjectionList p = Projections.projectionList();
 
-        p.add(Projections.groupProperty("funcionario.idFuncionario"));
+        p.add(Projections.groupProperty("endereco.enderecoId"));
 
         criteria.setProjection(p);
 
@@ -73,7 +74,7 @@ public class FuncionarioDAO implements Serializable {
     }
 
     private Criteria montarCriteria(String searchField, String searchString) {
-        Criteria criteria = session.createCriteria(Funcionario.class, "funcionario");
+        Criteria criteria = session.createCriteria(Endereco.class, "endereco");
 
         if (searchField != null && !searchField.equals("") && searchString != null && !searchString.equals("")) {
             criteria.add(Restrictions.ilike(searchField, searchString, MatchMode.ANYWHERE));
@@ -82,25 +83,14 @@ public class FuncionarioDAO implements Serializable {
         return criteria;
     }
 
-    public Funcionario buscarFuncionario(String searchField, String searchString) {
-        Criteria criteria = session.createCriteria(Funcionario.class, "funcionario");
+    public Endereco buscarEndereco(String searchField, String searchString) {
+        Criteria criteria = session.createCriteria(Endereco.class, "endereco");
 
         if (searchField != null && !searchField.equals("") && searchString != null && !searchString.equals("")) {
             criteria.add(Restrictions.ilike(searchField, searchString, MatchMode.ANYWHERE));
         }
-        criteria.add(Restrictions.eq("funcionario.deleted", "f"));
+        criteria.add(Restrictions.eq("endereco.deleted", "f"));
 
-        return (Funcionario) criteria.uniqueResult();
+        return (Endereco) criteria.uniqueResult();
     }
-    
-    public Integer checaFuncionarioExiste(Funcionario funcionario) {
-        Criteria criteria = session.createCriteria(Funcionario.class, "funcionario");
-
-        criteria.add(Restrictions.eq("funcionario.cpfCnpj", funcionario.getCpfCnpj()));
-        criteria.add(Restrictions.eq("funcionario.deleted", "f"));
-        
-        criteria.setProjection(Projections.rowCount());
-        return ((Integer) criteria.uniqueResult()).intValue();
-    }
-    
 }

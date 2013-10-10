@@ -31,6 +31,7 @@ import org.joda.time.LocalDateTime;
 @NamedQueries({
     @NamedQuery(name = "Estado.findAll", query = "SELECT e FROM Estado e")})
 public class Estado implements Serializable {
+
     @Column(name = "inserted")
     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
     private LocalDateTime inserted;
@@ -39,6 +40,8 @@ public class Estado implements Serializable {
     private LocalDateTime updated;
     @Column(name = "deleted")
     private Character deleted;
+    @OneToMany(mappedBy = "estado", fetch = FetchType.LAZY)
+    private List<Endereco> enderecoList;
     @JoinColumn(name = "usuarioId", referencedColumnName = "usuarioID")
     @ManyToOne(fetch = FetchType.LAZY)
     private Usuario usuarioId;
@@ -106,6 +109,22 @@ public class Estado implements Serializable {
         this.paisId = paisId;
     }
 
+    public LocalDateTime getInserted() {
+        return inserted;
+    }
+
+    public void setInserted(LocalDateTime inserted) {
+        this.inserted = inserted;
+    }
+
+    public LocalDateTime getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(LocalDateTime updated) {
+        this.updated = updated;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -131,22 +150,6 @@ public class Estado implements Serializable {
         return estadoNome;
     }
 
-    public LocalDateTime getInserted() {
-        return inserted;
-    }
-
-    public void setInserted(LocalDateTime inserted) {
-        this.inserted = inserted;
-    }
-
-    public LocalDateTime getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(LocalDateTime updated) {
-        this.updated = updated;
-    }
-
     public Character getDeleted() {
         return deleted;
     }
@@ -162,5 +165,12 @@ public class Estado implements Serializable {
     public void setUsuarioId(Usuario usuarioId) {
         this.usuarioId = usuarioId;
     }
-    
+
+    public List<Endereco> getEnderecoList() {
+        return enderecoList;
+    }
+
+    public void setEnderecoList(List<Endereco> enderecoList) {
+        this.enderecoList = enderecoList;
+    }
 }

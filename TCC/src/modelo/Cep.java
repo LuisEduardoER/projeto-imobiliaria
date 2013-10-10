@@ -31,6 +31,7 @@ import org.joda.time.LocalDateTime;
 @NamedQueries({
     @NamedQuery(name = "Cep.findAll", query = "SELECT c FROM Cep c")})
 public class Cep implements Serializable {
+
     @Column(name = "inserted")
     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
     private LocalDateTime inserted;
@@ -39,6 +40,8 @@ public class Cep implements Serializable {
     private LocalDateTime updated;
     @Column(name = "deleted")
     private Character deleted;
+    @OneToMany(mappedBy = "cep", fetch = FetchType.LAZY)
+    private List<Endereco> enderecoList;
     @JoinColumn(name = "usuarioId", referencedColumnName = "usuarioID")
     @ManyToOne(fetch = FetchType.LAZY)
     private Usuario usuarioId;
@@ -53,8 +56,6 @@ public class Cep implements Serializable {
     @JoinColumn(name = "ruaID", referencedColumnName = "ruaId")
     @ManyToOne(fetch = FetchType.LAZY)
     private Rua ruaID;
-    @OneToMany(mappedBy = "cepId", fetch = FetchType.LAZY)
-    private List<Funcionario> funcionarioList;
 
     public Cep() {
         this.deleted = 'f';
@@ -88,12 +89,20 @@ public class Cep implements Serializable {
         this.ruaID = ruaID;
     }
 
-    public List<Funcionario> getFuncionarioList() {
-        return funcionarioList;
+    public LocalDateTime getInserted() {
+        return inserted;
     }
 
-    public void setFuncionarioList(List<Funcionario> funcionarioList) {
-        this.funcionarioList = funcionarioList;
+    public void setInserted(LocalDateTime inserted) {
+        this.inserted = inserted;
+    }
+
+    public LocalDateTime getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(LocalDateTime updated) {
+        this.updated = updated;
     }
 
     @Override
@@ -121,22 +130,6 @@ public class Cep implements Serializable {
         return cep.toString();
     }
 
-    public LocalDateTime getInserted() {
-        return inserted;
-    }
-
-    public void setInserted(LocalDateTime inserted) {
-        this.inserted = inserted;
-    }
-
-    public LocalDateTime getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(LocalDateTime updated) {
-        this.updated = updated;
-    }
-
     public Character getDeleted() {
         return deleted;
     }
@@ -152,5 +145,12 @@ public class Cep implements Serializable {
     public void setUsuarioId(Usuario usuarioId) {
         this.usuarioId = usuarioId;
     }
-    
+
+    public List<Endereco> getEnderecoList() {
+        return enderecoList;
+    }
+
+    public void setEnderecoList(List<Endereco> enderecoList) {
+        this.enderecoList = enderecoList;
+    }
 }

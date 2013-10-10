@@ -5,7 +5,6 @@
 package modelo;
 
 import java.io.Serializable;
-import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,8 +16,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDateTime;
 
 /**
  *
@@ -29,9 +29,7 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Funcionario.findAll", query = "SELECT f FROM Funcionario f")})
 public class Funcionario implements Serializable {
-    @JoinColumn(name = "cepId", referencedColumnName = "cepID")
-    @ManyToOne(fetch = FetchType.LAZY)
-    private Cep cepId;
+
     private static final long serialVersionUID = 1L;
     @Column(name = "nome")
     private String nome;
@@ -39,10 +37,10 @@ public class Funcionario implements Serializable {
     private String telefone;
     @Basic(optional = false)
     @Column(name = "CPF_CNPJ")
-    private int cpfCnpj;
+    private Integer cpfCnpj;
     @Basic(optional = false)
     @Column(name = "RG")
-    private int rg;
+    private Integer rg;
     @Column(name = "CTPS")
     private String ctps;
     @Column(name = "email")
@@ -52,12 +50,23 @@ public class Funcionario implements Serializable {
     @Basic(optional = false)
     @Column(name = "idFuncionario")
     private Integer idFuncionario;
-    @Column(name = "idUsuario")
-    private Integer idUsuario;
-    @OneToMany(mappedBy = "funcionarioId", fetch = FetchType.LAZY)
-    private List<Usuario> usuarioList;
+    @Column(name = "inserted")
+    @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
+    private LocalDateTime inserted;
+    @Column(name = "updated")
+    @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
+    private LocalDateTime updated;
+    @Column(name = "deleted")
+    private Character deleted;
+    @JoinColumn(name = "enderecoID", referencedColumnName = "enderecoID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Endereco enderecoID;
+    @JoinColumn(name = "idUsuario", referencedColumnName = "usuarioID")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Usuario idUsuario;
 
     public Funcionario() {
+        this.deleted = 'f';
     }
 
     public Funcionario(Integer idFuncionario) {
@@ -90,7 +99,7 @@ public class Funcionario implements Serializable {
         return cpfCnpj;
     }
 
-    public void setCpfCnpj(int cpfCnpj) {
+    public void setCpfCnpj(Integer cpfCnpj) {
         this.cpfCnpj = cpfCnpj;
     }
 
@@ -98,7 +107,7 @@ public class Funcionario implements Serializable {
         return rg;
     }
 
-    public void setRg(int rg) {
+    public void setRg(Integer rg) {
         this.rg = rg;
     }
 
@@ -126,20 +135,44 @@ public class Funcionario implements Serializable {
         this.idFuncionario = idFuncionario;
     }
 
-    public Integer getIdUsuario() {
+    public LocalDateTime getInserted() {
+        return inserted;
+    }
+
+    public void setInserted(LocalDateTime inserted) {
+        this.inserted = inserted;
+    }
+
+    public LocalDateTime getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(LocalDateTime updated) {
+        this.updated = updated;
+    }
+
+    public Character getDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(Character deleted) {
+        this.deleted = deleted;
+    }
+
+    public Endereco getEnderecoID() {
+        return enderecoID;
+    }
+
+    public void setEnderecoID(Endereco enderecoID) {
+        this.enderecoID = enderecoID;
+    }
+
+    public Usuario getIdUsuario() {
         return idUsuario;
     }
 
-    public void setIdUsuario(Integer idUsuario) {
+    public void setIdUsuario(Usuario idUsuario) {
         this.idUsuario = idUsuario;
-    }
-
-    public List<Usuario> getUsuarioList() {
-        return usuarioList;
-    }
-
-    public void setUsuarioList(List<Usuario> usuarioList) {
-        this.usuarioList = usuarioList;
     }
 
     @Override
@@ -164,15 +197,6 @@ public class Funcionario implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.Funcionario[ idFuncionario=" + idFuncionario + " ]";
+        return "modelo.funcionario.Funcionario[ idFuncionario=" + idFuncionario + " ]";
     }
-
-    public Cep getCepId() {
-        return cepId;
-    }
-
-    public void setCepId(Cep cepId) {
-        this.cepId = cepId;
-    }
-    
 }
