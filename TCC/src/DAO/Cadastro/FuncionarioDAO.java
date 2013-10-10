@@ -64,7 +64,7 @@ public class FuncionarioDAO implements Serializable {
     public List<Object[]> buscarTodos() {
         Criteria criteria = session.createCriteria(Funcionario.class, "funcionario");
         criteria.createCriteria("funcionario.idUsuario", "usuario", Criteria.LEFT_JOIN);
-        
+
         ProjectionList p = Projections.projectionList();
         p.add(Projections.groupProperty("funcionario.idFuncionario"));
         p.add(Projections.groupProperty("funcionario.nome"));
@@ -72,12 +72,12 @@ public class FuncionarioDAO implements Serializable {
         p.add(Projections.groupProperty("usuario.usuarioName"));
         criteria.setProjection(p);
         criteria.add(Restrictions.or(Restrictions.isNull("usuario.usuarioId"),
-                                    (Restrictions.eq("usuario.deleted", "f"))));
+                (Restrictions.eq("usuario.deleted", "f"))));
         criteria.add(Restrictions.eq("funcionario.deleted", "f"));
-        
-        return  criteria.list();
+
+        return criteria.list();
     }
-    
+
     @SuppressWarnings("unchecked")
     public List<Object[]> consultarFuncionario(String searchField, String searchString) {
         Criteria criteria = montarCriteria(searchField, searchString);
@@ -104,21 +104,29 @@ public class FuncionarioDAO implements Serializable {
         Criteria criteria = session.createCriteria(Funcionario.class, "funcionario");
 
         if (searchField != null && !searchField.equals("") && searchString != null && !searchString.equals("")) {
-            criteria.add(Restrictions.ilike(searchField, searchString, MatchMode.ANYWHERE));
+            criteria.add(Restrictions.eq(searchField, searchString));
         }
         criteria.add(Restrictions.eq("funcionario.deleted", "f"));
 
         return (Funcionario) criteria.uniqueResult();
     }
-    
+
+    public Funcionario buscarFuncionarioById(Integer id) {
+        Criteria criteria = session.createCriteria(Funcionario.class, "funcionario");
+
+        criteria.add(Restrictions.eq("funcionario.idFuncionario", id));
+        criteria.add(Restrictions.eq("funcionario.deleted", "f"));
+
+        return (Funcionario) criteria.uniqueResult();
+    }
+
     public Integer checaFuncionarioExiste(Funcionario funcionario) {
         Criteria criteria = session.createCriteria(Funcionario.class, "funcionario");
 
         criteria.add(Restrictions.eq("funcionario.cpfCnpj", funcionario.getCpfCnpj()));
         criteria.add(Restrictions.eq("funcionario.deleted", "f"));
-        
+
         criteria.setProjection(Projections.rowCount());
         return ((Integer) criteria.uniqueResult()).intValue();
     }
-    
 }

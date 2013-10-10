@@ -95,7 +95,7 @@ public class CadastroPermissoes extends javax.swing.JDialog {
         jchkbExcluir = new javax.swing.JCheckBox();
         jchckConsultar = new javax.swing.JCheckBox();
         jbGravarPermissao = new javax.swing.JButton();
-        jcbPerfil = new javax.swing.JComboBox();
+        jtfPerfil = new javax.swing.JTextField();
         jpControles = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -106,7 +106,7 @@ public class CadastroPermissoes extends javax.swing.JDialog {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Seção"));
 
-        jLabel1.setText("Módulo");
+        jLabel1.setText("Módulo:");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -116,7 +116,7 @@ public class CadastroPermissoes extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jcbModulo, 0, 298, Short.MAX_VALUE)
+                .addComponent(jcbModulo, 0, 294, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -180,13 +180,6 @@ public class CadastroPermissoes extends javax.swing.JDialog {
                         .addContainerGap())))
         );
 
-        jcbPerfil.setEditable(true);
-        jcbPerfil.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jcbPerfilActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -195,15 +188,15 @@ public class CadastroPermissoes extends javax.swing.JDialog {
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jcbPerfil, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jtfPerfil)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jcbPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addComponent(jtfPerfil, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -227,7 +220,7 @@ public class CadastroPermissoes extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpControles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -242,10 +235,6 @@ public class CadastroPermissoes extends javax.swing.JDialog {
     private void jbGravarPermissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGravarPermissaoActionPerformed
 //        vinculaPermissaoModulo();
     }//GEN-LAST:event_jbGravarPermissaoActionPerformed
-
-    private void jcbPerfilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jcbPerfilActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jcbPerfilActionPerformed
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {
 //        acaoGravar();
@@ -312,12 +301,12 @@ public class CadastroPermissoes extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JButton jbGravarPermissao;
     private javax.swing.JComboBox jcbModulo;
-    private javax.swing.JComboBox jcbPerfil;
     private javax.swing.JCheckBox jchckConsultar;
     private javax.swing.JCheckBox jchkbAlterar;
     private javax.swing.JCheckBox jchkbExcluir;
     private javax.swing.JCheckBox jchkbGravar;
     private javax.swing.JPanel jpControles;
+    private javax.swing.JTextField jtfPerfil;
     // End of variables declaration//GEN-END:variables
 
     public void carregaTela() {
@@ -370,7 +359,7 @@ public class CadastroPermissoes extends javax.swing.JDialog {
 
     public void limparTela() {
         jcbModulo.setSelectedIndex(-1);
-        jcbPerfil.setSelectedIndex(-1);
+        jtfPerfil.setText("");
         jchckConsultar.setSelected(false);
         jchkbAlterar.setSelected(false);
         jchkbExcluir.setSelected(false);

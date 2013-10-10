@@ -74,11 +74,11 @@ public class CadastroUsuario extends javax.swing.JDialog {
         initComponents();
         jtfNome.requestFocus();
         
-        paisController = new PaisController();
+        paisController   = new PaisController();
         estadoController = new EstadoController();
         bairroController = new BairroController();
-        ruaController = new RuaController();
-        cepController = new CepController();
+        ruaController    = new RuaController();
+        cepController    = new CepController();
         funcionarioController = new FuncionarioController();
         
         jbGravar = c.criaBotaoGravar();
@@ -648,8 +648,8 @@ public class CadastroUsuario extends javax.swing.JDialog {
     private void acaoGravar() {
         String avisos = "";
         Pais p = (Pais) jcbPais.getSelectedItem();
-        Estado esta = (Estado) jcbEstados.getSelectedItem();
-        Cidade cida = (Cidade) jcbCidade.getSelectedItem();
+        Estado estado = (Estado) jcbEstados.getSelectedItem();
+        Cidade cidade = (Cidade) jcbCidade.getSelectedItem();
         Bairro bairro = (Bairro) jcbBairro.getSelectedItem();
         Rua rua = (Rua) jcbRua.getSelectedItem();
         Cep cep = (Cep) jcbCEP.getSelectedItem();
@@ -664,11 +664,11 @@ public class CadastroUsuario extends javax.swing.JDialog {
             avisos = avisos + "\n Pais não pode ser vazio";
         }
 
-        if (esta.getEstadoId() == null) {
+        if (estado.getEstadoId() == null) {
             avisos = avisos + "\n Estado não pode ser vazio ";
         }
 
-        if (cida.getCidade() == null) {
+        if (cidade.getCidade() == null) {
             avisos = avisos + "\n Cidade não pode ser vazio ";
         }
 
@@ -726,6 +726,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
 
             if (funcionario.getIdFuncionario() != null) {
                 m = new Mensagens();
+                gerenciaCampos(false);
                 m.jopAviso("Funcionario " + funcionario.getNome() + " - CPF: " + funcionario.getCpfCnpj() + " gravado com sucesso!");
             }
         } else {
@@ -736,36 +737,50 @@ public class CadastroUsuario extends javax.swing.JDialog {
     }
 
     private void alterar(Funcionario f) {
-        f = funcionarioController.buscarFuncionario("funcionario.idFuncionario", f.getIdFuncionario().toString());
+        f = funcionarioController.buscarFuncionarioById(f.getIdFuncionario());
         
-        jtfNome.setText(f.getNome());
-        jtfCTPS.setText(f.getCtps());
-        jtfEmail.setText(f.getEmail());
-        jtfRG.setText(f.getRg().toString());
+        jtfNome.setText    (f.getNome());
+        jtfCPF.setText     (f.getCpfCnpj().toString());
+        jtfCTPS.setText    (f.getCtps());
+        jtfEmail.setText   (f.getEmail());
+        jtfRG.setText      (f.getRg().toString());
         jtfTelefone.setText(f.getTelefone());
-        jtfUserName.setText(f.getIdUsuario().getUsuarioName());
         
-        jcbPais.setSelectedItem(f.getEnderecoID().getPais());
-        jcbEstados.setSelectedItem(endereco);
-        jcbCidade.setSelectedItem(f.getEnderecoID().getPais());
-        jcbBairro.setSelectedItem(endereco);
-        jcbCidade.setSelectedItem(endereco);
-        jcbRua.setSelectedItem(endereco);
-        jcbCEP.setSelectedItem(endereco);
-                
+        jcbPais   .setSelectedItem(f.getEnderecoID().getPais());
+        jcbEstados.setSelectedItem(f.getEnderecoID().getEstado());
+        jcbCidade .setSelectedItem(f.getEnderecoID().getCidade());
+        jcbBairro .setSelectedItem(f.getEnderecoID().getBairro());
+        jcbRua    .setSelectedItem(f.getEnderecoID().getRua());
+        jcbCEP    .setSelectedItem(f.getEnderecoID().getCep());
+        
+        if(f.getIdUsuario() != null){
+            jtfUserName.setText(f.getIdUsuario().getUsuarioName()  != null ? f.getIdUsuario().getUsuarioName()  : "");
+            jpfSenha.setText   (f.getIdUsuario().getUsuarioSenha() != null ? f.getIdUsuario().getUsuarioSenha() : "");        
+        }else{
+            jtfUserName.setText("");
+            jpfSenha.setText   ("");        
+        }
         
         gerenciaCampos(true);
         setAba(1);
     }
     
     private void gerenciaCampos(boolean abilitaDesabilita) {
-        jtfNome.setEnabled(abilitaDesabilita);
-        jtfCTPS.setEnabled(abilitaDesabilita);
-        jtfEmail.setEnabled(abilitaDesabilita);
-        jtfRG.setEnabled(abilitaDesabilita);
+        jtfNome .setEnabled   (abilitaDesabilita);
+        jtfCTPS .setEnabled   (abilitaDesabilita);
+        jtfEmail.setEnabled   (abilitaDesabilita);
+        jtfRG   .setEnabled   (abilitaDesabilita);
         jtfTelefone.setEnabled(abilitaDesabilita);
-        jtfUserName.setEnabled(abilitaDesabilita);
         
+        jcbPais   .setEnabled(abilitaDesabilita);
+        jcbEstados.setEnabled(abilitaDesabilita);
+        jcbCidade .setEnabled(abilitaDesabilita);        
+        jcbBairro .setEnabled(abilitaDesabilita); 
+        jcbRua    .setEnabled(abilitaDesabilita);        
+        jcbCEP    .setEnabled(abilitaDesabilita);     
+        
+        jtfUserName.setEnabled(abilitaDesabilita);
+        jpfSenha.setEnabled   (abilitaDesabilita);
     }
     
     private void setAba(int i) {

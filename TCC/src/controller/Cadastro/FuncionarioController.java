@@ -63,13 +63,12 @@ public class FuncionarioController {
         return dcbm;
     }
     /**
-     * Método que busca um objeto inteiro no banco de dados conforme os parâmetros informados
-     * @param field = campo no banco de dados conforme mapeamento no Objeto
-     * @param value = parâmetro da cláusula where
+     * Método que efetua uma busca pelo ID do funcionario
+     * @param id = id do funcionário
      * @return Funcionario funcionario
      */
-    public Funcionario buscarFuncionario(String field, String value) {
-        Funcionario funcionario = dao.buscarFuncionario(field, value);
+    public Funcionario buscarFuncionarioById(Integer id) {
+        Funcionario funcionario = dao.buscarFuncionarioById(id);
         return funcionario;
     }
 

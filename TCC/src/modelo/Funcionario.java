@@ -95,7 +95,7 @@ public class Funcionario implements Serializable {
         this.telefone = telefone;
     }
 
-    public int getCpfCnpj() {
+    public Integer getCpfCnpj() {
         return cpfCnpj;
     }
 
