@@ -5,6 +5,7 @@
 package visao.Cadastro;
 
 import Componentes.Componentes;
+import Componentes.TableModelFuncionario;
 import controller.Cadastro.Endereco.BairroController;
 import controller.Cadastro.Endereco.CepController;
 import controller.Cadastro.Endereco.CidadeController;
@@ -15,6 +16,7 @@ import controller.Cadastro.Endereco.RuaController;
 import controller.Cadastro.FuncionarioController;
 import controller.Cadastro.UsuarioController;
 import controller.Mensagens;
+import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import modelo.Bairro;
@@ -60,6 +62,8 @@ public class CadastroUsuario extends javax.swing.JDialog {
     Usuario usuario;
     Funcionario funcionario;
     Endereco endereco;
+    List<Funcionario> funcionarioList;
+    TableModelFuncionario modeloFuncionario;
     
     public CadastroUsuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -87,6 +91,12 @@ public class CadastroUsuario extends javax.swing.JDialog {
             }
         });
 
+        funcionarioList = funcionarioController.buscaTodos();
+        modeloProduto = new TableModelProduto();
+        jtProdutos.setModel(modeloProduto);
+        modeloProduto.addListaDeProdutos(produtoList);
+        jtProdutos.updateUI();
+        
         jcbPais.setModel(paisController.listPaises());
         jcbPais.updateUI();
 

@@ -78,13 +78,13 @@ public class TableModelFuncionario extends AbstractTableModel {
 
         switch (columnIndex) {
             case CODIGO:
-                return funcionario.getProduto_id();
+                return funcionario.getIdFuncionario();
             case NOME:
-                return funcionario.getProdutoCodigoBarras();
+                return funcionario.getNome();
             case CPF:
-                return funcionario.getProdutoNome();
+                return funcionario.getCpfCnpj();
             case LOGIN:
-                return funcionario.getValor();
+                return funcionario.getIdUsuario().getUsuarioName();
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
@@ -97,13 +97,13 @@ public class TableModelFuncionario extends AbstractTableModel {
 
         switch (columnIndex) {
 
-            case CODIGO_BARRAS:
-                funcionario.setProdutoCodigoBarras((String) aValue);
+            case NOME:
+                funcionario.setNome((String) aValue);
                 break;
-            case PRODUTO:
-                funcionario.setProdutoNome((String) aValue);
-            case VALOR:
-                funcionario.setValor((Float) aValue);
+            case CPF:
+                funcionario.setCpfCnpj((Integer) aValue);
+            case LOGIN:
+                funcionario.getIdUsuario().setUsuarioName((String) aValue);
                 break;
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");

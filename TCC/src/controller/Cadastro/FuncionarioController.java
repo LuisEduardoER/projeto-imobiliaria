@@ -31,7 +31,10 @@ public class FuncionarioController {
         dcbm.addElement(funcionario);
         return dcbm;
     }
-
+    public List<Funcionario> buscaTodos(){
+        List<Funcionario> lista = dao.buscarTodos();
+        return lista;
+    }
     public DefaultComboBoxModel<Funcionario> listByField(String field, String value) {
         DefaultComboBoxModel<Funcionario> dcbm = new DefaultComboBoxModel<>();
         List<Funcionario> lista = dao.consultarTodos();
@@ -41,17 +44,7 @@ public class FuncionarioController {
         return dcbm;
     }
 
-//    public DefaultComboBoxModel<Usuario> listBairroByCidade(Integer cidadeId) {
-//        DefaultComboBoxModel<Usuario> dcbm = new DefaultComboBoxModel<>();
-//        List<Usuario> lista = dao.buscarCidadeByEstado(cidadeId);
-//        for (Usuario bairro : lista) {
-//            dcbm.addElement(bairro);
-//        }
-//        return dcbm;
-//    }
-    
-    
-    public Funcionario buscarPais(String field, String value) {
+    public Funcionario buscarFuncionario(String field, String value) {
         Funcionario funcionario = dao.buscarFuncionario(field, value);
         return funcionario;
     }
