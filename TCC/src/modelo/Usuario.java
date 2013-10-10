@@ -34,8 +34,8 @@ import org.joda.time.LocalDateTime;
 public class Usuario implements Serializable {
 //    @EmbeddedId
 //    protected modelo.UsuarioPK usuarioPK;
-//    @OneToMany(mappedBy = "usuarioId", fetch = FetchType.LAZY)
 
+    @OneToMany(mappedBy = "usuarioId", fetch = FetchType.LAZY)
     private List<Bairro> bairroList;
     @OneToMany(mappedBy = "usuarioId", fetch = FetchType.LAZY)
     private List<Cidade> cidadeList;

@@ -59,6 +59,15 @@ public class CepController {
         return cep;
     }
 
+    public DefaultComboBoxModel<Cep> listCepByRua(Integer ruaId) {
+        DefaultComboBoxModel<Cep> dcbm = new DefaultComboBoxModel<>();
+        List<Cep> lista = dao.buscarCepByRua(ruaId);
+        for (Cep cep : lista) {
+            dcbm.addElement(cep);
+        }
+        return dcbm;
+    }
+    
     public Cep setDeleted(Cep cep) throws NonexistentEntityException, Exception {
         cep.setUpdated(Datas.dataAtualDateTime());
         cep.setDeleted('t');

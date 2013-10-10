@@ -56,6 +56,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
     Cidade cidade;
     Bairro bairro;
     Cep cep;
+    Rua rua;
     Usuario usuario;
     Funcionario funcionario;
     Endereco endereco;
@@ -69,6 +70,8 @@ public class CadastroUsuario extends javax.swing.JDialog {
         estadoController = new EstadoController();
         bairroController = new BairroController();
         ruaController = new RuaController();
+        cepController = new CepController();
+        
         jbGravar = c.criaBotaoGravar();
         jbExcluir = c.criaBotaoExcluir();
 
@@ -106,6 +109,12 @@ public class CadastroUsuario extends javax.swing.JDialog {
             bairro = (Bairro) jcbBairro.getSelectedItem();
             jcbRua.setModel(ruaController.listRuaByBairro(bairro.getBairroId()));
             jcbRua.updateUI();
+        }
+        
+        if ((Rua) jcbRua.getSelectedItem() != null) {
+            rua = (Rua) jcbRua.getSelectedItem();
+            jcbCEP.setModel(cepController.listCepByRua(rua.getRuaId()));
+            jcbCEP.updateUI();
         }
 
         jpControles.add(jbExcluir);
@@ -194,6 +203,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Usuários");
+        setResizable(false);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -516,7 +526,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -615,38 +625,38 @@ public class CadastroUsuario extends javax.swing.JDialog {
         funcionarioController = new FuncionarioController();
         
         if (p.getPaisID() == null) {
-            avisos = avisos + "Pais não pode ser vazio \n";
+            avisos = avisos + "\n Pais não pode ser vazio";
         }
 
         if (esta.getEstadoId() == null) {
-            avisos = avisos + "Estado não pode ser vazio \n";
+            avisos = avisos + "\n Estado não pode ser vazio ";
         }
 
         if (cida.getCidade() == null) {
-            avisos = avisos + "Cidade não pode ser vazio \n";
+            avisos = avisos + "\n Cidade não pode ser vazio ";
         }
 
         if (bairro.getBairroId() == null) {
-            avisos = avisos + "Bairro não pode ser vazio \n";
+            avisos = avisos + "\n Bairro não pode ser vazio ";
         }
 
         if (rua.getRuaId() == null) {
-            avisos = avisos + "Rua não pode ser vazio \n";
+            avisos = avisos + "\n Rua não pode ser vazio ";
         }
         
         if (cep.getCepID() == null) {
-            avisos = avisos + "Cep não pode ser vazio \n";
+            avisos = avisos + "\n Cep não pode ser vazio ";
         }
         if(jtfNome.getText().equals("")){
-            avisos = avisos + "Nome não pode ser vazio \n";
+            avisos = avisos + "\n Nome não pode ser vazio ";
         }
         
         if(jtfCPF.getText().equals("")){
-            avisos = avisos + "CPF não pode ser vazio \n";
+            avisos = avisos + "\n CPF não pode ser vazio ";
         }
        
         if(jtfRG.getText().equals("")){
-            avisos = avisos + "RG não pode ser vazio \n";
+            avisos = avisos + "\n RG não pode ser vazio";
         }
         
         if (avisos.equals("")) {
@@ -659,7 +669,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
             
             endereco = enderecoController.gravar(endereco);
             
-            if(!jtfUserName.equals("") && !jpfSenha.getPassword().toString().equals("")){
+            if(!jtfUserName.getText().equals("") && !jpfSenha.getPassword().toString().equals("")){
                 usuario.setUsuarioName(jtfUserName.getText());
                 usuario.setUsuarioSenha(jpfSenha.getPassword().toString());
                 
@@ -684,7 +694,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
             }
         } else {
             m = new Mensagens();
-            m.jopAlerta("O(s) campo(s) " + avisos + "não pode(m) ser vazio(s)!");
+            m.jopAlerta("Verifique: " + avisos + "!");
             jtfNome.requestFocus();
         }
     }

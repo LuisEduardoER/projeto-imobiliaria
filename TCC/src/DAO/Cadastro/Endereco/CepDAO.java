@@ -95,6 +95,17 @@ public class CepDAO implements Serializable {
         return (Cep) criteria.uniqueResult();
     }
 
+    public List<Cep> buscarCepByRua(Integer ruaId) {
+        Criteria criteria = session.createCriteria(Cep.class, "cep");
+        criteria.createCriteria("cep.ruaID", "rua");
+
+        criteria.add(Restrictions.eq("rua.ruaId", ruaId));
+        criteria.add(Restrictions.eq("rua.deleted", "f"));
+        criteria.add(Restrictions.eq("cep.deleted", "f"));
+
+        return criteria.list();
+    }
+    
     public Integer rowCount(String searchField, String searchString) {
         Criteria criteria = session.createCriteria(Cep.class, "cep");
 
