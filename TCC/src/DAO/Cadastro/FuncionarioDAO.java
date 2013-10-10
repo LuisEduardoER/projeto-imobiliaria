@@ -61,18 +61,19 @@ public class FuncionarioDAO implements Serializable {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Funcionario> buscarTodos() {
+    public List<Object[]> buscarTodos() {
         Criteria criteria = session.createCriteria(Funcionario.class, "funcionario");
-        criteria.createCriteria("usuario.idUsuario", "usuario", Criteria.LEFT_JOIN);
+        criteria.createCriteria("funcionario.idUsuario", "usuario", Criteria.LEFT_JOIN);
         
         ProjectionList p = Projections.projectionList();
-        p.add(Projections.groupProperty("funcionario.funcionarioNome"));
-        p.add(Projections.groupProperty("funcionario.funcionarioNome"));
-        p.add(Projections.groupProperty("funcionario.funcionarioNome"));
-        p.add(Projections.groupProperty("fbr.fabricanteNome"));
-        
-        criteria.add(Restrictions.eq("usuario.deleted", "f"));
-        criteria.add(Restrictions.eq("produto.deleted", "f"));
+        p.add(Projections.groupProperty("funcionario.idFuncionario"));
+        p.add(Projections.groupProperty("funcionario.nome"));
+        p.add(Projections.groupProperty("funcionario.cpfCnpj"));
+        p.add(Projections.groupProperty("usuario.usuarioName"));
+        criteria.setProjection(p);
+        criteria.add(Restrictions.or(Restrictions.isNull("usuario.usuarioId"),
+                                    (Restrictions.eq("usuario.deleted", "f"))));
+        criteria.add(Restrictions.eq("funcionario.deleted", "f"));
         
         return  criteria.list();
     }

@@ -97,11 +97,10 @@ public class CadastroProduto extends javax.swing.JDialog {
         modeloProduto.addListaDeProdutos(produtoList);
         jtProdutos.updateUI();
 
-        jtProdutos.setDefaultEditor(Object.class, null);  // ou usar um TableModel nao  editavel  
+        jtProdutos.setDefaultEditor(Object.class, null);  
         jtProdutos.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 jtProdutosMouseClicked(e);
-//                System.out.printf("row: %d    col: %d\n", row, col); 
             }
         });
     }
@@ -641,134 +640,6 @@ public class CadastroProduto extends javax.swing.JDialog {
         gerenciaCampos(true);
         setAba(1);
     }
-//    private boolean acaoBuscar() {
-//        try {
-//            if (jcbFornecedorCNPJ.getSelectedItem() != null) {
-//                if (!jcbFornecedorCNPJ.getSelectedItem().toString().equals("")) {
-//
-//
-//                    fornecedorController = new FornecedorController();
-//                    String s = jcbFornecedorCNPJ.getSelectedItem().toString();
-//                    DefaultComboBoxModel dcbm = fornecedorController.buscar("fornecedorCNPJ", s);
-//
-//                    if (dcbm != null) {
-//                        jcbFornecedorCNPJ.setModel(dcbm);
-//
-//                        if (jcbFornecedorCNPJ.getItemCount() >= 1) {
-//                            jcbFornecedorCNPJ.setSelectedIndex(-1);
-//                            jcbFornecedorCNPJ.setSelectedIndex(0);
-//                            f = (Fornecedor) jcbFornecedorCNPJ.getSelectedItem();
-//                            return true;
-//                        } else {
-//                            m = new Mensagens();
-//                            m.jopAviso("Nenhum fabricante encontrado.");
-//                            return false;
-//                        }
-//                    } else {
-//                        m = new Mensagens();
-//                        m.jopAviso("Nenhum fabricante encontrado.");
-//                        return false;
-//                    }
-//                } else if (!jtfFornecedorNome.getText().equals("")) {
-//                    fornecedorController = new FornecedorController();
-//
-//                    DefaultComboBoxModel dcbm = fornecedorController.buscar("fornecedorNome", jtfFornecedorNome.getText());
-//
-//                    if (dcbm != null) {
-//                        jcbFornecedorCNPJ.setModel(dcbm);
-//
-//                        if (jcbFornecedorCNPJ.getItemCount() >= 1) {
-//                            jcbFornecedorCNPJ.setSelectedIndex(-1);
-//                            jcbFornecedorCNPJ.setSelectedIndex(0);
-//                            f = (Fornecedor) jcbFornecedorCNPJ.getSelectedItem();
-//                            return true;
-//                        } else {
-//                            m = new Mensagens();
-//                            m.jopAviso("Nenhum fornecedor encontrado.");
-//                            f = null;
-//                            fornecedorController = null;
-//                            return false;
-//                        }
-//
-//                    } else {
-//                        m = new Mensagens();
-//                        m.jopAviso("É nescessário informar o CNPJ ou o nome do fornecedor para efetuar uma busca.");
-//                        f = null;
-//                        fornecedorController = null;
-//                        return false;
-//                    }
-//                } else {
-//                    m = new Mensagens();
-//                    m.jopAviso("É nescessário informar o CNPJ ou o nome do fornecedor para efetuar uma busca.");
-//                    f = null;
-//                    fornecedorController = null;
-//                    return false;
-//                }
-//            } else if (!jtfFornecedorNome.getText().equals("")) {
-//                fornecedorController = new FornecedorController();
-//
-//                DefaultComboBoxModel dcbm = fornecedorController.listByField("fornecedorNome", jtfFornecedorNome.getText());
-//
-//                if (dcbm != null) {
-//                    jcbFornecedorCNPJ.setModel(dcbm);
-//
-//                    if (jcbFornecedorCNPJ.getItemCount() >= 1) {
-//                        jcbFornecedorCNPJ.setSelectedIndex(-1);
-//                        jcbFornecedorCNPJ.setSelectedIndex(0);
-//                        f = (Fornecedor) jcbFornecedorCNPJ.getSelectedItem();
-//                        return true;
-//                    } else {
-//                        m = new Mensagens();
-//                        m.jopAviso("Nenhum fornecedor encontrado.");
-//                        f = null;
-//                        fornecedorController = null;
-//                        return false;
-//                    }
-//
-//                } else {
-//                    m = new Mensagens();
-//                    m.jopAviso("É nescessário informar o CNPJ ou o nome do fornecedor para efetuar uma busca.");
-//                    f = null;
-//                    fornecedorController = null;
-//                    return false;
-//                }
-//            } else {
-//                m = new Mensagens();
-//                m.jopAviso("É nescessário informar o CNPJ ou o nome do fornecedor para efetuar uma busca.");
-//                f = null;
-//                fornecedorController = null;
-//                return false;
-//            }
-//        } catch (Exception ex) {
-//            Logger.getLogger(CadastroFabricante.class.getName()).log(Level.SEVERE, null, ex + "\n É nescessário informar o CNPJ ou o nome do fornecedor para efetuar uma busca.");
-//            m = new Mensagens();
-//            m.jopAlerta("É nescessário informar o CNPJ ou o nome do fornecedor para efetuar uma busca.");
-//            return false;
-//        }
-//    }
-//    private void acaoRemover() {
-//        fornecedorController = new FornecedorController();
-//
-//        if (fabricante != null) {
-//            if (fabricante.getFornecedorId() != 0) {
-//                try {
-//                    fornecedorController.setDeleted(fabricante);
-//                    fabricante = null;
-//                    limparTela();
-//                } catch (NonexistentEntityException ex) {
-//                    Logger.getLogger(CadastroFabricante.class.getName()).log(Level.SEVERE, null, ex + "\n Este registro não existe mais em sua base de dados.\n");
-//                    m.jopAlerta("Este registro não existe mais em sua base de dados.");
-//                } catch (Exception ex) {
-//                    Logger.getLogger(CadastroFabricante.class.getName()).log(Level.SEVERE, null, "\n" + ex);
-//                    m.jopAlerta("Para excluir registro, é nescessário efetuar uma busca.");
-//                }
-//            } else {
-//                m.jopAlerta("Para excluir registro, é nescessário efetuar uma busca.");
-//            }
-//        } else {
-//            m.jopAlerta("Para excluir registro, é nescessário efetuar uma busca.");
-//        }
-//    }
 
     private boolean acaoBuscarFabricante() {
         try {

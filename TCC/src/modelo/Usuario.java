@@ -75,7 +75,6 @@ public class Usuario implements Serializable {
     public Usuario() {
         this.deleted = 'f';
         this.ativo = 1;
-
     }
 
     public String getUsuarioSenha() {

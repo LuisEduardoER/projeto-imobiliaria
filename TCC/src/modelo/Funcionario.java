@@ -103,7 +103,7 @@ public class Funcionario implements Serializable {
         this.cpfCnpj = cpfCnpj;
     }
 
-    public int getRg() {
+    public Integer getRg() {
         return rg;
     }
 
@@ -197,6 +197,6 @@ public class Funcionario implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.funcionario.Funcionario[ idFuncionario=" + idFuncionario + " ]";
+        return nome;
     }
 }

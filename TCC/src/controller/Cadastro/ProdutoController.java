@@ -7,8 +7,6 @@ package controller.Cadastro;
 import DAO.Cadastro.ProdutoDAO;
 import controller.CompraController;
 import controller.Mensagens;
-import java.sql.Array;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import modelo.Compra;

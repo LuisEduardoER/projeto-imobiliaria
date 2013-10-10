@@ -16,6 +16,9 @@ import controller.Cadastro.Endereco.RuaController;
 import controller.Cadastro.FuncionarioController;
 import controller.Cadastro.UsuarioController;
 import controller.Mensagens;
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
@@ -26,6 +29,7 @@ import modelo.Endereco;
 import modelo.Estado;
 import modelo.Funcionario;
 import modelo.Pais;
+import modelo.Produto;
 import modelo.Rua;
 import modelo.Usuario;
 
@@ -75,6 +79,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
         bairroController = new BairroController();
         ruaController = new RuaController();
         cepController = new CepController();
+        funcionarioController = new FuncionarioController();
         
         jbGravar = c.criaBotaoGravar();
         jbExcluir = c.criaBotaoExcluir();
@@ -92,10 +97,10 @@ public class CadastroUsuario extends javax.swing.JDialog {
         });
 
         funcionarioList = funcionarioController.buscaTodos();
-        modeloProduto = new TableModelProduto();
-        jtProdutos.setModel(modeloProduto);
-        modeloProduto.addListaDeProdutos(produtoList);
-        jtProdutos.updateUI();
+        modeloFuncionario = new TableModelFuncionario();
+        jtFuncionarios.setModel(modeloFuncionario);
+        modeloFuncionario.addListaDeProdutos(funcionarioList);
+        //jtFuncionarios.updateUI();
         
         jcbPais.setModel(paisController.listPaises());
         jcbPais.updateUI();
@@ -130,6 +135,13 @@ public class CadastroUsuario extends javax.swing.JDialog {
         jpControles.add(jbExcluir);
         jpControles.add(jbGravar);
 
+        jtFuncionarios.setDefaultEditor(Object.class, null);  
+        jtFuncionarios.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+                jtFuncionariosMouseClicked(e);
+            }
+        });
+        
     }
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {
@@ -150,6 +162,20 @@ public class CadastroUsuario extends javax.swing.JDialog {
             m.jopAlerta("Para excluir registro, é nescessário efetuar uma busca.");
         }
     }
+    
+    private void jtFuncionariosMouseClicked(java.awt.event.MouseEvent e) {
+        // TODO add your handling code here:  
+        if (e.getClickCount() == 2) {
+            Point p = e.getPoint();
+            int row = jtFuncionarios.rowAtPoint(p);
+            int col = jtFuncionarios.columnAtPoint(p);
+
+            Funcionario funcionario = new Funcionario();
+            funcionario = modeloFuncionario.getFuncionario(row);
+
+            alterar(funcionario);
+        }
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -160,10 +186,10 @@ public class CadastroUsuario extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jtpFuncionario = new javax.swing.JTabbedPane();
+        jtpAbas = new javax.swing.JTabbedPane();
         jpConsultaFuncionarios = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jtFuncionarios = new javax.swing.JTable();
         jpFuncionario = new javax.swing.JPanel();
         jpDadosPessoais = new javax.swing.JPanel();
         jpTextField = new javax.swing.JPanel();
@@ -215,7 +241,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
         setTitle("Cadastro de Usuários");
         setResizable(false);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jtFuncionarios.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -226,7 +252,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(jtFuncionarios);
 
         javax.swing.GroupLayout jpConsultaFuncionariosLayout = new javax.swing.GroupLayout(jpConsultaFuncionarios);
         jpConsultaFuncionarios.setLayout(jpConsultaFuncionariosLayout);
@@ -245,7 +271,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jtpFuncionario.addTab("Funcionários", jpConsultaFuncionarios);
+        jtpAbas.addTab("Funcionários", jpConsultaFuncionarios);
 
         jpDadosPessoais.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados Pessoais"));
 
@@ -422,7 +448,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
                 .addComponent(jpEndereco, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jtpFuncionario.addTab("Dados Funcionário", jpFuncionario);
+        jtpAbas.addTab("Dados Funcionário", jpFuncionario);
 
         jpDadosPessoais1.setBorder(javax.swing.BorderFactory.createTitledBorder("Dados de Acesso ao Sistema"));
 
@@ -496,7 +522,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
                 .addContainerGap(231, Short.MAX_VALUE))
         );
 
-        jtpFuncionario.addTab("Dados Usuário", jpUsuario);
+        jtpAbas.addTab("Dados Usuário", jpUsuario);
 
         jpControles.setLayout(new java.awt.GridLayout(1, 0, 3, 0));
 
@@ -507,7 +533,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jtpFuncionario, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
+                    .addComponent(jtpAbas, javax.swing.GroupLayout.DEFAULT_SIZE, 659, Short.MAX_VALUE)
                     .addComponent(jpControles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -515,7 +541,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jtpFuncionario, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtpAbas, javax.swing.GroupLayout.PREFERRED_SIZE, 404, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jpControles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(53, Short.MAX_VALUE))
@@ -585,7 +611,6 @@ public class CadastroUsuario extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JComboBox jcbBairro;
     private javax.swing.JComboBox jcbCEP;
     private javax.swing.JComboBox jcbCidade;
@@ -609,6 +634,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
     private javax.swing.JPanel jpTextFieldEndereco1;
     private javax.swing.JPanel jpUsuario;
     private javax.swing.JPasswordField jpfSenha;
+    private javax.swing.JTable jtFuncionarios;
     private javax.swing.JTextField jtfCPF;
     private javax.swing.JTextField jtfCTPS;
     private javax.swing.JTextField jtfEmail;
@@ -616,7 +642,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
     private javax.swing.JTextField jtfRG;
     private javax.swing.JTextField jtfTelefone;
     private javax.swing.JTextField jtfUserName;
-    private javax.swing.JTabbedPane jtpFuncionario;
+    private javax.swing.JTabbedPane jtpAbas;
     // End of variables declaration//GEN-END:variables
 
     private void acaoGravar() {
@@ -709,4 +735,40 @@ public class CadastroUsuario extends javax.swing.JDialog {
         }
     }
 
+    private void alterar(Funcionario f) {
+        f = funcionarioController.buscarFuncionario("funcionario.idFuncionario", f.getIdFuncionario().toString());
+        
+        jtfNome.setText(f.getNome());
+        jtfCTPS.setText(f.getCtps());
+        jtfEmail.setText(f.getEmail());
+        jtfRG.setText(f.getRg().toString());
+        jtfTelefone.setText(f.getTelefone());
+        jtfUserName.setText(f.getIdUsuario().getUsuarioName());
+        
+        jcbPais.setSelectedItem(f.getEnderecoID().getPais());
+        jcbEstados.setSelectedItem(endereco);
+        jcbCidade.setSelectedItem(f.getEnderecoID().getPais());
+        jcbBairro.setSelectedItem(endereco);
+        jcbCidade.setSelectedItem(endereco);
+        jcbRua.setSelectedItem(endereco);
+        jcbCEP.setSelectedItem(endereco);
+                
+        
+        gerenciaCampos(true);
+        setAba(1);
+    }
+    
+    private void gerenciaCampos(boolean abilitaDesabilita) {
+        jtfNome.setEnabled(abilitaDesabilita);
+        jtfCTPS.setEnabled(abilitaDesabilita);
+        jtfEmail.setEnabled(abilitaDesabilita);
+        jtfRG.setEnabled(abilitaDesabilita);
+        jtfTelefone.setEnabled(abilitaDesabilita);
+        jtfUserName.setEnabled(abilitaDesabilita);
+        
+    }
+    
+    private void setAba(int i) {
+        jtpAbas.setSelectedIndex(i);
+    }
 }

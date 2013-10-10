@@ -18,8 +18,6 @@ public class TableModelFuncionario extends AbstractTableModel {
     // Lista de Sócios a serem exibidos na tabela
     private List<Funcionario> linhas;
 
-    
-    
     // Cria um SocioTableModel sem nenhuma linha
     public TableModelFuncionario() {
         linhas = new ArrayList<Funcionario>();
@@ -56,11 +54,11 @@ public class TableModelFuncionario extends AbstractTableModel {
             case CODIGO:
                 return Integer.class;
             case NOME:
-                return Integer.class;
-            case CPF:
                 return String.class;
+            case CPF:
+                return Integer.class;
             case LOGIN:
-                return Float.class;
+                return String.class;
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
@@ -84,7 +82,15 @@ public class TableModelFuncionario extends AbstractTableModel {
             case CPF:
                 return funcionario.getCpfCnpj();
             case LOGIN:
-                return funcionario.getIdUsuario().getUsuarioName();
+                if (funcionario.getIdUsuario() != null) {
+                    if (funcionario.getIdUsuario().getUsuarioName() != null && !funcionario.getIdUsuario().getUsuarioName().equals("")) {
+                        return funcionario.getIdUsuario().getUsuarioName();
+                    } else {
+                        return "Usuário não cadastrado!";
+                    }
+                } else {
+                    return "Usuário não cadastrado!";
+                }
             default:
                 throw new IndexOutOfBoundsException("columnIndex out of bounds");
         }
