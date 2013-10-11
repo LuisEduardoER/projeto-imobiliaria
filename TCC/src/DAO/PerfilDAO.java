@@ -60,7 +60,7 @@ public class PerfilDAO implements Serializable {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Object[]> buscarTodos() {
+    public List<Perfil> buscarTodos() {
         Criteria criteria = session.createCriteria(Perfil.class, "perfil");
         
         ProjectionList p = Projections.projectionList();

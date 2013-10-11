@@ -60,7 +60,7 @@ public class ModuloDAO implements Serializable {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Object[]> buscarTodos() {
+    public List<Modulo> buscarTodos() {
         Criteria criteria = session.createCriteria(Modulo.class, "modulo");
         
         ProjectionList p = Projections.projectionList();

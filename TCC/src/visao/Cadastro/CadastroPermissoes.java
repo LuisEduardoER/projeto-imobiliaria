@@ -6,6 +6,7 @@ package visao.Cadastro;
 
 import Componentes.Componentes;
 import controller.Mensagens;
+import controller.ModuloController;
 //import controller.ModuloController;
 import controller.PerfilController;
 import java.util.ArrayList;
@@ -14,11 +15,11 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-//import modelo.Modulo;
-//import modelo.Modulopermissao;
-//import modelo.Perfil;
-//import modelo.PerfilModulopermissao;
-//import modelo.Permissao;
+import modelo.Modulo;
+import modelo.ModuloPermissao;
+import modelo.Perfil;
+import modelo.PerfilModulopermissao;
+import modelo.Permissao;
 
 /**
  *
@@ -26,13 +27,13 @@ import javax.swing.JPanel;
  */
 public class CadastroPermissoes extends javax.swing.JDialog {
 
-//    Perfil perfil = new Perfil();
-//    Modulo modulo = new Modulo();
-//    Modulopermissao modulopermissao = new Modulopermissao();
-//    PerfilModulopermissao perfilModulopermissao = new PerfilModulopermissao();
-//    Permissao permissao = new Permissao();
+    Perfil perfil = new Perfil();
+    Modulo modulo = new Modulo();
+    ModuloPermissao modulopermissao = new ModuloPermissao();
+    PerfilModulopermissao perfilModulopermissao = new PerfilModulopermissao();
+    Permissao permissao = new Permissao();
     PerfilController perfilController = new PerfilController();
-//    ModuloController moduloController = new ModuloController();
+    ModuloController moduloController = new ModuloController();
     Componentes c = new Componentes();
     JButton jbGravar;
     JButton jbBuscar;

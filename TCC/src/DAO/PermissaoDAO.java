@@ -60,7 +60,7 @@ public class PermissaoDAO implements Serializable {
     }
 
     @SuppressWarnings("unchecked")
-    public List<Object[]> buscarTodos() {
+    public List<Permissao> buscarTodos() {
         Criteria criteria = session.createCriteria(Permissao.class, "permissao");
         
         ProjectionList p = Projections.projectionList();
