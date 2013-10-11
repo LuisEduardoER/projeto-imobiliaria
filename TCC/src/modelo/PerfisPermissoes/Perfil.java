@@ -4,9 +4,7 @@
  */
 package modelo.PerfisPermissoes;
 
-import modelo.PerfisPermissoes.ModuloPermissao;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -21,8 +19,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import modelo.Usuario;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
@@ -33,8 +29,8 @@ import org.joda.time.LocalDateTime;
  */
 @Entity
 @Table(name = "perfil")
-@NamedQueries({
-    @NamedQuery(name = "Perfil.findAll", query = "SELECT p FROM Perfil p")})
+//@NamedQueries({
+//    @NamedQuery(name = "Perfil.findAll", query = "SELECT p FROM Perfil p")})
 public class Perfil implements Serializable {
 
     @Column(name = "inserted")
@@ -62,6 +58,7 @@ public class Perfil implements Serializable {
     private ModuloPermissao perfilmoduloPermissao;
 
     public Perfil() {
+        this.deleted = 'f';
     }
 
     public Perfil(Integer perfilID) {

@@ -4,7 +4,6 @@
  */
 package modelo.PerfisPermissoes;
 
-import modelo.PerfisPermissoes.ModuloPermissao;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -51,6 +50,7 @@ public class Modulo implements Serializable {
     private List<ModuloPermissao> modulopermissaoList;
 
     public Modulo() {
+        this.deleted = 'f';
     }
 
     public Modulo(Integer moduloId) {

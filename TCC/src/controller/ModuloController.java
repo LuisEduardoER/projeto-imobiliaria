@@ -7,6 +7,7 @@ package controller;
 import DAO.ModuloDAO;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import modelo.Pais;
 import modelo.PerfisPermissoes.Modulo;
 import persistencia.exceptions.NonexistentEntityException;
 import util.Datas;
@@ -51,6 +52,16 @@ public class ModuloController {
         
         return listaObject;
     }
+    
+    public DefaultComboBoxModel<Modulo> listModulos() {
+        DefaultComboBoxModel<Modulo> dcbm = new DefaultComboBoxModel<>();
+        List<Modulo> lista = dao.consultarTodos();
+        for (Modulo modulo : lista) {
+            dcbm.addElement(modulo);
+        }
+        return dcbm;
+    }
+    
     public DefaultComboBoxModel<Modulo> listByField(String field, String value) {
         DefaultComboBoxModel<Modulo> dcbm = new DefaultComboBoxModel<>();
         List<Modulo> lista = dao.consultarTodos();

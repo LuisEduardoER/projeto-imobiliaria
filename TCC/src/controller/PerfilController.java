@@ -82,6 +82,15 @@ public class PerfilController {
         return perfil;
     }
 
+    public DefaultComboBoxModel<Perfil> listPerfis() {
+        DefaultComboBoxModel<Perfil> dcbm = new DefaultComboBoxModel<>();
+        List<Perfil> lista = dao.consultarTodos();
+        for (Perfil Perfil : lista) {
+            dcbm.addElement(Perfil);
+        }
+        return dcbm;
+    }
+    
     public Perfil setDeleted(Perfil perfil) throws NonexistentEntityException, Exception {
         perfil.setUpdated(Datas.dataAtualDateTime());
         perfil.setDeleted('t');

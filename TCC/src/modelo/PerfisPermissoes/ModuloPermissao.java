@@ -29,7 +29,7 @@ import org.joda.time.LocalDateTime;
 @Entity
 @Table(name = "modulopermissao")
 @NamedQueries({
-    @NamedQuery(name = "Modulopermissao.findAll", query = "SELECT m FROM Modulopermissao m")})
+    @NamedQuery(name = "ModuloPermissao.findAll", query = "SELECT m FROM ModuloPermissao m")})
 public class ModuloPermissao implements Serializable {
 
     @Column(name = "inserted")
@@ -58,6 +58,7 @@ public class ModuloPermissao implements Serializable {
     private Modulo moduloId;
 
     public ModuloPermissao() {
+        this.deleted = 'f';
     }
 
     public ModuloPermissao(Integer moduloPermissaoId) {
