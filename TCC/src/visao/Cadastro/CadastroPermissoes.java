@@ -9,17 +9,13 @@ import controller.Mensagens;
 import controller.ModuloController;
 //import controller.ModuloController;
 import controller.PerfilController;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import modelo.Modulo;
+import modelo.PerfisPermissoes.Modulo;
 import modelo.PerfisPermissoes.ModuloPermissao;
-import modelo.Perfil;
-import modelo.PerfilModulopermissao;
-import modelo.Permissao;
+import modelo.PerfisPermissoes.Perfil;
+import modelo.PerfisPermissoes.PerfilModulopermissao;
+import modelo.PerfisPermissoes.Permissao;
 
 /**
  *
@@ -32,11 +28,11 @@ public class CadastroPermissoes extends javax.swing.JDialog {
     ModuloPermissao modulopermissao = new ModuloPermissao();
     PerfilModulopermissao perfilModulopermissao = new PerfilModulopermissao();
     Permissao permissao = new Permissao();
-    PerfilController perfilController = new PerfilController();
-    ModuloController moduloController = new ModuloController();
     Componentes c = new Componentes();
+    ModuloController moduloController = new ModuloController();
+    PerfilController pcerfilController = new PerfilController();
     JButton jbGravar;
-    JButton jbBuscar;
+//    JButton jbBuscar;
     JButton jbExcluir;
 //    List<PerfilModulopermissao> perfilModulopermissaoList = new ArrayList<>();
     private Mensagens m;
@@ -48,7 +44,7 @@ public class CadastroPermissoes extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         jbGravar = c.criaBotaoGravar();
-        jbBuscar = c.criaBotaoBuscar();
+//        jbBuscar = c.criaBotaoBuscar();
         jbExcluir = c.criaBotaoExcluir();
 
         jbGravar.addActionListener(new java.awt.event.ActionListener() {
@@ -63,13 +59,13 @@ public class CadastroPermissoes extends javax.swing.JDialog {
             }
         });
 
-        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbBuscarActionPerformed(evt);
-            }
-        });
+//        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
+//            public void actionPerformed(java.awt.event.ActionEvent evt) {
+//                jbBuscarActionPerformed(evt);
+//            }
+//        });
 
-        jpControles.add(jbBuscar);
+//        jpControles.add(jbBuscar);
         jpControles.add(jbExcluir);
         jpControles.add(jbGravar);
 //        carregaModulos();
@@ -312,10 +308,10 @@ public class CadastroPermissoes extends javax.swing.JDialog {
 
     public void carregaTela() {
         jbGravar = c.criaBotaoGravar();
-        jbBuscar = c.criaBotaoBuscar();
+//        jbBuscar = c.criaBotaoBuscar();
         jbExcluir = c.criaBotaoExcluir();
         jpControles = new JPanel();
-        jpControles.add(jbBuscar);
+//        jpControles.add(jbBuscar);
         jpControles.add(jbExcluir);
         jpControles.add(jbGravar);
     }

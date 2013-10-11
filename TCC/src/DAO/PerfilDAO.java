@@ -8,7 +8,7 @@ import controller.Mensagens;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
-import modelo.Perfil;
+import modelo.PerfisPermissoes.Perfil;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;

@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelo;
+package modelo.PerfisPermissoes;
 
 import modelo.PerfisPermissoes.ModuloPermissao;
 import java.io.Serializable;

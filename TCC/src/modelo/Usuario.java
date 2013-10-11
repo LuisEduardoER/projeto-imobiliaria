@@ -4,6 +4,7 @@
  */
 package modelo;
 
+import modelo.PerfisPermissoes.Perfil;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;

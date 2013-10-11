@@ -12,7 +12,6 @@
     <class>modelo.Fornecedor</class>
     <class>modelo.Itemvenda</class>
     <class>modelo.Pais</class>
-    <class>modelo.Perfil</class>
     <class>modelo.Produto</class>
     <class>modelo.Rua</class>
     <class>modelo.Tipopagamento</class>
@@ -20,11 +19,12 @@
     <class>modelo.Venda</class>
     <class>modelo.Endereco</class>
     <class>modelo.Funcionario</class>
-    <class>modelo.Modulo</class>
-    <class>modelo.Permissao</class>
     <class>modelo.Usuario</class>
-    <class>modelo.PerfilModulopermissao</class>
     <class>modelo.PerfisPermissoes.ModuloPermissao</class>
+    <class>modelo.PerfisPermissoes.Modulo</class>
+    <class>modelo.PerfisPermissoes.PerfilModulopermissao</class>
+    <class>modelo.PerfisPermissoes.Perfil</class>
+    <class>modelo.PerfisPermissoes.Permissao</class>
     <properties>
       <!--            <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>-->
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>

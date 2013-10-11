@@ -7,7 +7,7 @@ package controller;
 import DAO.PermissaoDAO;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import modelo.Permissao;
+import modelo.PerfisPermissoes.Permissao;
 import persistencia.exceptions.NonexistentEntityException;
 import util.Datas;
 

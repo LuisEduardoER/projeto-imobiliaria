@@ -19,10 +19,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import modelo.Modulo;
-import modelo.Perfil;
-import modelo.PerfilModulopermissao;
-import modelo.Permissao;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 
