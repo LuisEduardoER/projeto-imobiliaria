@@ -8,11 +8,16 @@ import Componentes.Componentes;
 import controller.Mensagens;
 import controller.ModuloController;
 import controller.PerfilController;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JButton;
 import modelo.Estado;
 import modelo.Pais;
 import modelo.PerfisPermissoes.Modulo;
+import modelo.PerfisPermissoes.ModuloPermissao;
 import modelo.PerfisPermissoes.Perfil;
+import modelo.PerfisPermissoes.PerfilModulopermissao;
+import modelo.PerfisPermissoes.Permissao;
 
 /**
  *
@@ -26,6 +31,10 @@ public class CadastroModuloPermissao extends javax.swing.JDialog {
     Componentes c;
     Modulo modulo;
     Perfil perfil;
+    Permissao permissao;
+    ModuloPermissao moduloPermissao;
+    PerfilModulopermissao perfilModulopermissao;
+    
     PerfilController perfilController;
     ModuloController moduloController;
     JButton jbGravar;
@@ -285,14 +294,18 @@ public class CadastroModuloPermissao extends javax.swing.JDialog {
 
         if (avisos.equals("")) {
 
-            
-            
-            modulolController = new ModuloController();
             modulo = new Modulo();
+            moduloPermissao = new ModuloPermissao();
+            
+            moduloPermissao.setModuloId(modulo);
+            
+            moduloPermissao.setPermissaoId(null);
+            
+            moduloController = new ModuloController();
 
-            modulo.setModuloDesc(jtfNome.getText());
+            
 
-            modulo = modulolController.gravar(modulo);
+            modulo = moduloController.gravar(modulo);
 
             if (modulo.getModuloId() != null) {
                 m = new Mensagens();
@@ -301,7 +314,36 @@ public class CadastroModuloPermissao extends javax.swing.JDialog {
         } else {
             m = new Mensagens();
             m.jopAlerta("Verifique: " + avisos + "!");
-            jtfNome.requestFocus();
+            jcbPerfis.requestFocus();
         }
+    }
+    
+    public List<Permissao> verificaPermissao(){
+        List<Permissao> permissoes = new ArrayList();
+        
+        if(jchkbGravar.isSelected()){
+            permissao = new Permissao();
+            permissao.setPermissaoId(1);
+            permissoes.add(permissao);
+        }
+        
+        if(jchkbAlterar.isSelected()){
+            permissao = new Permissao();
+            permissao.setPermissaoId(2);
+            permissoes.add(permissao);
+        }
+        
+        if(jchckConsultar.isSelected()){
+            permissao = new Permissao();
+            permissao.setPermissaoId(3);
+            permissoes.add(permissao);
+        }
+        
+        if(jchkbExcluir.isSelected()){
+            permissao = new Permissao();
+            permissao.setPermissaoId(4);
+            permissoes.add(permissao);
+        }
+        return permissoes;
     }
 }
