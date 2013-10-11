@@ -4,6 +4,7 @@
  */
 package modelo;
 
+import modelo.PerfisPermissoes.ModuloPermissao;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;

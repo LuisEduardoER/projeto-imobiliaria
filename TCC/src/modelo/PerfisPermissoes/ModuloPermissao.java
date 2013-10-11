@@ -2,11 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelo;
+package modelo.PerfisPermissoes;
 
-import modelo.PerfisPermissoes.ModuloPermissao;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
@@ -21,8 +19,10 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import modelo.Modulo;
+import modelo.Perfil;
+import modelo.PerfilModulopermissao;
+import modelo.Permissao;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 
@@ -31,10 +31,10 @@ import org.joda.time.LocalDateTime;
  * @author Bruno
  */
 @Entity
-@Table(name = "perfil")
+@Table(name = "modulopermissao")
 @NamedQueries({
-    @NamedQuery(name = "Perfil.findAll", query = "SELECT p FROM Perfil p")})
-public class Perfil implements Serializable {
+    @NamedQuery(name = "Modulopermissao.findAll", query = "SELECT m FROM Modulopermissao m")})
+public class ModuloPermissao implements Serializable {
 
     @Column(name = "inserted")
     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
@@ -44,76 +44,77 @@ public class Perfil implements Serializable {
     private LocalDateTime updated;
     @Column(name = "deleted")
     private Character deleted;
-    @OneToMany(mappedBy = "perfilId", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "moduloPermissaoId", fetch = FetchType.LAZY)
     private List<PerfilModulopermissao> perfilModulopermissaoList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "perfilID")
-    private Integer perfilID;
-    @Column(name = "perfilDesc")
-    private String perfilDesc;
-    @OneToMany(mappedBy = "usuarioPerfil", fetch = FetchType.LAZY)
-    private List<Usuario> usuarioList;
-    @JoinColumn(name = "perfil_moduloPermissao", referencedColumnName = "moduloPermissaoId")
+    @Column(name = "moduloPermissaoId")
+    private Integer moduloPermissaoId;
+    @OneToMany(mappedBy = "perfilmoduloPermissao", fetch = FetchType.LAZY)
+    private List<Perfil> perfilList;
+    @JoinColumn(name = "permissaoId", referencedColumnName = "permissaoId")
     @ManyToOne(fetch = FetchType.LAZY)
-    private ModuloPermissao perfilmoduloPermissao;
+    private Permissao permissaoId;
+    @JoinColumn(name = "moduloId", referencedColumnName = "moduloId")
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Modulo moduloId;
 
-    public Perfil() {
+    public ModuloPermissao() {
     }
 
-    public Perfil(Integer perfilID) {
-        this.perfilID = perfilID;
+    public ModuloPermissao(Integer moduloPermissaoId) {
+        this.moduloPermissaoId = moduloPermissaoId;
     }
 
-    public Integer getPerfilID() {
-        return perfilID;
+    public Integer getModuloPermissaoId() {
+        return moduloPermissaoId;
     }
 
-    public void setPerfilID(Integer perfilID) {
-        this.perfilID = perfilID;
+    public void setModuloPermissaoId(Integer moduloPermissaoId) {
+        this.moduloPermissaoId = moduloPermissaoId;
     }
 
-    public String getPerfilDesc() {
-        return perfilDesc;
+    public List<Perfil> getPerfilList() {
+        return perfilList;
     }
 
-    public void setPerfilDesc(String perfilDesc) {
-        this.perfilDesc = perfilDesc;
+    public void setPerfilList(List<Perfil> perfilList) {
+        this.perfilList = perfilList;
     }
 
-    public List<Usuario> getUsuarioList() {
-        return usuarioList;
+    public Permissao getPermissaoId() {
+        return permissaoId;
     }
 
-    public void setUsuarioList(List<Usuario> usuarioList) {
-        this.usuarioList = usuarioList;
+    public void setPermissaoId(Permissao permissaoId) {
+        this.permissaoId = permissaoId;
     }
 
-    public ModuloPermissao getPerfilmoduloPermissao() {
-        return perfilmoduloPermissao;
+    public Modulo getModuloId() {
+        return moduloId;
     }
 
-    public void setPerfilmoduloPermissao(ModuloPermissao perfilmoduloPermissao) {
-        this.perfilmoduloPermissao = perfilmoduloPermissao;
+    public void setModuloId(Modulo moduloId) {
+        this.moduloId = moduloId;
     }
 
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (perfilID != null ? perfilID.hashCode() : 0);
+        hash += (moduloPermissaoId != null ? moduloPermissaoId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Perfil)) {
+        if (!(object instanceof ModuloPermissao)) {
             return false;
         }
-        Perfil other = (Perfil) object;
-        if ((this.perfilID == null && other.perfilID != null) || (this.perfilID != null && !this.perfilID.equals(other.perfilID))) {
+        ModuloPermissao other = (ModuloPermissao) object;
+        if ((this.moduloPermissaoId == null && other.moduloPermissaoId != null) || (this.moduloPermissaoId != null && !this.moduloPermissaoId.equals(other.moduloPermissaoId))) {
             return false;
         }
         return true;
@@ -121,7 +122,7 @@ public class Perfil implements Serializable {
 
     @Override
     public String toString() {
-        return perfilDesc;
+        return moduloPermissaoId.toString();
     }
 
     public LocalDateTime getInserted() {

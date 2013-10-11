@@ -16,7 +16,7 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import modelo.Modulo;
-import modelo.ModuloPermissao;
+import modelo.PerfisPermissoes.ModuloPermissao;
 import modelo.Perfil;
 import modelo.PerfilModulopermissao;
 import modelo.Permissao;
