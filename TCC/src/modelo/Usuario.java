@@ -5,10 +5,12 @@
 package modelo;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
+import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -20,6 +22,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 
@@ -63,14 +67,14 @@ public class Usuario implements Serializable {
     @JoinColumn(name = "usuarioPerfil", referencedColumnName = "perfilID")
     @ManyToOne(fetch = FetchType.LAZY)
     private Perfil usuarioPerfil;
+    @Column(name = "deleted")
+    private Character deleted;
     @Column(name = "inserted")
     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
     private LocalDateTime inserted;
     @Column(name = "updated")
     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
     private LocalDateTime updated;
-    @Column(name = "deleted")
-    private Character deleted;
 
     public Usuario() {
         this.deleted = 'f';
@@ -101,8 +105,6 @@ public class Usuario implements Serializable {
         this.usuarioPerfil = usuarioPerfil;
     }
 
-    
-    
     @Override
     public int hashCode() {
         int hash = 7;
@@ -116,22 +118,6 @@ public class Usuario implements Serializable {
 
     public void setUsuarioId(Integer usuarioId) {
         this.usuarioId = usuarioId;
-    }
-
-    public LocalDateTime getInserted() {
-        return inserted;
-    }
-
-    public void setInserted(LocalDateTime inserted) {
-        this.inserted = inserted;
-    }
-
-    public LocalDateTime getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(LocalDateTime updated) {
-        this.updated = updated;
     }
 
     public Character getDeleted() {
@@ -148,6 +134,22 @@ public class Usuario implements Serializable {
 
     public void setUsuarioName(String usuarioName) {
         this.usuarioName = usuarioName;
+    }
+
+    public LocalDateTime getInserted() {
+        return inserted;
+    }
+
+    public void setInserted(LocalDateTime inserted) {
+        this.inserted = inserted;
+    }
+
+    public LocalDateTime getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(LocalDateTime updated) {
+        this.updated = updated;
     }
 
     @Override

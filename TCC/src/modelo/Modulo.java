@@ -17,6 +17,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDateTime;
 
 /**
  *
@@ -27,6 +29,7 @@ import javax.persistence.Table;
 @NamedQueries({
     @NamedQuery(name = "Modulo.findAll", query = "SELECT m FROM Modulo m")})
 public class Modulo implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,13 +39,15 @@ public class Modulo implements Serializable {
     @Column(name = "moduloDesc")
     private String moduloDesc;
     @Column(name = "inserted")
-    private String inserted;
+    @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
+    private LocalDateTime inserted;
     @Column(name = "updated")
-    private String updated;
+    @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
+    private LocalDateTime updated;
     @Column(name = "deleted")
     private Character deleted;
     @OneToMany(mappedBy = "moduloId", fetch = FetchType.LAZY)
-    private List<Modulopermissao> modulopermissaoList;
+    private List<ModuloPermissao> modulopermissaoList;
 
     public Modulo() {
     }
@@ -67,19 +72,19 @@ public class Modulo implements Serializable {
         this.moduloDesc = moduloDesc;
     }
 
-    public String getInserted() {
+    public LocalDateTime getInserted() {
         return inserted;
     }
 
-    public void setInserted(String inserted) {
+    public void setInserted(LocalDateTime inserted) {
         this.inserted = inserted;
     }
 
-    public String getUpdated() {
+    public LocalDateTime getUpdated() {
         return updated;
     }
 
-    public void setUpdated(String updated) {
+    public void setUpdated(LocalDateTime updated) {
         this.updated = updated;
     }
 
@@ -91,11 +96,11 @@ public class Modulo implements Serializable {
         this.deleted = deleted;
     }
 
-    public List<Modulopermissao> getModulopermissaoList() {
+    public List<ModuloPermissao> getModulopermissaoList() {
         return modulopermissaoList;
     }
 
-    public void setModulopermissaoList(List<Modulopermissao> modulopermissaoList) {
+    public void setModulopermissaoList(List<ModuloPermissao> modulopermissaoList) {
         this.modulopermissaoList = modulopermissaoList;
     }
 
@@ -121,7 +126,6 @@ public class Modulo implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.Modulo[ moduloId=" + moduloId + " ]";
+        return moduloDesc;
     }
-    
 }

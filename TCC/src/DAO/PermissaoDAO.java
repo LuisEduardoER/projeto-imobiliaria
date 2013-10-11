@@ -1,181 +1,128 @@
-///*
-// * To change this template, choose Tools | Templates
-// * and open the template in the editor.
-// */
-//package DAO;
-//
-//import controller.EntityManagerFactoryCreator;
-//import controller.Mensagens;
-//import java.util.List;
-//import javax.persistence.EntityManager;
-//import javax.persistence.EntityManagerFactory;
-//import javax.persistence.EntityNotFoundException;
-//import javax.persistence.TypedQuery;
-//import javax.persistence.criteria.CriteriaBuilder;
-//import javax.persistence.criteria.CriteriaQuery;
-//import javax.persistence.criteria.Root;
-//import modelo.Permissao;
-//import persistencia.exceptions.NonexistentEntityException;
-//
-///**
-// *
-// * @author Bruno
-// */
-//public class PermissaoDAO {
-//    static Mensagens m;
-//
-//    public PermissaoDAO(EntityManagerFactory emf) {
-//        this.emf = EntityManagerFactoryCreator.getEMF();
-//    }
-//    private static EntityManagerFactory emf = null;
-//
-//    public static EntityManager getEntityManager() {
-//        emf = EntityManagerFactoryCreator.getEMF();
-//        return emf.createEntityManager();
-//    }
-//
-//    public static boolean gravar(Permissao p) {
-//        EntityManager em = null;
-//        try {
-//            em = getEntityManager();
-//            em.getTransaction().begin();
-//            em.persist(p);
-//            em.getTransaction().commit();
-//            return true;
-//        } catch (Exception e) {
-//            m = new Mensagens();
-//            m.jopError("Erro ao gravar Permissao! \n ERRO: | PermissaoDAO | gravar() | " + e);
-//            return false;
-//        } finally {
-////            em.getTransaction().rollback();
-//            if (em != null) {
-//                em.close();
-////                return true;
-//            }
-//        }
-//    }
-//
-//    public static boolean edit(Permissao permissao) throws NonexistentEntityException, Exception {
-//        EntityManager em = null;
-//        try {
-//            em = getEntityManager();
-//            em.getTransaction().begin();
-//            permissao = em.merge(permissao);
-//            em.getTransaction().commit();
-//            return true;
-//        } catch (Exception ex) {
-//            String msg = ex.getLocalizedMessage();
-//            if (msg == null || msg.length() == 0) {
-//                Integer id = permissao.getPermissaoId();
-//                if (findProduto(id) == null) {
-//                    throw new NonexistentEntityException("Permissao  " + id + " não existe.");
-//                }
-//            }
-//            throw ex;
-////            return false;
-//        } finally {
-//            if (em != null) {
-//                em.close();
-//            }
-//        }
-//    }
-//
-//    public static void destroy(Integer id) throws NonexistentEntityException {
-//        EntityManager em = null;
-//        try {
-//            em = getEntityManager();
-//            em.getTransaction().begin();
-//            Permissao permissao;
-//            try {
-//                permissao = em.getReference(Permissao.class, id);
-//                permissao.getPermissaoId();
-//            } catch (EntityNotFoundException enfe) {
-//                throw new NonexistentEntityException("Permissao  " + id + " não existe.", enfe);
-//            }
-//            em.remove(permissao);
-//            em.getTransaction().commit();
-//        } finally {
-//            em.getTransaction().rollback();
-//            if (em != null) {
-//                em.close();
-//            }
-//        }
-//    }
-//
-//    public static Permissao buscaNome(String nome) {
-//        EntityManager em = getEntityManager();
-//
-//        try {
-//            CriteriaBuilder cb = em.getCriteriaBuilder();
-//            CriteriaQuery<Permissao> cq = cb.createQuery(Permissao.class);
-//            Root<Permissao> permissao = cq.from(Permissao.class);
-//
-//            cq.where(cb.equal(permissao.get("PermissaoDesc"), cb.parameter(String.class, "PermissaoDesc")),
-//                    cb.equal(permissao.get("deleted"), cb.parameter(String.class, "deleted")));
-//
-//            TypedQuery<Permissao> query = em.createQuery(cq);
-//            query.setParameter("PermissaoDesc", nome);
-//            query.setParameter("deleted", "f");
-//            return query.getSingleResult();
-//
-//        } finally {
-//            em.getTransaction().rollback();
-//            if (em != null) {
-//                em.close();
-//            }
-//        }
-//    }
-//
-//    public static Permissao buscaByField(String field, String value) {
-//        EntityManager em = null;
-//        try {
-//            em = getEntityManager();
-//            CriteriaBuilder cb = em.getCriteriaBuilder();
-//            CriteriaQuery<Permissao> cq = cb.createQuery(Permissao.class);
-//            Root<Permissao> permissao = cq.from(Permissao.class);
-//            cq.where(cb.equal(permissao.get(field), cb.parameter(String.class, field)),
-//                    cb.equal(permissao.get("deleted"), cb.parameter(String.class, "deleted")));
-//
-//            TypedQuery<Permissao> query = em.createQuery(cq);
-//            query.setParameter(field, value);
-//            query.setParameter("deleted", "f");
-//            return query.getSingleResult();
-//        } catch (Exception e) {
-//            System.out.println(e);
-//            return null;
-//        } finally {
-//            if (em != null) {
-//                em.close();
-//            }
-//        }
-//    }
-//
-//    public static List<Permissao> listByField(String field, String value) {
-//        EntityManager em = null;
-//        try {
-//            em = getEntityManager();
-//            CriteriaBuilder cb = em.getCriteriaBuilder();
-//            CriteriaQuery<Permissao> cq = cb.createQuery(Permissao.class);
-//            Root<Permissao> m = cq.from(Permissao.class);
-//
-//            cq.where(cb.equal(m.get(field), cb.parameter(String.class, field)),
-//                    cb.equal(m.get("deleted"), cb.parameter(String.class, "deleted")));
-//
-//            TypedQuery<Permissao> query = em.createQuery(cq);
-//            query.setParameter(field, value);
-//            query.setParameter("deleted", "f");
-//            return query.getResultList();
-//        } finally {
-//            em.close();
-//        }
-//    }
-//
-//    public static Permissao findProduto(Integer id) {
-//        EntityManager em = getEntityManager();
-//        try {
-//            return em.find(Permissao.class, id);
-//        } finally {
-//            em.close();
-//        }
-//    }
-//}
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package DAO;
+
+import controller.Mensagens;
+import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import modelo.Permissao;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.ProjectionList;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+
+/**
+ *
+ * @author Bruno
+ */
+public class PermissaoDAO implements Serializable {
+
+    static Mensagens m;
+    EntityManager em;
+    private Criteria select;
+    Session session;
+
+    public PermissaoDAO() {
+        em = new EntityManagerFactory().getEntityManager();
+        session = (Session) em.getDelegate();
+    }
+
+    public Permissao gravar(Permissao permissao ){
+        em.getTransaction().begin();
+        permissao = em.merge(permissao);
+        em.getTransaction().commit();
+        return permissao;
+    }
+
+    public Permissao atualizar(Permissao permissao) {
+        em.getTransaction().begin();
+        permissao = em.merge(permissao);
+        em.getTransaction().commit();
+        return permissao;
+    }
+
+    public void apagar(Permissao permissao) {
+        em.getTransaction().begin();
+        permissao = em.getReference(Permissao.class, permissao.getPermissaoId());
+        em.remove(permissao);
+        em.getTransaction().commit();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Permissao> consultarTodos() {
+        select = session.createCriteria(Permissao.class);
+        return select.list();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Object[]> buscarTodos() {
+        Criteria criteria = session.createCriteria(Permissao.class, "permissao");
+        
+        ProjectionList p = Projections.projectionList();
+        p.add(Projections.groupProperty("Permissao.permissaoId"));
+        p.add(Projections.groupProperty("Permissao.permissaoDesc"));
+        criteria.setProjection(p);
+//        criteria.add(Restrictions.or(Restrictions.isNull("usuario.usuarioId"),
+//                (Restrictions.eq("usuario.deleted", "f"))));
+        criteria.add(Restrictions.eq("Permissao.deleted", "f"));
+
+        return criteria.list();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Object[]> consultarPermissao(String searchField, String searchString) {
+        Criteria criteria = montarCriteria(searchField, searchString);
+        ProjectionList p = Projections.projectionList();
+
+        p.add(Projections.groupProperty("Permissao.permissaoId"));
+
+        criteria.setProjection(p);
+
+        return criteria.list();
+    }
+
+    private Criteria montarCriteria(String searchField, String searchString) {
+        Criteria criteria = session.createCriteria(Permissao.class, "permissao");
+
+        if (searchField != null && !searchField.equals("") && searchString != null && !searchString.equals("")) {
+            criteria.add(Restrictions.ilike(searchField, searchString, MatchMode.ANYWHERE));
+        }
+
+        return criteria;
+    }
+
+    public Permissao buscarPermissao(String searchField, String searchString) {
+        Criteria criteria = session.createCriteria(Permissao.class, "permissao");
+
+        if (searchField != null && !searchField.equals("") && searchString != null && !searchString.equals("")) {
+            criteria.add(Restrictions.eq(searchField, searchString));
+        }
+        criteria.add(Restrictions.eq("permissao.deleted", "f"));
+
+        return (Permissao) criteria.uniqueResult();
+    }
+
+    public Permissao buscarPermissaoById(Integer id) {
+        Criteria criteria = session.createCriteria(Permissao.class, "permissao");
+
+        criteria.add(Restrictions.eq("permissao.permissaoId", id));
+        criteria.add(Restrictions.eq("permissao.deleted", "f"));
+
+        return (Permissao) criteria.uniqueResult();
+    }
+
+    public Integer checaPermissaoExiste(Permissao permissao) {
+        Criteria criteria = session.createCriteria(Permissao.class, "permissao");
+
+        criteria.add(Restrictions.eq("permissao.permissaoId", permissao.getPermissaoId()));
+        criteria.add(Restrictions.eq("permissao.deleted", "f"));
+
+        criteria.setProjection(Projections.rowCount());
+        return ((Integer) criteria.uniqueResult()).intValue();
+    }
+}

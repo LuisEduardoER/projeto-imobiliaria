@@ -21,9 +21,10 @@
     <class>modelo.Endereco</class>
     <class>modelo.Funcionario</class>
     <class>modelo.Modulo</class>
-    <class>modelo.Modulopermissao</class>
     <class>modelo.Permissao</class>
     <class>modelo.Usuario</class>
+    <class>modelo.ModuloPermissao</class>
+    <class>modelo.PerfilModulopermissao</class>
     <properties>
       <!--            <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>-->
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>

@@ -1,101 +1,128 @@
-///*
-// * To change this template, choose Tools | Templates
-// * and open the template in the editor.
-// */
-//package DAO;
-//
-//import controller.Conexao;
-//import controller.Mensagens;
-//import controller.PerfilController;
-//import java.sql.Connection;
-//import java.sql.PreparedStatement;
-//import java.sql.ResultSet;
-//import java.sql.SQLException;
-//import java.util.List;
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
-//import javax.swing.DefaultComboBoxModel;
-//import modelo.Perfil;
-///**
-// *
-// * @author Bruno
-// */
-//public class PerfilDAO {
-//
-////    static Conexao c = new Conexao();
-////    static Connection con = c.conexaoMysql();
-////    public static PreparedStatement stmt;
-////
-////    public DefaultComboBoxModel<Perfil> buscaPerfil() {
-////        Perfil p;
-////        DefaultComboBoxModel<Perfil> dcbm;
-////        ResultSet rs;
-////        Mensagens mensagem = new Mensagens();
-////        dcbm = new DefaultComboBoxModel<>();
-////        try {
-////
-////            stmt = FuncionarioDAO.con.prepareStatement(""
-////                    + " SELECT *"
-////                    + " FROM perfil;");
-////
-////            rs = stmt.executeQuery();
-////
-////            while (rs.next()) {
-////                p = new Perfil();
-////                p.setDescPerfil(rs.getString("perfilDesc"));
-////                p.setIdPerfil(rs.getInt("perfilId"));
-////                dcbm.addElement(p);
-////            }
-////            return dcbm;
-////
-////        } catch (SQLException ex) {
-////            Logger.getLogger(FuncionarioDAO.class.getName()).log(Level.SEVERE, null, ex);
-////            mensagem.jopError("Erro ao recuperar ID de Funcionario no servidor de banco de dados.\nSQLException: " + ex.getMessage());
-////            return null;
-////        }
-////    }
-////    SessionFactory sf;
-////    Transaction tr;
-////    Mensagens m;
-//
-////    public Session abreSessao() {
-////        sf = new Configuration().configure().buildSessionFactory();
-////        Session session = sf.openSession();
-////        tr = session.beginTransaction();
-////        return session;
-////    }
-////
-////    public List getListaPerfil() {
-////        Session session = abreSessao();
-////        Criteria criteria = session.createCriteria(Perfil.class);
-////        return criteria.list();
-////    }
-////    
-////    public boolean gravar(Perfil p) {
-////        Session session = abreSessao();
-////        try {
-////            session.save(p);
-////            tr.commit();
-////            return true;
-////        } catch (Exception e) {
-////            m = new Mensagens();
-////            m.jopError("Erro ao gravar Perfil! \n ERRO: | PerfilDAO | gravar() | " + e);
-////            session.close();
-////            return false;
-////        } finally {
-////            session.getTransaction().rollback(); // ---- criar metodo
-////            return false;
-////        }
-////    }
-////    
-////    public List getListaPerfisByField(String field, String value) {
-////        Session session = abreSessao();
-////        Criteria criteria = session.createCriteria(Perfil.class);
-////
-////        if (!field.equals("") || !value.equals("")) {
-////            criteria.add(Restrictions.eq(field, value));
-////        }
-////        return criteria.list();
-////    }
-//    
-//}
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package DAO;
+
+import controller.Mensagens;
+import java.io.Serializable;
+import java.util.List;
+import javax.persistence.EntityManager;
+import modelo.Perfil;
+import org.hibernate.Criteria;
+import org.hibernate.Session;
+import org.hibernate.criterion.MatchMode;
+import org.hibernate.criterion.ProjectionList;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+
+/**
+ *
+ * @author Bruno
+ */
+public class PerfilDAO implements Serializable {
+
+    static Mensagens m;
+    EntityManager em;
+    private Criteria select;
+    Session session;
+
+    public PerfilDAO() {
+        em = new EntityManagerFactory().getEntityManager();
+        session = (Session) em.getDelegate();
+    }
+
+    public Perfil gravar(Perfil perfil) {
+        em.getTransaction().begin();
+        perfil = em.merge(perfil);
+        em.getTransaction().commit();
+        return perfil;
+    }
+
+    public Perfil atualizar(Perfil perfil) {
+        em.getTransaction().begin();
+        perfil = em.merge(perfil);
+        em.getTransaction().commit();
+        return perfil;
+    }
+
+    public void apagar(Perfil perfil) {
+        em.getTransaction().begin();
+        perfil = em.getReference(Perfil.class, perfil.getPerfilID());
+        em.remove(perfil);
+        em.getTransaction().commit();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Perfil> consultarTodos() {
+        select = session.createCriteria(Perfil.class);
+        return select.list();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Object[]> buscarTodos() {
+        Criteria criteria = session.createCriteria(Perfil.class, "perfil");
+        
+        ProjectionList p = Projections.projectionList();
+        p.add(Projections.groupProperty("perfil.perfilId"));
+        p.add(Projections.groupProperty("perfil.perfilDesc"));
+        criteria.setProjection(p);
+//        criteria.add(Restrictions.or(Restrictions.isNull("usuario.usuarioId"),
+//                (Restrictions.eq("usuario.deleted", "f"))));
+        criteria.add(Restrictions.eq("perfil.deleted", "f"));
+
+        return criteria.list();
+    }
+
+    @SuppressWarnings("unchecked")
+    public List<Object[]> consultarPerfil(String searchField, String searchString) {
+        Criteria criteria = montarCriteria(searchField, searchString);
+        ProjectionList p = Projections.projectionList();
+
+        p.add(Projections.groupProperty("perfil.perfilId"));
+
+        criteria.setProjection(p);
+
+        return criteria.list();
+    }
+
+    private Criteria montarCriteria(String searchField, String searchString) {
+        Criteria criteria = session.createCriteria(Perfil.class, "perfil");
+
+        if (searchField != null && !searchField.equals("") && searchString != null && !searchString.equals("")) {
+            criteria.add(Restrictions.ilike(searchField, searchString, MatchMode.ANYWHERE));
+        }
+
+        return criteria;
+    }
+
+    public Perfil buscarPerfil(String searchField, String searchString) {
+        Criteria criteria = session.createCriteria(Perfil.class, "perfil");
+
+        if (searchField != null && !searchField.equals("") && searchString != null && !searchString.equals("")) {
+            criteria.add(Restrictions.eq(searchField, searchString));
+        }
+        criteria.add(Restrictions.eq("perfil.deleted", "f"));
+
+        return (Perfil) criteria.uniqueResult();
+    }
+
+    public Perfil buscarPerfilById(Integer id) {
+        Criteria criteria = session.createCriteria(Perfil.class, "perfil");
+
+        criteria.add(Restrictions.eq("perfil.perfilId", id));
+        criteria.add(Restrictions.eq("perfil.deleted", "f"));
+
+        return (Perfil) criteria.uniqueResult();
+    }
+
+    public Integer checaPerfilExiste(Perfil perfil) {
+        Criteria criteria = session.createCriteria(Perfil.class, "perfil");
+
+        criteria.add(Restrictions.eq("perfil.perfilDesc", perfil.getPerfilDesc()));
+        criteria.add(Restrictions.eq("perfil.deleted", "f"));
+
+        criteria.setProjection(Projections.rowCount());
+        return ((Integer) criteria.uniqueResult()).intValue();
+    }
+}
