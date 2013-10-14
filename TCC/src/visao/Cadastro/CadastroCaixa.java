@@ -4,6 +4,14 @@
  */
 package visao.Cadastro;
 
+import Componentes.Componentes;
+import controller.Cadastro.CaixaController;
+import controller.Cadastro.UsuarioController;
+import controller.Mensagens;
+import javax.swing.JButton;
+import modelo.Caixa;
+import modelo.Usuario;
+
 /**
  *
  * @author Bruno
@@ -13,9 +21,50 @@ public class CadastroCaixa extends javax.swing.JDialog {
     /**
      * Creates new form CadastroCaixa
      */
+    Componentes c = new Componentes();
+    Mensagens m;
+    JButton jbGravar = c.criaBotaoGravar();
+    JButton jbExcluir = c.criaBotaoExcluir();
+    
+    UsuarioController usuarioController;
+    CaixaController caixaController;
+    
+    Usuario usuario;
+    Caixa caixa;
+    
     public CadastroCaixa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        jbGravar = c.criaBotaoGravar();
+        jbExcluir = c.criaBotaoExcluir();
+
+        jbGravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGravarActionPerformed(evt);
+            }
+        });
+
+        jbExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbExcluirActionPerformed(evt);
+            }
+        });
+
+        usuarioController = new UsuarioController();
+        jcbUsuario.setModel(usuarioController.listUsuarios());
+        jcbUsuario.updateUI();
+
+        jpControles.add(jbExcluir);
+        jpControles.add(jbGravar);
+
+    }
+
+    private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {
+        acaoGravar();
+    }
+
+    private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {
     }
 
     /**
@@ -27,20 +76,79 @@ public class CadastroCaixa extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jtfDesc = new javax.swing.JTextField();
+        jcbUsuario = new javax.swing.JComboBox();
+        jpControles = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cadastro de Caixa");
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+
+        jLabel1.setText("Descrição:");
+
+        jLabel2.setText("Usuário responsável:");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jtfDesc))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jcbUsuario, 0, 251, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jtfDesc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jcbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jpControles.setToolTipText("");
+        jpControles.setLayout(new java.awt.GridLayout(1, 0, 2, 0));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jpControles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jpControles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
-        pack();
+        java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
+        setBounds((screenSize.width-416)/2, (screenSize.height-206)/2, 416, 206);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -54,7 +162,7 @@ public class CadastroCaixa extends javax.swing.JDialog {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -85,5 +193,43 @@ public class CadastroCaixa extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JComboBox jcbUsuario;
+    private javax.swing.JPanel jpControles;
+    private javax.swing.JTextField jtfDesc;
     // End of variables declaration//GEN-END:variables
+
+    private void acaoGravar() {
+        caixa = new Caixa();
+        String avisos = "";
+
+        usuario = (Usuario) jcbUsuario.getSelectedItem();
+        
+        if (jtfDesc.getText().equals("")) {
+            avisos = avisos + "\n Descrição não pode ser vazio ";
+        }
+        if (usuario.getUsuarioId() == null) {
+            avisos = avisos + "\n Usuário não pode ser vazio ";
+        }
+        
+        if(avisos.equals("")){
+            caixa.setCaixaDesc(jtfDesc.getText());
+            caixa.setUsuarioRespId(usuario);
+            
+            caixaController =  new CaixaController();
+            
+            caixa = caixaController.gravar(caixa);
+            
+        if(caixa.getCaixaId()!=null){
+                m = new Mensagens();
+                m.jopAviso("Caixa " + caixa.getCaixaDesc() + " - ID: " + caixa.getCaixaId() + " gravado com sucesso!");
+            }
+        }else{
+            m = new Mensagens();
+            m.jopAlerta("Descrição do caixa deve ser informado!");
+            jtfDesc.requestFocus();
+        }
+    }
 }

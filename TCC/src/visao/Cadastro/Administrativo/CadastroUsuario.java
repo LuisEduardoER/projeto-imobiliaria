@@ -29,7 +29,6 @@ import modelo.Endereco;
 import modelo.Estado;
 import modelo.Funcionario;
 import modelo.Pais;
-import modelo.Produto;
 import modelo.Rua;
 import modelo.Usuario;
 

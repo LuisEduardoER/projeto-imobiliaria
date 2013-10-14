@@ -6,12 +6,10 @@ package modelo;
 
 import modelo.PerfisPermissoes.Perfil;
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.Basic;
 import javax.persistence.Column;
-import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -23,8 +21,6 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 
@@ -76,7 +72,12 @@ public class Usuario implements Serializable {
     @Column(name = "updated")
     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
     private LocalDateTime updated;
-
+    @OneToMany(mappedBy = "usuarioRespId", fetch = FetchType.LAZY)
+    private List<Caixa> caixaList;
+    @OneToMany(mappedBy = "usuarioId", fetch = FetchType.LAZY)
+    private List<Caixamovimento> caixamovimentoList;
+    
+    
     public Usuario() {
         this.deleted = 'f';
         this.ativo = 1;
@@ -121,6 +122,22 @@ public class Usuario implements Serializable {
         this.usuarioId = usuarioId;
     }
 
+    public List<Caixa> getCaixaList() {
+        return caixaList;
+    }
+
+    public void setCaixaList(List<Caixa> caixaList) {
+        this.caixaList = caixaList;
+    }
+
+    public List<Caixamovimento> getCaixamovimentoList() {
+        return caixamovimentoList;
+    }
+
+    public void setCaixamovimentoList(List<Caixamovimento> caixamovimentoList) {
+        this.caixamovimentoList = caixamovimentoList;
+    }
+
     public Character getDeleted() {
         return deleted;
     }
@@ -153,6 +170,8 @@ public class Usuario implements Serializable {
         this.updated = updated;
     }
 
+    
+    
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {

@@ -25,6 +25,8 @@
     <class>modelo.PerfisPermissoes.PerfilModulopermissao</class>
     <class>modelo.PerfisPermissoes.Perfil</class>
     <class>modelo.PerfisPermissoes.Permissao</class>
+    <class>modelo.Caixa</class>
+    <class>modelo.Caixamovimento</class>
     <properties>
       <!--            <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>-->
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>

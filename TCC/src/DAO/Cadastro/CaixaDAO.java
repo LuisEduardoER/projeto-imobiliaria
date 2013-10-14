@@ -9,7 +9,8 @@ import controller.Mensagens;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
-import modelo.Usuario;
+import modelo.Caixa;
+import modelo.Pais;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
@@ -21,60 +22,60 @@ import org.hibernate.criterion.Restrictions;
  *
  * @author Bruno
  */
-public class UsuarioDAO implements Serializable {
+public class CaixaDAO implements Serializable {
 
     static Mensagens m;
     EntityManager em;
-    private Criteria criteria;
+    private Criteria select;
     Session session;
 
-    public UsuarioDAO() {
+    public CaixaDAO() {
         em = new EntityManagerFactory().getEntityManager();
         session = (Session) em.getDelegate();
     }
 
-    public Usuario gravar(Usuario usuario) {
+    public Caixa gravar(Caixa caixa) {
         em.getTransaction().begin();
-        usuario = em.merge(usuario);
+        caixa = em.merge(caixa);
         em.getTransaction().commit();
-        return usuario;
+        return caixa;
     }
 
-    public Usuario atualizar(Usuario usuario) {
+    public Caixa atualizar(Caixa caixa) {
         em.getTransaction().begin();
-        usuario = em.merge(usuario);
+        caixa = em.merge(caixa);
         em.getTransaction().commit();
-        return usuario;
+        return caixa;
     }
 
-    public void apagar(Usuario usuario) {
+    public void apagar(Caixa caixa) {
         em.getTransaction().begin();
-        usuario = em.getReference(Usuario.class, usuario.getUsuarioId());
-        em.remove(usuario);
+        caixa = em.getReference(Caixa.class, caixa.getCaixaId());
+        em.remove(caixa);
         em.getTransaction().commit();
     }
 
     @SuppressWarnings("unchecked")
-    public List<Usuario> consultarTodos() {
-        criteria = session.createCriteria(Usuario.class);
-        criteria.add(Restrictions.eq("usuario.deleted", "f"));
-        return criteria.list();
+    public List<Caixa> consultarTodos() {
+//        Session session = (Session) em.getDelegate();
+        select = session.createCriteria(Caixa.class);
+        return select.list();
     }
 
     @SuppressWarnings("unchecked")
-    public List<Object[]> consultarUsuario(String searchField, String searchString) {
+    public List<Object[]> consultarCaixa(String searchField, String searchString) {
         Criteria criteria = montarCriteria(searchField, searchString);
         ProjectionList p = Projections.projectionList();
 
-        p.add(Projections.groupProperty("usuario.usuarioId"));
-
+        p.add(Projections.groupProperty("caixa.caixaId"));
+        p.add(Projections.groupProperty("caixa.caixaDesc"));
         criteria.setProjection(p);
 
         return criteria.list();
     }
 
     private Criteria montarCriteria(String searchField, String searchString) {
-        Criteria criteria = session.createCriteria(Usuario.class, "usuario");
+        Criteria criteria = session.createCriteria(Caixa.class, "caixa");
 
         if (searchField != null && !searchField.equals("") && searchString != null && !searchString.equals("")) {
             criteria.add(Restrictions.ilike(searchField, searchString, MatchMode.ANYWHERE));
@@ -83,25 +84,25 @@ public class UsuarioDAO implements Serializable {
         return criteria;
     }
 
-    public Usuario buscarUsuario(String searchField, String searchString) {
-        Criteria criteria = session.createCriteria(Usuario.class, "usuario");
+    public Caixa buscarCaixa(String searchField, String searchString) {
+        Criteria criteria = session.createCriteria(Caixa.class, "caixa");
 
         if (searchField != null && !searchField.equals("") && searchString != null && !searchString.equals("")) {
             criteria.add(Restrictions.ilike(searchField, searchString, MatchMode.ANYWHERE));
         }
-        criteria.add(Restrictions.eq("usuario.deleted", "f"));
+        criteria.add(Restrictions.eq("caixa.deleted", "f"));
 
-        return (Usuario) criteria.uniqueResult();
+        return (Caixa) criteria.uniqueResult();
     }
-    
-    public Integer checaUsuarioExiste(Usuario usuario) {
-        Criteria criteria = session.createCriteria(Usuario.class, "usuario");
 
-        criteria.add(Restrictions.eq("usuario.usuarioName", usuario.getUsuarioName()));
-        criteria.add(Restrictions.eq("usuario.deleted", "f"));
-        
+    public Integer rowCount(String searchField, String searchString) {
+        Criteria criteria = session.createCriteria(Caixa.class, "caixa");
+
+        if (searchField != null && !searchField.equals("") && searchString != null && !searchString.equals("")) {
+            criteria.add(Restrictions.ilike(searchField, searchString, MatchMode.EXACT));
+        }
+        criteria.add(Restrictions.eq("caixa.deleted", "f"));
         criteria.setProjection(Projections.rowCount());
         return ((Integer) criteria.uniqueResult()).intValue();
     }
-    
 }
