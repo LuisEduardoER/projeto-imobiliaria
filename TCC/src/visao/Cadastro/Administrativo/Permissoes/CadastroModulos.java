@@ -2,31 +2,31 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package visao.Cadastro;
+package visao.Cadastro.Administrativo.Permissoes;
 
 import Componentes.Componentes;
 import controller.Mensagens;
-import controller.PerfilController;
+import controller.ModuloController;
 import javax.swing.JButton;
-import modelo.PerfisPermissoes.Perfil;
+import modelo.PerfisPermissoes.Modulo;
 
 /**
  *
  * @author Bruno
  */
-public class CadastroPerfis extends javax.swing.JDialog {
+public class CadastroModulos extends javax.swing.JDialog {
 
     /**
-     * Creates new form CadastroPerfis
+     * Creates new form CadastroModulos
      */
     Componentes c;
-    Perfil p;
-    PerfilController perfilController;
+    Modulo modulo;
+    ModuloController modulolController;
     JButton jbGravar;
     JButton jbExcluir;
     private Mensagens m;
 
-    public CadastroPerfis(java.awt.Frame parent, boolean modal) {
+    public CadastroModulos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         c = new Componentes();
@@ -51,7 +51,6 @@ public class CadastroPerfis extends javax.swing.JDialog {
 
     }
 
-    
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {
         acaoGravar();
     }
@@ -62,7 +61,7 @@ public class CadastroPerfis extends javax.swing.JDialog {
 //            acaoRemover();
 //        }
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -74,14 +73,13 @@ public class CadastroPerfis extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jtfPerfilNome = new javax.swing.JTextField();
+        jtfNome = new javax.swing.JTextField();
         jpControles = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Cadastro de Perfis");
+        setTitle("Cadastro Modulos");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
-        jPanel1.setToolTipText("");
 
         jLabel1.setText("Nome:");
 
@@ -93,7 +91,7 @@ public class CadastroPerfis extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jtfPerfilNome, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
+                .addComponent(jtfNome, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -102,7 +100,7 @@ public class CadastroPerfis extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jtfPerfilNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfNome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -116,7 +114,7 @@ public class CadastroPerfis extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpControles, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jpControles, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -124,13 +122,13 @@ public class CadastroPerfis extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jpControles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(41, Short.MAX_VALUE))
+                .addContainerGap(52, Short.MAX_VALUE))
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-416)/2, (screenSize.height-156)/2, 416, 156);
+        setBounds((screenSize.width-416)/2, (screenSize.height-155)/2, 416, 155);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -150,20 +148,20 @@ public class CadastroPerfis extends javax.swing.JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CadastroPerfis.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroModulos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CadastroPerfis.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroModulos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CadastroPerfis.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroModulos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CadastroPerfis.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CadastroModulos.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                CadastroPerfis dialog = new CadastroPerfis(new javax.swing.JFrame(), true);
+                CadastroModulos dialog = new CadastroModulos(new javax.swing.JFrame(), true);
                 dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                     @Override
                     public void windowClosing(java.awt.event.WindowEvent e) {
@@ -178,36 +176,33 @@ public class CadastroPerfis extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jpControles;
-    private javax.swing.JTextField jtfPerfilNome;
+    private javax.swing.JTextField jtfNome;
     // End of variables declaration//GEN-END:variables
 
-    
     private void acaoGravar() {
         String avisos = "";
-        
-        if(jtfPerfilNome.getText().equals("")){
+
+        if (jtfNome.getText().equals("")) {
             avisos = avisos + "\n Nome não pode ser vazio ";
         }
-        
-        if (avisos.equals("")) {
-            
-            perfilController = new PerfilController();
-            p = new Perfil();
-            
-            p.setPerfilDesc(jtfPerfilNome.getText());
-            
-            p = perfilController.gravar(p);
 
-            if (p.getPerfilID() != null) {
+        if (avisos.equals("")) {
+
+            modulolController = new ModuloController();
+            modulo = new Modulo();
+
+            modulo.setModuloDesc(jtfNome.getText());
+
+            modulo = modulolController.gravar(modulo);
+
+            if (modulo.getModuloId() != null) {
                 m = new Mensagens();
-                m.jopAviso("Perfil " + p.getPerfilDesc() + " - ID: " + p.getPerfilID() + " gravado com sucesso!");
+                m.jopAviso("Modulo " + modulo.getModuloDesc() + " - ID: " + modulo.getModuloId() + " gravado com sucesso!");
             }
         } else {
             m = new Mensagens();
             m.jopAlerta("Verifique: " + avisos + "!");
-            jtfPerfilNome.requestFocus();
+            jtfNome.requestFocus();
         }
     }
-    
-
 }

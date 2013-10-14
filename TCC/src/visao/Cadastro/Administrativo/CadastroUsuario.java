@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package visao.Cadastro;
+package visao.Cadastro.Administrativo;
 
 import Componentes.Componentes;
 import Componentes.TableModelFuncionario;

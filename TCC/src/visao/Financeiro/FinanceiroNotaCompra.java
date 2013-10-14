@@ -4,7 +4,7 @@
  */
 package visao.Financeiro;
 
-import visao.Cadastro.CadastroFabricante;
+import visao.Cadastro.Administrativo.CadastroFabricante;
 import Componentes.Componentes;
 import Componentes.TableModelCompra;
 import controller.CompraController;
