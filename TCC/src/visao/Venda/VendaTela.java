@@ -5,7 +5,7 @@
 package visao.Venda;
 
 import controller.Mensagens;
-import controller.Cadastro.ProdutoController;
+import controller.Cadastro.Administrativo.ProdutoController;
 import controller.VendaController;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;

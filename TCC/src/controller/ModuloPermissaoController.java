@@ -5,9 +5,11 @@
 package controller;
 
 import DAO.ModuloPermissaoDAO;
+import controller.cadastro.administrativo.permissoes.PerfilModuloPermissaoController;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import modelo.PerfisPermissoes.ModuloPermissao;
+import modelo.PerfisPermissoes.PerfilModulopermissao;
 import modelo.PerfisPermissoes.Permissao;
 import persistencia.exceptions.NonexistentEntityException;
 import util.Datas;
@@ -19,7 +21,7 @@ import util.Datas;
 public class ModuloPermissaoController {
 
     ModuloPermissaoDAO dao = new ModuloPermissaoDAO();
-
+    
     public DefaultComboBoxModel<ModuloPermissao> buscar(String field, String value) {
         ModuloPermissao modulo = new ModuloPermissao();
         DefaultComboBoxModel<ModuloPermissao> dcbm = new DefaultComboBoxModel<>();
@@ -32,27 +34,11 @@ public class ModuloPermissaoController {
         return dcbm;
     }
 
-    public List<ModuloPermissao> buscaTodos() {
-        List<ModuloPermissao> listaObject = dao.buscarTodos();
-//        List<ModuloPermissao> listaModulo = new ArrayList<>();
-//        
-//        for(int i = 0; i < listaObject.size(); i++){
-//            ModuloPermissao f = new Modulo();
-//            
-//            f.setModuloId((Integer) listaObject.get(i)[0]);
-////            f.setNome((String) listaObject.get(i)[1]);
-////            f.setCpfCnpj((Integer) listaObject.get(i)[2]);
-//            
-//            Usuario u = new Usuario();
-//            u.setUsuarioName((String) listaObject.get(i)[3] != null ? (String) listaObject.get(i)[3] : "");
-//            
-//            f.setIdUsuario(u);
-//            
-//            listaFuncionario.add(f);
-//        }
-
-        return listaObject;
-    }
+//    public List<ModuloPermissao> buscaTodos() {
+//        List<ModuloPermissao> listaObject = dao.buscarTodos();
+//
+//        return listaObject;
+//    }
 
     public DefaultComboBoxModel<ModuloPermissao> listModuloPermissaos() {
         DefaultComboBoxModel<ModuloPermissao> dcbm = new DefaultComboBoxModel<>();
@@ -72,23 +58,23 @@ public class ModuloPermissaoController {
         return dcbm;
     }
 
-    /**
-     * Método que efetua uma busca pelo ID do funcionario
-     *
-     * @param id = id do funcionário
-     * @return Funcionario funcionario
-     */
     public ModuloPermissao buscarModuloPermissaoById(Integer id) {
         ModuloPermissao modulo = dao.buscarModuloPermissaoById(id);
         return modulo;
     }
 
     public ModuloPermissao gravar(ModuloPermissao moduloPermissao, List<Permissao> permissoes) {
-
+        PerfilModuloPermissaoController pmpController = new PerfilModuloPermissaoController();
+        PerfilModulopermissao pmp;
         for (int i = 0; i < permissoes.size(); i++) {
             moduloPermissao.setPermissaoId(permissoes.get(i));
             moduloPermissao.setInserted(Datas.dataAtualDateTime());
             moduloPermissao = dao.gravar(moduloPermissao);
+            
+            pmp = new PerfilModulopermissao();
+            pmp.setModuloPermissaoId(moduloPermissao);
+
+            pmpController.gravar(pmp);
         }
 
         return moduloPermissao;

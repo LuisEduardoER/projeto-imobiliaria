@@ -21,6 +21,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDateTime;
 
 /**
  *
@@ -38,11 +40,11 @@ public class PerfilModulopermissao implements Serializable {
     @Column(name = "perfil_moduloPermissaoId")
     private Integer perfilmoduloPermissaoId;
     @Column(name = "inserted")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date inserted;
+    @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
+    private LocalDateTime inserted;
     @Column(name = "updated")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date updated;
+    @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
+    private LocalDateTime updated;
     @Column(name = "deleted")
     private Character deleted;
     @JoinColumn(name = "perfilId", referencedColumnName = "perfilID")
@@ -67,19 +69,19 @@ public class PerfilModulopermissao implements Serializable {
         this.perfilmoduloPermissaoId = perfilmoduloPermissaoId;
     }
 
-    public Date getInserted() {
+    public LocalDateTime getInserted() {
         return inserted;
     }
 
-    public void setInserted(Date inserted) {
+    public void setInserted(LocalDateTime inserted) {
         this.inserted = inserted;
     }
 
-    public Date getUpdated() {
+    public LocalDateTime getUpdated() {
         return updated;
     }
 
-    public void setUpdated(Date updated) {
+    public void setUpdated(LocalDateTime updated) {
         this.updated = updated;
     }
 
@@ -129,7 +131,7 @@ public class PerfilModulopermissao implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.PerfilModulopermissao[ perfilmoduloPermissaoId=" + perfilmoduloPermissaoId + " ]";
+        return perfilmoduloPermissaoId.toString();
     }
     
 }

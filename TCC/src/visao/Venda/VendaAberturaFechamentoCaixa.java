@@ -6,7 +6,7 @@ package visao.Venda;
 
 import Componentes.Componentes;
 import controller.Cadastro.CaixaController;
-import controller.Cadastro.UsuarioController;
+import controller.Cadastro.Administrativo.UsuarioController;
 import controller.Cadastro.VendaAberturaFechamentoCaixaController;
 import controller.Mensagens;
 import javax.swing.JButton;

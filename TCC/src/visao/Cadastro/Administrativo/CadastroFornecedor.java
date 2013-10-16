@@ -5,7 +5,7 @@
 package visao.Cadastro.Administrativo;
 
 import Componentes.Componentes;
-import controller.Cadastro.FornecedorController;
+import controller.Cadastro.Administrativo.FornecedorController;
 import controller.Mensagens;
 import java.util.logging.Level;
 import java.util.logging.Logger;

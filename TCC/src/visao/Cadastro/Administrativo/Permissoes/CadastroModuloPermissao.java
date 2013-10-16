@@ -298,7 +298,6 @@ public class CadastroModuloPermissao extends javax.swing.JDialog {
 
         if (avisos.equals("")) {
 
-            modulo = new Modulo();
             moduloPermissao = new ModuloPermissao();
             
             moduloPermissao.setModuloId(modulo);
@@ -308,8 +307,6 @@ public class CadastroModuloPermissao extends javax.swing.JDialog {
             moduloPermissaoController = new ModuloPermissaoController();
             
             moduloPermissao = moduloPermissaoController.gravar(moduloPermissao, permissoes);
-
-            
             
             if (modulo.getModuloId() != null) {
                 m = new Mensagens();

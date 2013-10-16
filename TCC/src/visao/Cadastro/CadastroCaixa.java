@@ -6,7 +6,7 @@ package visao.Cadastro;
 
 import Componentes.Componentes;
 import controller.Cadastro.CaixaController;
-import controller.Cadastro.UsuarioController;
+import controller.Cadastro.Administrativo.UsuarioController;
 import controller.Mensagens;
 import javax.swing.JButton;
 import modelo.Caixa;
