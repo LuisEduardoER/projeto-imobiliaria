@@ -4,7 +4,26 @@
  */
 package visao;
 
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import modelo.AberturaCaixa;
+import modelo.Venda;
+import visao.Cadastro.Administrativo.CadastroFabricante;
+import visao.Cadastro.Administrativo.CadastroFornecedor;
+import visao.Cadastro.Administrativo.CadastroProduto;
+import visao.Cadastro.Administrativo.CadastroUsuario;
+import visao.Cadastro.Administrativo.Permissoes.CadastroModuloPermissao;
+import visao.Cadastro.Administrativo.Permissoes.CadastroModulos;
+import visao.Cadastro.Administrativo.Permissoes.CadastroPermissoes;
+import visao.Cadastro.CadastroCaixa;
+import visao.Cadastro.Endereco.CadastroBairro;
+import visao.Cadastro.Endereco.CadastroCEP;
+import visao.Cadastro.Endereco.CadastroCidade;
+import visao.Cadastro.Endereco.CadastroEstados;
+import visao.Cadastro.Endereco.CadastroPais;
+import visao.Financeiro.FinanceiroBaixaTituloPagar;
+import visao.Venda.VendaAberturaFechamentoCaixa;
+import visao.Venda.VendaTela;
 
 /**
  *
@@ -17,6 +36,7 @@ public class TCC extends javax.swing.JFrame {
      */
     public TCC() {
         initComponents();
+        this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
     }
 
     /**
@@ -30,11 +50,25 @@ public class TCC extends javax.swing.JFrame {
 
         jMenuBar1 = new javax.swing.JMenuBar();
         jmCadastro = new javax.swing.JMenu();
+        jmAdministrativo = new javax.swing.JMenu();
         jmiFabricante = new javax.swing.JMenuItem();
         jmiFornecedor = new javax.swing.JMenuItem();
         jmiProduto = new javax.swing.JMenuItem();
-        jmiCaixa = new javax.swing.JMenuItem();
         jmiCadastroUsuario = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JPopupMenu.Separator();
+        jmPermissoes = new javax.swing.JMenu();
+        jmCadastroModulos = new javax.swing.JMenuItem();
+        jmCadastroPermissoes = new javax.swing.JMenuItem();
+        jmVinculoModuloPermissao = new javax.swing.JMenuItem();
+        jmEnderecos = new javax.swing.JMenu();
+        jmiCadastroPais = new javax.swing.JMenuItem();
+        jmiCadastroEstado = new javax.swing.JMenuItem();
+        jmiCadastroCidade = new javax.swing.JMenuItem();
+        jmiCadastroBairro = new javax.swing.JMenuItem();
+        jmiCadastroRua = new javax.swing.JMenuItem();
+        jmiCadastroCEP = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jmiCaixa = new javax.swing.JMenuItem();
         jmFinanceiro = new javax.swing.JMenu();
         jmiBaixaDeTituloPagar = new javax.swing.JMenuItem();
         jmVenda = new javax.swing.JMenu();
@@ -55,36 +89,162 @@ public class TCC extends javax.swing.JFrame {
 
         jmCadastro.setText("Cadastro");
 
-        jmiFabricante.setText("jMenuItem1");
-        jmCadastro.add(jmiFabricante);
+        jmAdministrativo.setText("Administrativo");
 
-        jmiFornecedor.setText("jMenuItem1");
-        jmCadastro.add(jmiFornecedor);
+        jmiFabricante.setText("Cadastro de Fabricantes");
+        jmiFabricante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiFabricanteActionPerformed(evt);
+            }
+        });
+        jmAdministrativo.add(jmiFabricante);
 
-        jmiProduto.setText("jMenuItem1");
-        jmCadastro.add(jmiProduto);
+        jmiFornecedor.setText("Cadastro de Fornecedores");
+        jmiFornecedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiFornecedorActionPerformed(evt);
+            }
+        });
+        jmAdministrativo.add(jmiFornecedor);
 
-        jmiCaixa.setText("jMenuItem1");
+        jmiProduto.setText("Cadastro de Produtos");
+        jmiProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiProdutoActionPerformed(evt);
+            }
+        });
+        jmAdministrativo.add(jmiProduto);
+
+        jmiCadastroUsuario.setText("Cadastro de Usuários");
+        jmiCadastroUsuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiCadastroUsuarioActionPerformed(evt);
+            }
+        });
+        jmAdministrativo.add(jmiCadastroUsuario);
+        jmAdministrativo.add(jSeparator2);
+
+        jmPermissoes.setText("Permissões");
+
+        jmCadastroModulos.setText("Cadastro de Módulos");
+        jmCadastroModulos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmCadastroModulosActionPerformed(evt);
+            }
+        });
+        jmPermissoes.add(jmCadastroModulos);
+
+        jmCadastroPermissoes.setText("Cadastro de Permissões");
+        jmCadastroPermissoes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmCadastroPermissoesActionPerformed(evt);
+            }
+        });
+        jmPermissoes.add(jmCadastroPermissoes);
+
+        jmVinculoModuloPermissao.setText("Vincular Módulos e Permissões");
+        jmVinculoModuloPermissao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmVinculoModuloPermissaoActionPerformed(evt);
+            }
+        });
+        jmPermissoes.add(jmVinculoModuloPermissao);
+
+        jmAdministrativo.add(jmPermissoes);
+
+        jmCadastro.add(jmAdministrativo);
+
+        jmEnderecos.setText("Endereços");
+
+        jmiCadastroPais.setText("Cadastro de Países");
+        jmiCadastroPais.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiCadastroPaisActionPerformed(evt);
+            }
+        });
+        jmEnderecos.add(jmiCadastroPais);
+
+        jmiCadastroEstado.setText("Cadastro de Estados");
+        jmiCadastroEstado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiCadastroEstadoActionPerformed(evt);
+            }
+        });
+        jmEnderecos.add(jmiCadastroEstado);
+
+        jmiCadastroCidade.setText("Cadastro de Cidades");
+        jmiCadastroCidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiCadastroCidadeActionPerformed(evt);
+            }
+        });
+        jmEnderecos.add(jmiCadastroCidade);
+
+        jmiCadastroBairro.setText("Cadastro de Bairros");
+        jmiCadastroBairro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiCadastroBairroActionPerformed(evt);
+            }
+        });
+        jmEnderecos.add(jmiCadastroBairro);
+
+        jmiCadastroRua.setText("Cadastro de Ruas");
+        jmiCadastroRua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiCadastroRuaActionPerformed(evt);
+            }
+        });
+        jmEnderecos.add(jmiCadastroRua);
+
+        jmiCadastroCEP.setText("Cadastro de CEP");
+        jmiCadastroCEP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiCadastroCEPActionPerformed(evt);
+            }
+        });
+        jmEnderecos.add(jmiCadastroCEP);
+
+        jmCadastro.add(jmEnderecos);
+        jmCadastro.add(jSeparator1);
+
+        jmiCaixa.setText("Cadastro de Caixa");
+        jmiCaixa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiCaixaActionPerformed(evt);
+            }
+        });
         jmCadastro.add(jmiCaixa);
-
-        jmiCadastroUsuario.setText("jMenuItem1");
-        jmCadastro.add(jmiCadastroUsuario);
 
         jMenuBar1.add(jmCadastro);
 
         jmFinanceiro.setText("Financeiro");
 
-        jmiBaixaDeTituloPagar.setText("jMenuItem1");
+        jmiBaixaDeTituloPagar.setText("Baixa de Títulos à Pagar");
+        jmiBaixaDeTituloPagar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiBaixaDeTituloPagarActionPerformed(evt);
+            }
+        });
         jmFinanceiro.add(jmiBaixaDeTituloPagar);
 
         jMenuBar1.add(jmFinanceiro);
 
         jmVenda.setText("Venda");
 
-        jmiVenda.setText("jMenuItem1");
+        jmiVenda.setText("Venda");
+        jmiVenda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiVendaActionPerformed(evt);
+            }
+        });
         jmVenda.add(jmiVenda);
 
-        jmiAbrirCaixa.setText("jMenuItem1");
+        jmiAbrirCaixa.setText("Abertura de Caixa");
+        jmiAbrirCaixa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiAbrirCaixaActionPerformed(evt);
+            }
+        });
         jmVenda.add(jmiAbrirCaixa);
 
         jMenuBar1.add(jmVenda);
@@ -111,7 +271,93 @@ public class TCC extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         JOptionPane.showMessageDialog(null,"flowwww");
+        System.exit(0);
     }//GEN-LAST:event_formWindowClosing
+
+    private void jmiFabricanteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiFabricanteActionPerformed
+        CadastroFabricante fabricante = new CadastroFabricante(this, rootPaneCheckingEnabled);
+        fabricante.setVisible(true);
+    }//GEN-LAST:event_jmiFabricanteActionPerformed
+
+    private void jmiFornecedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiFornecedorActionPerformed
+        CadastroFornecedor fornecedor = new CadastroFornecedor(this, rootPaneCheckingEnabled);
+        fornecedor.setVisible(true);
+    }//GEN-LAST:event_jmiFornecedorActionPerformed
+
+    private void jmiProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiProdutoActionPerformed
+        CadastroProduto produto = new CadastroProduto(this, rootPaneCheckingEnabled);
+        produto.setVisible(true);
+    }//GEN-LAST:event_jmiProdutoActionPerformed
+
+    private void jmiCadastroUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCadastroUsuarioActionPerformed
+        CadastroUsuario usuario = new CadastroUsuario(this, rootPaneCheckingEnabled);
+        usuario.setVisible(true);
+    }//GEN-LAST:event_jmiCadastroUsuarioActionPerformed
+
+    private void jmCadastroModulosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCadastroModulosActionPerformed
+        CadastroModulos modulos = new CadastroModulos(this, rootPaneCheckingEnabled);
+        modulos.setVisible(true);
+    }//GEN-LAST:event_jmCadastroModulosActionPerformed
+
+    private void jmCadastroPermissoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCadastroPermissoesActionPerformed
+        CadastroPermissoes permissoes = new CadastroPermissoes(this, rootPaneCheckingEnabled);
+        permissoes.setVisible(true);
+    }//GEN-LAST:event_jmCadastroPermissoesActionPerformed
+
+    private void jmVinculoModuloPermissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmVinculoModuloPermissaoActionPerformed
+        CadastroModuloPermissao moduloPerissoes = new CadastroModuloPermissao(this, rootPaneCheckingEnabled);
+        moduloPerissoes.setVisible(true);
+    }//GEN-LAST:event_jmVinculoModuloPermissaoActionPerformed
+
+    private void jmiCadastroPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCadastroPaisActionPerformed
+        CadastroPais pais = new CadastroPais(this, rootPaneCheckingEnabled);
+        pais.setVisible(true);
+    }//GEN-LAST:event_jmiCadastroPaisActionPerformed
+
+    private void jmiCadastroEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCadastroEstadoActionPerformed
+        CadastroEstados estados = new CadastroEstados(this, rootPaneCheckingEnabled);
+        estados.setVisible(true);
+    }//GEN-LAST:event_jmiCadastroEstadoActionPerformed
+
+    private void jmiCadastroCidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCadastroCidadeActionPerformed
+        CadastroCidade cidade = new CadastroCidade(this, rootPaneCheckingEnabled);
+        cidade.setVisible(true);
+    }//GEN-LAST:event_jmiCadastroCidadeActionPerformed
+
+    private void jmiCadastroBairroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCadastroBairroActionPerformed
+        CadastroBairro bairro = new CadastroBairro(this, rootPaneCheckingEnabled);
+        bairro.setVisible(true);
+    }//GEN-LAST:event_jmiCadastroBairroActionPerformed
+
+    private void jmiCadastroRuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCadastroRuaActionPerformed
+        CadastroCidade cidade = new CadastroCidade(this, rootPaneCheckingEnabled);
+        cidade.setVisible(true);
+    }//GEN-LAST:event_jmiCadastroRuaActionPerformed
+
+    private void jmiCadastroCEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCadastroCEPActionPerformed
+        CadastroCEP cep = new CadastroCEP(this, rootPaneCheckingEnabled);
+        cep.setVisible(true);
+    }//GEN-LAST:event_jmiCadastroCEPActionPerformed
+
+    private void jmiCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCaixaActionPerformed
+        CadastroCaixa caixa = new CadastroCaixa(this, rootPaneCheckingEnabled);
+        caixa.setVisible(true);
+    }//GEN-LAST:event_jmiCaixaActionPerformed
+
+    private void jmiBaixaDeTituloPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiBaixaDeTituloPagarActionPerformed
+       FinanceiroBaixaTituloPagar baixas = new FinanceiroBaixaTituloPagar(this, rootPaneCheckingEnabled);
+       baixas.setVisible(true);
+    }//GEN-LAST:event_jmiBaixaDeTituloPagarActionPerformed
+
+    private void jmiVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiVendaActionPerformed
+        VendaTela venda = new VendaTela(this, rootPaneCheckingEnabled);
+        venda.setVisible(true);
+    }//GEN-LAST:event_jmiVendaActionPerformed
+
+    private void jmiAbrirCaixaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiAbrirCaixaActionPerformed
+        VendaAberturaFechamentoCaixa aberturaCaixa = new VendaAberturaFechamentoCaixa(this, rootPaneCheckingEnabled);
+        aberturaCaixa.setVisible(true);
+    }//GEN-LAST:event_jmiAbrirCaixaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -149,12 +395,26 @@ public class TCC extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
+    private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JMenu jmAdministrativo;
     private javax.swing.JMenu jmCadastro;
+    private javax.swing.JMenuItem jmCadastroModulos;
+    private javax.swing.JMenuItem jmCadastroPermissoes;
+    private javax.swing.JMenu jmEnderecos;
     private javax.swing.JMenu jmFinanceiro;
+    private javax.swing.JMenu jmPermissoes;
     private javax.swing.JMenu jmRelatorios;
     private javax.swing.JMenu jmVenda;
+    private javax.swing.JMenuItem jmVinculoModuloPermissao;
     private javax.swing.JMenuItem jmiAbrirCaixa;
     private javax.swing.JMenuItem jmiBaixaDeTituloPagar;
+    private javax.swing.JMenuItem jmiCadastroBairro;
+    private javax.swing.JMenuItem jmiCadastroCEP;
+    private javax.swing.JMenuItem jmiCadastroCidade;
+    private javax.swing.JMenuItem jmiCadastroEstado;
+    private javax.swing.JMenuItem jmiCadastroPais;
+    private javax.swing.JMenuItem jmiCadastroRua;
     private javax.swing.JMenuItem jmiCadastroUsuario;
     private javax.swing.JMenuItem jmiCaixa;
     private javax.swing.JMenuItem jmiFabricante;
