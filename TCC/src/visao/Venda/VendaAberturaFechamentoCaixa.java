@@ -4,6 +4,16 @@
  */
 package visao.Venda;
 
+import Componentes.Componentes;
+import controller.Cadastro.CaixaController;
+import controller.Cadastro.UsuarioController;
+import controller.Cadastro.VendaAberturaFechamentoCaixaController;
+import controller.Mensagens;
+import javax.swing.JButton;
+import modelo.AberturaCaixa;
+import modelo.Caixa;
+import modelo.Usuario;
+
 /**
  *
  * @author Bruno
@@ -13,12 +23,65 @@ public class VendaAberturaFechamentoCaixa extends javax.swing.JDialog {
     /**
      * Creates new form VendaAberturaFechamentoCaixa
      */
+    
+    VendaAberturaFechamentoCaixaController vendaAberturaFechamentoCaixaController;
+    CaixaController caixaController;
+    UsuarioController usuarioController;
+    
+    Caixa caixa;
+    AberturaCaixa aberturaCaixa;
+    Usuario usuario;
+    
+    Componentes c = new Componentes();
+    Mensagens m;
+    JButton jbGravar = c.criaBotaoGravar();
+    JButton jbExcluir = c.criaBotaoExcluir();
+
     public VendaAberturaFechamentoCaixa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        jlUsuarioPerfil.setText("Perfil");
-        jlUsuarioResp.setText("Usuario Responsável");
-        jlUsuarioRespAbertura.setText("Usuario Responsável pela abertura");
+        
+        jlUsuarioPerfil.setText(" ");
+        jlUsuarioResp.setText(" ");
+        jlUsuarioRespAbertura.setText(" ");
+
+        jbGravar = c.criaBotaoGravar();
+        jbExcluir = c.criaBotaoExcluir();
+
+        jbGravar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbGravarActionPerformed(evt);
+            }
+        });
+
+        jbExcluir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbExcluirActionPerformed(evt);
+            }
+        });
+
+        jcbCaixa.setModel(caixaController.listCaixa());
+        jcbUsuarioAbertura.setModel(usuarioController.listUsuarios());
+        
+    }
+
+    private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {
+        acaoGravar();
+    }
+
+    private void jbExcluirActionPerformed(java.awt.event.ActionEvent evt) {
+//        m = new Mensagens();
+//        if (p != null) {
+//            if (p.getPaisID() != 0) {
+//                if (m.jopDeletar("Deseja realmente excluir este Pais ?") == JOptionPane.YES_OPTION) {
+////                    acaoRemover();
+//                }
+//            } else {
+//                m.jopAlerta("Para excluir registro, é nescessário efetuar uma busca.");
+//            }
+//        } else {
+//            m.jopAlerta("Para excluir registro, é nescessário efetuar uma busca.");
+//        }
     }
 
     /**
@@ -42,8 +105,8 @@ public class VendaAberturaFechamentoCaixa extends javax.swing.JDialog {
         jlUsuarioPerfil = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
+        jrbUserResp = new javax.swing.JRadioButton();
+        jrbUserOutro = new javax.swing.JRadioButton();
         jcbUsuarioAbertura = new javax.swing.JComboBox();
         jlUsuarioRespAbertura = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
@@ -135,12 +198,17 @@ public class VendaAberturaFechamentoCaixa extends javax.swing.JDialog {
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Usuário para abertura do caixa"));
 
-        jbUsuario.add(jRadioButton1);
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText("Responsável pelo caixa");
+        jbUsuario.add(jrbUserResp);
+        jrbUserResp.setSelected(true);
+        jrbUserResp.setText("Responsável pelo caixa");
 
-        jbUsuario.add(jRadioButton2);
-        jRadioButton2.setText("Outro usuário");
+        jbUsuario.add(jrbUserOutro);
+        jrbUserOutro.setText("Outro usuário");
+        jrbUserOutro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbUserOutroActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -149,17 +217,17 @@ public class VendaAberturaFechamentoCaixa extends javax.swing.JDialog {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2))
+                    .addComponent(jrbUserResp)
+                    .addComponent(jrbUserOutro))
                 .addContainerGap(10, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jRadioButton1)
+                .addComponent(jrbUserResp)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton2)
+                .addComponent(jrbUserOutro)
                 .addContainerGap())
         );
 
@@ -250,6 +318,12 @@ public class VendaAberturaFechamentoCaixa extends javax.swing.JDialog {
         setBounds((screenSize.width-416)/2, (screenSize.height-397)/2, 416, 397);
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jrbUserOutroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbUserOutroActionPerformed
+        if(!jcbUsuarioAbertura.isEnabled()){
+            jcbUsuarioAbertura.setEnabled(true);
+        }
+    }//GEN-LAST:event_jrbUserOutroActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -302,8 +376,6 @@ public class VendaAberturaFechamentoCaixa extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.ButtonGroup jbUsuario;
     private javax.swing.JComboBox jcbCaixa;
     private javax.swing.JComboBox jcbUsuarioAbertura;
@@ -311,6 +383,56 @@ public class VendaAberturaFechamentoCaixa extends javax.swing.JDialog {
     private javax.swing.JLabel jlUsuarioResp;
     private javax.swing.JLabel jlUsuarioRespAbertura;
     private javax.swing.JPanel jpControles;
+    private javax.swing.JRadioButton jrbUserOutro;
+    private javax.swing.JRadioButton jrbUserResp;
     private javax.swing.JTextField jtfSaldoInicial;
     // End of variables declaration//GEN-END:variables
+
+    private void acaoGravar() {
+        String avisos = "";
+        caixa = (Caixa) jcbCaixa.getSelectedItem();
+        
+        
+        caixaController = new CaixaController();
+        usuarioController = new UsuarioController();
+        vendaAberturaFechamentoCaixaController = new VendaAberturaFechamentoCaixaController();
+        
+        if (caixa.getCaixaId() == null) {
+            avisos = avisos + "\n Caixa não pode ser vazio";
+        }
+
+        if(jrbUserResp.isSelected()){
+            usuario = (Usuario) jcbUsuarioAbertura.getSelectedItem();
+        }else{
+            
+        }
+        
+        if (usuario.getUsuarioId() == null) {
+            avisos = avisos + "\n Usuario não pode ser vazio ";
+        }
+
+        if(jtfSaldoInicial.getText().equals("")){
+            avisos = avisos + "\n Saldo inicial não pode ser vazio ";
+        }
+        
+        
+        if (avisos.equals("")) {
+            aberturaCaixa = new AberturaCaixa();
+            
+            aberturaCaixa.setCaixaId(caixa);
+            aberturaCaixa.setUsuarioId(usuario);
+            aberturaCaixa.setSaldoInicio(Float.parseFloat(jtfSaldoInicial.getText()));
+            
+            aberturaCaixa = vendaAberturaFechamentoCaixaController.gravar(aberturaCaixa);
+            
+            if (aberturaCaixa.getAberturaCaixaId() != null) {
+                m = new Mensagens();
+                m.jopAviso("Caixa " + aberturaCaixa.getCaixaId().getCaixaDesc() + " aberto com sucesso para: \n " + aberturaCaixa.getUsuarioId().getUsuarioName() + "!");
+            }
+        } else {
+            m = new Mensagens();
+            m.jopAlerta("Verifique: " + avisos + "!");
+            jcbCaixa.requestFocus();
+        }
+    }
 }

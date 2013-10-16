@@ -20,6 +20,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDateTime;
 
 /**
  *
@@ -29,7 +31,7 @@ import javax.persistence.TemporalType;
 @Table(name = "caixamovimento")
 @NamedQueries({
     @NamedQuery(name = "Caixamovimento.findAll", query = "SELECT c FROM Caixamovimento c")})
-public class Caixamovimento implements Serializable {
+public class AberturaCaixa implements Serializable {
     @JoinColumn(name = "usuarioId", referencedColumnName = "usuarioID")
     @ManyToOne(fetch = FetchType.LAZY)
     private Usuario usuarioId;
@@ -57,15 +59,19 @@ public class Caixamovimento implements Serializable {
     @JoinColumn(name = "caixaId", referencedColumnName = "caixaId")
     @ManyToOne(fetch = FetchType.LAZY)
     private Caixa caixaId;
-
-    public Caixamovimento() {
+    @Basic(optional = false)
+    @Column(name = "inserted")
+    @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
+    private LocalDateTime inserted;
+    
+    public AberturaCaixa() {
     }
 
-    public Caixamovimento(Integer aberturaCaixaId) {
+    public AberturaCaixa(Integer aberturaCaixaId) {
         this.aberturaCaixaId = aberturaCaixaId;
     }
 
-    public Caixamovimento(Integer aberturaCaixaId, Date aberturaCaixa, Date fechamentoCaixa) {
+    public AberturaCaixa(Integer aberturaCaixaId, Date aberturaCaixa, Date fechamentoCaixa) {
         this.aberturaCaixaId = aberturaCaixaId;
         this.aberturaCaixa = aberturaCaixa;
         this.fechamentoCaixa = fechamentoCaixa;
@@ -127,6 +133,14 @@ public class Caixamovimento implements Serializable {
         this.caixaId = caixaId;
     }
 
+    public LocalDateTime getInserted() {
+        return inserted;
+    }
+
+    public void setInserted(LocalDateTime inserted) {
+        this.inserted = inserted;
+    }
+
     @Override
     public int hashCode() {
         int hash = 0;
@@ -137,10 +151,10 @@ public class Caixamovimento implements Serializable {
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Caixamovimento)) {
+        if (!(object instanceof AberturaCaixa)) {
             return false;
         }
-        Caixamovimento other = (Caixamovimento) object;
+        AberturaCaixa other = (AberturaCaixa) object;
         if ((this.aberturaCaixaId == null && other.aberturaCaixaId != null) || (this.aberturaCaixaId != null && !this.aberturaCaixaId.equals(other.aberturaCaixaId))) {
             return false;
         }

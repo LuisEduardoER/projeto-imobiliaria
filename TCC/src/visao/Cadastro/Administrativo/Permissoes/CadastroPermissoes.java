@@ -32,9 +32,7 @@ public class CadastroPermissoes extends javax.swing.JDialog {
     ModuloController moduloController = new ModuloController();
     PerfilController pcerfilController = new PerfilController();
     JButton jbGravar;
-//    JButton jbBuscar;
     JButton jbExcluir;
-//    List<PerfilModulopermissao> perfilModulopermissaoList = new ArrayList<>();
     private Mensagens m;
 
     /**
@@ -44,7 +42,6 @@ public class CadastroPermissoes extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         jbGravar = c.criaBotaoGravar();
-//        jbBuscar = c.criaBotaoBuscar();
         jbExcluir = c.criaBotaoExcluir();
 
         jbGravar.addActionListener(new java.awt.event.ActionListener() {
@@ -59,17 +56,8 @@ public class CadastroPermissoes extends javax.swing.JDialog {
             }
         });
 
-//        jbBuscar.addActionListener(new java.awt.event.ActionListener() {
-//            public void actionPerformed(java.awt.event.ActionEvent evt) {
-//                jbBuscarActionPerformed(evt);
-//            }
-//        });
-
-//        jpControles.add(jbBuscar);
         jpControles.add(jbExcluir);
         jpControles.add(jbGravar);
-//        carregaModulos();
-//        carregaPerfis();
     }
 
     /**
