@@ -4,6 +4,11 @@
  */
 package visao;
 
+import controller.Cadastro.Administrativo.UsuarioController;
+import controller.LoginController;
+import controller.Mensagens;
+import modelo.Usuario;
+
 /**
  *
  * @author Bruno
@@ -11,7 +16,12 @@ package visao;
 public class Login extends javax.swing.JDialog {
 
     private boolean ADVANCED_PANEL = false;
+    UsuarioController usuarioController;
+    LoginController loginController;
     
+    Mensagens m;
+    
+    Usuario usuario;
     /**
      * Creates new form Login
      */
@@ -81,6 +91,12 @@ public class Login extends javax.swing.JDialog {
         jPanel2.add(jLabel3);
 
         jPanel3.setLayout(new java.awt.GridLayout(2, 0, 8, 8));
+
+        jtfUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jtfUserKeyPressed(evt);
+            }
+        });
         jPanel3.add(jtfUser);
         jPanel3.add(jpfPass);
 
@@ -183,6 +199,12 @@ public class Login extends javax.swing.JDialog {
       System.exit(0);
     }//GEN-LAST:event_jbExitActionPerformed
 
+    private void jtfUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfUserKeyPressed
+        if(evt.getKeyChar() == 10){
+            login();
+        }
+    }//GEN-LAST:event_jtfUserKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -256,4 +278,35 @@ public class Login extends javax.swing.JDialog {
             ADVANCED_PANEL = true;
         }
     }
+
+    private void login() {
+        String avisos = "";
+
+        if (jtfUser.getText().equals("")) {
+            avisos = avisos + "\n Login não pode ser vazio ";
+        }
+        if (jpfPass.getPassword().toString().equals("")) {
+            avisos = avisos + "\n Senha não pode ser vazio ";
+        }
+
+        if (avisos.equals("")) {
+            usuario = new Usuario();
+            
+            usuario.setUsuarioName(jtfUser.getText());
+            usuario.setUsuarioSenha(jpfPass.getPassword().toString());
+            
+            usuarioController = new UsuarioController();
+            loginController = new LoginController();
+            
+            usuario = usuarioController.buscarUsuarioByLogin(usuario);
+            loginController.login(usuario);
+            
+        } else {
+            m = new Mensagens();
+            m.jopAlerta("Verifique: " + avisos + "!");
+            jtfUser.requestFocus();
+        }
+    }
+
+    
 }

@@ -94,6 +94,18 @@ public class UsuarioDAO implements Serializable {
         return (Usuario) criteria.uniqueResult();
     }
     
+    public Usuario loadUsuarioByLogin(Usuario usuario) {
+        Criteria criteria = session.createCriteria(Usuario.class, "usuario");
+
+        criteria.add(Restrictions.eq("usuario.usuarioSenha", usuario.getUsuarioSenha()));
+        criteria.add(Restrictions.eq("usuario.usuarioName", usuario.getUsuarioName()));
+        
+        criteria.add(Restrictions.eq("usuario.ativo", "t"));
+        criteria.add(Restrictions.eq("usuario.deleted", "f"));
+
+        return (Usuario) criteria.uniqueResult();
+    }
+    
     public Integer checaUsuarioExiste(Usuario usuario) {
         Criteria criteria = session.createCriteria(Usuario.class, "usuario");
 

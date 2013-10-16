@@ -8,7 +8,6 @@ import DAO.Cadastro.UsuarioDAO;
 import controller.Mensagens;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import modelo.Pais;
 import modelo.Usuario;
 import persistencia.exceptions.NonexistentEntityException;
 import util.Datas;
@@ -42,6 +41,11 @@ public class UsuarioController {
         return dcbm;
     }
 
+    public Usuario buscarUsuarioByLogin(Usuario usuario) {
+        usuario = dao.loadUsuarioByLogin(usuario);
+        return usuario;
+    }
+    
     public DefaultComboBoxModel<Usuario> listUsuarios() {
         DefaultComboBoxModel<Usuario> dcbm = new DefaultComboBoxModel<>();
         List<Usuario> lista = dao.consultarTodos();
@@ -50,16 +54,6 @@ public class UsuarioController {
         }
         return dcbm;
     }
-    
-//    public DefaultComboBoxModel<Usuario> listBairroByCidade(Integer cidadeId) {
-//        DefaultComboBoxModel<Usuario> dcbm = new DefaultComboBoxModel<>();
-//        List<Usuario> lista = dao.buscarCidadeByEstado(cidadeId);
-//        for (Usuario bairro : lista) {
-//            dcbm.addElement(bairro);
-//        }
-//        return dcbm;
-//    }
-    
     
     public Usuario buscarUsuario(String field, String value) {
         Usuario usuario = dao.buscarUsuario(field, value);
