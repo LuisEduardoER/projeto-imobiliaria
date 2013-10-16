@@ -59,6 +59,7 @@ public class CaixaDAO implements Serializable {
     public List<Caixa> consultarTodos() {
 //        Session session = (Session) em.getDelegate();
         select = session.createCriteria(Caixa.class);
+        Restrictions.eq("caixa.deleted", "f");
         return select.list();
     }
 

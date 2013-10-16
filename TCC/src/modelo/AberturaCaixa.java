@@ -28,9 +28,9 @@ import org.joda.time.LocalDateTime;
  * @author Bruno
  */
 @Entity
-@Table(name = "caixamovimento")
+@Table(name = "aberturaCaixa")
 @NamedQueries({
-    @NamedQuery(name = "Caixamovimento.findAll", query = "SELECT c FROM Caixamovimento c")})
+    @NamedQuery(name = "AberturaCaixa.findAll", query = "SELECT c FROM AberturaCaixa c")})
 public class AberturaCaixa implements Serializable {
     @JoinColumn(name = "usuarioId", referencedColumnName = "usuarioID")
     @ManyToOne(fetch = FetchType.LAZY)

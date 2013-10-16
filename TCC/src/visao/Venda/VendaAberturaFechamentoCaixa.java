@@ -12,6 +12,7 @@ import controller.Mensagens;
 import javax.swing.JButton;
 import modelo.AberturaCaixa;
 import modelo.Caixa;
+import modelo.Session;
 import modelo.Usuario;
 
 /**
@@ -40,6 +41,8 @@ public class VendaAberturaFechamentoCaixa extends javax.swing.JDialog {
     public VendaAberturaFechamentoCaixa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        caixaController = new CaixaController();
+        usuarioController = new UsuarioController();
         
         jlUsuarioPerfil.setText(" ");
         jlUsuarioResp.setText(" ");
@@ -392,7 +395,6 @@ public class VendaAberturaFechamentoCaixa extends javax.swing.JDialog {
         String avisos = "";
         caixa = (Caixa) jcbCaixa.getSelectedItem();
         
-        
         caixaController = new CaixaController();
         usuarioController = new UsuarioController();
         vendaAberturaFechamentoCaixaController = new VendaAberturaFechamentoCaixaController();
@@ -404,7 +406,7 @@ public class VendaAberturaFechamentoCaixa extends javax.swing.JDialog {
         if(jrbUserResp.isSelected()){
             usuario = (Usuario) jcbUsuarioAbertura.getSelectedItem();
         }else{
-            
+            usuario = Session.getUsuario();
         }
         
         if (usuario.getUsuarioId() == null) {

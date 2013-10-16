@@ -7,6 +7,7 @@ package visao.Cadastro.Administrativo.Permissoes;
 import Componentes.Componentes;
 import controller.Mensagens;
 import controller.ModuloController;
+import controller.ModuloPermissaoController;
 import controller.PerfilController;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,7 @@ public class CadastroModuloPermissao extends javax.swing.JDialog {
     
     PerfilController perfilController;
     ModuloController moduloController;
+    ModuloPermissaoController moduloPermissaoController;
     JButton jbGravar;
     JButton jbExcluir;
     private Mensagens m;
@@ -44,7 +46,9 @@ public class CadastroModuloPermissao extends javax.swing.JDialog {
     public CadastroModuloPermissao(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
+        perfilController = new PerfilController();
+        moduloController = new ModuloController();
+        
         c = new Componentes();
 
         jbGravar = c.criaBotaoGravar();
@@ -235,7 +239,7 @@ public class CadastroModuloPermissao extends javax.swing.JDialog {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -299,14 +303,14 @@ public class CadastroModuloPermissao extends javax.swing.JDialog {
             
             moduloPermissao.setModuloId(modulo);
             
-            moduloPermissao.setPermissaoId(null);
+            List<Permissao> permissoes = verificaPermissao();
             
-            moduloController = new ModuloController();
+            moduloPermissaoController = new ModuloPermissaoController();
+            
+            moduloPermissao = moduloPermissaoController.gravar(moduloPermissao, permissoes);
 
             
-
-            modulo = moduloController.gravar(modulo);
-
+            
             if (modulo.getModuloId() != null) {
                 m = new Mensagens();
                 m.jopAviso("Modulo " + modulo.getModuloDesc() + " - ID: " + modulo.getModuloId() + " gravado com sucesso!");

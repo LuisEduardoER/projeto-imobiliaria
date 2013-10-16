@@ -58,7 +58,6 @@ public class VendaAberturaFechamentoCaixaDAO implements Serializable {
 
     @SuppressWarnings("unchecked")
     public List<AberturaCaixa> consultarTodos() {
-//        Session session = (Session) em.getDelegate();
         select = session.createCriteria(AberturaCaixa.class);
         return select.list();
     }

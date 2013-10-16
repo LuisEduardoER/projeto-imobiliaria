@@ -54,7 +54,7 @@ public class ModuloPermissaoDAO implements Serializable {
     }
 
     @SuppressWarnings("unchecked")
-    public List<ModuloPermissaoDAO> consultarTodos() {
+    public List<ModuloPermissao> consultarTodos() {
         select = session.createCriteria(ModuloPermissao.class);
         return select.list();
     }
