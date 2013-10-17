@@ -57,7 +57,7 @@ public class UsuarioDAO implements Serializable {
 
     @SuppressWarnings("unchecked")
     public List<Usuario> consultarTodos() {
-        criteria = session.createCriteria(Usuario.class);
+        criteria = session.createCriteria(Usuario.class, "usuario");
         criteria.add(Restrictions.eq("usuario.deleted", "f"));
         return criteria.list();
     }

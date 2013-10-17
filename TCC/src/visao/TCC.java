@@ -19,6 +19,7 @@ import visao.Cadastro.Endereco.CadastroCEP;
 import visao.Cadastro.Endereco.CadastroCidade;
 import visao.Cadastro.Endereco.CadastroEstados;
 import visao.Cadastro.Endereco.CadastroPais;
+import visao.Cadastro.Endereco.CadastroRuas;
 import visao.Financeiro.FinanceiroBaixaTituloPagar;
 import visao.Venda.VendaAberturaFechamentoCaixa;
 import visao.Venda.VendaTela;
@@ -325,8 +326,8 @@ public class TCC extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiCadastroBairroActionPerformed
 
     private void jmiCadastroRuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCadastroRuaActionPerformed
-        CadastroCidade cidade = new CadastroCidade(this, rootPaneCheckingEnabled);
-        cidade.setVisible(true);
+        CadastroRuas ruas = new CadastroRuas(this, rootPaneCheckingEnabled);
+        ruas.setVisible(true);
     }//GEN-LAST:event_jmiCadastroRuaActionPerformed
 
     private void jmiCadastroCEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCadastroCEPActionPerformed
