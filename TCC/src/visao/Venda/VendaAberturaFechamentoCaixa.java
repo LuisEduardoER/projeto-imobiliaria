@@ -24,15 +24,12 @@ public class VendaAberturaFechamentoCaixa extends javax.swing.JDialog {
     /**
      * Creates new form VendaAberturaFechamentoCaixa
      */
-    
     VendaAberturaFechamentoCaixaController vendaAberturaFechamentoCaixaController;
     CaixaController caixaController;
     UsuarioController usuarioController;
-    
     Caixa caixa;
     AberturaCaixa aberturaCaixa;
     Usuario usuario;
-    
     Componentes c = new Componentes();
     Mensagens m;
     JButton jbGravar = c.criaBotaoGravar();
@@ -43,7 +40,7 @@ public class VendaAberturaFechamentoCaixa extends javax.swing.JDialog {
         initComponents();
         caixaController = new CaixaController();
         usuarioController = new UsuarioController();
-        
+
         jlUsuarioPerfil.setText(" ");
         jlUsuarioResp.setText(" ");
         jlUsuarioRespAbertura.setText(" ");
@@ -65,7 +62,14 @@ public class VendaAberturaFechamentoCaixa extends javax.swing.JDialog {
 
         jcbCaixa.setModel(caixaController.listCaixa());
         jcbUsuarioAbertura.setModel(usuarioController.listUsuarios());
-        
+
+        if (jcbCaixa.getSelectedItem() != null) {
+            caixa = (Caixa) jcbCaixa.getSelectedItem();
+            jlUsuarioResp.setText(caixa.getUsuarioRespId().getUsuarioName());
+            jlUsuarioPerfil.setText(caixa.getUsuarioRespId().getUsuarioPerfil().getPerfilDesc());
+            jlUsuarioRespAbertura.setText(caixa.getUsuarioRespId().getUsuarioName());
+        }
+
     }
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,6 +155,12 @@ public class VendaAberturaFechamentoCaixa extends javax.swing.JDialog {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jcbCaixa.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbCaixaItemStateChanged(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -204,6 +214,11 @@ public class VendaAberturaFechamentoCaixa extends javax.swing.JDialog {
         jbUsuario.add(jrbUserResp);
         jrbUserResp.setSelected(true);
         jrbUserResp.setText("Responsável pelo caixa");
+        jrbUserResp.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jrbUserRespActionPerformed(evt);
+            }
+        });
 
         jbUsuario.add(jrbUserOutro);
         jrbUserOutro.setText("Outro usuário");
@@ -235,6 +250,11 @@ public class VendaAberturaFechamentoCaixa extends javax.swing.JDialog {
         );
 
         jcbUsuarioAbertura.setEnabled(false);
+        jcbUsuarioAbertura.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jcbUsuarioAberturaItemStateChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -322,10 +342,29 @@ public class VendaAberturaFechamentoCaixa extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jrbUserOutroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbUserOutroActionPerformed
-        if(!jcbUsuarioAbertura.isEnabled()){
+        if (!jcbUsuarioAbertura.isEnabled()) {
             jcbUsuarioAbertura.setEnabled(true);
         }
     }//GEN-LAST:event_jrbUserOutroActionPerformed
+
+    private void jrbUserRespActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbUserRespActionPerformed
+        if (jcbCaixa.getSelectedItem() != null) {
+            caixa = (Caixa) jcbCaixa.getSelectedItem();
+            jlUsuarioRespAbertura.setText(caixa.getUsuarioRespId().getUsuarioName());
+        }
+    }//GEN-LAST:event_jrbUserRespActionPerformed
+
+    private void jcbCaixaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbCaixaItemStateChanged
+        caixa = (Caixa) jcbCaixa.getSelectedItem();
+        jlUsuarioResp.setText(caixa.getUsuarioRespId().getUsuarioName());
+        jlUsuarioPerfil.setText(caixa.getUsuarioRespId().getUsuarioPerfil().getPerfilDesc());
+        jlUsuarioRespAbertura.setText(caixa.getUsuarioRespId().getUsuarioName());
+    }//GEN-LAST:event_jcbCaixaItemStateChanged
+
+    private void jcbUsuarioAberturaItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jcbUsuarioAberturaItemStateChanged
+        caixa = (Caixa) jcbCaixa.getSelectedItem();
+        jlUsuarioRespAbertura.setText(caixa.getUsuarioRespId().getUsuarioName());
+    }//GEN-LAST:event_jcbUsuarioAberturaItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -394,39 +433,42 @@ public class VendaAberturaFechamentoCaixa extends javax.swing.JDialog {
     private void acaoGravar() {
         String avisos = "";
         caixa = (Caixa) jcbCaixa.getSelectedItem();
-        
+
         caixaController = new CaixaController();
         usuarioController = new UsuarioController();
         vendaAberturaFechamentoCaixaController = new VendaAberturaFechamentoCaixaController();
-        
+
         if (caixa.getCaixaId() == null) {
             avisos = avisos + "\n Caixa não pode ser vazio";
         }
 
-        if(jrbUserResp.isSelected()){
+        if (jrbUserOutro.isSelected()) {
             usuario = (Usuario) jcbUsuarioAbertura.getSelectedItem();
-        }else{
-            usuario = Session.getUsuario();
+        } else {
+            if (!avisos.equals("")) {
+                caixa = (Caixa) jcbCaixa.getSelectedItem();
+                usuario = caixa.getUsuarioRespId();
+            }
         }
-        
+
         if (usuario.getUsuarioId() == null) {
             avisos = avisos + "\n Usuario não pode ser vazio ";
         }
 
-        if(jtfSaldoInicial.getText().equals("")){
+        if (jtfSaldoInicial.getText().equals("")) {
             avisos = avisos + "\n Saldo inicial não pode ser vazio ";
         }
-        
-        
+
+
         if (avisos.equals("")) {
             aberturaCaixa = new AberturaCaixa();
-            
+
             aberturaCaixa.setCaixaId(caixa);
             aberturaCaixa.setUsuarioId(usuario);
             aberturaCaixa.setSaldoInicio(Float.parseFloat(jtfSaldoInicial.getText()));
-            
+
             aberturaCaixa = vendaAberturaFechamentoCaixaController.gravar(aberturaCaixa);
-            
+
             if (aberturaCaixa.getAberturaCaixaId() != null) {
                 m = new Mensagens();
                 m.jopAviso("Caixa " + aberturaCaixa.getCaixaId().getCaixaDesc() + " aberto com sucesso para: \n " + aberturaCaixa.getUsuarioId().getUsuarioName() + "!");

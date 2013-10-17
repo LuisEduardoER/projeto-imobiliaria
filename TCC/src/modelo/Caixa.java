@@ -133,7 +133,7 @@ public class Caixa implements Serializable {
 
     @Override
     public String toString() {
-        return "modelo.Caixa[ caixaId=" + caixaId + " ]";
+        return caixaDesc;
     }
 
     public Usuario getUsuarioRespId() {
