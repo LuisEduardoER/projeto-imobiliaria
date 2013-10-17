@@ -6,15 +6,13 @@ package visao;
 
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import modelo.AberturaCaixa;
-import modelo.Venda;
 import visao.Cadastro.Administrativo.CadastroFabricante;
 import visao.Cadastro.Administrativo.CadastroFornecedor;
 import visao.Cadastro.Administrativo.CadastroProduto;
 import visao.Cadastro.Administrativo.CadastroUsuario;
 import visao.Cadastro.Administrativo.Permissoes.CadastroModuloPermissao;
 import visao.Cadastro.Administrativo.Permissoes.CadastroModulos;
-import visao.Cadastro.Administrativo.Permissoes.CadastroPermissoes;
+import visao.Cadastro.Administrativo.Permissoes.CadastroPerfis;
 import visao.Cadastro.CadastroCaixa;
 import visao.Cadastro.Endereco.CadastroBairro;
 import visao.Cadastro.Endereco.CadastroCEP;
@@ -58,7 +56,8 @@ public class TCC extends javax.swing.JFrame {
         jSeparator2 = new javax.swing.JPopupMenu.Separator();
         jmPermissoes = new javax.swing.JMenu();
         jmCadastroModulos = new javax.swing.JMenuItem();
-        jmCadastroPermissoes = new javax.swing.JMenuItem();
+        jmiPerfis = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JPopupMenu.Separator();
         jmVinculoModuloPermissao = new javax.swing.JMenuItem();
         jmEnderecos = new javax.swing.JMenu();
         jmiCadastroPais = new javax.swing.JMenuItem();
@@ -134,13 +133,14 @@ public class TCC extends javax.swing.JFrame {
         });
         jmPermissoes.add(jmCadastroModulos);
 
-        jmCadastroPermissoes.setText("Cadastro de Permissões");
-        jmCadastroPermissoes.addActionListener(new java.awt.event.ActionListener() {
+        jmiPerfis.setText("Cadastro de Perfis");
+        jmiPerfis.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmCadastroPermissoesActionPerformed(evt);
+                jmiPerfisActionPerformed(evt);
             }
         });
-        jmPermissoes.add(jmCadastroPermissoes);
+        jmPermissoes.add(jmiPerfis);
+        jmPermissoes.add(jSeparator3);
 
         jmVinculoModuloPermissao.setText("Vincular Módulos e Permissões");
         jmVinculoModuloPermissao.addActionListener(new java.awt.event.ActionListener() {
@@ -299,11 +299,6 @@ public class TCC extends javax.swing.JFrame {
         modulos.setVisible(true);
     }//GEN-LAST:event_jmCadastroModulosActionPerformed
 
-    private void jmCadastroPermissoesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmCadastroPermissoesActionPerformed
-        CadastroPermissoes permissoes = new CadastroPermissoes(this, rootPaneCheckingEnabled);
-        permissoes.setVisible(true);
-    }//GEN-LAST:event_jmCadastroPermissoesActionPerformed
-
     private void jmVinculoModuloPermissaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmVinculoModuloPermissaoActionPerformed
         CadastroModuloPermissao moduloPerissoes = new CadastroModuloPermissao(this, rootPaneCheckingEnabled);
         moduloPerissoes.setVisible(true);
@@ -359,6 +354,11 @@ public class TCC extends javax.swing.JFrame {
         aberturaCaixa.setVisible(true);
     }//GEN-LAST:event_jmiAbrirCaixaActionPerformed
 
+    private void jmiPerfisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPerfisActionPerformed
+        CadastroPerfis perfis = new CadastroPerfis(this, rootPaneCheckingEnabled);
+        perfis.setVisible(true);
+    }//GEN-LAST:event_jmiPerfisActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -397,10 +397,10 @@ public class TCC extends javax.swing.JFrame {
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
+    private javax.swing.JPopupMenu.Separator jSeparator3;
     private javax.swing.JMenu jmAdministrativo;
     private javax.swing.JMenu jmCadastro;
     private javax.swing.JMenuItem jmCadastroModulos;
-    private javax.swing.JMenuItem jmCadastroPermissoes;
     private javax.swing.JMenu jmEnderecos;
     private javax.swing.JMenu jmFinanceiro;
     private javax.swing.JMenu jmPermissoes;
@@ -419,6 +419,7 @@ public class TCC extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiCaixa;
     private javax.swing.JMenuItem jmiFabricante;
     private javax.swing.JMenuItem jmiFornecedor;
+    private javax.swing.JMenuItem jmiPerfis;
     private javax.swing.JMenuItem jmiProduto;
     private javax.swing.JMenuItem jmiVenda;
     // End of variables declaration//GEN-END:variables

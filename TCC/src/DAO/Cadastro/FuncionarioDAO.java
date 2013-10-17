@@ -125,6 +125,19 @@ public class FuncionarioDAO implements Serializable {
 
         criteria.add(Restrictions.eq("funcionario.cpfCnpj", funcionario.getCpfCnpj()));
         criteria.add(Restrictions.eq("funcionario.deleted", "f"));
+        criteria.add(Restrictions.not(Restrictions.eq("funcionario.idFuncionario", funcionario.getIdFuncionario())));
+
+        criteria.setProjection(Projections.rowCount());
+        return ((Integer) criteria.uniqueResult()).intValue();
+    }
+    
+     public Integer checaFuncionarioUsuario(Funcionario funcionario) {
+        Criteria criteria = session.createCriteria(Funcionario.class, "funcionario");
+        criteria.createCriteria("funcionario.idUsuario", "usuario");
+        
+        criteria.add(Restrictions.eq("usuario.usuarioId", funcionario.getIdUsuario().getUsuarioId()));
+        criteria.add(Restrictions.eq("funcionario.deleted", "f"));
+        criteria.add(Restrictions.eq("usuario.deleted", "f"));
 
         criteria.setProjection(Projections.rowCount());
         return ((Integer) criteria.uniqueResult()).intValue();

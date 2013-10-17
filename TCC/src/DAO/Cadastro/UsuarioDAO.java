@@ -9,6 +9,7 @@ import controller.Mensagens;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
+import modelo.Funcionario;
 import modelo.Usuario;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
@@ -106,6 +107,15 @@ public class UsuarioDAO implements Serializable {
         return (Usuario) criteria.uniqueResult();
     }
     
+    public Usuario loadUsuarioById(Usuario usuario) {
+        Criteria criteria = session.createCriteria(Usuario.class, "usuario");
+
+        criteria.add(Restrictions.eq("usuario.usuarioId", usuario.getUsuarioId()));
+        criteria.add(Restrictions.eq("usuario.deleted", "f"));
+
+        return (Usuario) criteria.uniqueResult();
+    }
+    
     public Integer checaUsuarioExiste(Usuario usuario) {
         Criteria criteria = session.createCriteria(Usuario.class, "usuario");
 
@@ -115,5 +125,4 @@ public class UsuarioDAO implements Serializable {
         criteria.setProjection(Projections.rowCount());
         return ((Integer) criteria.uniqueResult()).intValue();
     }
-    
 }

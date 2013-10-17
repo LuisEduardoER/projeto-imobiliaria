@@ -32,7 +32,7 @@ import org.joda.time.LocalDateTime;
 @Table(name = "usuario")
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")})
-public class Usuario implements Serializable {
+    public class Usuario implements Serializable {
 //    @EmbeddedId
 //    protected modelo.UsuarioPK usuarioPK;
 
@@ -57,7 +57,7 @@ public class Usuario implements Serializable {
     private String usuarioSenha;
     @Basic(optional = false)
     @Column(name = "ativo")
-    private int ativo;
+    private char ativo;
     @Basic(optional = false)
     @Column(name = "usuarioName")
     private String usuarioName;
@@ -77,10 +77,9 @@ public class Usuario implements Serializable {
     @OneToMany(mappedBy = "usuarioId", fetch = FetchType.LAZY)
     private List<AberturaCaixa> caixamovimentoList;
     
-    
     public Usuario() {
         this.deleted = 'f';
-        this.ativo = 1;
+        this.ativo = 't';
     }
 
     public String getUsuarioSenha() {
@@ -91,11 +90,11 @@ public class Usuario implements Serializable {
         this.usuarioSenha = usuarioSenha;
     }
 
-    public int getAtivo() {
+    public char getAtivo() {
         return ativo;
     }
 
-    public void setAtivo(int ativo) {
+    public void setAtivo(char ativo) {
         this.ativo = ativo;
     }
 

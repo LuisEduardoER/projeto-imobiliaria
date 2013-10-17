@@ -61,13 +61,15 @@
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmCadastroModulosActionPerformed"/>
                       </Events>
                     </MenuItem>
-                    <MenuItem class="javax.swing.JMenuItem" name="jmCadastroPermissoes">
+                    <MenuItem class="javax.swing.JMenuItem" name="jmiPerfis">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Cadastro de Permiss&#xf5;es"/>
+                        <Property name="text" type="java.lang.String" value="Cadastro de Perfis"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmCadastroPermissoesActionPerformed"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiPerfisActionPerformed"/>
                       </Events>
+                    </MenuItem>
+                    <MenuItem class="javax.swing.JPopupMenu$Separator" name="jSeparator3">
                     </MenuItem>
                     <MenuItem class="javax.swing.JMenuItem" name="jmVinculoModuloPermissao">
                       <Properties>

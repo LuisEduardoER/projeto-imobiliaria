@@ -8,6 +8,7 @@ import DAO.Cadastro.UsuarioDAO;
 import controller.Mensagens;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
+import modelo.Funcionario;
 import modelo.Usuario;
 import persistencia.exceptions.NonexistentEntityException;
 import util.Datas;
@@ -19,7 +20,8 @@ import util.Datas;
 public class UsuarioController {
 
     UsuarioDAO dao = new UsuarioDAO();
-
+    FuncionarioController funcionarioController;
+    
     public DefaultComboBoxModel<Usuario> buscar(String field, String value) {
         Usuario usuario = new Usuario();
         DefaultComboBoxModel<Usuario> dcbm = new DefaultComboBoxModel<>();
@@ -46,6 +48,11 @@ public class UsuarioController {
         return usuario;
     }
     
+    public Usuario buscarUsuarioById(Usuario usuario) {
+        usuario = dao.loadUsuarioByLogin(usuario);
+        return usuario;
+    }
+    
     public DefaultComboBoxModel<Usuario> listUsuarios() {
         DefaultComboBoxModel<Usuario> dcbm = new DefaultComboBoxModel<>();
         List<Usuario> lista = dao.consultarTodos();
@@ -60,12 +67,20 @@ public class UsuarioController {
         return usuario;
     }
 
-    public Usuario gravar(Usuario usuario) {
+    public Usuario gravar(Funcionario funcionario) {
+        Usuario usuario = funcionario.getIdUsuario();
         
+        funcionarioController = new FuncionarioController();
         Integer usuarios = dao.checaUsuarioExiste(usuario);
+        
         if (usuarios > 0) {
-            Mensagens m = new Mensagens();
-            m.jopAlerta("Este nome de usuario já existe.");
+            if(funcionarioController.verificaUsuarioFuncionario(funcionario) > 0){
+                usuario.setUpdated(Datas.dataAtualDateTime());
+                usuario = dao.atualizar(usuario);
+            }else{
+                Mensagens m = new Mensagens();
+                m.jopAlerta("Este nome de usuario já existe.");
+            }
         }else{
             usuario.setInserted(Datas.dataAtualDateTime());
             usuario = dao.gravar(usuario);

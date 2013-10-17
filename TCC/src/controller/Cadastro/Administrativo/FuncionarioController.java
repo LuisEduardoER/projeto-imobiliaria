@@ -33,6 +33,11 @@ public class FuncionarioController {
         dcbm.addElement(funcionario);
         return dcbm;
     }
+    
+    public Integer verificaUsuarioFuncionario(Funcionario funcionario){
+        return dao.checaFuncionarioUsuario(funcionario);
+    }
+    
     public List<Funcionario> buscaTodos(){
         List<Object[]> listaObject = dao.buscarTodos();
         List<Funcionario> listaFuncionario = new ArrayList<>();
@@ -76,8 +81,19 @@ public class FuncionarioController {
         
         Integer funcionarios = dao.checaFuncionarioExiste(funcionario);
         if (funcionarios > 0) {
-            Mensagens m = new Mensagens();
-            m.jopAlerta("Este CPF/CNPJ já existe.");
+            
+            if(funcionario.getIdFuncionario() != null){
+                if(funcionario.getIdUsuario() != null){
+                    UsuarioController usuarioController = new UsuarioController();
+                    funcionario.setIdUsuario(usuarioController.buscarUsuarioById(funcionario.getIdUsuario()));
+                }
+                funcionario.setUpdated(Datas.dataAtualDateTime());
+                dao.atualizar(funcionario);
+            }else{
+                Mensagens m = new Mensagens();
+                m.jopAlerta("Este CPF/CNPJ já existe.");
+            }
+            
         }else{
             funcionario.setInserted(Datas.dataAtualDateTime());
             funcionario = dao.gravar(funcionario);

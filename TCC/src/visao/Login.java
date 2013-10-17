@@ -18,10 +18,9 @@ public class Login extends javax.swing.JDialog {
     private boolean ADVANCED_PANEL = false;
     UsuarioController usuarioController;
     LoginController loginController;
-    
     Mensagens m;
-    
     Usuario usuario;
+
     /**
      * Creates new form Login
      */
@@ -33,6 +32,7 @@ public class Login extends javax.swing.JDialog {
         jpAdvanced.setVisible(false);
         jbAdvancedPanel.setText("<");
         ADVANCED_PANEL = false;
+        jtfUser.requestFocus();
     }
 
     /**
@@ -56,11 +56,11 @@ public class Login extends javax.swing.JDialog {
         jpAdvanced = new javax.swing.JPanel();
         jbCon = new javax.swing.JButton();
         jbAdvanced = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        jbLogin = new javax.swing.JButton();
         jbExit = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Mart Manager");
+        setTitle("TCC - Bruno");
         setResizable(false);
 
         jLabel1.setText("logo");
@@ -98,6 +98,12 @@ public class Login extends javax.swing.JDialog {
             }
         });
         jPanel3.add(jtfUser);
+
+        jpfPass.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jpfPassKeyPressed(evt);
+            }
+        });
         jPanel3.add(jpfPass);
 
         jbAdvancedPanel.setText("<");
@@ -125,7 +131,12 @@ public class Login extends javax.swing.JDialog {
         });
         jpAdvanced.add(jbAdvanced);
 
-        jButton1.setText("Login");
+        jbLogin.setText("Login");
+        jbLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbLoginActionPerformed(evt);
+            }
+        });
 
         jbExit.setText("Sair");
         jbExit.addActionListener(new java.awt.event.ActionListener() {
@@ -148,7 +159,7 @@ public class Login extends javax.swing.JDialog {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(jbLogin)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jbExit)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -166,7 +177,7 @@ public class Login extends javax.swing.JDialog {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
+                            .addComponent(jbLogin)
                             .addComponent(jbExit)))
                     .addComponent(jpAdvanced, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -196,14 +207,24 @@ public class Login extends javax.swing.JDialog {
     }//GEN-LAST:event_jbConActionPerformed
 
     private void jbExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbExitActionPerformed
-      System.exit(0);
+        System.exit(0);
     }//GEN-LAST:event_jbExitActionPerformed
 
     private void jtfUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfUserKeyPressed
-        if(evt.getKeyChar() == 10){
-            login();
+        if (evt.getKeyChar() == 10) {
+            jpfPass.requestFocus();
         }
     }//GEN-LAST:event_jtfUserKeyPressed
+
+    private void jpfPassKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jpfPassKeyPressed
+        if (evt.getKeyChar() == 10) {
+            login();
+        }
+    }//GEN-LAST:event_jpfPassKeyPressed
+
+    private void jbLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbLoginActionPerformed
+        login();
+    }//GEN-LAST:event_jbLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -247,7 +268,6 @@ public class Login extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -258,6 +278,7 @@ public class Login extends javax.swing.JDialog {
     private javax.swing.JButton jbAdvancedPanel;
     private javax.swing.JButton jbCon;
     private javax.swing.JButton jbExit;
+    private javax.swing.JButton jbLogin;
     private javax.swing.JPanel jpAdvanced;
     private javax.swing.JPasswordField jpfPass;
     private javax.swing.JTextField jtfUser;
@@ -291,22 +312,25 @@ public class Login extends javax.swing.JDialog {
 
         if (avisos.equals("")) {
             usuario = new Usuario();
-            
+
             usuario.setUsuarioName(jtfUser.getText());
-            usuario.setUsuarioSenha(jpfPass.getPassword().toString());
-            
+            usuario.setUsuarioSenha(new String(jpfPass.getPassword()));
+
             usuarioController = new UsuarioController();
             loginController = new LoginController();
-            
+
             usuario = usuarioController.buscarUsuarioByLogin(usuario);
-            loginController.login(usuario);
-            
+
+            if (loginController.login(usuario)) {
+                TCC sistema = new TCC();
+                this.setVisible(false);
+                sistema.setVisible(true);
+            }
+            jtfUser.requestFocus();
         } else {
             m = new Mensagens();
             m.jopAlerta("Verifique: " + avisos + "!");
             jtfUser.requestFocus();
         }
     }
-
-    
 }

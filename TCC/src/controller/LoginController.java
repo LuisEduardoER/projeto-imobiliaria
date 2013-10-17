@@ -24,7 +24,7 @@ public class LoginController {
     
     public boolean login (Usuario usuario) {
         Session.setInicio(Datas.dataAtualDateTime());
-        if(usuario.getUsuarioId() != null){
+        if(usuario != null){
             Session.setUsuario(usuario);
             return true;
         }else{

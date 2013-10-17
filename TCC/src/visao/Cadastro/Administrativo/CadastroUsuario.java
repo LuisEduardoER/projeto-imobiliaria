@@ -16,6 +16,7 @@ import controller.Cadastro.Endereco.RuaController;
 import controller.Cadastro.Administrativo.FuncionarioController;
 import controller.Cadastro.Administrativo.UsuarioController;
 import controller.Mensagens;
+import controller.PerfilController;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -29,6 +30,7 @@ import modelo.Endereco;
 import modelo.Estado;
 import modelo.Funcionario;
 import modelo.Pais;
+import modelo.PerfisPermissoes.Perfil;
 import modelo.Rua;
 import modelo.Usuario;
 
@@ -45,7 +47,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
     Mensagens m;
     JButton jbGravar = c.criaBotaoGravar();
     JButton jbExcluir = c.criaBotaoExcluir();
-    
+    JButton jbNovo = c.criaBotaoNovo();
     EstadoController estadoController;
     PaisController paisController;
     CidadeController cidadeController;
@@ -55,7 +57,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
     EnderecoController enderecoController;
     FuncionarioController funcionarioController;
     UsuarioController usuarioController;
-    
+    PerfilController perfilController;
     Pais p;
     Estado estado;
     Cidade cidade;
@@ -67,21 +69,24 @@ public class CadastroUsuario extends javax.swing.JDialog {
     Endereco endereco;
     List<Funcionario> funcionarioList;
     TableModelFuncionario modeloFuncionario;
-    
+    Perfil perfil;
+
     public CadastroUsuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         jtfNome.requestFocus();
-        
-        paisController   = new PaisController();
+
+        paisController = new PaisController();
         estadoController = new EstadoController();
         bairroController = new BairroController();
-        ruaController    = new RuaController();
-        cepController    = new CepController();
+        ruaController = new RuaController();
+        cepController = new CepController();
         funcionarioController = new FuncionarioController();
-        
+        perfilController = new PerfilController();
+
         jbGravar = c.criaBotaoGravar();
         jbExcluir = c.criaBotaoExcluir();
+        jbNovo = c.criaBotaoNovo();
 
         jbGravar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -95,36 +100,44 @@ public class CadastroUsuario extends javax.swing.JDialog {
             }
         });
 
+        jbNovo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbNovoActionPerformed(evt);
+            }
+        });
+
         funcionarioList = funcionarioController.buscaTodos();
         modeloFuncionario = new TableModelFuncionario();
         jtFuncionarios.setModel(modeloFuncionario);
         modeloFuncionario.addListaDeProdutos(funcionarioList);
         //jtFuncionarios.updateUI();
-        
+
+        jcbPerfil.setModel(perfilController.listPerfis());
+
         jcbPais.setModel(paisController.listPaises());
         jcbPais.updateUI();
 
         jcbEstados.setModel(estadoController.listEstados());
         jcbEstados.updateUI();
-        
+
         if ((Estado) jcbEstados.getSelectedItem() != null) {
             cidadeController = new CidadeController();
             jcbCidade.setModel(cidadeController.listCidadesByEstado(((Estado) jcbEstados.getSelectedItem()).getEstadoId()));
             jcbCidade.updateUI();
         }
-        
+
         if ((Cidade) jcbCidade.getSelectedItem() != null) {
             cidade = (Cidade) jcbCidade.getSelectedItem();
             jcbBairro.setModel(bairroController.listBairroByCidade(cidade.getCidade()));
             jcbBairro.updateUI();
         }
-        
+
         if ((Bairro) jcbBairro.getSelectedItem() != null) {
             bairro = (Bairro) jcbBairro.getSelectedItem();
             jcbRua.setModel(ruaController.listRuaByBairro(bairro.getBairroId()));
             jcbRua.updateUI();
         }
-        
+
         if ((Rua) jcbRua.getSelectedItem() != null) {
             rua = (Rua) jcbRua.getSelectedItem();
             jcbCEP.setModel(cepController.listCepByRua(rua.getRuaId()));
@@ -133,14 +146,15 @@ public class CadastroUsuario extends javax.swing.JDialog {
 
         jpControles.add(jbExcluir);
         jpControles.add(jbGravar);
+        jpControles.add(jbNovo);
 
-        jtFuncionarios.setDefaultEditor(Object.class, null);  
+        jtFuncionarios.setDefaultEditor(Object.class, null);
         jtFuncionarios.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 jtFuncionariosMouseClicked(e);
             }
         });
-        
+
     }
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {
@@ -161,7 +175,11 @@ public class CadastroUsuario extends javax.swing.JDialog {
             m.jopAlerta("Para excluir registro, é nescessário efetuar uma busca.");
         }
     }
-    
+
+    private void jbNovoActionPerformed(java.awt.event.ActionEvent evt) {
+        limpar();
+    }
+
     private void jtFuncionariosMouseClicked(java.awt.event.MouseEvent e) {
         // TODO add your handling code here:  
         if (e.getClickCount() == 2) {
@@ -652,13 +670,16 @@ public class CadastroUsuario extends javax.swing.JDialog {
         Bairro bairro = (Bairro) jcbBairro.getSelectedItem();
         Rua rua = (Rua) jcbRua.getSelectedItem();
         Cep cep = (Cep) jcbCEP.getSelectedItem();
-        
-        funcionario = new Funcionario();
+
+        if (funcionario == null) {
+            funcionario = new Funcionario();
+        }
+
         usuario = new Usuario();
         endereco = new Endereco();
         enderecoController = new EnderecoController();
         funcionarioController = new FuncionarioController();
-        
+
         if (p.getPaisID() == null) {
             avisos = avisos + "\n Pais não pode ser vazio";
         }
@@ -678,22 +699,22 @@ public class CadastroUsuario extends javax.swing.JDialog {
         if (rua.getRuaId() == null) {
             avisos = avisos + "\n Rua não pode ser vazio ";
         }
-        
+
         if (cep.getCepID() == null) {
             avisos = avisos + "\n Cep não pode ser vazio ";
         }
-        if(jtfNome.getText().equals("")){
+        if (jtfNome.getText().equals("")) {
             avisos = avisos + "\n Nome não pode ser vazio ";
         }
-        
-        if(jtfCPF.getText().equals("")){
+
+        if (jtfCPF.getText().equals("")) {
             avisos = avisos + "\n CPF não pode ser vazio ";
         }
-       
-        if(jtfRG.getText().equals("")){
+
+        if (jtfRG.getText().equals("")) {
             avisos = avisos + "\n RG não pode ser vazio";
         }
-        
+
         if (avisos.equals("")) {
             endereco.setPais(p);
             endereco.setEstado(estado);
@@ -701,18 +722,31 @@ public class CadastroUsuario extends javax.swing.JDialog {
             endereco.setBairro(bairro);
             endereco.setRua(rua);
             endereco.setCep(cep);
-            
+
             endereco = enderecoController.gravar(endereco);
-            
-            if(!jtfUserName.getText().equals("") && !jpfSenha.getPassword().toString().equals("")){
+
+            if (!jtfUserName.getText().equals("") && !(new String(jpfSenha.getPassword())).toString().equals("")) {
+
                 usuario.setUsuarioName(jtfUserName.getText());
-                usuario.setUsuarioSenha(jpfSenha.getPassword().toString());
-                
-                usuarioController = new UsuarioController();
-                usuario = usuarioController.gravar(usuario);
+                usuario.setUsuarioSenha(new String(jpfSenha.getPassword()));
+
+                perfil = new Perfil();
+                perfil = (Perfil) jcbPerfil.getSelectedItem();
+
+                usuario.setUsuarioPerfil(perfil);
+
                 funcionario.setIdUsuario(usuario);
+
+                usuarioController = new UsuarioController();
+                funcionario.setIdUsuario(usuarioController.gravar(funcionario));
+
+                if (funcionario.getIdUsuario().getUsuarioId() == null) {
+                    Mensagens m = new Mensagens();
+                    m.jopAviso("Não foi possível gravar o usuário, porém, a gravação do funcionário continuará.");
+                    funcionario.setIdUsuario(null);
+                }
             }
-            
+
             funcionario.setEnderecoID(endereco);
             funcionario.setCpfCnpj(new Integer(jtfCPF.getText()));
             funcionario.setCtps(jtfCPF.getText());
@@ -720,7 +754,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
             funcionario.setNome(jtfNome.getText());
             funcionario.setRg(new Integer(jtfRG.getText()));
             funcionario.setTelefone(jtfTelefone.getText());
-            
+
             funcionario = funcionarioController.gravar(funcionario);
 
             if (funcionario.getIdFuncionario() != null) {
@@ -736,53 +770,80 @@ public class CadastroUsuario extends javax.swing.JDialog {
     }
 
     private void alterar(Funcionario f) {
-        f = funcionarioController.buscarFuncionarioById(f.getIdFuncionario());
-        
-        jtfNome.setText    (f.getNome());
-        jtfCPF.setText     (f.getCpfCnpj().toString());
-        jtfCTPS.setText    (f.getCtps());
-        jtfEmail.setText   (f.getEmail());
-        jtfRG.setText      (f.getRg().toString());
-        jtfTelefone.setText(f.getTelefone());
-        
-        jcbPais   .setSelectedItem(f.getEnderecoID().getPais());
-        jcbEstados.setSelectedItem(f.getEnderecoID().getEstado());
-        jcbCidade .setSelectedItem(f.getEnderecoID().getCidade());
-        jcbBairro .setSelectedItem(f.getEnderecoID().getBairro());
-        jcbRua    .setSelectedItem(f.getEnderecoID().getRua());
-        jcbCEP    .setSelectedItem(f.getEnderecoID().getCep());
-        
-        if(f.getIdUsuario() != null){
-            jtfUserName.setText(f.getIdUsuario().getUsuarioName()  != null ? f.getIdUsuario().getUsuarioName()  : "");
-            jpfSenha.setText   (f.getIdUsuario().getUsuarioSenha() != null ? f.getIdUsuario().getUsuarioSenha() : "");        
-        }else{
+        funcionario = funcionarioController.buscarFuncionarioById(f.getIdFuncionario());
+
+        jtfNome.setText(funcionario.getNome());
+        jtfCPF.setText(funcionario.getCpfCnpj().toString());
+        jtfCTPS.setText(funcionario.getCtps());
+        jtfEmail.setText(funcionario.getEmail());
+        jtfRG.setText(funcionario.getRg().toString());
+        jtfTelefone.setText(funcionario.getTelefone());
+
+        jcbPais.setSelectedItem(funcionario.getEnderecoID().getPais());
+        jcbEstados.setSelectedItem(funcionario.getEnderecoID().getEstado());
+        jcbCidade.setSelectedItem(funcionario.getEnderecoID().getCidade());
+        jcbBairro.setSelectedItem(funcionario.getEnderecoID().getBairro());
+        jcbRua.setSelectedItem(funcionario.getEnderecoID().getRua());
+        jcbCEP.setSelectedItem(funcionario.getEnderecoID().getCep());
+
+        if (funcionario.getIdUsuario() != null) {
+            jtfUserName.setText(funcionario.getIdUsuario().getUsuarioName() != null ? funcionario.getIdUsuario().getUsuarioName() : "");
+            jpfSenha.setText(funcionario.getIdUsuario().getUsuarioSenha() != null ? funcionario.getIdUsuario().getUsuarioSenha() : "");
+        } else {
             jtfUserName.setText("");
-            jpfSenha.setText   ("");        
+            jpfSenha.setText("");
         }
-        
+
         gerenciaCampos(true);
         setAba(1);
     }
-    
+
     private void gerenciaCampos(boolean abilitaDesabilita) {
-        jtfNome .setEnabled   (abilitaDesabilita);
-        jtfCTPS .setEnabled   (abilitaDesabilita);
-        jtfEmail.setEnabled   (abilitaDesabilita);
-        jtfRG   .setEnabled   (abilitaDesabilita);
+        jtfNome.setEnabled(abilitaDesabilita);
+        jtfCPF.setEnabled(abilitaDesabilita);
+        jtfCTPS.setEnabled(abilitaDesabilita);
+        jtfEmail.setEnabled(abilitaDesabilita);
+        jtfRG.setEnabled(abilitaDesabilita);
         jtfTelefone.setEnabled(abilitaDesabilita);
-        
-        jcbPais   .setEnabled(abilitaDesabilita);
+
+        jcbPais.setEnabled(abilitaDesabilita);
         jcbEstados.setEnabled(abilitaDesabilita);
-        jcbCidade .setEnabled(abilitaDesabilita);        
-        jcbBairro .setEnabled(abilitaDesabilita); 
-        jcbRua    .setEnabled(abilitaDesabilita);        
-        jcbCEP    .setEnabled(abilitaDesabilita);     
-        
+        jcbCidade.setEnabled(abilitaDesabilita);
+        jcbBairro.setEnabled(abilitaDesabilita);
+        jcbRua.setEnabled(abilitaDesabilita);
+        jcbCEP.setEnabled(abilitaDesabilita);
+
         jtfUserName.setEnabled(abilitaDesabilita);
-        jpfSenha.setEnabled   (abilitaDesabilita);
+        jpfSenha.setEnabled(abilitaDesabilita);
+
+        jbGravar.setEnabled(abilitaDesabilita);
+        jbExcluir.setEnabled(abilitaDesabilita);
     }
-    
+
     private void setAba(int i) {
         jtpAbas.setSelectedIndex(i);
+    }
+
+    private void limpar() {
+        
+        gerenciaCampos(true);
+        
+        jtfNome.setText("");
+        jtfCPF.setText("");
+        jtfCTPS.setText("");
+        jtfEmail.setText("");
+        jtfRG.setText("");
+        jtfTelefone.setText("");
+
+        jcbPais.setSelectedIndex(0);
+        jcbEstados.setSelectedIndex(0);
+        jcbCidade.setSelectedIndex(0);
+        jcbBairro.setSelectedIndex(0);
+        jcbRua.setSelectedIndex(0);
+        jcbCEP.setSelectedIndex(0);
+
+        jtfUserName.setText("");
+        jpfSenha.setText("");
+        setAba(1);
     }
 }
