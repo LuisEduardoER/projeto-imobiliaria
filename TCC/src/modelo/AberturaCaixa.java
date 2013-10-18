@@ -5,7 +5,6 @@
 package modelo;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,8 +17,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 
@@ -43,17 +40,17 @@ public class AberturaCaixa implements Serializable {
     private Integer aberturaCaixaId;
     @Basic(optional = false)
     @Column(name = "aberturaCaixa")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date aberturaCaixa;
+    @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
+    private LocalDateTime aberturaCaixa;
     // @Max(value=?)  @Min(value=?)//if you know range of your decimal fields consider using these annotations to enforce field validation
     @Column(name = "saldoCaixa")
     private Float saldoCaixa;
     @Column(name = "saldoInicio")
     private Float saldoInicio;
-    @Basic(optional = false)
+    @Basic(optional = true)
     @Column(name = "fechamentoCaixa")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date fechamentoCaixa;
+    @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
+    private LocalDateTime fechamentoCaixa;
     @Column(name = "saldoFechamento")
     private Float saldoFechamento;
     @JoinColumn(name = "caixaId", referencedColumnName = "caixaId")
@@ -71,7 +68,7 @@ public class AberturaCaixa implements Serializable {
         this.aberturaCaixaId = aberturaCaixaId;
     }
 
-    public AberturaCaixa(Integer aberturaCaixaId, Date aberturaCaixa, Date fechamentoCaixa) {
+    public AberturaCaixa(Integer aberturaCaixaId, LocalDateTime aberturaCaixa, LocalDateTime fechamentoCaixa) {
         this.aberturaCaixaId = aberturaCaixaId;
         this.aberturaCaixa = aberturaCaixa;
         this.fechamentoCaixa = fechamentoCaixa;
@@ -85,11 +82,11 @@ public class AberturaCaixa implements Serializable {
         this.aberturaCaixaId = aberturaCaixaId;
     }
 
-    public Date getAberturaCaixa() {
+    public LocalDateTime getAberturaCaixa() {
         return aberturaCaixa;
     }
 
-    public void setAberturaCaixa(Date aberturaCaixa) {
+    public void setAberturaCaixa(LocalDateTime aberturaCaixa) {
         this.aberturaCaixa = aberturaCaixa;
     }
 
@@ -109,11 +106,11 @@ public class AberturaCaixa implements Serializable {
         this.saldoInicio = saldoInicio;
     }
 
-    public Date getFechamentoCaixa() {
+    public LocalDateTime getFechamentoCaixa() {
         return fechamentoCaixa;
     }
 
-    public void setFechamentoCaixa(Date fechamentoCaixa) {
+    public void setFechamentoCaixa(LocalDateTime fechamentoCaixa) {
         this.fechamentoCaixa = fechamentoCaixa;
     }
 

@@ -47,6 +47,9 @@ public class VendaAberturaFechamentoCaixa extends javax.swing.JDialog {
 
         jbGravar = c.criaBotaoGravar();
         jbExcluir = c.criaBotaoExcluir();
+        
+        jpControles.add(jbGravar);
+        jpControles.add(jbExcluir);
 
         jbGravar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -333,12 +336,12 @@ public class VendaAberturaFechamentoCaixa extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jpControles, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(78, Short.MAX_VALUE))
+                .addComponent(jpControles, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-416)/2, (screenSize.height-397)/2, 416, 397);
+        setBounds((screenSize.width-416)/2, (screenSize.height-365)/2, 416, 365);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jrbUserOutroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jrbUserOutroActionPerformed
@@ -351,6 +354,7 @@ public class VendaAberturaFechamentoCaixa extends javax.swing.JDialog {
         if (jcbCaixa.getSelectedItem() != null) {
             caixa = (Caixa) jcbCaixa.getSelectedItem();
             jlUsuarioRespAbertura.setText(caixa.getUsuarioRespId().getUsuarioName());
+            jcbUsuarioAbertura.setEnabled(false);
         }
     }//GEN-LAST:event_jrbUserRespActionPerformed
 
@@ -445,7 +449,7 @@ public class VendaAberturaFechamentoCaixa extends javax.swing.JDialog {
         if (jrbUserOutro.isSelected()) {
             usuario = (Usuario) jcbUsuarioAbertura.getSelectedItem();
         } else {
-            if (!avisos.equals("")) {
+            if (avisos.equals("")) {
                 caixa = (Caixa) jcbCaixa.getSelectedItem();
                 usuario = caixa.getUsuarioRespId();
             }

@@ -55,7 +55,7 @@ public class PerfilDAO implements Serializable {
 
     @SuppressWarnings("unchecked")
     public List<Perfil> consultarTodos() {
-        select = session.createCriteria(Perfil.class);
+        select = session.createCriteria(Perfil.class, "perfil");
         select.add(Restrictions.eq("perfil.deleted", "f"));
         return select.list();
     }

@@ -53,6 +53,7 @@ public class VendaAberturaFechamentoCaixaController {
             m.jopAlerta("Este caixa já se encontra aberto!");
         }else{
             aberturaCaixa.setInserted(Datas.dataAtualDateTime());
+            aberturaCaixa.setAberturaCaixa(Datas.dataAtualDateTime());
             aberturaCaixa = dao.gravar(aberturaCaixa);
         }
         return aberturaCaixa;

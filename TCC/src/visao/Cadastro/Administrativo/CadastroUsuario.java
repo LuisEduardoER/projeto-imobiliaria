@@ -6,6 +6,8 @@ package visao.Cadastro.Administrativo;
 
 import Componentes.Componentes;
 import Componentes.TableModelFuncionario;
+import controller.Cadastro.Administrativo.FuncionarioController;
+import controller.Cadastro.Administrativo.UsuarioController;
 import controller.Cadastro.Endereco.BairroController;
 import controller.Cadastro.Endereco.CepController;
 import controller.Cadastro.Endereco.CidadeController;
@@ -13,8 +15,6 @@ import controller.Cadastro.Endereco.EnderecoController;
 import controller.Cadastro.Endereco.EstadoController;
 import controller.Cadastro.Endereco.PaisController;
 import controller.Cadastro.Endereco.RuaController;
-import controller.Cadastro.Administrativo.FuncionarioController;
-import controller.Cadastro.Administrativo.UsuarioController;
 import controller.Mensagens;
 import controller.PerfilController;
 import java.awt.Point;
@@ -48,6 +48,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
     JButton jbGravar = c.criaBotaoGravar();
     JButton jbExcluir = c.criaBotaoExcluir();
     JButton jbNovo = c.criaBotaoNovo();
+    
     EstadoController estadoController;
     PaisController paisController;
     CidadeController cidadeController;
@@ -58,6 +59,7 @@ public class CadastroUsuario extends javax.swing.JDialog {
     FuncionarioController funcionarioController;
     UsuarioController usuarioController;
     PerfilController perfilController;
+    
     Pais p;
     Estado estado;
     Cidade cidade;
@@ -67,9 +69,10 @@ public class CadastroUsuario extends javax.swing.JDialog {
     Usuario usuario;
     Funcionario funcionario;
     Endereco endereco;
+    Perfil perfil;
+    
     List<Funcionario> funcionarioList;
     TableModelFuncionario modeloFuncionario;
-    Perfil perfil;
 
     public CadastroUsuario(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -154,7 +157,8 @@ public class CadastroUsuario extends javax.swing.JDialog {
                 jtFuncionariosMouseClicked(e);
             }
         });
-
+        jtpAbas.setEnabledAt(1, false);    
+        jtpAbas.setEnabledAt(2, false);
     }
 
     private void jbGravarActionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,6 +182,8 @@ public class CadastroUsuario extends javax.swing.JDialog {
 
     private void jbNovoActionPerformed(java.awt.event.ActionEvent evt) {
         limpar();
+        jtpAbas.setEnabledAt(1, true);    
+        jtpAbas.setEnabledAt(2, true);
     }
 
     private void jtFuncionariosMouseClicked(java.awt.event.MouseEvent e) {
@@ -758,8 +764,15 @@ public class CadastroUsuario extends javax.swing.JDialog {
             funcionario = funcionarioController.gravar(funcionario);
 
             if (funcionario.getIdFuncionario() != null) {
-                m = new Mensagens();
+                funcionarioList = funcionarioController.buscaTodos();
+                modeloFuncionario = new TableModelFuncionario();
+                jtFuncionarios.setModel(modeloFuncionario);
+                modeloFuncionario.addListaDeProdutos(funcionarioList);
                 gerenciaCampos(false);
+                setAba(0);
+                jtpAbas.setEnabledAt(1, false);    
+                jtpAbas.setEnabledAt(2, false);
+                m = new Mensagens();
                 m.jopAviso("Funcionario " + funcionario.getNome() + " - CPF: " + funcionario.getCpfCnpj() + " gravado com sucesso!");
             }
         } else {
@@ -796,6 +809,8 @@ public class CadastroUsuario extends javax.swing.JDialog {
 
         gerenciaCampos(true);
         setAba(1);
+        jtpAbas.setEnabledAt(1, true);    
+        jtpAbas.setEnabledAt(2, true);
     }
 
     private void gerenciaCampos(boolean abilitaDesabilita) {
