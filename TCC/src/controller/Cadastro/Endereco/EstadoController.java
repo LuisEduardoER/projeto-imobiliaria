@@ -8,7 +8,7 @@ import DAO.Cadastro.Endereco.EstadoDAO;
 import controller.Mensagens;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import modelo.Estado;
+import modelo.Endereco.Estado;
 import persistencia.exceptions.NonexistentEntityException;
 import util.Datas;
 

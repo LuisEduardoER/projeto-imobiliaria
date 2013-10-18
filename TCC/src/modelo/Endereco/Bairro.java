@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelo;
+package modelo.Endereco;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,6 +19,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import modelo.Usuario;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 
@@ -27,10 +28,10 @@ import org.joda.time.LocalDateTime;
  * @author Bruno
  */
 @Entity
-@Table(name = "estado")
+@Table(name = "bairro")
 @NamedQueries({
-    @NamedQuery(name = "Estado.findAll", query = "SELECT e FROM Estado e")})
-public class Estado implements Serializable {
+    @NamedQuery(name = "Bairro.findAll", query = "SELECT b FROM Bairro b")})
+public class Bairro implements Serializable {
 
     @Column(name = "inserted")
     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
@@ -40,73 +41,63 @@ public class Estado implements Serializable {
     private LocalDateTime updated;
     @Column(name = "deleted")
     private Character deleted;
-    @OneToMany(mappedBy = "estado", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "bairro", fetch = FetchType.LAZY)
     private List<Endereco> enderecoList;
-    @JoinColumn(name = "usuarioId", referencedColumnName = "usuarioID")
+    @JoinColumn(name = "usuarioId", referencedColumnName = "usuarioId")
     @ManyToOne(fetch = FetchType.LAZY)
     private Usuario usuarioId;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "estadoId")
-    private Integer estadoId;
-    @Column(name = "estadoNome")
-    private String estadoNome;
-    @Column(name = "estadoUF")
-    private String estadoUF;
-    @OneToMany(mappedBy = "estadoId", fetch = FetchType.LAZY)
-    private List<Cidade> cidadeList;
-    @JoinColumn(name = "paisId", referencedColumnName = "paisID")
+    @Column(name = "bairroId")
+    private Integer bairroId;
+    @Column(name = "bairroNome")
+    private String bairroNome;
+    @JoinColumn(name = "cidadeId", referencedColumnName = "cidade")
     @ManyToOne(fetch = FetchType.LAZY)
-    private Pais paisId;
+    private Cidade cidadeId;
+    @OneToMany(mappedBy = "bairroID", fetch = FetchType.LAZY)
+    private List<Rua> ruaList;
 
-    public Estado() {
+    public Bairro() {
         this.deleted = 'f';
     }
 
-    public Estado(Integer estadoId) {
-        this.estadoId = estadoId;
+    public Bairro(Integer bairroId) {
+        this.bairroId = bairroId;
     }
 
-    public Integer getEstadoId() {
-        return estadoId;
+    public Integer getBairroId() {
+        return bairroId;
     }
 
-    public void setEstadoId(Integer estadoId) {
-        this.estadoId = estadoId;
+    public void setBairroId(Integer bairroId) {
+        this.bairroId = bairroId;
     }
 
-    public String getEstadoNome() {
-        return estadoNome;
+    public String getBairroNome() {
+        return bairroNome;
     }
 
-    public void setEstadoNome(String estadoNome) {
-        this.estadoNome = estadoNome;
+    public void setBairroNome(String bairroNome) {
+        this.bairroNome = bairroNome;
     }
 
-    public String getEstadoUF() {
-        return estadoUF;
+    public Cidade getCidadeId() {
+        return cidadeId;
     }
 
-    public void setEstadoUF(String estadoUF) {
-        this.estadoUF = estadoUF;
+    public void setCidadeId(Cidade cidadeId) {
+        this.cidadeId = cidadeId;
     }
 
-    public List<Cidade> getCidadeList() {
-        return cidadeList;
+    public List<Rua> getRuaList() {
+        return ruaList;
     }
 
-    public void setCidadeList(List<Cidade> cidadeList) {
-        this.cidadeList = cidadeList;
-    }
-
-    public Pais getPaisId() {
-        return paisId;
-    }
-
-    public void setPaisId(Pais paisId) {
-        this.paisId = paisId;
+    public void setRuaList(List<Rua> ruaList) {
+        this.ruaList = ruaList;
     }
 
     public LocalDateTime getInserted() {
@@ -128,18 +119,18 @@ public class Estado implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (estadoId != null ? estadoId.hashCode() : 0);
+        hash += (bairroId != null ? bairroId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Estado)) {
+        if (!(object instanceof Bairro)) {
             return false;
         }
-        Estado other = (Estado) object;
-        if ((this.estadoId == null && other.estadoId != null) || (this.estadoId != null && !this.estadoId.equals(other.estadoId))) {
+        Bairro other = (Bairro) object;
+        if ((this.bairroId == null && other.bairroId != null) || (this.bairroId != null && !this.bairroId.equals(other.bairroId))) {
             return false;
         }
         return true;
@@ -147,7 +138,7 @@ public class Estado implements Serializable {
 
     @Override
     public String toString() {
-        return estadoNome;
+        return bairroNome;
     }
 
     public Character getDeleted() {

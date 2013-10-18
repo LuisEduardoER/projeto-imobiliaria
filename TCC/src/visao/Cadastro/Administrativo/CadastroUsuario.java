@@ -23,15 +23,15 @@ import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import modelo.Bairro;
-import modelo.Cep;
-import modelo.Cidade;
-import modelo.Endereco;
-import modelo.Estado;
+import modelo.Endereco.Bairro;
+import modelo.Endereco.Cep;
+import modelo.Endereco.Cidade;
+import modelo.Endereco.Endereco;
+import modelo.Endereco.Estado;
 import modelo.Funcionario;
-import modelo.Pais;
+import modelo.Endereco.Pais;
 import modelo.PerfisPermissoes.Perfil;
-import modelo.Rua;
+import modelo.Endereco.Rua;
 import modelo.Usuario;
 
 /**

@@ -10,7 +10,7 @@ import controller.Mensagens;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import modelo.Caixa;
-import modelo.Pais;
+import modelo.Endereco.Pais;
 import persistencia.exceptions.NonexistentEntityException;
 import util.Datas;
 

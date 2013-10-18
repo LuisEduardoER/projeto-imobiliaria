@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelo;
+package modelo.Endereco;
 
 import java.io.Serializable;
 import java.util.List;
@@ -19,6 +19,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import modelo.Usuario;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 

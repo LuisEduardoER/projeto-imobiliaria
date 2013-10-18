@@ -4,7 +4,6 @@
  */
 package modelo.PerfisPermissoes;
 
-import modelo.PerfisPermissoes.ModuloPermissao;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;

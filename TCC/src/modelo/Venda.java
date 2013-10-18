@@ -62,6 +62,8 @@ public class Venda implements Serializable {
     @JoinColumn(name = "tipoPagamentoId", referencedColumnName = "tipoPagamentoId")
     @ManyToOne(fetch = FetchType.LAZY)
     private Tipopagamento tipoPagamentoId;
+    @OneToMany(mappedBy = "vendaId", fetch = FetchType.LAZY)
+    private List<Movimento> movimentoList;
 
     public Venda() {
         this.deleted = 'f';
@@ -148,6 +150,14 @@ public class Venda implements Serializable {
 
     public void setTipoPagamentoId(Tipopagamento tipoPagamentoId) {
         this.tipoPagamentoId = tipoPagamentoId;
+    }
+
+    public List<Movimento> getMovimentoList() {
+        return movimentoList;
+    }
+
+    public void setMovimentoList(List<Movimento> movimentoList) {
+        this.movimentoList = movimentoList;
     }
 
     @Override

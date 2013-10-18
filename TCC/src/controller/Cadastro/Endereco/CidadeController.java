@@ -8,8 +8,8 @@ import DAO.Cadastro.Endereco.CidadeDAO;
 import controller.Mensagens;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import modelo.Cidade;
-import modelo.Estado;
+import modelo.Endereco.Cidade;
+import modelo.Endereco.Estado;
 import persistencia.exceptions.NonexistentEntityException;
 import util.Datas;
 

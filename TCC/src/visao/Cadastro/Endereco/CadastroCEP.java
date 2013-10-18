@@ -14,12 +14,12 @@ import controller.Cadastro.Endereco.RuaController;
 import controller.Mensagens;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import modelo.Bairro;
-import modelo.Cep;
-import modelo.Cidade;
-import modelo.Estado;
-import modelo.Pais;
-import modelo.Rua;
+import modelo.Endereco.Bairro;
+import modelo.Endereco.Cep;
+import modelo.Endereco.Cidade;
+import modelo.Endereco.Estado;
+import modelo.Endereco.Pais;
+import modelo.Endereco.Rua;
 
 /**
  *

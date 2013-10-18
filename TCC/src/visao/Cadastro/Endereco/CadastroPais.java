@@ -9,7 +9,7 @@ import controller.Cadastro.Endereco.PaisController;
 import controller.Mensagens;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import modelo.Pais;
+import modelo.Endereco.Pais;
 
 /**
  *

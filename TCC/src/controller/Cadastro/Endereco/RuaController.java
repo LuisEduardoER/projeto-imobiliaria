@@ -8,7 +8,7 @@ import DAO.Cadastro.Endereco.RuaDAO;
 import controller.Mensagens;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import modelo.Rua;
+import modelo.Endereco.Rua;
 import persistencia.exceptions.NonexistentEntityException;
 import util.Datas;
 

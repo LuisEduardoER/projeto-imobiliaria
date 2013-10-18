@@ -4,6 +4,12 @@
  */
 package modelo;
 
+import modelo.Endereco.Rua;
+import modelo.Endereco.Estado;
+import modelo.Endereco.Pais;
+import modelo.Endereco.Cidade;
+import modelo.Endereco.Cep;
+import modelo.Endereco.Bairro;
 import modelo.PerfisPermissoes.Perfil;
 import java.io.Serializable;
 import java.util.List;
@@ -33,9 +39,6 @@ import org.joda.time.LocalDateTime;
 @NamedQueries({
     @NamedQuery(name = "Usuario.findAll", query = "SELECT u FROM Usuario u")})
     public class Usuario implements Serializable {
-//    @EmbeddedId
-//    protected modelo.UsuarioPK usuarioPK;
-
     @OneToMany(mappedBy = "usuarioId", fetch = FetchType.LAZY)
     private List<Bairro> bairroList;
     @OneToMany(mappedBy = "usuarioId", fetch = FetchType.LAZY)
@@ -76,6 +79,8 @@ import org.joda.time.LocalDateTime;
     private List<Caixa> caixaList;
     @OneToMany(mappedBy = "usuarioId", fetch = FetchType.LAZY)
     private List<AberturaCaixa> caixamovimentoList;
+    @OneToMany(mappedBy = "usuarioId", fetch = FetchType.LAZY)
+    private List<Movimento> movimentoList;
     
     public Usuario() {
         this.deleted = 'f';
@@ -167,6 +172,14 @@ import org.joda.time.LocalDateTime;
 
     public void setUpdated(LocalDateTime updated) {
         this.updated = updated;
+    }
+
+    public List<Movimento> getMovimentoList() {
+        return movimentoList;
+    }
+
+    public void setMovimentoList(List<Movimento> movimentoList) {
+        this.movimentoList = movimentoList;
     }
 
     

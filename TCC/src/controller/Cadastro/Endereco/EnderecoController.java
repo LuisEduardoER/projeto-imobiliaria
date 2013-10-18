@@ -7,7 +7,7 @@ package controller.Cadastro.Endereco;
 import DAO.Cadastro.Endereco.EnderecoDAO;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import modelo.Endereco;
+import modelo.Endereco.Endereco;
 import persistencia.exceptions.NonexistentEntityException;
 import util.Datas;
 

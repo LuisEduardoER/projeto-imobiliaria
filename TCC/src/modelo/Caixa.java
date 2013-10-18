@@ -54,7 +54,9 @@ public class Caixa implements Serializable {
     private String caixaDesc;
     @OneToMany(mappedBy = "caixaId", fetch = FetchType.LAZY)
     private List<AberturaCaixa> caixamovimentoList;
-
+    @OneToMany(mappedBy = "caixaId", fetch = FetchType.LAZY)
+    private List<Movimento> movimentoList;
+    
     public Caixa() {
         this.deleted = 'f';
     }
@@ -109,6 +111,14 @@ public class Caixa implements Serializable {
 
     public void setCaixamovimentoList(List<AberturaCaixa> caixamovimentoList) {
         this.caixamovimentoList = caixamovimentoList;
+    }
+
+    public List<Movimento> getMovimentoList() {
+        return movimentoList;
+    }
+
+    public void setMovimentoList(List<Movimento> movimentoList) {
+        this.movimentoList = movimentoList;
     }
 
     @Override

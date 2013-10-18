@@ -2,8 +2,9 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelo;
+package modelo.Endereco;
 
+import modelo.Endereco.Bairro;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
@@ -19,6 +20,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import modelo.Usuario;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 
@@ -27,10 +29,10 @@ import org.joda.time.LocalDateTime;
  * @author Bruno
  */
 @Entity
-@Table(name = "bairro")
+@Table(name = "cidade")
 @NamedQueries({
-    @NamedQuery(name = "Bairro.findAll", query = "SELECT b FROM Bairro b")})
-public class Bairro implements Serializable {
+    @NamedQuery(name = "Cidade.findAll", query = "SELECT c FROM Cidade c")})
+public class Cidade implements Serializable {
 
     @Column(name = "inserted")
     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
@@ -40,63 +42,63 @@ public class Bairro implements Serializable {
     private LocalDateTime updated;
     @Column(name = "deleted")
     private Character deleted;
-    @OneToMany(mappedBy = "bairro", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "cidade", fetch = FetchType.LAZY)
     private List<Endereco> enderecoList;
-    @JoinColumn(name = "usuarioId", referencedColumnName = "usuarioId")
+    @JoinColumn(name = "usuarioId", referencedColumnName = "usuarioID")
     @ManyToOne(fetch = FetchType.LAZY)
     private Usuario usuarioId;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "bairroId")
-    private Integer bairroId;
-    @Column(name = "bairroNome")
-    private String bairroNome;
-    @JoinColumn(name = "cidadeId", referencedColumnName = "cidade")
+    @Column(name = "cidade")
+    private Integer cidade;
+    @Column(name = "cidadeNome")
+    private String cidadeNome;
+    @OneToMany(mappedBy = "cidadeId", fetch = FetchType.LAZY)
+    private List<Bairro> bairroList;
+    @JoinColumn(name = "estadoId", referencedColumnName = "estadoId")
     @ManyToOne(fetch = FetchType.LAZY)
-    private Cidade cidadeId;
-    @OneToMany(mappedBy = "bairroID", fetch = FetchType.LAZY)
-    private List<Rua> ruaList;
+    private Estado estadoId;
 
-    public Bairro() {
+    public Cidade() {
         this.deleted = 'f';
     }
 
-    public Bairro(Integer bairroId) {
-        this.bairroId = bairroId;
+    public Cidade(Integer cidade) {
+        this.cidade = cidade;
     }
 
-    public Integer getBairroId() {
-        return bairroId;
+    public Integer getCidade() {
+        return cidade;
     }
 
-    public void setBairroId(Integer bairroId) {
-        this.bairroId = bairroId;
+    public void setCidade(Integer cidade) {
+        this.cidade = cidade;
     }
 
-    public String getBairroNome() {
-        return bairroNome;
+    public String getCidadeNome() {
+        return cidadeNome;
     }
 
-    public void setBairroNome(String bairroNome) {
-        this.bairroNome = bairroNome;
+    public void setCidadeNome(String cidadeNome) {
+        this.cidadeNome = cidadeNome;
     }
 
-    public Cidade getCidadeId() {
-        return cidadeId;
+    public List<Bairro> getBairroList() {
+        return bairroList;
     }
 
-    public void setCidadeId(Cidade cidadeId) {
-        this.cidadeId = cidadeId;
+    public void setBairroList(List<Bairro> bairroList) {
+        this.bairroList = bairroList;
     }
 
-    public List<Rua> getRuaList() {
-        return ruaList;
+    public Estado getEstadoId() {
+        return estadoId;
     }
 
-    public void setRuaList(List<Rua> ruaList) {
-        this.ruaList = ruaList;
+    public void setEstadoId(Estado estadoId) {
+        this.estadoId = estadoId;
     }
 
     public LocalDateTime getInserted() {
@@ -118,18 +120,18 @@ public class Bairro implements Serializable {
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (bairroId != null ? bairroId.hashCode() : 0);
+        hash += (cidade != null ? cidade.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Bairro)) {
+        if (!(object instanceof Cidade)) {
             return false;
         }
-        Bairro other = (Bairro) object;
-        if ((this.bairroId == null && other.bairroId != null) || (this.bairroId != null && !this.bairroId.equals(other.bairroId))) {
+        Cidade other = (Cidade) object;
+        if ((this.cidade == null && other.cidade != null) || (this.cidade != null && !this.cidade.equals(other.cidade))) {
             return false;
         }
         return true;
@@ -137,7 +139,7 @@ public class Bairro implements Serializable {
 
     @Override
     public String toString() {
-        return bairroNome;
+        return cidadeNome;
     }
 
     public Character getDeleted() {

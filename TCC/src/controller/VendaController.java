@@ -34,7 +34,7 @@ public class VendaController {
     public Venda gravar(Venda venda, List<Itemvenda> itens) {
         venda.setInserted(Datas.dataAtualDateTime());
         venda.setDataVenda(Datas.dataAtualDateTime());
-
+        
         venda = dao.gravar(venda);
         venda.setItemvendaList(itens);
 
