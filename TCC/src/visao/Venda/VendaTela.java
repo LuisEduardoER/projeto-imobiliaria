@@ -6,6 +6,7 @@ package visao.Venda;
 
 import controller.Mensagens;
 import controller.Cadastro.Administrativo.ProdutoController;
+import controller.MovimentoController;
 import controller.VendaController;
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
@@ -15,7 +16,9 @@ import javax.swing.AbstractButton;
 import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import modelo.Itemvenda;
+import modelo.Movimento;
 import modelo.Produto;
+import modelo.Session;
 import modelo.Tipopagamento;
 import modelo.Venda;
 import util.Datas;
@@ -28,13 +31,18 @@ public class VendaTela extends javax.swing.JDialog {
 
     ProdutoController pc;
     VendaController vendaController;
+    MovimentoController movimentoController;
+    
     Produto produto;
-    Float totalVenda = Float.MIN_VALUE;
-    Mensagens m;
     Venda venda = new Venda();
     Itemvenda itemvenda;
+    Movimento movimento;
+    
     List<Itemvenda> itens = new ArrayList<>();
     Tipopagamento tipopagamento = new Tipopagamento();
+    
+    Float totalVenda = Float.MIN_VALUE;
+    Mensagens m;
     final int DINHEIRO = 1;
     final int CHEQUES = 2;
     final int CARTAO = 3;
@@ -492,7 +500,15 @@ public class VendaTela extends javax.swing.JDialog {
                     vendaController = new VendaController();
                     vendaController.gravar(venda, itens);
                     
-                    vendaController.imprimeCupomFiscal(venda);
+                    movimentoController = new MovimentoController();
+                    
+                    movimento = new Movimento();
+                    
+                    movimento.setVendaId(venda);
+                    movimento.setCaixaId(Session.getCaixa().getCaixaId());
+                    movimento.setUsuarioId(Session.getUsuario());
+                    
+//                    vendaController.imprimeCupomFiscal(venda);
                     
                 } else {
                     jtfCodigoBarra.requestFocus();

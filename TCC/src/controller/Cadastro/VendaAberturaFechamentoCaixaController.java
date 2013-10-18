@@ -9,6 +9,7 @@ import controller.Mensagens;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import modelo.AberturaCaixa;
+import org.hibernate.Session;
 import util.Datas;
 
 /**
@@ -55,6 +56,7 @@ public class VendaAberturaFechamentoCaixaController {
             aberturaCaixa.setInserted(Datas.dataAtualDateTime());
             aberturaCaixa.setAberturaCaixa(Datas.dataAtualDateTime());
             aberturaCaixa = dao.gravar(aberturaCaixa);
+            modelo.Session.setCaixa(aberturaCaixa);
         }
         return aberturaCaixa;
     }

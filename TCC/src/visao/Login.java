@@ -7,6 +7,7 @@ package visao;
 import controller.Cadastro.Administrativo.UsuarioController;
 import controller.LoginController;
 import controller.Mensagens;
+import modelo.Session;
 import modelo.Usuario;
 
 /**
@@ -322,6 +323,7 @@ public class Login extends javax.swing.JDialog {
             usuario = usuarioController.buscarUsuarioByLogin(usuario);
 
             if (loginController.login(usuario)) {
+                Session.setUsuario(usuario);
                 TCC sistema = new TCC();
                 this.setVisible(false);
                 sistema.setVisible(true);

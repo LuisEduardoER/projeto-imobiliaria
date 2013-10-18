@@ -5,14 +5,13 @@
 package visao.Venda;
 
 import Componentes.Componentes;
-import controller.Cadastro.CaixaController;
 import controller.Cadastro.Administrativo.UsuarioController;
+import controller.Cadastro.CaixaController;
 import controller.Cadastro.VendaAberturaFechamentoCaixaController;
 import controller.Mensagens;
 import javax.swing.JButton;
 import modelo.AberturaCaixa;
 import modelo.Caixa;
-import modelo.Session;
 import modelo.Usuario;
 
 /**
