@@ -306,7 +306,6 @@ public class VendaTela extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtfCodigoBarraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoBarraKeyPressed
-
         setNextFocus(evt);
     }//GEN-LAST:event_jtfCodigoBarraKeyPressed
 

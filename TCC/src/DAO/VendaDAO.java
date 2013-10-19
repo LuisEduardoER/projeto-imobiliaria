@@ -41,7 +41,7 @@ public class VendaDAO implements Serializable {
     public Venda atualizar(Venda venda) {
         em.getTransaction().begin();
         em.persist(venda);
-//        em.getTransaction().commit();
+        em.getTransaction().commit();
         return venda;
     }
 
