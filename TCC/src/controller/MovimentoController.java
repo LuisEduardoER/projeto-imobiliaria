@@ -39,6 +39,9 @@ public class MovimentoController {
     public Movimento gravar(Movimento movimento) {
         movimento.setMovimentoHorario(Datas.dataDateTime);
         
+        VendaController vendaController = new VendaController();
+        vendaController.atualizarVenda(movimento.getVendaId());
+        
         movimento = dao.gravar(movimento);
         return movimento;
     }

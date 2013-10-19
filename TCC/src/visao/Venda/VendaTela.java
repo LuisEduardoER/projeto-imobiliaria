@@ -9,6 +9,7 @@ import controller.Mensagens;
 import controller.MovimentoController;
 import controller.VendaController;
 import java.awt.event.KeyEvent;
+import java.util.AbstractList;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
@@ -89,6 +90,8 @@ public class VendaTela extends javax.swing.JDialog {
         jrbDinheiro = new javax.swing.JRadioButton();
         jrbCheque = new javax.swing.JRadioButton();
         jrbCartao = new javax.swing.JRadioButton();
+        jLabel1 = new javax.swing.JLabel();
+        jlNomeProduto = new javax.swing.JLabel();
 
         setTitle("Venda");
         setResizable(false);
@@ -170,7 +173,7 @@ public class VendaTela extends javax.swing.JDialog {
 
         jpDetalheProdL.setLayout(new java.awt.GridLayout(3, 0, 0, 10));
 
-        jlProduto.setText("Produto:");
+        jlProduto.setText("Código de Barras:");
         jpDetalheProdL.add(jlProduto);
 
         jlQtd.setText("Quantidade:");
@@ -214,11 +217,11 @@ public class VendaTela extends javax.swing.JDialog {
         jpListaProds.setLayout(jpListaProdsLayout);
         jpListaProdsLayout.setHorizontalGroup(
             jpListaProdsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 593, Short.MAX_VALUE)
         );
         jpListaProdsLayout.setVerticalGroup(
             jpListaProdsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
         );
 
         jpPagamento.setBorder(javax.swing.BorderFactory.createTitledBorder("Tipo de Pagamento"));
@@ -272,6 +275,8 @@ public class VendaTela extends javax.swing.JDialog {
                 .addContainerGap(19, Short.MAX_VALUE))
         );
 
+        jLabel1.setText("Produto:");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -279,21 +284,33 @@ public class VendaTela extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jpListaProds, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jpDetalhesProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jpPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
-                        .addComponent(jpTotais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addGap(10, 10, 10)
+                        .addComponent(jLabel1)
+                        .addGap(28, 28, 28)
+                        .addComponent(jlNomeProduto)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jpListaProds, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jpDetalhesProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jpPagamento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
+                                .addComponent(jpTotais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap())))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jpDetalhesProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jpListaProds, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jlNomeProduto))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                .addComponent(jpListaProds, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jpTotais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -302,7 +319,7 @@ public class VendaTela extends javax.swing.JDialog {
         );
 
         java.awt.Dimension screenSize = java.awt.Toolkit.getDefaultToolkit().getScreenSize();
-        setBounds((screenSize.width-641)/2, (screenSize.height-517)/2, 641, 517);
+        setBounds((screenSize.width-641)/2, (screenSize.height-539)/2, 641, 539);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtfCodigoBarraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoBarraKeyPressed
@@ -380,11 +397,13 @@ public class VendaTela extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel jlDetalheProdutoJTF;
+    private javax.swing.JLabel jlNomeProduto;
     private javax.swing.JLabel jlProduto;
     private javax.swing.JLabel jlQtd;
     private javax.swing.JLabel jlTotal;
@@ -427,6 +446,7 @@ public class VendaTela extends javax.swing.JDialog {
         produto = pc.buscaCodigoBarra(jtfCodigoBarra.getText());
         if (produto != null) {
             jlValorPrd.setText(produto.getValor().toString());
+            jlNomeProduto.setText(produto.getProdutoNome());
         } else {
             m = new Mensagens();
             m.jopAlerta("Não foram encontrados produtos com este código de barras");
@@ -473,10 +493,11 @@ public class VendaTela extends javax.swing.JDialog {
         jtfCodigoBarra.setText("");
         jtfQuantidade.setText("");
         jlValorPrd.setText("");
+        jlNomeProduto.setText("");
     }
 
     private void finalizaVenda(KeyEvent evt) {
-
+        
         if (evt.getKeyChar() == 13 || evt.getKeyChar() == 10) {
 
             m = new Mensagens();
@@ -484,17 +505,20 @@ public class VendaTela extends javax.swing.JDialog {
             if (totalVenda > Float.MIN_VALUE) {
                 Float total = new Float(totalVenda);
                 Float dinheiro = Float.parseFloat(jtfDinheiro.getText());
-                Float pago = Float.MIN_VALUE;
+                Float troco = Float.MIN_VALUE;
 
-                pago = dinheiro - total;
-                jlTroco.setText(pago.toString());
+                troco = dinheiro - total;
+                jlTroco.setText(troco.toString());
 
-                i = JOptionPane.showConfirmDialog(null,  "Deseja finalizar esta venda ?\n"
-                                                        + "Total: " + totalVenda + "\n"
-                                                        + "Forma de pagamento: " + getSelectedPagamento(pagamentoRbg) + "\n"
-                                                        + "Total Pago: " + dinheiro,
-                                                        "Finalizar", JOptionPane.YES_NO_OPTION);
+                encerraVenda(total, troco);
+                
+                i = JOptionPane.showConfirmDialog(null, "Deseja finalizar esta venda ?\n"
+                        + "Total: " + totalVenda + "\n"
+                        + "Forma de pagamento: " + getSelectedPagamento(pagamentoRbg) + "\n"
+                        + "Total Pago: " + dinheiro,
+                        "Finalizar", JOptionPane.YES_NO_OPTION);
                 if (i == JOptionPane.YES_OPTION) {
+                    
 
                     venda.setDataVenda(Datas.dataDateTime);
                     venda.setValorTotal(totalVenda);
@@ -515,11 +539,32 @@ public class VendaTela extends javax.swing.JDialog {
                     movimento.setUsuarioId(Session.getUsuario());
 
                     movimentoController.gravar(movimento);
-//                    vendaController.imprimeCupomFiscal(venda);
 
+                    jtaLista.setText("");
+                    jtaLista.append("Bem  Vindo!");
+                    limpaTela();
+
+                    jlValorPrd.setText("");
+                    totalVenda = Float.MIN_VALUE;
+
+                    jrbDinheiro.setSelected(true);
+                    jrbCartao.setSelected(false);
+                    jrbCheque.setSelected(false);
+
+                    jlTotal.setText("0.0000");
+                    jtfDinheiro.setText("");
+                    jlTroco.setText("0.0000");
+                    
+                    venda =  new Venda();
+                    itemvenda = new Itemvenda();
+                    itens = new ArrayList<>();
+                    movimento = new Movimento();
+                    
+                    
                 } else {
                     jtfCodigoBarra.requestFocus();
                 }
+
             } else {
                 m.jopAlerta("Para finalizar a venda o valor deve ser superior à 0(zero).");
             }
@@ -535,5 +580,24 @@ public class VendaTela extends javax.swing.JDialog {
             }
         }
         return null;
+    }
+
+    private void encerraVenda(Float total, Float troco) {
+
+        jtaLista.append("\n");
+        jtaLista.append("\n");
+        jtaLista.append("----------------------------------");
+        jtaLista.append("\n");
+        jtaLista.append("TCC - Bruno");
+        jtaLista.append("\n");
+        jtaLista.append("Venda encerrada");
+        jtaLista.append("\n");
+        jtaLista.append("Total: R$ " + total);
+        jtaLista.append("\n");
+        jtaLista.append("Troco: R$ " + troco);
+        jtaLista.append("\n");
+        jtaLista.append("----------------------------------");
+        jtaLista.append("\n");
+
     }
 }

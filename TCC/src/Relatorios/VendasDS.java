@@ -15,12 +15,12 @@ import net.sf.jasperreports.engine.JRField;
  *
  * @author Bruno
  */
-public class ImovelNDS implements JRDataSource {
+public class VendasDS implements JRDataSource {
 
     private final Iterator<Venda> iterator;
     private Venda selecionado;
 
-    public ImovelNDS(ArrayList<Venda> lista) {
+    public VendasDS(ArrayList<Venda> lista) {
         this.iterator = lista.iterator();
     }
 

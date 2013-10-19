@@ -44,6 +44,11 @@ public class VendaController {
         return venda;
     }
 
+    public Venda atualizarVenda(Venda venda){
+        venda = dao.atualizar(venda);
+        return venda;
+    }
+    
     public List<Venda> buscaTodos() {
         List<Venda> lista = dao.consultarTodos();
         return lista;

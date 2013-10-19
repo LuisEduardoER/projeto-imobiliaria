@@ -26,7 +26,7 @@ public class ImprimeRelatorio {
 
         try {
             if ("rImovel".equals(arquivo)) {
-                JasperPrint print = JasperFillManager.fillReport(fileName, null, new ImovelNDS(l));
+                JasperPrint print = JasperFillManager.fillReport(fileName, null, new VendasDS(l));
                 JRExporter exporter = new net.sf.jasperreports.engine.export.JRPdfExporter();
                 exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
                 exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outFileName);
