@@ -10,6 +10,7 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import modelo.Movimento;
 import persistencia.exceptions.NonexistentEntityException;
+import util.Datas;
 
 /**
  *
@@ -36,6 +37,7 @@ public class MovimentoController {
      * para cada item faz atualização da quantidade em estoque;
      */
     public Movimento gravar(Movimento movimento) {
+        movimento.setMovimentoHorario(Datas.dataDateTime);
         
         movimento = dao.gravar(movimento);
         return movimento;

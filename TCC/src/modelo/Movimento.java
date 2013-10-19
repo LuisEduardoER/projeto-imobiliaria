@@ -5,7 +5,6 @@
 package modelo;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,8 +17,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import org.hibernate.annotations.Type;
+import org.joda.time.LocalDateTime;
 
 /**
  *
@@ -33,8 +32,8 @@ public class Movimento implements Serializable {
     private static final long serialVersionUID = 1L;
     @Basic(optional = false)
     @Column(name = "movimentoHorario")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date movimentoHorario;
+    @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
+    private LocalDateTime movimentoHorario;
     @Column(name = "operacao")
     private Character operacao;
     @Id
@@ -59,16 +58,16 @@ public class Movimento implements Serializable {
         this.movimentoId = movimentoId;
     }
 
-    public Movimento(Integer movimentoId, Date movimentoHorario) {
+    public Movimento(Integer movimentoId, LocalDateTime movimentoHorario) {
         this.movimentoId = movimentoId;
         this.movimentoHorario = movimentoHorario;
     }
 
-    public Date getMovimentoHorario() {
+    public LocalDateTime getMovimentoHorario() {
         return movimentoHorario;
     }
 
-    public void setMovimentoHorario(Date movimentoHorario) {
+    public void setMovimentoHorario(LocalDateTime movimentoHorario) {
         this.movimentoHorario = movimentoHorario;
     }
 

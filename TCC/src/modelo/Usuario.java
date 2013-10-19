@@ -4,13 +4,6 @@
  */
 package modelo;
 
-import modelo.Endereco.Rua;
-import modelo.Endereco.Estado;
-import modelo.Endereco.Pais;
-import modelo.Endereco.Cidade;
-import modelo.Endereco.Cep;
-import modelo.Endereco.Bairro;
-import modelo.PerfisPermissoes.Perfil;
 import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
@@ -27,6 +20,13 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import modelo.Endereco.Bairro;
+import modelo.Endereco.Cep;
+import modelo.Endereco.Cidade;
+import modelo.Endereco.Estado;
+import modelo.Endereco.Pais;
+import modelo.Endereco.Rua;
+import modelo.PerfisPermissoes.Perfil;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 

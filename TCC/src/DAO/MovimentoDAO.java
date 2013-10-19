@@ -34,7 +34,7 @@ public class MovimentoDAO implements Serializable {
 
     public Movimento gravar(Movimento movimento) {
         em.getTransaction().begin();
-        movimento = em.merge(movimento);
+        em.persist(movimento);
         em.getTransaction().commit();
         return movimento;
     }

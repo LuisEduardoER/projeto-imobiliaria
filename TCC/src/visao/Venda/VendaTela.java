@@ -4,8 +4,8 @@
  */
 package visao.Venda;
 
-import controller.Mensagens;
 import controller.Cadastro.Administrativo.ProdutoController;
+import controller.Mensagens;
 import controller.MovimentoController;
 import controller.VendaController;
 import java.awt.event.KeyEvent;
@@ -32,22 +32,18 @@ public class VendaTela extends javax.swing.JDialog {
     ProdutoController pc;
     VendaController vendaController;
     MovimentoController movimentoController;
-    
     Produto produto;
     Venda venda = new Venda();
     Itemvenda itemvenda;
     Movimento movimento;
-    
     List<Itemvenda> itens = new ArrayList<>();
     Tipopagamento tipopagamento = new Tipopagamento();
-    
     Float totalVenda = Float.MIN_VALUE;
     Mensagens m;
     final int DINHEIRO = 1;
     final int CHEQUES = 2;
     final int CARTAO = 3;
-    
-    
+
     /**
      * Creates new form Venda
      */
@@ -310,6 +306,7 @@ public class VendaTela extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtfCodigoBarraKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jtfCodigoBarraKeyPressed
+
         setNextFocus(evt);
     }//GEN-LAST:event_jtfCodigoBarraKeyPressed
 
@@ -429,9 +426,9 @@ public class VendaTela extends javax.swing.JDialog {
     private void buscaProduto() {
         pc = new ProdutoController();
         produto = pc.buscaCodigoBarra(jtfCodigoBarra.getText());
-        if(produto != null){
+        if (produto != null) {
             jlValorPrd.setText(produto.getValor().toString());
-        }else{
+        } else {
             m = new Mensagens();
             m.jopAlerta("Não foram encontrados produtos com este código de barras");
             jtfCodigoBarra.requestFocus();
@@ -458,14 +455,14 @@ public class VendaTela extends javax.swing.JDialog {
                 jtaLista.append("\n");
                 jtaLista.append("----------------------------------");
                 jtaLista.append("\n");
-                
+
                 itemvenda = new Itemvenda();
                 itemvenda.setProdutoId(produto);
                 itemvenda.setQuantidade(qtd);
                 itemvenda.setValorItemVenda(valor);
-                
+
                 itens.add(itemvenda);
-                
+
                 limpaTela();
             }
         } else {
@@ -480,36 +477,47 @@ public class VendaTela extends javax.swing.JDialog {
     }
 
     private void finalizaVenda(KeyEvent evt) {
-        
+
         if (evt.getKeyChar() == 13 || evt.getKeyChar() == 10) {
-        
+
             m = new Mensagens();
             int i = 0;
             if (totalVenda > Float.MIN_VALUE) {
-                i = JOptionPane.showConfirmDialog(null, "Deseja finalizar esta venda ?\n"
-                                                       + "Total: " + totalVenda +"\n"
-                                                       + "Forma de pagamento: " + getSelectedPagamento(pagamentoRbg)+"\n",
-                                                         "Finalizar", JOptionPane.YES_NO_OPTION);
+                Float total = new Float(totalVenda);
+                Float dinheiro = Float.parseFloat(jtfDinheiro.getText());
+                Float pago = Float.MIN_VALUE;
+
+                pago = dinheiro - total;
+                jlTroco.setText(pago.toString());
+
+                i = JOptionPane.showConfirmDialog(null,  "Deseja finalizar esta venda ?\n"
+                                                        + "Total: " + totalVenda + "\n"
+                                                        + "Forma de pagamento: " + getSelectedPagamento(pagamentoRbg) + "\n"
+                                                        + "Total Pago: " + dinheiro,
+                                                        "Finalizar", JOptionPane.YES_NO_OPTION);
                 if (i == JOptionPane.YES_OPTION) {
-                    
+
                     venda.setDataVenda(Datas.dataDateTime);
                     venda.setValorTotal(totalVenda);
                     venda.setTotalPago(Float.parseFloat(jtfDinheiro.getText()));
                     venda.setTipoPagamentoId(tipopagamento);
-                    
+
                     vendaController = new VendaController();
                     vendaController.gravar(venda, itens);
-                    
+
                     movimentoController = new MovimentoController();
-                    
+
                     movimento = new Movimento();
-                    
+
                     movimento.setVendaId(venda);
+
                     movimento.setCaixaId(Session.getCaixa().getCaixaId());
+
                     movimento.setUsuarioId(Session.getUsuario());
-                    
+
+                    movimentoController.gravar(movimento);
 //                    vendaController.imprimeCupomFiscal(venda);
-                    
+
                 } else {
                     jtfCodigoBarra.requestFocus();
                 }

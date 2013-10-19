@@ -9,7 +9,8 @@ import controller.Mensagens;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import modelo.AberturaCaixa;
-import org.hibernate.Session;
+import modelo.Caixa;
+import modelo.Usuario;
 import util.Datas;
 
 /**
@@ -19,13 +20,13 @@ import util.Datas;
 public class VendaAberturaFechamentoCaixaController {
 
     VendaAberturaFechamentoCaixaDAO dao = new VendaAberturaFechamentoCaixaDAO();
-    
+
     public DefaultComboBoxModel<AberturaCaixa> buscar(String field, String value) {
         AberturaCaixa aberturaCaixa = new AberturaCaixa();
         DefaultComboBoxModel<AberturaCaixa> dcbm = new DefaultComboBoxModel<>();
         List<Object[]> aberturaCaixaObject = dao.consultarCaixamovimento(field, value);
         if (!aberturaCaixaObject.isEmpty()) {
-            aberturaCaixa.setAberturaCaixaId((Integer)aberturaCaixaObject.get(0)[0]);
+            aberturaCaixa.setAberturaCaixaId((Integer) aberturaCaixaObject.get(0)[0]);
         }
         dcbm.addElement(aberturaCaixa);
         return dcbm;
@@ -45,14 +46,24 @@ public class VendaAberturaFechamentoCaixaController {
         return aberturaCaixa;
     }
 
+    public Integer rowCountCaixasAbertosByUsuario(Integer usuarioId) {
+        Integer caixasAbertos = dao.rowCountCaixasAbertosByUsuario(usuarioId);
+        return caixasAbertos;
+    }
+    
+    public AberturaCaixa getCaixaAbertoByFuncionario(Integer usuarioId) {
+        AberturaCaixa aberturaCaixa = dao.getCaixaAbertoByFuncionario(usuarioId);
+        return aberturaCaixa;
+    }
+
     public AberturaCaixa gravar(AberturaCaixa aberturaCaixa) {
-        
+
         Integer aberturaCaixas = dao.rowCountCaixasAbertos(aberturaCaixa.getCaixaId().getCaixaId());
-        
+
         if (aberturaCaixas > 0) {
             Mensagens m = new Mensagens();
             m.jopAlerta("Este caixa já se encontra aberto!");
-        }else{
+        } else {
             aberturaCaixa.setInserted(Datas.dataAtualDateTime());
             aberturaCaixa.setAberturaCaixa(Datas.dataAtualDateTime());
             aberturaCaixa = dao.gravar(aberturaCaixa);
@@ -60,7 +71,6 @@ public class VendaAberturaFechamentoCaixaController {
         }
         return aberturaCaixa;
     }
-
 //    public AberturaCaixa setDeleted(AberturaCaixa aberturaCaixa) throws NonexistentEntityException, Exception {
 //        aberturaCaixa.setUpdated(Datas.dataAtualDateTime());
 //        aberturaCaixa.setDeleted('t');

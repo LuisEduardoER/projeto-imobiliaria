@@ -5,8 +5,11 @@
 package visao;
 
 import controller.Cadastro.Administrativo.UsuarioController;
+import controller.Cadastro.VendaAberturaFechamentoCaixaController;
 import controller.LoginController;
 import controller.Mensagens;
+import modelo.AberturaCaixa;
+import modelo.Caixa;
 import modelo.Session;
 import modelo.Usuario;
 
@@ -19,6 +22,8 @@ public class Login extends javax.swing.JDialog {
     private boolean ADVANCED_PANEL = false;
     UsuarioController usuarioController;
     LoginController loginController;
+    VendaAberturaFechamentoCaixaController vendaAberturaFechamentoCaixaController;
+    
     Mensagens m;
     Usuario usuario;
 
@@ -33,7 +38,7 @@ public class Login extends javax.swing.JDialog {
         jpAdvanced.setVisible(false);
         jbAdvancedPanel.setText("<");
         ADVANCED_PANEL = false;
-        jtfUser.requestFocus();
+        setFocus();
     }
 
     /**
@@ -324,6 +329,14 @@ public class Login extends javax.swing.JDialog {
 
             if (loginController.login(usuario)) {
                 Session.setUsuario(usuario);
+                
+                vendaAberturaFechamentoCaixaController = new VendaAberturaFechamentoCaixaController();
+                Integer caixasAbertos = vendaAberturaFechamentoCaixaController.rowCountCaixasAbertosByUsuario(usuario.getUsuarioId());
+                if(caixasAbertos > 0 ){
+                    AberturaCaixa aberturaCaixa = vendaAberturaFechamentoCaixaController.getCaixaAbertoByFuncionario(usuario.getUsuarioId());
+                    Session.setCaixa(aberturaCaixa);
+                }
+                                
                 TCC sistema = new TCC();
                 this.setVisible(false);
                 sistema.setVisible(true);
@@ -334,5 +347,9 @@ public class Login extends javax.swing.JDialog {
             m.jopAlerta("Verifique: " + avisos + "!");
             jtfUser.requestFocus();
         }
+    }
+
+    private void setFocus(){
+        jtfUser.requestFocus();
     }
 }

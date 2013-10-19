@@ -4,8 +4,10 @@
  */
 package visao;
 
+import controller.Mensagens;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import modelo.Session;
 import visao.Cadastro.Administrativo.CadastroFabricante;
 import visao.Cadastro.Administrativo.CadastroFornecedor;
 import visao.Cadastro.Administrativo.CadastroProduto;
@@ -36,6 +38,9 @@ public class TCC extends javax.swing.JFrame {
     public TCC() {
         initComponents();
         this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
+
+        verificaUsuario();
+
     }
 
     /**
@@ -271,7 +276,7 @@ public class TCC extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        JOptionPane.showMessageDialog(null,"flowwww");
+        JOptionPane.showMessageDialog(null, "flowwww");
         System.exit(0);
     }//GEN-LAST:event_formWindowClosing
 
@@ -341,8 +346,8 @@ public class TCC extends javax.swing.JFrame {
     }//GEN-LAST:event_jmiCaixaActionPerformed
 
     private void jmiBaixaDeTituloPagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiBaixaDeTituloPagarActionPerformed
-       FinanceiroBaixaTituloPagar baixas = new FinanceiroBaixaTituloPagar(this, rootPaneCheckingEnabled);
-       baixas.setVisible(true);
+        FinanceiroBaixaTituloPagar baixas = new FinanceiroBaixaTituloPagar(this, rootPaneCheckingEnabled);
+        baixas.setVisible(true);
     }//GEN-LAST:event_jmiBaixaDeTituloPagarActionPerformed
 
     private void jmiVendaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiVendaActionPerformed
@@ -424,4 +429,12 @@ public class TCC extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiProduto;
     private javax.swing.JMenuItem jmiVenda;
     // End of variables declaration//GEN-END:variables
+
+    public void verificaUsuario(){
+        if (Session.getUsuario() == null) {
+            Mensagens m = new Mensagens();
+            m.jopError("Ocorre um erro durante a verificação do usuário, por favor faça login novamente!");
+            System.exit(0);
+        }
+    }
 }

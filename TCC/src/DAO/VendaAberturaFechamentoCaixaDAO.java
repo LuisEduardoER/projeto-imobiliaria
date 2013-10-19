@@ -12,6 +12,7 @@ import javax.persistence.EntityManager;
 import modelo.Caixa;
 import modelo.AberturaCaixa;
 import modelo.Endereco.Pais;
+import modelo.Usuario;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;
@@ -103,5 +104,25 @@ public class VendaAberturaFechamentoCaixaDAO implements Serializable {
         criteria.setProjection(Projections.rowCount());
         
         return ((Integer) criteria.uniqueResult()).intValue();
+    }
+    
+    public Integer rowCountCaixasAbertosByUsuario(Integer usuarioId) {
+        Criteria criteria = session.createCriteria(AberturaCaixa.class, "aberturaCaixa");
+        criteria.createCriteria("aberturaCaixa.usuarioId", "usuario");
+        
+        criteria.add(Restrictions.eq("usuario.usuarioId", usuarioId));
+        
+        criteria.setProjection(Projections.rowCount());
+        
+        return ((Integer) criteria.uniqueResult()).intValue();
+    }
+    
+    public AberturaCaixa getCaixaAbertoByFuncionario(Integer usuarioId) {
+        Criteria criteria = session.createCriteria(AberturaCaixa.class, "aberturaCaixa");
+        criteria.createCriteria("aberturaCaixa.usuarioId", "usuarioAbertura");
+        
+        criteria.add(Restrictions.eq("usuarioAbertura.usuarioId", usuarioId));
+        
+        return (AberturaCaixa) criteria.uniqueResult();
     }
 }
