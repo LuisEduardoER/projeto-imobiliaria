@@ -34,8 +34,8 @@ public class ItemVendaDAO implements Serializable {
 
     public Itemvenda gravar(Itemvenda itemVenda) {
         em.getTransaction().begin();
-        itemVenda = em.merge(itemVenda);
-        em.getTransaction().commit();
+        em.persist(itemVenda);
+//        em.getTransaction().commit();
         return itemVenda;
     }
 

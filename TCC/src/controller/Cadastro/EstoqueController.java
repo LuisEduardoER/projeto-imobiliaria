@@ -6,10 +6,8 @@ package controller.Cadastro;
 
 import DAO.EstoqueDAO;
 import controller.Mensagens;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultComboBoxModel;
 import modelo.Estoque;
 import modelo.Produto;
 import persistencia.exceptions.NonexistentEntityException;

@@ -41,7 +41,7 @@ public class EstoqueDAO implements Serializable {
     public Estoque atualizar(Estoque estoque) {
         em.getTransaction().begin();
         estoque = em.merge(estoque);
-    //    em.getTransaction().commit();
+//        em.getTransaction().commit();
         return estoque;
     }
 
