@@ -37,9 +37,9 @@ public class VendaDS implements JRDataSource {
 
     @Override
     public Object getFieldValue(JRField jrf) throws JRException {
-
-//        if ("numero".equals(jrf.getName())) {
-//            return selecionado.getImovelNumero();
+//
+//        if ("produto".equals(jrf.getName())) {
+//            return selecionado.;
 //        }
 //        if ("comprador".equals(jrf.getName())) {
 //            return selecionado.getComprador();
@@ -53,8 +53,8 @@ public class VendaDS implements JRDataSource {
 //        if ("valorVenda".equals(jrf.getName())) {
 //            return selecionado.getValorVenda();
 //        }
-        
+//        
         return "Erro ao Gerar Relatório!";
-
+//
     }
 }

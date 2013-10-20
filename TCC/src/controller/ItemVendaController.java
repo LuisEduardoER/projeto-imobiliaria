@@ -57,7 +57,7 @@ public class ItemVendaController {
             estoqueController.atualizar(estoque);
             // implementar esta verificação apenas no caso de compras por delivery!
 //            if(estoque.getQuantidade() - item.getQuantidade() > estoque.getQuantidadeMIN()){
-//                item = dao.gravar(item);
+                dao.gravar(item);
 //            }else if (estoque.getQuantidade() - item.getQuantidade() < 0){
 //                m = new Mensagens();
 //                m.jopAlerta("A quantidade solicitada para o Produto: " + item.getProdutoId().getProdutoNome() +" ultrapassa a quantidade em estoque!");

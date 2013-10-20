@@ -7,7 +7,6 @@ package controller;
 import DAO.ModuloDAO;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import modelo.Endereco.Pais;
 import modelo.PerfisPermissoes.Modulo;
 import persistencia.exceptions.NonexistentEntityException;
 import util.Datas;
@@ -31,7 +30,8 @@ public class ModuloController {
         dcbm.addElement(modulo);
         return dcbm;
     }
-    public List<Modulo> buscaTodos(){
+
+    public List<Modulo> buscaTodos() {
         List<Modulo> listaObject = dao.buscarTodos();
 //        List<Modulo> listaModulo = new ArrayList<>();
 //        
@@ -49,10 +49,10 @@ public class ModuloController {
 //            
 //            listaFuncionario.add(f);
 //        }
-        
+
         return listaObject;
     }
-    
+
     public DefaultComboBoxModel<Modulo> listModulos() {
         DefaultComboBoxModel<Modulo> dcbm = new DefaultComboBoxModel<>();
         List<Modulo> lista = dao.consultarTodos();
@@ -61,7 +61,7 @@ public class ModuloController {
         }
         return dcbm;
     }
-    
+
     public DefaultComboBoxModel<Modulo> listByField(String field, String value) {
         DefaultComboBoxModel<Modulo> dcbm = new DefaultComboBoxModel<>();
         List<Modulo> lista = dao.consultarTodos();
@@ -70,8 +70,10 @@ public class ModuloController {
         }
         return dcbm;
     }
+
     /**
      * Método que efetua uma busca pelo ID do funcionario
+     *
      * @param id = id do funcionário
      * @return Funcionario funcionario
      */
@@ -81,12 +83,12 @@ public class ModuloController {
     }
 
     public Modulo gravar(Modulo modulo) {
-        
+
         Integer modulos = dao.checaModuloExiste(modulo);
         if (modulos > 0) {
             Mensagens m = new Mensagens();
             m.jopAlerta("Este CPF/CNPJ já existe.");
-        }else{
+        } else {
             modulo.setInserted(Datas.dataAtualDateTime());
             modulo = dao.gravar(modulo);
         }
