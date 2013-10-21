@@ -9,7 +9,6 @@ import controller.Cadastro.VendaAberturaFechamentoCaixaController;
 import controller.LoginController;
 import controller.Mensagens;
 import modelo.AberturaCaixa;
-import modelo.Caixa;
 import modelo.Session;
 import modelo.Usuario;
 

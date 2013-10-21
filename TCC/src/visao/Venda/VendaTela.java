@@ -5,6 +5,7 @@
 package visao.Venda;
 
 import controller.Cadastro.Administrativo.ProdutoController;
+import controller.ItemVendaController;
 import controller.Mensagens;
 import controller.MovimentoController;
 import controller.VendaController;
@@ -33,6 +34,7 @@ public class VendaTela extends javax.swing.JDialog {
     ProdutoController pc;
     VendaController vendaController;
     MovimentoController movimentoController;
+    ItemVendaController itemVendaController;
     Produto produto;
     Venda venda = new Venda();
     Itemvenda itemvenda;
@@ -497,7 +499,7 @@ public class VendaTela extends javax.swing.JDialog {
     }
 
     private void finalizaVenda(KeyEvent evt) {
-        
+
         if (evt.getKeyChar() == 13 || evt.getKeyChar() == 10) {
 
             m = new Mensagens();
@@ -511,14 +513,14 @@ public class VendaTela extends javax.swing.JDialog {
                 jlTroco.setText(troco.toString());
 
                 encerraVenda(total, troco);
-                
+
                 i = JOptionPane.showConfirmDialog(null, "Deseja finalizar esta venda ?\n"
                         + "Total: " + totalVenda + "\n"
                         + "Forma de pagamento: " + getSelectedPagamento(pagamentoRbg) + "\n"
                         + "Total Pago: " + dinheiro,
                         "Finalizar", JOptionPane.YES_NO_OPTION);
                 if (i == JOptionPane.YES_OPTION) {
-                    
+
 
                     venda.setDataVenda(Datas.dataDateTime);
                     venda.setValorTotal(totalVenda);
@@ -526,19 +528,24 @@ public class VendaTela extends javax.swing.JDialog {
                     venda.setTipoPagamentoId(tipopagamento);
 
                     vendaController = new VendaController();
-                    vendaController.gravar(venda, itens);
+                    vendaController.gravar(venda);
 
                     movimentoController = new MovimentoController();
 
                     movimento = new Movimento();
 
                     movimento.setVendaId(venda);
-
+                    
                     movimento.setCaixaId(Session.getCaixa().getCaixaId());
 
                     movimento.setUsuarioId(Session.getUsuario());
 
                     movimentoController.gravar(movimento);
+
+                    itemVendaController = new ItemVendaController();
+                    
+                    venda.setItemvendaList(itens);
+                    venda = itemVendaController.gravar(venda);
 
                     jtaLista.setText("");
                     jtaLista.append("Bem  Vindo!");
@@ -554,13 +561,13 @@ public class VendaTela extends javax.swing.JDialog {
                     jlTotal.setText("0.0000");
                     jtfDinheiro.setText("");
                     jlTroco.setText("0.0000");
-                    
-                    venda =  new Venda();
+
+                    venda = new Venda();
                     itemvenda = new Itemvenda();
                     itens = new ArrayList<>();
                     movimento = new Movimento();
-                    
-                    
+
+
                 } else {
                     jtfCodigoBarra.requestFocus();
                 }

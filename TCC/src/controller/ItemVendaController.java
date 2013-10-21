@@ -57,8 +57,6 @@ public class ItemVendaController {
             estoqueController.atualizar(estoque);
             // implementar esta verificação apenas no caso de compras por delivery!
 //            if(estoque.getQuantidade() - item.getQuantidade() > estoque.getQuantidadeMIN()){
-            VendaController vC = new VendaController();
-            vC.atualizarVenda(venda);
             dao.gravar(item);
 //            }else if (estoque.getQuantidade() - item.getQuantidade() < 0){
 //                m = new Mensagens();

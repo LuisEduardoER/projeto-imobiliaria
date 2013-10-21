@@ -23,6 +23,7 @@ import visao.Cadastro.Endereco.CadastroEstados;
 import visao.Cadastro.Endereco.CadastroPais;
 import visao.Cadastro.Endereco.CadastroRuas;
 import visao.Financeiro.FinanceiroBaixaTituloPagar;
+import visao.Relatorios.RelatorioVenda;
 import visao.Venda.VendaAberturaFechamentoCaixa;
 import visao.Venda.VendaTela;
 
@@ -80,6 +81,8 @@ public class TCC extends javax.swing.JFrame {
         jmiVenda = new javax.swing.JMenuItem();
         jmiAbrirCaixa = new javax.swing.JMenuItem();
         jmRelatorios = new javax.swing.JMenu();
+        jmVendas = new javax.swing.JMenu();
+        jmiVendasPorProduto = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TCC - Bruno");
@@ -256,6 +259,19 @@ public class TCC extends javax.swing.JFrame {
         jMenuBar1.add(jmVenda);
 
         jmRelatorios.setText("Relatórios");
+
+        jmVendas.setText("Vendas");
+
+        jmiVendasPorProduto.setText("Vendas por Produto");
+        jmiVendasPorProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiVendasPorProdutoActionPerformed(evt);
+            }
+        });
+        jmVendas.add(jmiVendasPorProduto);
+
+        jmRelatorios.add(jmVendas);
+
         jMenuBar1.add(jmRelatorios);
 
         setJMenuBar(jMenuBar1);
@@ -365,6 +381,11 @@ public class TCC extends javax.swing.JFrame {
         perfis.setVisible(true);
     }//GEN-LAST:event_jmiPerfisActionPerformed
 
+    private void jmiVendasPorProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiVendasPorProdutoActionPerformed
+        RelatorioVenda relatorio = new RelatorioVenda(this, rootPaneCheckingEnabled);
+        relatorio.setVisible(true);
+    }//GEN-LAST:event_jmiVendasPorProdutoActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -412,6 +433,7 @@ public class TCC extends javax.swing.JFrame {
     private javax.swing.JMenu jmPermissoes;
     private javax.swing.JMenu jmRelatorios;
     private javax.swing.JMenu jmVenda;
+    private javax.swing.JMenu jmVendas;
     private javax.swing.JMenuItem jmVinculoModuloPermissao;
     private javax.swing.JMenuItem jmiAbrirCaixa;
     private javax.swing.JMenuItem jmiBaixaDeTituloPagar;
@@ -428,6 +450,7 @@ public class TCC extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiPerfis;
     private javax.swing.JMenuItem jmiProduto;
     private javax.swing.JMenuItem jmiVenda;
+    private javax.swing.JMenuItem jmiVendasPorProduto;
     // End of variables declaration//GEN-END:variables
 
     public void verificaUsuario(){

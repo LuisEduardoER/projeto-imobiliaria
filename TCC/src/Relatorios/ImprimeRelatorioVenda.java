@@ -4,6 +4,7 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import modelo.Venda;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRExporter;
@@ -14,10 +15,10 @@ import net.sf.jasperreports.engine.JasperPrint;
 
 public class ImprimeRelatorioVenda {
 
-    public static ArrayList<Venda> l;
+    public static List<Object[]> l;
     public static String modelo;
 
-    public ImprimeRelatorioVenda(ArrayList<Venda> lista, String arquivo) {
+    public ImprimeRelatorioVenda(List<Object[]> lista, String arquivo) {
 
         this.l = lista;
 

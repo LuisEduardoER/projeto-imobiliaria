@@ -4,9 +4,13 @@
  */
 package visao.Relatorios;
 
+import Relatorios.ImprimeRelatorioVenda;
 import controller.Relatorios.RelatorioVendasController;
+import java.util.ArrayList;
+import java.util.List;
 import modelo.Caixa;
 import modelo.Produto;
+import modelo.Venda;
 
 /**
  *
@@ -59,7 +63,7 @@ public class RelatorioVenda extends javax.swing.JDialog {
         jtfDataFinal = new javax.swing.JTextField();
         jcbCaixas = new javax.swing.JComboBox();
         jcbProdutos = new javax.swing.JComboBox();
-        jButton1 = new javax.swing.JButton();
+        jbGerar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Relatorios de Vendas");
@@ -186,10 +190,10 @@ public class RelatorioVenda extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
-        jButton1.setText("Gerar Relatório");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jbGerar.setText("Gerar Relatório");
+        jbGerar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jbGerarActionPerformed(evt);
             }
         });
 
@@ -207,7 +211,7 @@ public class RelatorioVenda extends javax.swing.JDialog {
                         .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)))
+                        .addComponent(jbGerar)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -220,7 +224,7 @@ public class RelatorioVenda extends javax.swing.JDialog {
                 .addGap(18, 18, 18)
                 .addComponent(jpFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addComponent(jbGerar)
                 .addContainerGap())
         );
 
@@ -228,12 +232,13 @@ public class RelatorioVenda extends javax.swing.JDialog {
         setBounds((screenSize.width-416)/2, (screenSize.height-368)/2, 416, 368);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jbGerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGerarActionPerformed
         Produto produto = (Produto) jcbProdutos.getSelectedItem();
         Caixa caixa = (Caixa) jcbCaixas.getSelectedItem();
         
-        relatorioVendasController.relatorioVendasProdutoCaixaData(produto.getProduto_id(), caixa.getCaixaId(), null, null);
-    }//GEN-LAST:event_jButton1ActionPerformed
+        List<Object[]> lista = relatorioVendasController.relatorioVendasProdutoCaixaData(produto.getProduto_id(), caixa.getCaixaId(), null, null);
+        new ImprimeRelatorioVenda(lista, "rVendas");
+    }//GEN-LAST:event_jbGerarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -277,7 +282,6 @@ public class RelatorioVenda extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -287,6 +291,7 @@ public class RelatorioVenda extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JButton jbGerar;
     private javax.swing.JComboBox jcbCaixas;
     private javax.swing.JComboBox jcbProdutos;
     private javax.swing.JComboBox jcbTipoRelatorio;

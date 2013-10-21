@@ -22,20 +22,19 @@ public class RelatorioVendasController {
 
     RelatorioVendasDAO dao = new RelatorioVendasDAO();
 
-    public List<Venda> relatorioVendasProdutoCaixaData(Integer produtoId, Integer caixaId, LocalDateTime dataInicial, LocalDateTime dataFinal) {
+    public List<Object[]> relatorioVendasProdutoCaixaData(Integer produtoId, Integer caixaId, LocalDateTime dataInicial, LocalDateTime dataFinal) {
 
+        List<Object[]> vendas = dao.relatorioVendasProdutoCaixaData(produtoId, caixaId, dataInicial, dataFinal);
 
-        List<Venda> vendas = new ArrayList<>();
-
-        List<Object[]> vendasObject = dao.relatorioVendasProdutoCaixaData(produtoId, caixaId, dataInicial, dataFinal);
-
-//        if (!aberturaCaixaObject.isEmpty()) {
-//            
-//            aberturaCaixa.setAberturaCaixaId((Integer) aberturaCaixaObject.get(0)[0]);
-//        
-//        }
-//        
-//        dcbm.addElement(aberturaCaixa);
+        
+//        p.add(Projections.groupProperty("produto.produtoNome"));
+//        p.add(Projections.groupProperty("caixa.caixaDesc"));
+//        p.add(Projections.groupProperty("venda.dataVenda"));
+//        p.add(Projections.groupProperty("venda.valorTotal"));
+//        p.add(Projections.groupProperty("venda.totalPago"));
+            
+            
+        
         return vendas;
     }
 

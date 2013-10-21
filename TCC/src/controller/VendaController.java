@@ -31,15 +31,11 @@ public class VendaController {
         return dcbm;
     }
 
-    public Venda gravar(Venda venda, List<Itemvenda> itens) {
+    public Venda gravar(Venda venda) {
         venda.setInserted(Datas.dataAtualDateTime());
         venda.setDataVenda(Datas.dataAtualDateTime());
         
         venda = dao.gravar(venda);
-        venda.setItemvendaList(itens);
-
-        itemVendaController = new ItemVendaController();
-        venda = itemVendaController.gravar(venda);
 
         return venda;
     }
