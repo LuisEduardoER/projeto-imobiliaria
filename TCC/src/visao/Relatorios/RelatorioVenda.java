@@ -21,22 +21,21 @@ public class RelatorioVenda extends javax.swing.JDialog {
     /**
      * Creates new form RelatorioVenda
      */
-    
     RelatorioVendasController relatorioVendasController;
-    
+
     public RelatorioVenda(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         relatorioVendasController = new RelatorioVendasController();
-        
+
         jcbCaixas.setModel(relatorioVendasController.listaCaixas());
         jcbCaixas.addItem("TODOS");
-        
+
         jcbProdutos.setModel(relatorioVendasController.listaProdutos());
         jcbProdutos.addItem("TODOS");
-        
-        
+
+
     }
 
     /**
@@ -233,10 +232,35 @@ public class RelatorioVenda extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jbGerarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbGerarActionPerformed
-        Produto produto = (Produto) jcbProdutos.getSelectedItem();
-        Caixa caixa = (Caixa) jcbCaixas.getSelectedItem();
-        
-        List<Object[]> lista = relatorioVendasController.relatorioVendasProdutoCaixaData(produto.getProduto_id(), caixa.getCaixaId(), null, null);
+        Produto produto = new Produto();
+        Caixa caixa;
+
+        List<Object[]> lista;
+
+        Integer produtoId = null;
+        Integer caixaId = null;
+
+        try {
+            produto = (Produto) jcbProdutos.getSelectedItem();
+            produtoId = produto.getProduto_id();
+        } catch (Exception e) {
+            if (jcbProdutos.getSelectedItem() == "TODOS") {
+                produtoId = null;
+            }
+        }
+
+        try {
+            caixa = (Caixa) jcbCaixas.getSelectedItem();
+            caixaId = caixa.getCaixaId();
+        } catch (Exception e) {
+            if (jcbCaixas.getSelectedItem() == "TODOS") {
+                caixaId = null;
+            }
+        }
+
+
+        lista = relatorioVendasController.relatorioVendasProdutoCaixaData(produtoId, caixaId, null, null);
+
         new ImprimeRelatorioVenda(lista, "rVendas");
     }//GEN-LAST:event_jbGerarActionPerformed
 

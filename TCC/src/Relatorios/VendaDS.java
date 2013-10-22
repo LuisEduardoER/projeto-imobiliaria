@@ -11,6 +11,8 @@ import modelo.Venda;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRField;
+import org.joda.time.DateTimeZone;
+import org.joda.time.LocalDateTime;
 
 /**
  *
@@ -53,7 +55,9 @@ public class VendaDS implements JRDataSource {
             return selecionado[1];
         }
         if ("data".equals(jrf.getName())) {
-            return selecionado[2];
+            LocalDateTime data = (LocalDateTime) selecionado[2];
+            String d = data.toLocalDate().toString("dd/MM/YYYY");
+            return d;
         }
         if ("valor".equals(jrf.getName())) {
             return selecionado[3];
