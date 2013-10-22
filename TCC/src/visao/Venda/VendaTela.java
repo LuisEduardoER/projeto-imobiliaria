@@ -567,6 +567,8 @@ public class VendaTela extends javax.swing.JDialog {
                     itens = new ArrayList<>();
                     movimento = new Movimento();
 
+                    
+                    
 
                 } else {
                     jtfCodigoBarra.requestFocus();

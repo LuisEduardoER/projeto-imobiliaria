@@ -76,22 +76,22 @@ public class VendaController {
         return lista;
     }
 
-    public void imprimeCupomFiscal(Venda venda) {
-
-        impressao = new ImpressaoCupomController();
-
-        List<String> impressoras = new ArrayList<>();
-        impressoras = impressao.retornaImressoras();
-
-        if (impressoras.isEmpty()) {
-            m = new Mensagens();
-            m.jopAviso("Nenhuma impressora encotrada!");
-        } else {
-//            impressoras.get(0).
-//            PrintService impressora = impressao.detectaImpressoras(impressoras);
-        }
-        //Bematech.AbrePortaSerial();
-//        Bematech.AbreCupom("");
-        }
+//    public void imprimeCupomFiscal(Venda venda) {
+//
+//        impressao = new ImpressaoCupomController();
+//
+//        List<String> impressoras = new ArrayList<>();
+//        impressoras = impressao.retornaImressoras();
+//
+//        if (impressoras.isEmpty()) {
+//            m = new Mensagens();
+//            m.jopAviso("Nenhuma impressora encotrada!");
+//        } else {
+////            impressoras.get(0).
+////            PrintService impressora = impressao.detectaImpressoras(impressoras);
+//        }
+//        //Bematech.AbrePortaSerial();
+////        Bematech.AbreCupom("");
+//        }
     
 }
