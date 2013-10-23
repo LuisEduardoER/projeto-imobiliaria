@@ -25,7 +25,7 @@ public class ImprimeRelatorioTitulosPagar {
 
         try {
             if ("rTitulosPagarNaoBaixados".equals(arquivo)) {
-                JasperPrint print = JasperFillManager.fillReport(fileName, null, new VendaDS(l));
+                JasperPrint print = JasperFillManager.fillReport(fileName, null, new TitulosPagarNaoBaixadosDS(l));
                 JRExporter exporter = new net.sf.jasperreports.engine.export.JRPdfExporter();
                 exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);
                 exporter.setParameter(JRExporterParameter.OUTPUT_FILE_NAME, outFileName);
@@ -47,6 +47,6 @@ public class ImprimeRelatorioTitulosPagar {
     }
 
     public static void main(String[] args) {
-        new ImprimeRelatorioVenda(l, modelo);
+        new ImprimeRelatorioTitulosPagar(l, modelo);
     }
 }
