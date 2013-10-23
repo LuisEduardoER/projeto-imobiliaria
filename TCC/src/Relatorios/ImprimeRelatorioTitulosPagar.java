@@ -11,12 +11,12 @@ import net.sf.jasperreports.engine.JasperFillManager;
 import net.sf.jasperreports.engine.JasperPrint;
 
 
-public class ImprimeRelatorioVenda {
+public class ImprimeRelatorioTitulosPagar {
 
     public static List<Object[]> l;
     public static String modelo;
 
-    public ImprimeRelatorioVenda(List<Object[]> lista, String arquivo) {
+    public ImprimeRelatorioTitulosPagar(List<Object[]> lista, String arquivo) {
 
         this.l = lista;
 
@@ -24,7 +24,7 @@ public class ImprimeRelatorioVenda {
         String outFileName = arquivo + ".pdf";
 
         try {
-            if ("rVendas".equals(arquivo)) {
+            if ("rTitulosPagarNaoBaixados".equals(arquivo)) {
                 JasperPrint print = JasperFillManager.fillReport(fileName, null, new VendaDS(l));
                 JRExporter exporter = new net.sf.jasperreports.engine.export.JRPdfExporter();
                 exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);

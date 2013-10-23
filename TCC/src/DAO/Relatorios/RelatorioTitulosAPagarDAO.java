@@ -50,7 +50,7 @@ public class RelatorioTitulosAPagarDAO implements Serializable {
     private Criteria montarCriteria() {
         Criteria criteria = session.createCriteria(Titulopagar.class, "tituloPagar");
         criteria.createCriteria("tituloPagar.compraId", "compra");
-        criteria.createCriteria("compra.Fornecedor", "fornecedor");
+        criteria.createCriteria("compra.fornecedorId", "fornecedor");
 
         criteria.add(Restrictions.eq("tituloPagar.baixado", "f"));
         criteria.add(Restrictions.eq("tituloPagar.deleted", "f"));

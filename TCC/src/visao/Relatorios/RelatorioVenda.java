@@ -6,11 +6,9 @@ package visao.Relatorios;
 
 import Relatorios.ImprimeRelatorioVenda;
 import controller.Relatorios.RelatorioVendasController;
-import java.util.ArrayList;
 import java.util.List;
 import modelo.Caixa;
 import modelo.Produto;
-import modelo.Venda;
 
 /**
  *

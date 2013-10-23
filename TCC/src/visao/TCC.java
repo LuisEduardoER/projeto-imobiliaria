@@ -4,8 +4,11 @@
  */
 package visao;
 
+import Relatorios.ImprimeRelatorioTitulosPagar;
 import controller.ImpressaoCupomController;
 import controller.Mensagens;
+import controller.Relatorios.RelatorioTitulosAPagarController;
+import java.util.List;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import modelo.Session;
@@ -84,8 +87,10 @@ public class TCC extends javax.swing.JFrame {
         jmRelatorios = new javax.swing.JMenu();
         jmVendas = new javax.swing.JMenu();
         jmiVendasPorProduto = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jmPendentes = new javax.swing.JMenuItem();
         jmTeste = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jmiTestarImpressora = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TCC - Bruno");
@@ -275,6 +280,18 @@ public class TCC extends javax.swing.JFrame {
 
         jmRelatorios.add(jmVendas);
 
+        jMenu1.setText("Titulos à Pagar");
+
+        jmPendentes.setText("Pendêntes de Baixa");
+        jmPendentes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmPendentesActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jmPendentes);
+
+        jmRelatorios.add(jMenu1);
+
         jMenuBar1.add(jmRelatorios);
 
         jmTeste.setText("Testar Impressora");
@@ -284,13 +301,13 @@ public class TCC extends javax.swing.JFrame {
             }
         });
 
-        jMenuItem1.setText("jMenuItem1");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        jmiTestarImpressora.setText("Testar");
+        jmiTestarImpressora.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                jmiTestarImpressoraActionPerformed(evt);
             }
         });
-        jmTeste.add(jMenuItem1);
+        jmTeste.add(jmiTestarImpressora);
 
         jMenuBar1.add(jmTeste);
 
@@ -411,10 +428,15 @@ public class TCC extends javax.swing.JFrame {
         impressao.testaImpressao();
     }//GEN-LAST:event_jmTesteActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jmiTestarImpressoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiTestarImpressoraActionPerformed
         ImpressaoCupomController impressao = new ImpressaoCupomController();
         impressao.testaImpressao();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jmiTestarImpressoraActionPerformed
+
+    private void jmPendentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmPendentesActionPerformed
+        imprimeRelatorioTituloPagar();
+        
+    }//GEN-LAST:event_jmPendentesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -451,8 +473,8 @@ public class TCC extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
@@ -461,6 +483,7 @@ public class TCC extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmCadastroModulos;
     private javax.swing.JMenu jmEnderecos;
     private javax.swing.JMenu jmFinanceiro;
+    private javax.swing.JMenuItem jmPendentes;
     private javax.swing.JMenu jmPermissoes;
     private javax.swing.JMenu jmRelatorios;
     private javax.swing.JMenu jmTeste;
@@ -481,6 +504,7 @@ public class TCC extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiFornecedor;
     private javax.swing.JMenuItem jmiPerfis;
     private javax.swing.JMenuItem jmiProduto;
+    private javax.swing.JMenuItem jmiTestarImpressora;
     private javax.swing.JMenuItem jmiVenda;
     private javax.swing.JMenuItem jmiVendasPorProduto;
     // End of variables declaration//GEN-END:variables
@@ -491,5 +515,12 @@ public class TCC extends javax.swing.JFrame {
             m.jopError("Ocorre um erro durante a verificação do usuário, por favor faça login novamente!");
             System.exit(0);
         }
+    }
+
+    private void imprimeRelatorioTituloPagar() {
+        RelatorioTitulosAPagarController relatorioTituloPagarController = new RelatorioTitulosAPagarController();
+        List<Object[]> lista;
+        lista = relatorioTituloPagarController.relatorioTitulosPagarNaoBaixados();
+        new ImprimeRelatorioTitulosPagar(lista, "rTitulosPagarNaoBaixados");
     }
 }
