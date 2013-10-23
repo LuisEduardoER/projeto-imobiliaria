@@ -9,6 +9,7 @@ import java.util.List;
 import net.sf.jasperreports.engine.JRDataSource;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRField;
+import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 
 /**
@@ -49,8 +50,8 @@ public class TitulosPagarNaoBaixadosDS implements JRDataSource {
             return selecionado[0];
         }
         if ("dataCompra".equals(jrf.getName())) {
-            LocalDateTime data = (LocalDateTime) selecionado[1];
-            String d = data.toLocalDate().toString("dd/MM/YYYY");
+            LocalDate data = (LocalDate) selecionado[1];
+            String d = data.toString("dd/MM/YYYY");
             return d;
         }
         if ("fornecedor".equals(jrf.getName())) {
