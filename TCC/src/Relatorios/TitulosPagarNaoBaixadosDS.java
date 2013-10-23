@@ -38,14 +38,7 @@ public class TitulosPagarNaoBaixadosDS implements JRDataSource {
 
     @Override
     public Object getFieldValue(JRField jrf) throws JRException {
-//
-/*        
-        p.add(Projections.groupProperty("produto.produtoNome"));
-        p.add(Projections.groupProperty("caixa.caixaDesc"));
-        p.add(Projections.groupProperty("venda.dataVenda"));
-        p.add(Projections.groupProperty("venda.valorTotal"));
-        p.add(Projections.groupProperty("venda.totalPago"));
-*/        
+
         if ("titulo".equals(jrf.getName())) {
             return selecionado[0];
         }
@@ -60,8 +53,8 @@ public class TitulosPagarNaoBaixadosDS implements JRDataSource {
         if ("cnpj".equals(jrf.getName())) {
             return selecionado[3];
         }
-//        
+
         return "Erro ao Gerar Relatório!";
-//
+
     }
 }
