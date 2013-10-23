@@ -14,6 +14,11 @@ public class ImpressaoCupomController {
 
     public static void main(String[] args) {
 
+        
+    }
+    
+    
+    public void testaImpressao(){
         int iRetorno;
 
         BemaInteger ACK, ST1, ST2, ST3;
@@ -30,7 +35,7 @@ public class ImpressaoCupomController {
 
         // Habilitando o retorno estendido da impressora MFD
 
-        iRetorno = Bematech.HabilitaDesabilitaRetornoEstendidoMFD("1");
+        // iRetorno = Bematech.HabilitaDesabilitaRetornoEstendidoMFD("1");
 
 
 
@@ -56,18 +61,13 @@ public class ImpressaoCupomController {
 
         System.out.println("Retorno Impressora MFD: \n" + retorno);
 
-        iRetorno = Bematech.AbreCupom("11.111.111-11");
-        iRetorno = Bematech.VendeItem("123", "Caneta", "1200", "I", "10", 2, "0,25", "%", "0000");
-        iRetorno = Bematech.IniciaFechamentoCupom("A", "%", "1000");
-        iRetorno = Bematech.EfetuaFormaPagamento("DINHEIRO", "50,00");
-        iRetorno = Bematech.TerminaFechamentoCupom("Obrigado, volte sempre !!!");
-        iRetorno = Bematech.FechaCupom("Dinheiro", "A", "$", "0000", "35,00", "Obrigado, volte sempre !!!");
-
-
-
-
-
-
-        
+//        iRetorno = Bematech.AbreCupom("11.111.111-11");
+//        iRetorno = Bematech.VendeItem("123", "Caneta", "1200", "I", "10", 2, "0,25", "%", "0000");
+//        iRetorno = Bematech.IniciaFechamentoCupom("A", "%", "1000");
+//        iRetorno = Bematech.EfetuaFormaPagamento("DINHEIRO", "50,00");
+//        iRetorno = Bematech.TerminaFechamentoCupom("Obrigado, volte sempre !!!");
+//        iRetorno = Bematech.FechaCupom("Dinheiro", "A", "$", "0000", "35,00", "Obrigado, volte sempre !!!");
     }
+    
+    
 }

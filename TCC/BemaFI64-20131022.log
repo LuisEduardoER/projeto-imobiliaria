@@ -1,201 +1,102 @@
-2013-10-22 0:42:48:904 - ----------------------------------------------------------------------- 
-2013-10-22 0:42:48:905 - Bematech_FI_LeInformacoesConfiguracao 
-2013-10-22 0:42:48:906 - Versão BemaFI64.Dll: 6,1,2,0
-2013-10-22 0:42:48:907 - Versão BemaMFD.dll: 1,0,2,0
-2013-10-22 0:42:48:909 - Versão BemaMFD2_64.dll: 2,1,2,0
-2013-10-22 0:42:48:909 - path: C:\teszet\TCC
-2013-10-22 0:42:48:910 - Log: 1
-2013-10-22 0:42:48:910 - LogDiario: 1
-2013-10-22 0:42:48:911 - Status: 0
-2013-10-22 0:42:48:912 - Retorno: 0
-2013-10-22 0:42:48:913 - ControlePorta: 1
-2013-10-22 0:42:48:913 - StatusFuncao: 0
-2013-10-22 0:42:48:914 - ModeloImp: BEMATECH
-2013-10-22 0:42:48:915 - ModoGaveta: 0
-2013-10-22 0:42:48:916 - EmulMFD: 1
-2013-10-22 0:42:48:917 - StatusCheque: 0
-2013-10-22 0:42:48:918 - Porta: COM2
-2013-10-22 0:42:48:919 - StatusErro: 1
-2013-10-22 0:42:48:919 - TimeOutZ: 99
-2013-10-22 0:42:48:920 - Impressora: 1
-2013-10-22 0:42:48:921 - TimeOutGerencial: 40
-2013-10-22 0:42:48:922 - CrLfVinculado: 0
-2013-10-22 0:42:48:923 - Gerencial: 0
-2013-10-22 0:42:48:924 - ForceWTSClient: 1
-2013-10-22 0:42:48:924 - RetriesWTSCmd: 3
-2013-10-22 0:42:48:925 - Software House - COO: 0
-2013-10-22 0:42:48:926 - Software House - NumeroAplicativo: 0
-2013-10-22 0:42:48:927 - Software House - CNPJ: 0
-2013-10-22 0:42:48:928 - Software House - IE: 0
-2013-10-22 0:42:48:933 - Software House - IM: 0
-2013-10-22 0:42:48:939 - Software House - RazaoSocial: 0
-2013-10-22 0:42:48:944 - Software House - NomeAplicativo: 0
-2013-10-22 0:42:48:947 - Software House - Versao: 0
-2013-10-22 0:42:48:948 - Software House - Linha1: 0
-2013-10-22 0:42:48:952 - Software House - Linha2: 0
-2013-10-22 0:42:48:954 - ECF - IM: 0
-2013-10-22 0:42:48:955 - ECF - UF: 0
-2013-10-22 0:42:48:956 - GerarRFD: 0
-2013-10-22 0:42:48:958 - CalculoIcmsCupom: 0
-2013-10-22 0:42:48:960 - HabilitaRFDImpMFD: 0
-2013-10-22 0:42:48:961 - Retorno Bematech_FI_LeInformacoesConfiguracao: OK
-2013-10-22 0:42:48:962 - ----------------------------------------------------------------------- 
-2013-10-22 0:42:48:962 - Bematech_FI_HabilitaDesabilitaRetornoEstendidoMFD 
-2013-10-22 0:42:48:970 - Parâmetro: 1
-2013-10-22 0:42:48:970 - Retorno: 1 - Ok 
-2013-10-22 0:42:48:972 - ----------------------------------------------------------------------- 
-2013-10-22 0:42:48:973 - Bematech_FI_LeituraX 
-2013-10-22 0:42:48:974 - Retorno Bematech_FI_AbrePortaSerial: -5 - Erro ao abrir a arquivo comando p/ o EmuladorLast Err: 5
-2013-10-22 0:42:48:975 - Bematech_FI_TrataComando - Erro na abertura da porta -5
-2013-10-22 0:42:48:976 - Retorno Bematech_FI_LeituraX: 0 - Erro de comunicacao 
-2013-10-22 0:42:48:978 - ----------------------------------------------------------------------- 
-2013-10-22 0:42:48:979 - Bematech_FI_RetornoImpressoraMFD 
-2013-10-22 0:42:48:980 - Retorno impressora: 0,0,0,0
-2013-10-22 0:42:48:981 - Retorno: 1 - Ok 
-2013-10-22 0:42:48:994 - ----------------------------------------------------------------------- 
-2013-10-22 0:42:49:  5 - Bematech_FI_AbreCupom 
-2013-10-22 0:42:49:  6 - Parâmetro: 11.111.111-11
-2013-10-22 0:42:49:  7 - Bematech_FI_NumeroCupom 
-2013-10-22 0:42:49:  8 - Retorno Bematech_FI_AbrePortaSerial: -5 - Erro ao abrir a arquivo comando p/ o EmuladorLast Err: 5
-2013-10-22 0:42:49:  9 - Bematech_FI_TrataComando - Erro na abertura da porta -5
-2013-10-22 0:42:49: 10 - Retorno Bematech_FI_NumeroCupom: 0 - Erro de comunicacao 
-2013-10-22 0:42:49: 11 - ----------------------------------------------------------------------- 
-2013-10-22 0:42:49: 11 - Bematech_FI_VendeItem 
-2013-10-22 0:42:49: 12 - Bematech_FI_ModeloImpressora 
-2013-10-22 0:42:49: 12 - Bematech_FI_NumeroSerie 
-2013-10-22 0:42:49: 13 - Retorno Bematech_FI_AbrePortaSerial: -5 - Erro ao abrir a arquivo comando p/ o EmuladorLast Err: 5
-2013-10-22 0:42:49: 14 - Bematech_FI_TrataComando - Erro na abertura da porta -5
-2013-10-22 0:42:49: 15 - Retorno Bematech_FI_NumeroSerie: 0 - Erro de comunicacao 
-2013-10-22 0:42:49: 15 - Retorno Bematech_FI_CriaArquivoRFD: 0
-2013-10-22 0:42:49: 16 - Retorno Bematech_FI_VendeItem: 0
-2013-10-22 0:42:49: 17 - ----------------------------------------------------------------------- 
-2013-10-22 0:42:49: 18 - Bematech_FI_IniciaFechamentoCupom 
-2013-10-22 0:42:49: 18 - Parâmetros: A|%|1000
-2013-10-22 0:42:49: 19 - Retorno Bematech_FI_AbrePortaSerial: -5 - Erro ao abrir a arquivo comando p/ o EmuladorLast Err: 5
-2013-10-22 0:42:49: 19 - Bematech_FI_TrataComando - Erro na abertura da porta -5
-2013-10-22 0:42:49: 20 - Retorno Bematech_FI_IniciaFechamentoCupom: 0 - Erro de comunicacao 
-2013-10-22 0:42:49: 20 - ----------------------------------------------------------------------- 
-2013-10-22 0:42:49: 21 - Bematech_FI_EfetuaFormaPagamento  
-2013-10-22 0:42:49: 22 - Bematech_FI_ObtemIndiceFormaPagamento 
-2013-10-22 0:42:49: 22 - Parâmetro: DINHEIRO
-2013-10-22 0:42:49: 23 - Retorno Bematech_FI_AbrePortaSerial: -5 - Erro ao abrir a arquivo comando p/ o EmuladorLast Err: 5
-2013-10-22 0:42:49: 23 - Bematech_FI_TrataComando - Erro na abertura da porta -5
-2013-10-22 0:42:49: 24 - Retorno: 0 - Erro de comunicacao 
-2013-10-22 0:42:49: 25 - ----------------------------------------------------------------------- 
-2013-10-22 0:42:49: 26 - Bematech_FI_TerminaFechamentoCupom 
-2013-10-22 0:42:49: 26 - Parâmetro: Obrigado, volte sempre !!!
-2013-10-22 0:42:49: 27 - Retorno Bematech_FI_AbrePortaSerial: -5 - Erro ao abrir a arquivo comando p/ o EmuladorLast Err: 5
-2013-10-22 0:42:49: 27 - Bematech_FI_TrataComando - Erro na abertura da porta -5
-2013-10-22 0:42:49: 28 - Retorno Bematech_FI_TerminaFechamentoCupom: 0 - Erro de comunicacao 
-2013-10-22 0:42:49: 28 - ----------------------------------------------------------------------- 
-2013-10-22 0:42:49: 29 - Bematech_FI_FechaCupom 
-2013-10-22 0:42:49: 29 - Parâmetros: Dinheiro|A|$|0000|3500|Obrigado, volte sempre !!!
-2013-10-22 0:42:49: 30 - Bematech_FI_IniciaFechamentoCupom 
-2013-10-22 0:42:49: 30 - Parâmetros: A|$|0000
-2013-10-22 0:42:49: 31 - Retorno Bematech_FI_AbrePortaSerial: -5 - Erro ao abrir a arquivo comando p/ o EmuladorLast Err: 5
-2013-10-22 0:42:49: 31 - Bematech_FI_TrataComando - Erro na abertura da porta -5
-2013-10-22 0:42:49: 32 - Retorno Bematech_FI_IniciaFechamentoCupom: 0 - Erro de comunicacao 
-2013-10-22 0:46:39:357 - ----------------------------------------------------------------------- 
-2013-10-22 0:46:39:358 - Bematech_FI_LeInformacoesConfiguracao 
-2013-10-22 0:46:39:359 - Versão BemaFI64.Dll: 6,1,2,0
-2013-10-22 0:46:39:360 - Versão BemaMFD.dll: 1,0,2,0
-2013-10-22 0:46:39:361 - Versão BemaMFD2_64.dll: 2,1,2,0
-2013-10-22 0:46:39:362 - path: C:\teszet\TCC
-2013-10-22 0:46:39:363 - Log: 1
-2013-10-22 0:46:39:363 - LogDiario: 1
-2013-10-22 0:46:39:364 - Status: 0
-2013-10-22 0:46:39:365 - Retorno: 0
-2013-10-22 0:46:39:365 - ControlePorta: 1
-2013-10-22 0:46:39:366 - StatusFuncao: 0
-2013-10-22 0:46:39:367 - ModeloImp: BEMATECH
-2013-10-22 0:46:39:368 - ModoGaveta: 0
-2013-10-22 0:46:39:369 - EmulMFD: 1
-2013-10-22 0:46:39:369 - StatusCheque: 0
-2013-10-22 0:46:39:370 - Porta: DEFAULT
-2013-10-22 0:46:39:371 - StatusErro: 1
-2013-10-22 0:46:39:371 - TimeOutZ: 99
-2013-10-22 0:46:39:372 - Impressora: 1
-2013-10-22 0:46:39:373 - TimeOutGerencial: 40
-2013-10-22 0:46:39:375 - CrLfVinculado: 0
-2013-10-22 0:46:39:375 - Gerencial: 0
-2013-10-22 0:46:39:376 - ForceWTSClient: 1
-2013-10-22 0:46:39:377 - RetriesWTSCmd: 3
-2013-10-22 0:46:39:377 - Software House - COO: 0
-2013-10-22 0:46:39:378 - Software House - NumeroAplicativo: 0
-2013-10-22 0:46:39:379 - Software House - CNPJ: 0
-2013-10-22 0:46:39:379 - Software House - IE: 0
-2013-10-22 0:46:39:380 - Software House - IM: 0
-2013-10-22 0:46:39:381 - Software House - RazaoSocial: 0
-2013-10-22 0:46:39:400 - Software House - NomeAplicativo: 0
-2013-10-22 0:46:39:402 - Software House - Versao: 0
-2013-10-22 0:46:39:403 - Software House - Linha1: 0
-2013-10-22 0:46:39:405 - Software House - Linha2: 0
-2013-10-22 0:46:39:406 - ECF - IM: 0
-2013-10-22 0:46:39:409 - ECF - UF: 0
-2013-10-22 0:46:39:411 - GerarRFD: 0
-2013-10-22 0:46:39:413 - CalculoIcmsCupom: 0
-2013-10-22 0:46:39:414 - HabilitaRFDImpMFD: 0
-2013-10-22 0:46:39:414 - Retorno Bematech_FI_LeInformacoesConfiguracao: OK
-2013-10-22 0:46:39:416 - ----------------------------------------------------------------------- 
-2013-10-22 0:46:39:416 - Bematech_FI_HabilitaDesabilitaRetornoEstendidoMFD 
-2013-10-22 0:46:39:417 - Parâmetro: 1
-2013-10-22 0:46:39:418 - Retorno: 1 - Ok 
-2013-10-22 0:46:39:419 - ----------------------------------------------------------------------- 
-2013-10-22 0:46:39:420 - Bematech_FI_LeituraX 
-2013-10-22 0:46:51:642 - Timout finalizado e ACK não lido - Erro 003 
-2013-10-22 0:46:51:642 - Qtd bytes ler:   5
-2013-10-22 0:46:51:643 - Qtd bytes lidos: 0
-2013-10-22 0:46:51:643 - Retorno Bematech_FI_LeituraX: 0 - Erro de comunicacao 
-2013-10-22 0:46:51:645 - ----------------------------------------------------------------------- 
-2013-10-22 0:46:51:646 - Bematech_FI_RetornoImpressoraMFD 
-2013-10-22 0:46:51:646 - Retorno impressora: 0,0,0,0
-2013-10-22 0:46:51:647 - Retorno: 1 - Ok 
-2013-10-22 0:46:51:648 - ----------------------------------------------------------------------- 
-2013-10-22 0:46:51:648 - Bematech_FI_AbreCupom 
-2013-10-22 0:46:51:649 - Parâmetro: 11.111.111-11
-2013-10-22 0:46:51:650 - Bematech_FI_NumeroCupom 
-2013-10-22 0:47:03:814 - Timout finalizado e ACK não lido - Erro 003 
-2013-10-22 0:47:03:814 - Qtd bytes ler:   8
-2013-10-22 0:47:03:815 - Qtd bytes lidos: 0
-2013-10-22 0:47:03:815 - Retorno Bematech_FI_NumeroCupom: 0 - Erro de comunicacao 
-2013-10-22 0:47:03:816 - ----------------------------------------------------------------------- 
-2013-10-22 0:47:03:816 - Bematech_FI_VendeItem 
-2013-10-22 0:47:03:817 - Bematech_FI_ModeloImpressora 
-2013-10-22 0:47:03:817 - Bematech_FI_NumeroSerie 
-2013-10-22 0:47:16:  1 - Timout finalizado e ACK não lido - Erro 003 
-2013-10-22 0:47:16:  1 - Qtd bytes ler:   20
-2013-10-22 0:47:16:  2 - Qtd bytes lidos: 0
-2013-10-22 0:47:16:  2 - Retorno Bematech_FI_NumeroSerie: 0 - Erro de comunicacao 
-2013-10-22 0:47:16:  3 - Retorno Bematech_FI_CriaArquivoRFD: 0
-2013-10-22 0:47:16:  3 - Retorno Bematech_FI_VendeItem: 0
-2013-10-22 0:47:16:  4 - ----------------------------------------------------------------------- 
-2013-10-22 0:47:16:  4 - Bematech_FI_IniciaFechamentoCupom 
-2013-10-22 0:47:16:  5 - Parâmetros: A|%|1000
-2013-10-22 0:47:28:173 - Timout finalizado e ACK não lido - Erro 003 
-2013-10-22 0:47:28:173 - Qtd bytes ler:   5
-2013-10-22 0:47:28:174 - Qtd bytes lidos: 0
-2013-10-22 0:47:28:174 - Retorno Bematech_FI_IniciaFechamentoCupom: 0 - Erro de comunicacao 
-2013-10-22 0:47:28:175 - ----------------------------------------------------------------------- 
-2013-10-22 0:47:28:175 - Bematech_FI_EfetuaFormaPagamento  
-2013-10-22 0:47:28:176 - Bematech_FI_ObtemIndiceFormaPagamento 
-2013-10-22 0:47:28:176 - Parâmetro: DINHEIRO
-2013-10-22 0:47:40:345 - Timout finalizado e ACK não lido - Erro 003 
-2013-10-22 0:47:40:345 - Qtd bytes ler:   7
-2013-10-22 0:47:40:346 - Qtd bytes lidos: 0
-2013-10-22 0:47:40:346 - Retorno: 0 - Erro de comunicacao 
-2013-10-22 0:47:40:347 - ----------------------------------------------------------------------- 
-2013-10-22 0:47:40:347 - Bematech_FI_TerminaFechamentoCupom 
-2013-10-22 0:47:40:348 - Parâmetro: Obrigado, volte sempre !!!
-2013-10-22 0:47:52:517 - Timout finalizado e ACK não lido - Erro 003 
-2013-10-22 0:47:52:517 - Qtd bytes ler:   5
-2013-10-22 0:47:52:518 - Qtd bytes lidos: 0
-2013-10-22 0:47:52:518 - Retorno Bematech_FI_TerminaFechamentoCupom: 0 - Erro de comunicacao 
-2013-10-22 0:47:52:519 - ----------------------------------------------------------------------- 
-2013-10-22 0:47:52:519 - Bematech_FI_FechaCupom 
-2013-10-22 0:47:52:520 - Parâmetros: Dinheiro|A|$|0000|3500|Obrigado, volte sempre !!!
-2013-10-22 0:47:52:521 - Bematech_FI_IniciaFechamentoCupom 
-2013-10-22 0:47:52:521 - Parâmetros: A|$|0000
-2013-10-22 0:48:04:704 - Timout finalizado e ACK não lido - Erro 003 
-2013-10-22 0:48:04:704 - Qtd bytes ler:   5
-2013-10-22 0:48:04:705 - Qtd bytes lidos: 0
-2013-10-22 0:48:04:705 - Retorno Bematech_FI_IniciaFechamentoCupom: 0 - Erro de comunicacao 
+2013-10-22 23:46:13:534 - ----------------------------------------------------------------------- 
+2013-10-22 23:46:13:535 - Bematech_FI_LeInformacoesConfiguracao 
+2013-10-22 23:46:13:548 - Versão BemaFI64.Dll: 6,1,2,0
+2013-10-22 23:46:13:554 - Versão BemaMFD.dll: 1,0,2,0
+2013-10-22 23:46:13:572 - Versão BemaMFD2_64.dll: 2,1,2,0
+2013-10-22 23:46:13:573 - path: C:\teszet\TCC\
+2013-10-22 23:46:13:573 - Log: 1
+2013-10-22 23:46:13:574 - LogDiario: 1
+2013-10-22 23:46:13:574 - Status: 0
+2013-10-22 23:46:13:575 - Retorno: 0
+2013-10-22 23:46:13:576 - ControlePorta: 1
+2013-10-22 23:46:13:576 - StatusFuncao: 0
+2013-10-22 23:46:13:577 - ModeloImp: BEMATECH
+2013-10-22 23:46:13:578 - ModoGaveta: 0
+2013-10-22 23:46:13:578 - EmulMFD: 0
+2013-10-22 23:46:13:579 - StatusCheque: 0
+2013-10-22 23:46:13:579 - Porta: COM2
+2013-10-22 23:46:13:580 - StatusErro: 1
+2013-10-22 23:46:13:581 - TimeOutZ: 99
+2013-10-22 23:46:13:581 - Impressora: 1
+2013-10-22 23:46:13:582 - TimeOutGerencial: 40
+2013-10-22 23:46:13:583 - CrLfVinculado: 0
+2013-10-22 23:46:13:583 - Gerencial: 0
+2013-10-22 23:46:13:584 - ForceWTSClient: 1
+2013-10-22 23:46:13:584 - RetriesWTSCmd: 3
+2013-10-22 23:46:13:585 - Software House - COO: 0
+2013-10-22 23:46:13:586 - Software House - NumeroAplicativo: 0
+2013-10-22 23:46:13:586 - Software House - CNPJ: 0
+2013-10-22 23:46:13:587 - Software House - IE: 0
+2013-10-22 23:46:13:587 - Software House - IM: 0
+2013-10-22 23:46:13:588 - Software House - RazaoSocial: 0
+2013-10-22 23:46:13:589 - Software House - NomeAplicativo: 0
+2013-10-22 23:46:13:590 - Software House - Versao: 0
+2013-10-22 23:46:13:590 - Software House - Linha1: 0
+2013-10-22 23:46:13:591 - Software House - Linha2: 0
+2013-10-22 23:46:13:592 - ECF - IM: 0
+2013-10-22 23:46:13:592 - ECF - UF: 0
+2013-10-22 23:46:13:593 - GerarRFD: 0
+2013-10-22 23:46:13:594 - CalculoIcmsCupom: 0
+2013-10-22 23:46:13:595 - HabilitaRFDImpMFD: 0
+2013-10-22 23:46:13:596 - Retorno Bematech_FI_LeInformacoesConfiguracao: OK
+2013-10-22 23:46:13:598 - ----------------------------------------------------------------------- 
+2013-10-22 23:46:13:599 - Bematech_FI_LeituraX 
+2013-10-22 23:46:27:144 - Timout finalizado e ACK não lido - Erro 003 
+2013-10-22 23:46:27:144 - Qtd bytes ler:   3
+2013-10-22 23:46:27:145 - Qtd bytes lidos: 0
+2013-10-22 23:46:27:150 - Retorno Bematech_FI_LeituraX: 0 - Erro de comunicacao 
+2013-10-22 23:46:27:176 - ----------------------------------------------------------------------- 
+2013-10-22 23:46:27:177 - Bematech_FI_RetornoImpressoraMFD 
+2013-10-22 23:46:27:182 - Retorno impressora: 0,0,0
+2013-10-22 23:46:27:182 - Retorno: 1 - Ok 
+2013-10-22 23:46:27:189 - ----------------------------------------------------------------------- 
+2013-10-22 23:46:27:190 - Bematech_FI_AbreCupom 
+2013-10-22 23:46:27:191 - Parâmetro: 11.111.111-11
+2013-10-22 23:46:27:192 - Bematech_FI_NumeroCupom 
+2013-10-22 23:46:39:400 - Timout finalizado e ACK não lido - Erro 003 
+2013-10-22 23:46:39:400 - Qtd bytes ler:   6
+2013-10-22 23:46:39:401 - Qtd bytes lidos: 0
+2013-10-22 23:46:39:401 - Retorno Bematech_FI_NumeroCupom: 0 - Erro de comunicacao 
+2013-10-22 23:46:39:425 - ----------------------------------------------------------------------- 
+2013-10-22 23:46:39:425 - Bematech_FI_VendeItem 
+2013-10-22 23:46:39:428 - Bematech_FI_ModeloImpressora 
+2013-10-22 23:46:39:428 - Bematech_FI_NumeroSerie 
+2013-10-22 23:46:39:765 - Percorrido todo o buffer lido e ACK não encontrado 
+2013-10-22 23:46:39:765 - Qtd bytes ler:   18
+2013-10-22 23:46:39:766 - Qtd bytes lidos: 14
+2013-10-22 23:46:39:766 - Ajustando a quantidade de bytes lidos por ter recebido lixo nos dados 
+2013-10-22 23:47:01:635 - Bematech_FI_LeRetornoImpressora - Erro 001 
+2013-10-22 23:47:01:636 - Retorno Bematech_FI_NumeroSerie: 0 - Erro de comunicacao 
+2013-10-22 23:47:01:637 - Retorno Bematech_FI_CriaArquivoRFD: 0
+2013-10-22 23:47:01:638 - Retorno Bematech_FI_VendeItem: 0
+2013-10-22 23:47:01:669 - ----------------------------------------------------------------------- 
+2013-10-22 23:47:01:670 - Bematech_FI_IniciaFechamentoCupom 
+2013-10-22 23:47:01:677 - Parâmetros: A|%|1000
+2013-10-22 23:47:15: 50 - Timout finalizado e ACK não lido - Erro 003 
+2013-10-22 23:47:15: 50 - Qtd bytes ler:   3
+2013-10-22 23:47:15: 51 - Qtd bytes lidos: 0
+2013-10-22 23:47:15: 51 - Retorno Bematech_FI_IniciaFechamentoCupom: 0 - Erro de comunicacao 
+2013-10-22 23:47:15: 52 - ----------------------------------------------------------------------- 
+2013-10-22 23:47:15: 76 - Bematech_FI_EfetuaFormaPagamento  
+2013-10-22 23:47:15: 84 - Bematech_FI_ObtemIndiceFormaPagamento 
+2013-10-22 23:47:15: 85 - Parâmetro: DINHEIRO
+2013-10-22 23:47:28:476 - Timout finalizado e ACK não lido - Erro 003 
+2013-10-22 23:47:28:476 - Qtd bytes ler:   5
+2013-10-22 23:47:28:477 - Qtd bytes lidos: 0
+2013-10-22 23:47:28:477 - Retorno: 0 - Erro de comunicacao 
+2013-10-22 23:47:28:479 - ----------------------------------------------------------------------- 
+2013-10-22 23:47:28:479 - Bematech_FI_TerminaFechamentoCupom 
+2013-10-22 23:47:28:480 - Parâmetro: Obrigado, volte sempre !!!
+2013-10-22 23:47:41:880 - Timout finalizado e ACK não lido - Erro 003 
+2013-10-22 23:47:41:881 - Qtd bytes ler:   3
+2013-10-22 23:47:41:881 - Qtd bytes lidos: 0
+2013-10-22 23:47:41:882 - Retorno Bematech_FI_TerminaFechamentoCupom: 0 - Erro de comunicacao 
+2013-10-22 23:47:41:886 - ----------------------------------------------------------------------- 
+2013-10-22 23:47:41:887 - Bematech_FI_FechaCupom 
+2013-10-22 23:47:41:887 - Parâmetros: Dinheiro|A|$|0000|3500|Obrigado, volte sempre !!!
+2013-10-22 23:47:41:888 - Bematech_FI_IniciaFechamentoCupom 
+2013-10-22 23:47:41:888 - Parâmetros: A|$|0000
+2013-10-22 23:47:55:285 - Timout finalizado e ACK não lido - Erro 003 
+2013-10-22 23:47:55:285 - Qtd bytes ler:   3
+2013-10-22 23:47:55:286 - Qtd bytes lidos: 0
+2013-10-22 23:47:55:286 - Retorno Bematech_FI_IniciaFechamentoCupom: 0 - Erro de comunicacao 

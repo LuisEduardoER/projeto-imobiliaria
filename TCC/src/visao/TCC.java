@@ -4,6 +4,7 @@
  */
 package visao;
 
+import controller.ImpressaoCupomController;
 import controller.Mensagens;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
@@ -83,6 +84,8 @@ public class TCC extends javax.swing.JFrame {
         jmRelatorios = new javax.swing.JMenu();
         jmVendas = new javax.swing.JMenu();
         jmiVendasPorProduto = new javax.swing.JMenuItem();
+        jmTeste = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TCC - Bruno");
@@ -274,6 +277,23 @@ public class TCC extends javax.swing.JFrame {
 
         jMenuBar1.add(jmRelatorios);
 
+        jmTeste.setText("Testar Impressora");
+        jmTeste.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmTesteActionPerformed(evt);
+            }
+        });
+
+        jMenuItem1.setText("jMenuItem1");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
+        jmTeste.add(jMenuItem1);
+
+        jMenuBar1.add(jmTeste);
+
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -386,6 +406,16 @@ public class TCC extends javax.swing.JFrame {
         relatorio.setVisible(true);
     }//GEN-LAST:event_jmiVendasPorProdutoActionPerformed
 
+    private void jmTesteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmTesteActionPerformed
+        ImpressaoCupomController impressao = new ImpressaoCupomController();
+        impressao.testaImpressao();
+    }//GEN-LAST:event_jmTesteActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        ImpressaoCupomController impressao = new ImpressaoCupomController();
+        impressao.testaImpressao();
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -422,6 +452,7 @@ public class TCC extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JPopupMenu.Separator jSeparator2;
     private javax.swing.JPopupMenu.Separator jSeparator3;
@@ -432,6 +463,7 @@ public class TCC extends javax.swing.JFrame {
     private javax.swing.JMenu jmFinanceiro;
     private javax.swing.JMenu jmPermissoes;
     private javax.swing.JMenu jmRelatorios;
+    private javax.swing.JMenu jmTeste;
     private javax.swing.JMenu jmVenda;
     private javax.swing.JMenu jmVendas;
     private javax.swing.JMenuItem jmVinculoModuloPermissao;
