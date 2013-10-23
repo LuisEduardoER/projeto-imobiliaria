@@ -382,7 +382,6 @@
                 <Component class="javax.swing.JLabel" name="jLabel8">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Data:"/>
-                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel9">
@@ -440,9 +439,6 @@
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtfDataCompra">
-                  <Properties>
-                    <Property name="enabled" type="boolean" value="false"/>
-                  </Properties>
                 </Component>
                 <Component class="javax.swing.JTextField" name="jtfValorCompra">
                 </Component>

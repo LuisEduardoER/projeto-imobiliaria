@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="test" language="groovy" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="422e6d1b-e860-439f-92bc-f278793a6848">
 	<property name="ireport.zoom" value="1.4641000000000006"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="31"/>
 	<property name="ireport.y" value="0"/>
-	<field name="produto" class="java.lang.String"/>
-	<field name="caixa" class="java.lang.String"/>
-	<field name="data" class="java.lang.String"/>
-	<field name="valor" class="java.lang.String"/>
+	<field name="titulo" class="java.lang.String"/>
+	<field name="dataCompra" class="java.lang.String"/>
+	<field name="fornecedor" class="java.lang.String"/>
+	<field name="cnpj" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -16,9 +16,9 @@
 				<reportElement uuid="17067d27-bba0-4852-8d97-ec9eaf6e7515" x="0" y="0" width="555" height="20"/>
 			</rectangle>
 			<staticText>
-				<reportElement uuid="3265657c-5bfa-4d45-ad20-50d56eefeedd" positionType="FixRelativeToBottom" x="227" y="0" width="100" height="20"/>
-				<textElement verticalAlignment="Middle"/>
-				<text><![CDATA[Relatório de Vendas]]></text>
+				<reportElement uuid="3265657c-5bfa-4d45-ad20-50d56eefeedd" positionType="FixRelativeToBottom" x="179" y="0" width="195" height="20"/>
+				<textElement textAlignment="Justified" verticalAlignment="Middle"/>
+				<text><![CDATA[Relatório de Títulos à Pagar Não baixados]]></text>
 			</staticText>
 		</band>
 	</title>
@@ -30,22 +30,22 @@
 			<staticText>
 				<reportElement uuid="96232e4d-4a03-40d9-b41d-e59f62576698" x="0" y="0" width="100" height="20"/>
 				<textElement verticalAlignment="Bottom"/>
-				<text><![CDATA[Produto]]></text>
+				<text><![CDATA[Título]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="5fef94dc-2c0a-4afd-bd1f-b97511b70be4" x="127" y="0" width="100" height="20"/>
 				<textElement verticalAlignment="Bottom"/>
-				<text><![CDATA[Caixa]]></text>
+				<text><![CDATA[Data da Compra]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="09bc0cae-9335-4a93-a31e-d8767e900325" x="274" y="0" width="100" height="20"/>
-				<textElement/>
-				<text><![CDATA[Data]]></text>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[Fornecedor]]></text>
 			</staticText>
 			<staticText>
 				<reportElement uuid="2e29a4da-d291-4cf0-8da8-cd5505743d28" x="409" y="0" width="100" height="20"/>
-				<textElement/>
-				<text><![CDATA[Valor]]></text>
+				<textElement verticalAlignment="Bottom"/>
+				<text><![CDATA[CNPJ]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
@@ -57,22 +57,22 @@
 			<textField>
 				<reportElement uuid="1eba717e-75c6-4998-865d-3662b827b0b8" x="0" y="12" width="100" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{produto}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{titulo}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="6ae1b62d-0146-4061-94b1-975d8f7760d6" x="127" y="12" width="100" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{caixa}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{dataCompra}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="8fbc5813-be34-4c96-a76f-330ec478a413" x="274" y="12" width="100" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{data}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{fornecedor}]]></textFieldExpression>
 			</textField>
 			<textField>
 				<reportElement uuid="81c30917-b882-472b-befa-fd8b2b7bcf9d" x="409" y="12" width="100" height="20"/>
 				<textElement/>
-				<textFieldExpression><![CDATA[$F{valor}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{cnpj}]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

@@ -5,13 +5,10 @@
 package controller.Relatorios;
 
 import DAO.Relatorios.RelatorioVendasDAO;
-import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import modelo.AberturaCaixa;
 import modelo.Caixa;
 import modelo.Produto;
-import modelo.Venda;
 import org.joda.time.LocalDateTime;
 
 /**

@@ -15,12 +15,12 @@ import org.joda.time.LocalDateTime;
  *
  * @author Bruno
  */
-public class VendaDS implements JRDataSource {
+public class TitulosPagarNaoBaixadosDS implements JRDataSource {
 
     private final Iterator<Object[]> iterator;
     private Object[] selecionado;
 
-    public VendaDS(List<Object[]> lista) {
+    public TitulosPagarNaoBaixadosDS(List<Object[]> lista) {
         this.iterator = lista.iterator();
     }
 
@@ -45,18 +45,18 @@ public class VendaDS implements JRDataSource {
         p.add(Projections.groupProperty("venda.valorTotal"));
         p.add(Projections.groupProperty("venda.totalPago"));
 */        
-        if ("produto".equals(jrf.getName())) {
+        if ("titulo".equals(jrf.getName())) {
             return selecionado[0];
         }
-        if ("caixa".equals(jrf.getName())) {
-            return selecionado[1];
-        }
-        if ("data".equals(jrf.getName())) {
-            LocalDateTime data = (LocalDateTime) selecionado[2];
+        if ("dataCompra".equals(jrf.getName())) {
+            LocalDateTime data = (LocalDateTime) selecionado[1];
             String d = data.toLocalDate().toString("dd/MM/YYYY");
             return d;
         }
-        if ("valor".equals(jrf.getName())) {
+        if ("fornecedor".equals(jrf.getName())) {
+             return selecionado[2];
+        }
+        if ("cnpj".equals(jrf.getName())) {
             return selecionado[3];
         }
 //        

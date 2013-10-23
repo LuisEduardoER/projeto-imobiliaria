@@ -13,6 +13,7 @@ import controller.Cadastro.Administrativo.ProdutoController;
 import java.awt.Point;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -25,6 +26,8 @@ import modelo.Estoque;
 import modelo.Fabricante;
 import modelo.Fornecedor;
 import modelo.Produto;
+import org.joda.time.LocalDate;
+import util.Datas;
 
 /**
  *
@@ -299,7 +302,6 @@ public class CadastroProduto extends javax.swing.JDialog {
         jpDadosCompra.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Dados da Compra", 0, 0, null, java.awt.Color.black));
 
         jLabel8.setText("Data:");
-        jLabel8.setEnabled(false);
 
         jLabel9.setText("Valor:");
 
@@ -329,8 +331,6 @@ public class CadastroProduto extends javax.swing.JDialog {
         );
 
         jcbFornecedorCNPJ.setEditable(true);
-
-        jtfDataCompra.setEnabled(false);
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -566,6 +566,9 @@ public class CadastroProduto extends javax.swing.JDialog {
             } else if (jtfQuantidade.getText() == null && !jtfQuantidade.getText().equals("")) {
                 camposVazios = "Quantidade\n";
                 return false;
+            } else if (jtfValor.getText() == null && !jtfValor.getText().equals("")) {
+                camposVazios = "Valor\n";
+                return false;
             } else {
                 return true;
             }
@@ -583,7 +586,6 @@ public class CadastroProduto extends javax.swing.JDialog {
             p = new Produto();
             e = new Estoque();
             compra = new Compra();
-            Date data = new Date();
 
             p.setProdutoNome(jtfProdNome.getText());
             p.setFabricanteId(fabricante);
@@ -597,17 +599,15 @@ public class CadastroProduto extends javax.swing.JDialog {
 
             compra.setFornecedorId(fornecedor);
 
-//            SimpleDateFormat fmt = new SimpleDateFormat("dd/MM/yyyy");    
-//            try {   
-//                data = (Date) fmt.parse(jtfDataCompra.getText());
-//            } catch (ParseException ex) {
-//                Logger.getLogger(CadastroProduto.class.getName()).log(Level.SEVERE, null, ex);
-//            }
+            LocalDate dataCompra = new LocalDate();
+            try {   
+                dataCompra = Datas.localDateParser(jtfDataCompra.getText());
+            } catch (Exception ex) {
+                m.jopError("Data informada no padrão errado! \n" + ex);
+            }
 
-//            LocalDate dataCompra = new LocalDate(data.toString());
+            compra.setDataCompra(dataCompra);
             compra.setValorCompra(Float.parseFloat(jtfValorCompra.getText()));
-
-//            compra.setDataCompra(new LocalDate(dataCompra));
 
             produtoController = new ProdutoController();
             if (produtoController.gravar(p, e, compra) != null) {
@@ -634,7 +634,9 @@ public class CadastroProduto extends javax.swing.JDialog {
         jtfProdNome.setText(p.getProdutoNome());
         jtfValor.setText(p.getValor().toString());
         jcbFabricanteCNPJ.setSelectedItem(p.getFabricanteId());
+        acaoBuscarFabricante();
         jcbFornecedorCNPJ.setSelectedItem(p.getFornecedorId());
+        acaoBuscarFornecedor();
 //        jtfQtdMinima.setText();
 //        jtfValorCompra.setText();
         gerenciaCampos(true);
@@ -754,6 +756,10 @@ public class CadastroProduto extends javax.swing.JDialog {
         jtfQuantidade.setEnabled(abilitaDesabilita);
         jtfValor.setEnabled(abilitaDesabilita);
         jtfValorCompra.setEnabled(abilitaDesabilita);
+        
+        jcbFabricanteCNPJ.setEnabled(abilitaDesabilita);
+        jcbFornecedorCNPJ.setEnabled(abilitaDesabilita);
+        jtfDataCompra.setEnabled(abilitaDesabilita);
     }
 
     private void setAba(int i) {

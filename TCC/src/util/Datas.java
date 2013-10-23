@@ -4,7 +4,9 @@
  */
 package util;
 
+import java.text.ParseException;
 import org.joda.time.DateTime;
+import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 
 /**
@@ -24,4 +26,18 @@ public class Datas {
         dataDateTime = new LocalDateTime();
         return dataDateTime;
     }
+    
+    public static LocalDate localDateParser(String dataBR) throws ParseException{
+        
+        String date = "";
+        
+        if(dataBR.isEmpty()){
+            throw new ParseException("Impossivel converter a data informada!",0);
+        }
+        
+        String dateArray[] = dataBR.split("/");
+        
+        return new LocalDate(Integer.parseInt(dateArray[2]),Integer.parseInt(dateArray[1]),Integer.parseInt(dateArray[0]));
+    }
+    
 }
