@@ -53,7 +53,7 @@ public class Caixa implements Serializable {
     @Column(name = "caixaDesc")
     private String caixaDesc;
     @OneToMany(mappedBy = "caixaId", fetch = FetchType.LAZY)
-    private List<AberturaCaixa> caixamovimentoList;
+    private List<AberturaCaixa> aberturaCaixaList;
     @OneToMany(mappedBy = "caixaId", fetch = FetchType.LAZY)
     private List<Movimento> movimentoList;
     
@@ -106,11 +106,11 @@ public class Caixa implements Serializable {
     }
 
     public List<AberturaCaixa> getCaixamovimentoList() {
-        return caixamovimentoList;
+        return aberturaCaixaList;
     }
 
     public void setCaixamovimentoList(List<AberturaCaixa> caixamovimentoList) {
-        this.caixamovimentoList = caixamovimentoList;
+        this.aberturaCaixaList = caixamovimentoList;
     }
 
     public List<Movimento> getMovimentoList() {

@@ -1,51 +1,61 @@
-2013-10-23 0:10:28:  2 - ----------------------------------------------------------------------- 
-2013-10-23 0:10:28:  3 - Bematech_FI_LeInformacoesConfiguracao 
-2013-10-23 0:10:28: 29 - Versão BemaFI64.Dll: 6,1,2,0
-2013-10-23 0:10:28: 54 - Versão BemaMFD.dll: 1,0,2,0
-2013-10-23 0:10:28: 72 - Versão BemaMFD2_64.dll: 2,1,2,0
-2013-10-23 0:10:28: 73 - path: C:\teszet\TCC\
-2013-10-23 0:10:28: 73 - Log: 1
-2013-10-23 0:10:28: 73 - LogDiario: 1
-2013-10-23 0:10:28: 74 - Status: 0
-2013-10-23 0:10:28: 75 - Retorno: 0
-2013-10-23 0:10:28: 76 - ControlePorta: 1
-2013-10-23 0:10:28: 76 - StatusFuncao: 0
-2013-10-23 0:10:28: 77 - ModeloImp: BEMATECH
-2013-10-23 0:10:28: 78 - ModoGaveta: 0
-2013-10-23 0:10:28: 79 - EmulMFD: 0
-2013-10-23 0:10:28: 79 - StatusCheque: 0
-2013-10-23 0:10:28: 80 - Porta: COM2
-2013-10-23 0:10:28: 80 - StatusErro: 1
-2013-10-23 0:10:28: 81 - TimeOutZ: 99
-2013-10-23 0:10:28: 82 - Impressora: 1
-2013-10-23 0:10:28: 82 - TimeOutGerencial: 40
-2013-10-23 0:10:28: 83 - CrLfVinculado: 0
-2013-10-23 0:10:28: 84 - Gerencial: 0
-2013-10-23 0:10:28: 84 - ForceWTSClient: 1
-2013-10-23 0:10:28: 85 - RetriesWTSCmd: 3
-2013-10-23 0:10:28: 86 - Software House - COO: 0
-2013-10-23 0:10:28: 86 - Software House - NumeroAplicativo: 0
-2013-10-23 0:10:28: 87 - Software House - CNPJ: 0
-2013-10-23 0:10:28: 87 - Software House - IE: 0
-2013-10-23 0:10:28: 88 - Software House - IM: 0
-2013-10-23 0:10:28: 89 - Software House - RazaoSocial: 0
-2013-10-23 0:10:28: 90 - Software House - NomeAplicativo: 0
-2013-10-23 0:10:28: 90 - Software House - Versao: 0
-2013-10-23 0:10:28: 91 - Software House - Linha1: 0
-2013-10-23 0:10:28: 91 - Software House - Linha2: 0
-2013-10-23 0:10:28: 92 - ECF - IM: 0
-2013-10-23 0:10:28: 93 - ECF - UF: 0
-2013-10-23 0:10:28: 93 - GerarRFD: 0
-2013-10-23 0:10:28: 94 - CalculoIcmsCupom: 0
-2013-10-23 0:10:28: 95 - HabilitaRFDImpMFD: 0
-2013-10-23 0:10:28: 95 - Retorno Bematech_FI_LeInformacoesConfiguracao: OK
-2013-10-23 0:10:28: 96 - ----------------------------------------------------------------------- 
-2013-10-23 0:10:28: 97 - Bematech_FI_LeituraX 
-2013-10-23 0:10:41:582 - Timout finalizado e ACK não lido - Erro 003 
-2013-10-23 0:10:41:582 - Qtd bytes ler:   3
-2013-10-23 0:10:41:583 - Qtd bytes lidos: 0
-2013-10-23 0:10:41:583 - Retorno Bematech_FI_LeituraX: 0 - Erro de comunicacao 
-2013-10-23 0:10:41:585 - ----------------------------------------------------------------------- 
-2013-10-23 0:10:41:585 - Bematech_FI_RetornoImpressoraMFD 
-2013-10-23 0:10:41:586 - Retorno impressora: 0,0,0
-2013-10-23 0:10:41:586 - Retorno: 1 - Ok 
+2013-10-23 20:48:17:352 - ----------------------------------------------------------------------- 
+2013-10-23 20:48:17:353 - Bematech_FI_LeInformacoesConfiguracao 
+2013-10-23 20:48:17:354 - Versão BemaFI64.Dll: 6,1,2,0
+2013-10-23 20:48:17:355 - Versão BemaMFD.dll: 1,0,2,0
+2013-10-23 20:48:17:356 - Versão BemaMFD2_64.dll: 2,1,2,0
+2013-10-23 20:48:17:356 - path: C:\teszet\TCC\
+2013-10-23 20:48:17:357 - Log: 1
+2013-10-23 20:48:17:357 - LogDiario: 1
+2013-10-23 20:48:17:358 - Status: 0
+2013-10-23 20:48:17:359 - Retorno: 0
+2013-10-23 20:48:17:359 - ControlePorta: 1
+2013-10-23 20:48:17:360 - StatusFuncao: 0
+2013-10-23 20:48:17:361 - ModeloImp: BEMATECH
+2013-10-23 20:48:17:362 - ModoGaveta: 0
+2013-10-23 20:48:17:362 - EmulMFD: 0
+2013-10-23 20:48:17:363 - StatusCheque: 0
+2013-10-23 20:48:17:364 - Porta: COM1
+2013-10-23 20:48:17:364 - StatusErro: 0
+2013-10-23 20:48:17:365 - TimeOutZ: 500
+2013-10-23 20:48:17:366 - Impressora: 0
+2013-10-23 20:48:17:366 - TimeOutGerencial: 40
+2013-10-23 20:48:17:367 - CrLfVinculado: 0
+2013-10-23 20:48:17:368 - Gerencial: 0
+2013-10-23 20:48:17:368 - ForceWTSClient: 1
+2013-10-23 20:48:17:369 - RetriesWTSCmd: 3
+2013-10-23 20:48:17:370 - Software House - COO: 0
+2013-10-23 20:48:17:370 - Software House - NumeroAplicativo: 0
+2013-10-23 20:48:17:371 - Software House - CNPJ: 0
+2013-10-23 20:48:17:372 - Software House - IE: 0
+2013-10-23 20:48:17:372 - Software House - IM: 0
+2013-10-23 20:48:17:373 - Software House - RazaoSocial: 0
+2013-10-23 20:48:17:374 - Software House - NomeAplicativo: 0
+2013-10-23 20:48:17:375 - Software House - Versao: 0
+2013-10-23 20:48:17:375 - Software House - Linha1: 0
+2013-10-23 20:48:17:376 - Software House - Linha2: 0
+2013-10-23 20:48:17:376 - ECF - IM: 0
+2013-10-23 20:48:17:377 - ECF - UF: 0
+2013-10-23 20:48:17:378 - GerarRFD: 0
+2013-10-23 20:48:17:378 - CalculoIcmsCupom: 0
+2013-10-23 20:48:17:379 - HabilitaRFDImpMFD: 0
+2013-10-23 20:48:17:379 - Retorno Bematech_FI_LeInformacoesConfiguracao: OK
+2013-10-23 20:48:17:380 - ----------------------------------------------------------------------- 
+2013-10-23 20:48:17:381 - Bematech_FI_LeituraX 
+2013-10-23 20:48:30:754 - Timout finalizado e ACK não lido - Erro 003 
+2013-10-23 20:48:30:754 - Qtd bytes ler:   3
+2013-10-23 20:48:30:755 - Qtd bytes lidos: 0
+2013-10-23 20:48:30:756 - Retorno Bematech_FI_LeituraX: 0 - Erro de comunicacao 
+2013-10-23 20:48:30:756 - ----------------------------------------------------------------------- 
+2013-10-23 20:48:30:757 - Bematech_FI_RetornoImpressoraMFD 
+2013-10-23 20:48:30:757 - Retorno impressora: 0,0,0
+2013-10-23 20:48:30:758 - Retorno: 1 - Ok 
+2013-10-23 20:50:38: 83 - ----------------------------------------------------------------------- 
+2013-10-23 20:50:38: 83 - Bematech_FI_LeituraX 
+2013-10-23 20:50:51:457 - Timout finalizado e ACK não lido - Erro 003 
+2013-10-23 20:50:51:457 - Qtd bytes ler:   3
+2013-10-23 20:50:51:458 - Qtd bytes lidos: 0
+2013-10-23 20:50:51:458 - Retorno Bematech_FI_LeituraX: 0 - Erro de comunicacao 
+2013-10-23 20:50:51:458 - ----------------------------------------------------------------------- 
+2013-10-23 20:50:51:459 - Bematech_FI_RetornoImpressoraMFD 
+2013-10-23 20:50:51:460 - Retorno impressora: 0,0,0
+2013-10-23 20:50:51:460 - Retorno: 1 - Ok 

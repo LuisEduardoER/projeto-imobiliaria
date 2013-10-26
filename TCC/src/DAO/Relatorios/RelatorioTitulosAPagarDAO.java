@@ -39,7 +39,7 @@ public class RelatorioTitulosAPagarDAO implements Serializable {
 
         p.add(Projections.groupProperty("tituloPagar.tituloId"));
         p.add(Projections.groupProperty("compra.dataCompra"));
-        
+
         p.add(Projections.groupProperty("fornecedor.fornecedorNome"));
         p.add(Projections.groupProperty("fornecedor.fornecedorCNPJ"));
         criteria.setProjection(p);
