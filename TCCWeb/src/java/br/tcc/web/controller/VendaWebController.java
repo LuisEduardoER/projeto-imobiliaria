@@ -9,7 +9,10 @@ import br.com.caelum.vraptor.Post;
 import br.com.caelum.vraptor.Resource;
 import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
+import br.com.caelum.vraptor.view.Results;
+import controller.Cadastro.Administrativo.ProdutoController;
 import controller.VendaController;
+import modelo.Produto;
 import modelo.Venda;
 
 /**
@@ -38,5 +41,13 @@ public class VendaWebController {
         Venda venda = new Venda();
 
         controller.gravar(venda);
+    }
+    
+    @Post("/vendaWeb/buscaProduto")
+    public void buscaProduto(Integer codigoBarras) {
+        ProdutoController prodController = new ProdutoController();
+        Produto produto = prodController.buscaCodigoBarra(codigoBarras.toString());
+
+        result.use(Results.json()).from(produto).serialize();
     }
 }
