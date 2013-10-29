@@ -70,6 +70,15 @@ public class ProdutoDAO implements Serializable {
     }
     
     @SuppressWarnings("unchecked")
+    public Produto consultarProdutoCodigoBarra(String codigoBarras) {
+        Criteria criteria = session.createCriteria(Produto.class, "produto");
+        
+        criteria.add(Restrictions.eq("produto.produtoCodigoBarras", codigoBarras));
+        
+        return  (Produto) criteria.uniqueResult();
+    }
+    
+    @SuppressWarnings("unchecked")
     public List<Produto> buscarTodos() {
         Criteria criteria = session.createCriteria(Produto.class, "produto");
         criteria.createCriteria("produto.fornecedorId", "frn");

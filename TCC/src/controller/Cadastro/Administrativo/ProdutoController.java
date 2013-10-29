@@ -50,7 +50,7 @@ public class ProdutoController {
     }
     
     public Produto buscaCodigoBarra(String codigoBarra) {
-        Produto p = dao.consultarProduto("produtoCodigoBarras", codigoBarra);
+        Produto p = dao.consultarProdutoCodigoBarra(codigoBarra);
         return p;
     }
 
