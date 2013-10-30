@@ -15,9 +15,13 @@
         <meta name="description" content="">
         <meta name="author" content="">
         
-        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet"/>
+        
+        <script lang="JavaScript" type="text/javascript" src="js/jquery.min.js"></script>
+        
+<!--        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
         <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script src="http://pingendo-web.herokuapp.com/bootstrap-3/js/bootstrap.js"></script>
+        <script src="http://pingendo-web.herokuapp.com/bootstrap-3/js/bootstrap.js"></script>-->
         
         <script lang="JavaScript" type="text/javascript" src="js/venda.js"></script>
         <!--[if lt IE 9]>
@@ -110,7 +114,6 @@
                         <div class="input-group input-group-sm">
                             <span class="input-group-addon">$</span>
                             <input id="produtoValor" class="form-control" disabled="" type="text">
-                            <span class="input-group-addon">.00</span>
                         </div>
 
                     </div>
@@ -119,7 +122,7 @@
 
                 <div class="panel">
                     <div class="col-md-6">
-                        <textarea class="form-control" rows="3" disabled=""></textarea>
+                        <textarea id="logVenda" class="form-control" rows="3" disabled=""></textarea>
                     </div>
                 </div>
 
@@ -157,7 +160,7 @@
 
             <div>
                 <label> Total:</label>
-                <label> R$ 0,000:</label>
+                <label id="total"> R$ 0,000:</label>
             </div>
             
             <div class="row">
