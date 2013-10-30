@@ -5,14 +5,15 @@
 
 var produto = "";
 var totalGlobal = 0;
-var listProdutos = new Array;
+var listProdutos = [''];
 
 function vender() {
 
     var parametros = {};
-        parametros['eMail']   = $('#eMail').val();
-        parametros['nome']    = $('#nome').val();
-        parametros['assunto'] = $('#assunto').val();
+    
+    for(var i =0; i<listProdutos.lenght; i++){
+        parametros['produtos['+i+']'] = listProdutos[i] + ':' + listProdutos[i];
+    }
     
     $.ajax({
         async: false,

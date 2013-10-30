@@ -12,6 +12,9 @@ import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.view.Results;
 import controller.Cadastro.Administrativo.ProdutoController;
 import controller.VendaController;
+import java.util.ArrayList;
+import java.util.List;
+import modelo.Itemvenda;
 import modelo.Produto;
 import modelo.Venda;
 
@@ -32,17 +35,27 @@ public class VendaWebController {
 
     @Get("/venda.jsp")
     public void redirecionaPgVenda() {
-       result.forwardTo("/WEB-INF/jsp/venda.jsp");
+        result.forwardTo("/WEB-INF/jsp/venda.jsp");
     }
 
-    @Post("/vendaWeb/venda")
-    public void vendaWeb() {
+    @Post("/vendaWeb/vender")
+    public void vendaWeb(List<String> produtos) {
         VendaController controller = new VendaController();
         Venda venda = new Venda();
+        List<Itemvenda> itens = new ArrayList<Itemvenda>();
 
+        for (int i = 0; i < produtos.size(); i++) {
+            Itemvenda item = new Itemvenda();
+            
+            String itemPK = produtos.get(i).split(":")[1];
+            item.setProdutoId(new Produto());
+            item.getProdutoId().setProdutoId(new Integer(itemPK));
+            
+            itens.add(item);
+        }
         controller.gravar(venda);
     }
-    
+
     @Post("/vendaWeb/buscaProduto")
     public void buscaProduto(Integer codigoBarras) {
         ProdutoController prodController = new ProdutoController();
