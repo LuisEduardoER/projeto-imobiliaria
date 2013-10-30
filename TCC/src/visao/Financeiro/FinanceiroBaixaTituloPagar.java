@@ -260,6 +260,7 @@ public class FinanceiroBaixaTituloPagar extends javax.swing.JDialog {
         if(tP.getTituloId() != null){
             tituloPagarController = new TituloPagarController();
             tP = tituloPagarController.baixarTituloPagar(tP);
+            m=new Mensagens();
             m.jopAviso("Título à pagar "+tP.getTituloId()+" baixado em: "+tP.getDataBaixado().toString("dd/MM/YYYY"));
         }
         tP = null;
@@ -269,15 +270,18 @@ public class FinanceiroBaixaTituloPagar extends javax.swing.JDialog {
         StringBuilder sb = new StringBuilder();
         tP = new Titulopagar();
         compra = new Compra();
+        fornecedorController = new FornecedorController();
+        
         if(!jtfFornecedor.getText().isEmpty()){
-            compra.setFornecedorId(fornecedorController.buscarFornecedor("fornecedorId", jtfFornecedor.getText()));
+            compra.setFornecedorId(fornecedorController.buscarFornecedor("fornecedorCNPJ", jtfFornecedor.getText()));
             tP.setCompraId(compra);
         }else{
             sb.append("É necessário informar um fornecedor!");
         }
         
         if(!jtfTitulo.getText().isEmpty()){
-            tP = tituloPagarController.buscaTituloPagar("tituloPagar.tituloId", jtfTitulo.getText());
+            tituloPagarController = new TituloPagarController();
+            tP = tituloPagarController.buscaTituloPagar(new Integer(jtfTitulo.getText()));
             jlValor.setText(tP.getCompraId().getValorCompra().toString());
             
             if(tP.getBaixado() == 'f'){

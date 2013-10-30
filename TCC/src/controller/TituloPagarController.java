@@ -26,8 +26,8 @@ public class TituloPagarController {
 //        return dcbm;
 //    }
 
-    public Titulopagar buscaTituloPagar(String searchField, String searchString) {
-        Titulopagar tituloPagar = dao.consultarTituloPagar(searchField, searchString);
+    public Titulopagar buscaTituloPagar(Integer id) {
+        Titulopagar tituloPagar = dao.consultarTituloPagarById(id);
         return tituloPagar;
     }
 

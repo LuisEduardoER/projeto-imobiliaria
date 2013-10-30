@@ -25,6 +25,7 @@ public class ImprimeRelatorioTitulosPagar {
 
         try {
             if ("rTitulosPagarNaoBaixados".equals(arquivo)) {
+                getClass().getClassLoader().getResourceAsStream(fileName);
                 JasperPrint print = JasperFillManager.fillReport(fileName, null, new TitulosPagarNaoBaixadosDS(l));
                 JRExporter exporter = new net.sf.jasperreports.engine.export.JRPdfExporter();
                 exporter.setParameter(JRExporterParameter.JASPER_PRINT, print);

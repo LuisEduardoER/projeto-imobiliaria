@@ -60,6 +60,18 @@ public class TituloPagarDAO implements Serializable {
         return select.list();
     }
     
+    
+    
+    @SuppressWarnings("unchecked")
+    public Titulopagar consultarTituloPagarById(Integer id) {
+        Criteria criteria = session.createCriteria(Titulopagar.class, "tituloPagar");
+        
+            criteria.add(Restrictions.eq("tituloPagar.tituloId", id));
+            criteria.add(Restrictions.eq("tituloPagar.deleted", "f"));
+        
+        return  (Titulopagar) criteria.uniqueResult();
+    }
+    
     @SuppressWarnings("unchecked")
     public Titulopagar consultarTituloPagar(String searchField, String searchString) {
         Criteria criteria = montarCriteria(searchField, searchString);
@@ -70,9 +82,7 @@ public class TituloPagarDAO implements Serializable {
     private Criteria montarCriteria(String searchField, String searchString) {
         Criteria criteria = session.createCriteria(Titulopagar.class, "tituloPagar");
         
-        if(searchField != null && !searchField.equals("") && searchString != null && !searchString.equals("")){
-            criteria.add(Restrictions.ilike(searchField, searchString, MatchMode.EXACT));
-        }
+            criteria.add(Restrictions.eq(searchField, searchString));
             criteria.add(Restrictions.eq("tituloPagar.deleted", "f"));
         
         return criteria;

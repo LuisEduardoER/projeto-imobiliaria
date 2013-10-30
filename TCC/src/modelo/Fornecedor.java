@@ -40,16 +40,20 @@ public class Fornecedor implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fornecedorId", fetch = FetchType.LAZY)
     private List<Compra> compraList;
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "fornecedorId")
     private Integer fornecedorId;
+    
     @Basic(optional = false)
     @Column(name = "fornecedorCNPJ")
     private String fornecedorCNPJ;
+    
     @Column(name = "fornecedorNome")
     private String fornecedorNome;
+    
     @Column(name = "deleted")
     private Character deleted;
     @OneToMany(mappedBy = "fornecedorId", fetch = FetchType.LAZY)
