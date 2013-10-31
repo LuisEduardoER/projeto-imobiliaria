@@ -12,8 +12,8 @@ function vender() {
 
     var parametros = {};
     
-    for(var i =0; i<listProdutos.lenght; i++){
-        parametros['produtos['+i+']'] = listProdutos[i] + ':' + listProdutos[i];
+    for(var i =0; i<listProdutos.length; i++){
+        parametros['produtos['+i+']'] = listProdutos[i];
     }
     
     parametros['totalVenda'] = totalGlobal;
@@ -33,10 +33,12 @@ function vender() {
         },
         error: function(xhr, status, error) {
             //resultValidator(xhr, error);
+            
             alert(xhr.statusText);
         },
         success: function(json) {
-            alert('funfoooooo');
+            alert('Venda: '+json.venda.vendaId + " realizada com sucesso!");
+            limpaTela();
         },
         complete: function() {
             $(".load-ajax").css({
@@ -65,6 +67,8 @@ function buscaProduto() {
                 },
                 error: function(xhr, status, error) {
                     //resultValidator(xhr, error);
+                    $('#produtoId').val("");
+                    $('#produtoId').focus();
                     alert(xhr.statusText);
                 },
                 success: function(json) {
@@ -105,16 +109,33 @@ function atualizaTotal(){
         
         $("[id='total']").html("R$ " + totalGlobal);
         
+        listProdutos[listProdutos.length + 1] = "PK:" + produto.produto_id + "-"+$("[id='prodQuantidade']").val();
+        
         $("[id='prodQuantidade']").val("");
         $("[id='produtoId']").val("");
         $("[id='produtoValor']").val("");
         total = 0;
         
-        listProdutos[listProdutos.length + 1] = produto.produto_id;
         
         $("#produtoId").focus();
         
     }
+}
+
+
+function limpaTela(){
+    produto = "";
+    totalGlobal = 0;
+    listProdutos = new Array;
+    
+    $("[id='logVenda']").val("Bem Vindo!");
+    $("[id='prodQuantidade']").val("");
+    $("[id='produtoId']").val("");
+    $("[id='produtoValor']").val("");
+    $("[id='total']").html(" R$ 0.000");
+    $("[id='valorPago']").val("");
+     $("[id='dinheiro']").attr('checked', true);
+     tipoPagamento = 1;
 }
 
 $(document).ready(function(){
@@ -160,11 +181,10 @@ $(document).ready(function(){
     produto = "";
     totalGlobal = 0;
     listProdutos = new Array;
-    tipoPagamento = '';
     
     $("[id='prodQuantidade']").val("");
     $("[id='produtoId']").val("");
     $("[id='produtoValor']").val("");
-    $("[id='total']").val(" R$ 0.000");
+    $("[id='total']").html(" R$ 0.000");
      $("[id='valorPago']").val("");
 });  

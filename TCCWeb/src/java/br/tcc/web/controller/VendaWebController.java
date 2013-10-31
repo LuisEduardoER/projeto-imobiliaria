@@ -43,53 +43,62 @@ public class VendaWebController {
     public void redirecionaPgVenda() {
         result.forwardTo("/WEB-INF/jsp/venda.jsp");
     }
-    
+
     @Post("/vendaWeb/vender")
-    public void vendaWeb(List<String> produtos, Float totalVenda, Float totalPago, Integer tipoPagamento) {
+    public void vendaWeb(List<String> produtos, Float totalVenda, Float totalPago, String tipoPagamento) {
         VendaController controller = new VendaController();
         MovimentoController movimentoController;
-        
+
         Venda venda = new Venda();
         List<Itemvenda> itens = new ArrayList<Itemvenda>();
 
         for (int i = 0; i < produtos.size(); i++) {
             Itemvenda item = new Itemvenda();
 
-            String itemPK = produtos.get(i).split(":")[1];
-            item.setProdutoId(new Produto());
-            item.getProdutoId().setProdutoId(new Integer(itemPK));
+            if (!produtos.get(i).contains("undefined")) {
+                String itemPK = produtos.get(i).split(":")[1].split("-")[0];
+                String qtd = produtos.get(i).split("-")[1];
 
-            itens.add(item);
+
+                item.setProdutoId(new Produto());
+                item.getProdutoId().setProdutoId(new Integer(itemPK));
+                item.setQuantidade(new Float(qtd));
+
+                itens.add(item);
+            }
         }
 
         venda.setDataVenda(Datas.dataDateTime);
         venda.setValorTotal(totalVenda);
         venda.setTotalPago(totalPago);
         venda.setTipoPagamentoId(new Tipopagamento());
-        venda.getTipoPagamentoId().setTipoPagamentoId(tipoPagamento);
+        venda.getTipoPagamentoId().setTipoPagamentoId(new Integer(tipoPagamento));
+        try {
+            controller.gravar(venda);
 
-        controller.gravar(venda);
+            movimentoController = new MovimentoController();
 
-        movimentoController = new MovimentoController();
+            Movimento movimento = new Movimento();
 
-        Movimento movimento = new Movimento();
+            movimento.setVendaId(venda);
 
-        movimento.setVendaId(venda);
+            movimento.setCaixaId(Session.getCaixa().getCaixaId());
 
-        movimento.setCaixaId(Session.getCaixa().getCaixaId());
+            movimento.setUsuarioId(Session.getUsuario());
 
-        movimento.setUsuarioId(Session.getUsuario());
+            movimentoController.gravar(movimento);
 
-        movimentoController.gravar(movimento);
+            ItemVendaController itemVendaController = new ItemVendaController();
 
-        ItemVendaController itemVendaController = new ItemVendaController();
+            venda.setItemvendaList(itens);
+            venda = itemVendaController.gravar(venda);
 
-        venda.setItemvendaList(itens);
-        venda = itemVendaController.gravar(venda);
+            controller.gravar(venda);
+            result.use(Results.json()).from(venda).serialize();
+        } catch (Exception e) {
+            result.use(Results.json()).from(e).serialize();
+        }
 
-        controller.gravar(venda);
-        
-        
     }
 
     @Post("/vendaWeb/buscaProduto")
