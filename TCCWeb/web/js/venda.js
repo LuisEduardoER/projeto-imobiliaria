@@ -6,6 +6,7 @@
 var produto = "";
 var totalGlobal = 0;
 var listProdutos = [''];
+var tipoPagamento = 1;
 
 function vender() {
 
@@ -15,9 +16,13 @@ function vender() {
         parametros['produtos['+i+']'] = listProdutos[i] + ':' + listProdutos[i];
     }
     
+    parametros['totalVenda'] = totalGlobal;
+    parametros['totalPago'] = $("[id='valorPago']").val();
+    parametros['tipoPagamento'] = tipoPagamento;
+    
     $.ajax({
         async: false,
-        url: 'contato/enviar',
+        url: 'vendaWeb/vender',
         type : "POST",
         dataType: 'json',
         data: parametros,
@@ -28,7 +33,7 @@ function vender() {
         },
         error: function(xhr, status, error) {
             //resultValidator(xhr, error);
-            alert(xhr.responseText['message']);
+            alert(xhr.statusText);
         },
         success: function(json) {
             alert('funfoooooo');
@@ -60,7 +65,7 @@ function buscaProduto() {
                 },
                 error: function(xhr, status, error) {
                     //resultValidator(xhr, error);
-                    alert(xhr.responseText['message']);
+                    alert(xhr.statusText);
                 },
                 success: function(json) {
                     produto = json.produto;
@@ -112,7 +117,7 @@ function atualizaTotal(){
     }
 }
 
-$(document).ready(function(){  
+$(document).ready(function(){
 
     $("[id='logVenda']").append("Bem Vindo!");
     $("[id='dinheiro']").attr('checked', true);
@@ -130,13 +135,36 @@ $(document).ready(function(){
         }
     });
     
-     produto = "";
-     totalGlobal = 0;
-     listProdutos = new Array;
+    $("[id='valorPago']").keypress(function(event) {
+        if ( event.which == 13 || event.which == 0) {
+            vender();
+        }
+    });
+    
+     $('#dinheiro').change(function() {
+        if($(this).is(':checked')){
+            tipoPagamento = 1;
+        }
+    });
+     $('#cheque').change(function() {
+        if($(this).is(':checked')){
+            tipoPagamento = 2;
+        }
+    });
+     $('#cartao').change(function() {
+        if($(this).is(':checked')){
+            tipoPagamento = 3;
+        }
+    });
+    
+    produto = "";
+    totalGlobal = 0;
+    listProdutos = new Array;
+    tipoPagamento = '';
     
     $("[id='prodQuantidade']").val("");
     $("[id='produtoId']").val("");
     $("[id='produtoValor']").val("");
     $("[id='total']").val(" R$ 0.000");
-    
+     $("[id='valorPago']").val("");
 });  

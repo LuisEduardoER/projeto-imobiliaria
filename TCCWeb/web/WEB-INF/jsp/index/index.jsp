@@ -29,7 +29,7 @@
             </div>
             <div class="control-group">
                 <div class="controls">
-                    <button class="btn" id="btnAcessar" >Acessar</button>
+                    <button class="btn" id="btnAcessar">Acessar</button>
                 </div>
             </div>
         </form>

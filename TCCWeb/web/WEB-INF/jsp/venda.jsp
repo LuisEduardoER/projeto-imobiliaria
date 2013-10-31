@@ -14,15 +14,15 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta name="description" content="">
         <meta name="author" content="">
-        
+
         <link href="css/bootstrap.min.css" rel="stylesheet"/>
-        
+
         <script lang="JavaScript" type="text/javascript" src="js/jquery.min.js"></script>
-        
-<!--        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
-        <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script src="http://pingendo-web.herokuapp.com/bootstrap-3/js/bootstrap.js"></script>-->
-        
+
+        <!--        <link href="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
+                <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+                <script src="http://pingendo-web.herokuapp.com/bootstrap-3/js/bootstrap.js"></script>-->
+
         <script lang="JavaScript" type="text/javascript" src="js/venda.js"></script>
         <!--[if lt IE 9]>
             <script src="http://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.6.1/html5shiv.js"></script>
@@ -40,14 +40,6 @@
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse"><span class="sr-only">Toggle navigation</span><span class="icon-bar"></span>
                         <span class="icon-bar"></span><span class="icon-bar"></span> </button><a class="navbar-brand" href="#">TCC Bruno - Web</a>
                 </div>
-<!--                <div class="collapse navbar-collapse navbar-ex1-collapse">
-                    <ul class="nav navbar-nav navbar-right">
-                        <li class="active"><a href="#">Home</a>
-                        </li>
-                        <li><a href="#">Contacts</a>
-                        </li>
-                    </ul>
-                </div>-->
             </div>
             <div id="textAreaLog" class="row">
                 <div class="col-md-2">
@@ -91,18 +83,18 @@
                     </div>
                 </div>
 
-                <div class="col col-md-6">
+                <div class="col col-md-6" style="padding-top: 5px;">
 
                     <div class="panel">
 
-                        <div class="input-group input-group-sm">
+                        <div class="input-group input-group-sm" style="padding-top: 5px;">
                             <input class="form-control" id="produtoId" type="text">
                         </div>
-                        
+
                         <div>
                             <br>
                         </div>
-                        <div class="input-group input-group-sm">
+                        <div class="input-group input-group-sm" style="padding-top: 7px;">
                             <input class="form-control" id="prodQuantidade" align="right" type="text">
                             <span class="input-group-addon">.00</span>
                         </div>
@@ -111,7 +103,7 @@
                             <br>
                         </div>
 
-                        <div class="input-group input-group-sm">
+                        <div class="input-group input-group-sm" style="padding-top: 7px;">
                             <span class="input-group-addon">$</span>
                             <input id="produtoValor" class="form-control" disabled="" type="text">
                         </div>
@@ -120,13 +112,15 @@
 
                 </div>
 
-                <div class="panel">
+                <div class="panel" style="padding-top: 5px;">
                     <div class="col-md-6">
                         <textarea id="logVenda" class="form-control" rows="3" disabled=""></textarea>
                     </div>
                 </div>
 
+
             </div>
+
 
             <div class="col-md-3">
                 <label> Forma de Pagamento:</label>
@@ -162,13 +156,22 @@
                 <label> Total:</label>
                 <label id="total"> R$ 0,000:</label>
             </div>
-            
+
+            <div>
+                <label> Total Pago:</label>
+            </div>
+            <div class="input-group input-group-sm col-md-3">
+                <span class="input-group-addon">$</span>
+                <input id="valorPago" class="form-control" type="text">
+            </div>
+
+            <br/>
+
             <div class="row">
                 <div class="col-md-12">
                     <hr>
                 </div>
             </div>
-
 
             <div class="row">
                 <div class="col-md-12">

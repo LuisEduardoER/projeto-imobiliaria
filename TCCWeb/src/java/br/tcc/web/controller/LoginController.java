@@ -11,22 +11,11 @@ import br.com.caelum.vraptor.Result;
 import br.com.caelum.vraptor.Validator;
 import br.com.caelum.vraptor.validator.ValidationMessage;
 import br.com.caelum.vraptor.view.Results;
-import controller.Cadastro.Administrativo.ProdutoController;
 import controller.Cadastro.Administrativo.UsuarioController;
 import controller.Cadastro.VendaAberturaFechamentoCaixaController;
-import controller.MovimentoController;
-import controller.VendaController;
-import java.util.ArrayList;
-import java.util.List;
 import modelo.AberturaCaixa;
-import modelo.Itemvenda;
-import modelo.Movimento;
-import modelo.Produto;
 import modelo.Session;
-import modelo.Tipopagamento;
 import modelo.Usuario;
-import modelo.Venda;
-import util.Datas;
 
 /**
  *
@@ -84,11 +73,10 @@ public class LoginController {
                 AberturaCaixa aberturaCaixa = vendaAberturaFechamentoCaixaController.getCaixaAbertoByFuncionario(usuario.getUsuarioId());
                 Session.setCaixa(aberturaCaixa);
             }
-//            result.redirectTo("/WEB-INF/jsp/venda.jsp");
             result.use(Results.http()).setStatusCode(200);
-//            result.forwardTo("/venda.jsp");
+//            result.forwardTo("/WEB-INF/jsp/venda.jsp");
         }
 
-
     }
+    
 }

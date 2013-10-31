@@ -45,9 +45,10 @@ public class VendaWebController {
     }
     
     @Post("/vendaWeb/vender")
-    public void vendaWeb(List<String> produtos, Float totalVenda, Float totalPago, int tipoPagamento) {
+    public void vendaWeb(List<String> produtos, Float totalVenda, Float totalPago, Integer tipoPagamento) {
         VendaController controller = new VendaController();
         MovimentoController movimentoController;
+        
         Venda venda = new Venda();
         List<Itemvenda> itens = new ArrayList<Itemvenda>();
 
@@ -67,7 +68,6 @@ public class VendaWebController {
         venda.setTipoPagamentoId(new Tipopagamento());
         venda.getTipoPagamentoId().setTipoPagamentoId(tipoPagamento);
 
-        controller = new VendaController();
         controller.gravar(venda);
 
         movimentoController = new MovimentoController();

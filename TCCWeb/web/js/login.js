@@ -7,31 +7,24 @@ function logar() {
 
     var parametros = {};
     
-    parametros['usuarioName'] = $("[id='inputUsuario']").val();
-    parametros['pass'] = $("[id='inputPassword']").val();
+    parametros['usuarioName'] = $("#inputUsuario").val();
+    parametros['pass'] = $("#inputPassword").val();
     
     $.ajax({
         async: false,
         url: 'login/logar',
         type : "POST",
-        dataType: 'json',
         data: parametros,
-        beforeSend: function() {
-        },
         error: function(xhr, status, error) {
-            //resultValidator(xhr, error);
-//            alert(xhr.responseText['message']);
-            if(xhr.status == 200){
-                window.open("venda.jsp", '', '');
-
-            }
         },
         success: function(json) {
-            alert('funfoooooo');
+            window.open("venda.jsp", "parent", '');
+            
         },
         complete: function() {
         }
     });
+
 }
 
 
