@@ -39,6 +39,7 @@ function vender() {
         success: function(json) {
             alert('Venda: '+json.venda.vendaId + " realizada com sucesso!");
             limpaTela();
+            $('#produtoId').focus();
         },
         complete: function() {
             $(".load-ajax").css({
@@ -128,7 +129,7 @@ function limpaTela(){
     totalGlobal = 0;
     listProdutos = new Array;
     
-    $("[id='logVenda']").val("Bem Vindo!");
+    $("[id='logVenda']").text("Bem Vindo!");
     $("[id='prodQuantidade']").val("");
     $("[id='produtoId']").val("");
     $("[id='produtoValor']").val("");
@@ -140,7 +141,7 @@ function limpaTela(){
 
 $(document).ready(function(){
 
-    $("[id='logVenda']").append("Bem Vindo!");
+    $("[id='logVenda']").text("Bem Vindo!");
     $("[id='dinheiro']").attr('checked', true);
 
     
