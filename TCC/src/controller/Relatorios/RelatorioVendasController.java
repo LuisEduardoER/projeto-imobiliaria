@@ -8,7 +8,7 @@ import DAO.Relatorios.RelatorioVendasDAO;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import modelo.Caixa;
-import modelo.Produto;
+import modelo.Cadastro.Adminsitrativo.Produto;
 import org.joda.time.LocalDateTime;
 
 /**

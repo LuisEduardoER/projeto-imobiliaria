@@ -4,6 +4,7 @@
  */
 package modelo;
 
+import modelo.Cadastro.Adminsitrativo.Usuario;
 import org.joda.time.LocalDateTime;
 
 /**

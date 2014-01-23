@@ -93,7 +93,7 @@ public class CadastroCEP extends javax.swing.JDialog {
             jcbRua.updateUI();
         }
 
-        jpControles.add(jbExcluir);
+//        jpControles.add(jbExcluir);
         jpControles.add(jbGravar);
 
     }

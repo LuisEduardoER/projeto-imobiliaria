@@ -79,7 +79,7 @@ public class CadastroBairro extends javax.swing.JDialog {
             jcbCidade.updateUI();
         }
         
-        jpControles.add(jbExcluir);
+//        jpControles.add(jbExcluir);
         jpControles.add(jbGravar);
 
     }

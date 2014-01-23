@@ -2,14 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package DAO.Cadastro;
+package DAO.Cadastro.Administrativo;
 
 import DAO.EntityManagerFactory;
 import controller.Mensagens;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
-import modelo.Funcionario;
+import modelo.Cadastro.Adminsitrativo.Funcionario;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;

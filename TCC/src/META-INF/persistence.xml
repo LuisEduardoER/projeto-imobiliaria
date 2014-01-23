@@ -13,9 +13,6 @@
     <class>modelo.Endereco.Pais</class>
     <class>modelo.Endereco.Rua</class>
     <class>modelo.Estoque</class>
-    <class>modelo.Fabricante</class>
-    <class>modelo.Fornecedor</class>
-    <class>modelo.Funcionario</class>
     <class>modelo.Itemvenda</class>
     <class>modelo.Movimento</class>
     <class>modelo.PerfisPermissoes.Modulo</class>
@@ -23,11 +20,15 @@
     <class>modelo.PerfisPermissoes.Perfil</class>
     <class>modelo.PerfisPermissoes.PerfilModulopermissao</class>
     <class>modelo.PerfisPermissoes.Permissao</class>
-    <class>modelo.Produto</class>
     <class>modelo.Tipopagamento</class>
     <class>modelo.Titulopagar</class>
-    <class>modelo.Usuario</class>
     <class>modelo.Venda</class>
+    <class>modelo.Cadastro.Adminsitrativo.Funcionario</class>
+    <class>modelo.Cadastro.Adminsitrativo.Fabricante</class>
+    <class>modelo.Cadastro.Adminsitrativo.Produto</class>
+    <class>modelo.Cadastro.Adminsitrativo.Usuario</class>
+    <class>modelo.Cadastro.Adminsitrativo.Fornecedor</class>
+    <class>modelo.Cadastro.Adminsitrativo.Grupoproduto</class>
     <properties>
       <!--            <property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>-->
       <property name="hibernate.cache.provider_class" value="org.hibernate.cache.NoCacheProvider"/>
@@ -36,7 +37,7 @@
       <property name="hibernate.connection.username" value="root"/>
       <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
       <property name="hibernate.connection.password" value="root"/>
-      <property name="hibernate.connection.url" value="jdbc:mysql://bruno-not:3306/tcc?zeroDateTimeBehavior=convertToNull"/>
+      <property name="hibernate.connection.url" value="jdbc:mysql://bruno-pc:3306/tcc?zeroDateTimeBehavior=convertToNull"/>
     </properties>
   </persistence-unit>
 </persistence>

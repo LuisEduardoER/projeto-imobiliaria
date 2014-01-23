@@ -8,7 +8,7 @@ import Relatorios.ImprimeRelatorioVenda;
 import controller.Relatorios.RelatorioVendasController;
 import java.util.List;
 import modelo.Caixa;
-import modelo.Produto;
+import modelo.Cadastro.Adminsitrativo.Produto;
 
 /**
  *

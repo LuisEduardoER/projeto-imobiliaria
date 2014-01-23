@@ -4,13 +4,13 @@
  */
 package controller.Cadastro.Administrativo;
 
-import DAO.Cadastro.FornecedorDAO;
+import DAO.Cadastro.Administrativo.FornecedorDAO;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import modelo.Fornecedor;
+import modelo.Cadastro.Adminsitrativo.Fornecedor;
 import org.joda.time.LocalDateTime;
 import persistencia.exceptions.NonexistentEntityException;
 import util.Datas;

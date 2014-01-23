@@ -23,9 +23,9 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import modelo.Compra;
 import modelo.Estoque;
-import modelo.Fabricante;
-import modelo.Fornecedor;
-import modelo.Produto;
+import modelo.Cadastro.Adminsitrativo.Fabricante;
+import modelo.Cadastro.Adminsitrativo.Fornecedor;
+import modelo.Cadastro.Adminsitrativo.Produto;
 import org.joda.time.LocalDate;
 import util.Datas;
 
@@ -90,9 +90,9 @@ public class CadastroProduto extends javax.swing.JDialog {
             }
         });
 
-        jpControles.add(jbBuscar);
-        jpControles.add(jbExcluir);
         jpControles.add(jbGravar);
+//        jpControles.add(jbBuscar);
+//        jpControles.add(jbExcluir);
         jpControles.add(jbNovo);
         produtoList = produtoController.buscaTodos();
         modeloProduto = new TableModelProduto();
@@ -126,6 +126,7 @@ public class CadastroProduto extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
@@ -138,6 +139,7 @@ public class CadastroProduto extends javax.swing.JDialog {
         jbBuscarFabricante = new javax.swing.JButton();
         jtfQtdMinima = new javax.swing.JTextField();
         jtfValor = new javax.swing.JTextField();
+        jcbGrupoProduto = new javax.swing.JComboBox();
         jpDadosCompra = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
@@ -171,16 +173,11 @@ public class CadastroProduto extends javax.swing.JDialog {
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 648, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 668, Short.MAX_VALUE)
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 261, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 272, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jpConsultaProdutosLayout = new javax.swing.GroupLayout(jpConsultaProdutos);
@@ -212,13 +209,16 @@ public class CadastroProduto extends javax.swing.JDialog {
         jLabel2.setText("Fabricante:");
         jPanel1.add(jLabel2);
 
+        jLabel10.setText("Grupo:");
+        jPanel1.add(jLabel10);
+
         jLabel4.setText("Valor: (Para Venda)");
         jPanel1.add(jLabel4);
 
         jLabel5.setText("Código de Barras:");
         jPanel1.add(jLabel5);
 
-        jLabel6.setText("Quantidade:");
+        jLabel6.setText("Saldo Inicial:");
         jPanel1.add(jLabel6);
 
         jLabel7.setText("Quantidade mínima:");
@@ -241,21 +241,22 @@ public class CadastroProduto extends javax.swing.JDialog {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jtfCodigoBarras)
-                            .addComponent(jtfProdNome)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(jcbFabricanteCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jbBuscarFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jtfCodigoBarras)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jtfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtfQtdMinima, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jtfValor, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(126, 126, 126))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jcbGrupoProduto, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jtfProdNome, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createSequentialGroup()
+                                .addComponent(jcbFabricanteCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, 244, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbBuscarFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -266,14 +267,16 @@ public class CadastroProduto extends javax.swing.JDialog {
                     .addComponent(jcbFabricanteCNPJ, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jbBuscarFabricante, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jcbGrupoProduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(11, 11, 11)
                 .addComponent(jtfCodigoBarras, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jtfQtdMinima, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(101, Short.MAX_VALUE))
+                .addContainerGap(75, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jpCadastroProdutosLayout = new javax.swing.GroupLayout(jpCadastroProdutos);
@@ -511,6 +514,7 @@ public class CadastroProduto extends javax.swing.JDialog {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -529,6 +533,7 @@ public class CadastroProduto extends javax.swing.JDialog {
     private javax.swing.JButton jbBuscarFornecedor;
     private javax.swing.JComboBox jcbFabricanteCNPJ;
     private javax.swing.JComboBox jcbFornecedorCNPJ;
+    private javax.swing.JComboBox jcbGrupoProduto;
     private javax.swing.JPanel jpCadastroProdutos;
     private javax.swing.JPanel jpConsultaProdutos;
     private javax.swing.JPanel jpControles;
@@ -610,7 +615,9 @@ public class CadastroProduto extends javax.swing.JDialog {
             compra.setValorCompra(Float.parseFloat(jtfValorCompra.getText()));
 
             produtoController = new ProdutoController();
-            if (produtoController.gravar(p, e, compra) != null) {
+            p = produtoController.gravar(p, e, compra);
+            if (p.getProduto_id() != null) {
+                modeloProduto.addProduto(p);
                 m = new Mensagens();
                 m.jopAviso("Produto gravado com sucesso!");
                 gerenciaCampos(false);
@@ -627,6 +634,9 @@ public class CadastroProduto extends javax.swing.JDialog {
         jtfValor.setText("");
         jtfCodigoBarras.setText("");
         jtfQuantidade.setText("");
+        jtfQtdMinima.setText("");
+        jtfDataCompra.setText("");
+        jtfValorCompra.setText("");
     }
 
     private void alterar(Produto p) {
@@ -760,6 +770,7 @@ public class CadastroProduto extends javax.swing.JDialog {
         jcbFabricanteCNPJ.setEnabled(abilitaDesabilita);
         jcbFornecedorCNPJ.setEnabled(abilitaDesabilita);
         jtfDataCompra.setEnabled(abilitaDesabilita);
+        jbGravar.setEnabled(abilitaDesabilita);
     }
 
     private void setAba(int i) {

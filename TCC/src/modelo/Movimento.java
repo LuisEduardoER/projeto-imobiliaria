@@ -4,6 +4,7 @@
  */
 package modelo;
 
+import modelo.Cadastro.Adminsitrativo.Usuario;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;

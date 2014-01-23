@@ -12,7 +12,7 @@ import controller.Mensagens;
 import javax.swing.JButton;
 import modelo.AberturaCaixa;
 import modelo.Caixa;
-import modelo.Usuario;
+import modelo.Cadastro.Adminsitrativo.Usuario;
 
 /**
  *

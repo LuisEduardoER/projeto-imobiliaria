@@ -28,11 +28,11 @@ import modelo.Endereco.Cep;
 import modelo.Endereco.Cidade;
 import modelo.Endereco.Endereco;
 import modelo.Endereco.Estado;
-import modelo.Funcionario;
+import modelo.Cadastro.Adminsitrativo.Funcionario;
 import modelo.Endereco.Pais;
 import modelo.PerfisPermissoes.Perfil;
 import modelo.Endereco.Rua;
-import modelo.Usuario;
+import modelo.Cadastro.Adminsitrativo.Usuario;
 
 /**
  *
@@ -147,8 +147,8 @@ public class CadastroUsuario extends javax.swing.JDialog {
             jcbCEP.updateUI();
         }
 
-        jpControles.add(jbExcluir);
         jpControles.add(jbGravar);
+//        jpControles.add(jbExcluir);
         jpControles.add(jbNovo);
 
         jtFuncionarios.setDefaultEditor(Object.class, null);

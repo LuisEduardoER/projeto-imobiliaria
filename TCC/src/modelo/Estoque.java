@@ -4,6 +4,8 @@
  */
 package modelo;
 
+import modelo.Cadastro.Adminsitrativo.Produto;
+import modelo.Cadastro.Adminsitrativo.Fabricante;
 import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;

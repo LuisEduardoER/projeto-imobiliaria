@@ -54,7 +54,7 @@ public class CadastroEstados extends javax.swing.JDialog {
         jcbPais.setModel(paisController.listPaises());
         jcbPais.updateUI();
         
-        jpControles.add(jbExcluir);
+//        jpControles.add(jbExcluir);
         jpControles.add(jbGravar);
 
     }

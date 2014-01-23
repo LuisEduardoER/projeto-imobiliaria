@@ -43,9 +43,7 @@ public class TCC extends javax.swing.JFrame {
     public TCC() {
         initComponents();
         this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-
         verificaUsuario();
-
     }
 
     /**
@@ -89,8 +87,6 @@ public class TCC extends javax.swing.JFrame {
         jmiVendasPorProduto = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
         jmPendentes = new javax.swing.JMenuItem();
-        jmTeste = new javax.swing.JMenu();
-        jmiTestarImpressora = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("TCC - Bruno");
@@ -294,23 +290,6 @@ public class TCC extends javax.swing.JFrame {
 
         jMenuBar1.add(jmRelatorios);
 
-        jmTeste.setText("Testar Impressora");
-        jmTeste.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmTesteActionPerformed(evt);
-            }
-        });
-
-        jmiTestarImpressora.setText("Testar");
-        jmiTestarImpressora.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jmiTestarImpressoraActionPerformed(evt);
-            }
-        });
-        jmTeste.add(jmiTestarImpressora);
-
-        jMenuBar1.add(jmTeste);
-
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -329,7 +308,6 @@ public class TCC extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        JOptionPane.showMessageDialog(null, "flowwww");
         System.exit(0);
     }//GEN-LAST:event_formWindowClosing
 
@@ -423,16 +401,6 @@ public class TCC extends javax.swing.JFrame {
         relatorio.setVisible(true);
     }//GEN-LAST:event_jmiVendasPorProdutoActionPerformed
 
-    private void jmTesteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmTesteActionPerformed
-        ImpressaoCupomController impressao = new ImpressaoCupomController();
-        impressao.testaImpressao();
-    }//GEN-LAST:event_jmTesteActionPerformed
-
-    private void jmiTestarImpressoraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiTestarImpressoraActionPerformed
-        ImpressaoCupomController impressao = new ImpressaoCupomController();
-        impressao.testaImpressao();
-    }//GEN-LAST:event_jmiTestarImpressoraActionPerformed
-
     private void jmPendentesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmPendentesActionPerformed
         imprimeRelatorioTituloPagar();
         
@@ -486,7 +454,6 @@ public class TCC extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmPendentes;
     private javax.swing.JMenu jmPermissoes;
     private javax.swing.JMenu jmRelatorios;
-    private javax.swing.JMenu jmTeste;
     private javax.swing.JMenu jmVenda;
     private javax.swing.JMenu jmVendas;
     private javax.swing.JMenuItem jmVinculoModuloPermissao;
@@ -504,7 +471,6 @@ public class TCC extends javax.swing.JFrame {
     private javax.swing.JMenuItem jmiFornecedor;
     private javax.swing.JMenuItem jmiPerfis;
     private javax.swing.JMenuItem jmiProduto;
-    private javax.swing.JMenuItem jmiTestarImpressora;
     private javax.swing.JMenuItem jmiVenda;
     private javax.swing.JMenuItem jmiVendasPorProduto;
     // End of variables declaration//GEN-END:variables

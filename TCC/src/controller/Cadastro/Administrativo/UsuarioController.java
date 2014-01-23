@@ -4,12 +4,12 @@
  */
 package controller.Cadastro.Administrativo;
 
-import DAO.Cadastro.UsuarioDAO;
+import DAO.Cadastro.Administrativo.UsuarioDAO;
 import controller.Mensagens;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import modelo.Funcionario;
-import modelo.Usuario;
+import modelo.Cadastro.Adminsitrativo.Funcionario;
+import modelo.Cadastro.Adminsitrativo.Usuario;
 import persistencia.exceptions.NonexistentEntityException;
 import util.Datas;
 

@@ -89,7 +89,7 @@ public class CadastroRuas extends javax.swing.JDialog {
 //            jcbBairro.updateUI();
 //        }
         
-        jpControles.add(jbExcluir);
+//        jpControles.add(jbExcluir);
         jpControles.add(jbGravar);
 
     }

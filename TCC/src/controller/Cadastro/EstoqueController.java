@@ -9,7 +9,7 @@ import controller.Mensagens;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import modelo.Estoque;
-import modelo.Produto;
+import modelo.Cadastro.Adminsitrativo.Produto;
 import persistencia.exceptions.NonexistentEntityException;
 import util.Datas;
 

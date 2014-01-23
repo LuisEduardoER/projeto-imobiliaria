@@ -2,11 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelo;
+package modelo.Cadastro.Adminsitrativo;
 
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Basic;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,6 +18,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import modelo.Compra;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 
@@ -25,10 +27,10 @@ import org.joda.time.LocalDateTime;
  * @author Bruno
  */
 @Entity
-@Table(name = "fabricante")
+@Table(name = "fornecedor")
 @NamedQueries({
-    @NamedQuery(name = "Fabricante.findAll", query = "SELECT f FROM Fabricante f")})
-public class Fabricante implements Serializable {
+    @NamedQuery(name = "Fornecedor.findAll", query = "SELECT f FROM Fornecedor f")})
+public class Fornecedor implements Serializable {
 
     @Column(name = "inserted")
     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
@@ -36,66 +38,69 @@ public class Fabricante implements Serializable {
     @Column(name = "updated")
     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
     private LocalDateTime updated;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fornecedorId", fetch = FetchType.LAZY)
+    private List<Compra> compraList;
     private static final long serialVersionUID = 1L;
+    
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
-    @Column(name = "fabricanteId")
-    private Integer fabricanteId;
-    @Column(name = "fabricanteNome")
-    private String fabricanteNome;
+    @Column(name = "fornecedorId")
+    private Integer fornecedorId;
+    
     @Basic(optional = false)
-    @Column(name = "fabricanteCNPJ")
-    private String fabricanteCNPJ;
+    @Column(name = "fornecedorCNPJ")
+    private String fornecedorCNPJ;
+    
+    @Column(name = "fornecedorNome")
+    private String fornecedorNome;
+    
     @Column(name = "deleted")
-    private String deleted;
-    @OneToMany(mappedBy = "fabricanteId", fetch = FetchType.LAZY)
+    private Character deleted;
+    @OneToMany(mappedBy = "fornecedorId", fetch = FetchType.LAZY)
     private List<Produto> produtoList;
-    @OneToMany(mappedBy = "fabricanteId", fetch = FetchType.LAZY)
-    private List<Estoque> estoqueList;
 
-    public Fabricante() {
-        this.deleted = "f";
+    public Fornecedor() {
     }
 
-    public Fabricante(Integer fabricanteId) {
-        this.fabricanteId = fabricanteId;
+    public Fornecedor(Integer fornecedorId) {
+        this.fornecedorId = fornecedorId;
     }
 
-    public Fabricante(Integer fabricanteId, String fabricanteCNPJ) {
-        this.fabricanteId = fabricanteId;
-        this.fabricanteCNPJ = fabricanteCNPJ;
+    public Fornecedor(Integer fornecedorId, String fornecedorCNPJ) {
+        this.fornecedorId = fornecedorId;
+        this.fornecedorCNPJ = fornecedorCNPJ;
     }
 
-    public Integer getFabricanteId() {
-        return fabricanteId;
+    public Integer getFornecedorId() {
+        return fornecedorId;
     }
 
-    public void setFabricanteId(Integer fabricanteId) {
-        this.fabricanteId = fabricanteId;
+    public void setFornecedorId(Integer fornecedorId) {
+        this.fornecedorId = fornecedorId;
     }
 
-    public String getFabricanteNome() {
-        return fabricanteNome;
+    public String getFornecedorCNPJ() {
+        return fornecedorCNPJ;
     }
 
-    public void setFabricanteNome(String fabricanteNome) {
-        this.fabricanteNome = fabricanteNome;
+    public void setFornecedorCNPJ(String fornecedorCNPJ) {
+        this.fornecedorCNPJ = fornecedorCNPJ;
     }
 
-    public String getFabricanteCNPJ() {
-        return fabricanteCNPJ;
+    public String getFornecedorNome() {
+        return fornecedorNome;
     }
 
-    public void setFabricanteCNPJ(String fabricanteCNPJ) {
-        this.fabricanteCNPJ = fabricanteCNPJ;
+    public void setFornecedorNome(String fornecedorNome) {
+        this.fornecedorNome = fornecedorNome;
     }
 
-    public String getDeleted() {
+    public Character getDeleted() {
         return deleted;
     }
 
-    public void setDeleted(String deleted) {
+    public void setDeleted(Character deleted) {
         this.deleted = deleted;
     }
 
@@ -107,29 +112,21 @@ public class Fabricante implements Serializable {
         this.produtoList = produtoList;
     }
 
-    public List<Estoque> getEstoqueList() {
-        return estoqueList;
-    }
-
-    public void setEstoqueList(List<Estoque> estoqueList) {
-        this.estoqueList = estoqueList;
-    }
-
     @Override
     public int hashCode() {
         int hash = 0;
-        hash += (fabricanteId != null ? fabricanteId.hashCode() : 0);
+        hash += (fornecedorId != null ? fornecedorId.hashCode() : 0);
         return hash;
     }
 
     @Override
     public boolean equals(Object object) {
         // TODO: Warning - this method won't work in the case the id fields are not set
-        if (!(object instanceof Fabricante)) {
+        if (!(object instanceof Fornecedor)) {
             return false;
         }
-        Fabricante other = (Fabricante) object;
-        if ((this.fabricanteId == null && other.fabricanteId != null) || (this.fabricanteId != null && !this.fabricanteId.equals(other.fabricanteId))) {
+        Fornecedor other = (Fornecedor) object;
+        if ((this.fornecedorId == null && other.fornecedorId != null) || (this.fornecedorId != null && !this.fornecedorId.equals(other.fornecedorId))) {
             return false;
         }
         return true;
@@ -137,12 +134,12 @@ public class Fabricante implements Serializable {
 
     @Override
     public String toString() {
-        return fabricanteCNPJ;
+        return fornecedorCNPJ;
     }
 
     public LocalDateTime getInserted() {
         return inserted;
-}
+    }
 
     public void setInserted(LocalDateTime inserted) {
         this.inserted = inserted;
@@ -154,5 +151,13 @@ public class Fabricante implements Serializable {
 
     public void setUpdated(LocalDateTime updated) {
         this.updated = updated;
+    }
+
+    public List<Compra> getCompraList() {
+        return compraList;
+}
+
+    public void setCompraList(List<Compra> compraList) {
+        this.compraList = compraList;
     }
 }

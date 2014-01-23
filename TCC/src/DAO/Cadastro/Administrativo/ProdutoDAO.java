@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package DAO.Cadastro;
+package DAO.Cadastro.Administrativo;
 
 import DAO.EntityManagerFactory;
 import controller.Mensagens;
@@ -11,7 +11,7 @@ import java.util.List;
 import javax.persistence.EntityManager;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
-import modelo.Produto;
+import modelo.Cadastro.Adminsitrativo.Produto;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.ProjectionList;
 import org.hibernate.criterion.Projections;

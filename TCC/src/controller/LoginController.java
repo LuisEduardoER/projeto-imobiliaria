@@ -9,7 +9,7 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import modelo.PerfisPermissoes.Perfil;
 import modelo.Session;
-import modelo.Usuario;
+import modelo.Cadastro.Adminsitrativo.Usuario;
 import persistencia.exceptions.NonexistentEntityException;
 import util.Datas;
 

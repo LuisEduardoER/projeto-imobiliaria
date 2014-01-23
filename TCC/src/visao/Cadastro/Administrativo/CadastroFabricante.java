@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import modelo.Fabricante;
+import modelo.Cadastro.Adminsitrativo.Fabricante;
 import persistencia.exceptions.NonexistentEntityException;
 import util.ValidaCNPJ;
 
@@ -60,9 +60,9 @@ public class CadastroFabricante extends javax.swing.JDialog {
             }
         });
 
+        jpControles.add(jbGravar);
         jpControles.add(jbBuscar);
         jpControles.add(jbExcluir);
-        jpControles.add(jbGravar);
     }
 
     /**
@@ -177,7 +177,7 @@ public class CadastroFabricante extends javax.swing.JDialog {
         m = new Mensagens();
         if (f != null) {
             if (f.getFabricanteId() != 0) {
-                if (m.jopDeletar("Deseja realmente excluir este fucionário ?") == JOptionPane.YES_OPTION) {
+                if (m.jopDeletar("Deseja realmente excluir este fabricante ?") == JOptionPane.YES_OPTION) {
                     acaoRemover();
                 }
             } else {
@@ -270,6 +270,7 @@ public class CadastroFabricante extends javax.swing.JDialog {
 
     private void limparTela() {
         jtfFabricanteNome.setText("");
+        jlCodigo.setText("");
         jcbFabricanteCNPJ.removeAll();
     }
 

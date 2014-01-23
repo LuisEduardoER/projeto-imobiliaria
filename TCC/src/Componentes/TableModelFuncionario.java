@@ -7,7 +7,7 @@ package Componentes;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
-import modelo.Funcionario;
+import modelo.Cadastro.Adminsitrativo.Funcionario;
 
 /**
  *

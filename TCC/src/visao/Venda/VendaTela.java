@@ -19,7 +19,7 @@ import javax.swing.ButtonGroup;
 import javax.swing.JOptionPane;
 import modelo.Itemvenda;
 import modelo.Movimento;
-import modelo.Produto;
+import modelo.Cadastro.Adminsitrativo.Produto;
 import modelo.Session;
 import modelo.Tipopagamento;
 import modelo.Venda;

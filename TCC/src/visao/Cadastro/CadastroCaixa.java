@@ -10,7 +10,7 @@ import controller.Cadastro.Administrativo.UsuarioController;
 import controller.Mensagens;
 import javax.swing.JButton;
 import modelo.Caixa;
-import modelo.Usuario;
+import modelo.Cadastro.Adminsitrativo.Usuario;
 
 /**
  *
@@ -55,7 +55,7 @@ public class CadastroCaixa extends javax.swing.JDialog {
         jcbUsuario.setModel(usuarioController.listUsuarios());
         jcbUsuario.updateUI();
 
-        jpControles.add(jbExcluir);
+//        jpControles.add(jbExcluir);
         jpControles.add(jbGravar);
 
     }

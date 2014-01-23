@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
 import modelo.Estoque;
-import modelo.Produto;
+import modelo.Cadastro.Adminsitrativo.Produto;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Projections;

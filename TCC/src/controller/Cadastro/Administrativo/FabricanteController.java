@@ -4,10 +4,10 @@
  */
 package controller.Cadastro.Administrativo;
 
-import DAO.Cadastro.FabricanteDAO;
+import DAO.Cadastro.Administrativo.FabricanteDAO;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
-import modelo.Fabricante;
+import modelo.Cadastro.Adminsitrativo.Fabricante;
 import org.joda.time.LocalDateTime;
 import persistencia.exceptions.NonexistentEntityException;
 import util.Datas;
@@ -25,17 +25,17 @@ public class FabricanteController {
         DefaultComboBoxModel<Fabricante> dcbm = new DefaultComboBoxModel<>();
         
         List<Object[]> fabricanteObject = dao.consultarFabricante(field, value);
-        if(!fabricanteObject.isEmpty()){
+        if(!fabricanteObject.isEmpty() && fabricanteObject.size() > 0){
             fabricante.setFabricanteId((int) fabricanteObject.get(0)[0]);
             fabricante.setFabricanteNome((String) fabricanteObject.get(0)[1]);
             fabricante.setFabricanteCNPJ((String) fabricanteObject.get(0)[2]);
             fabricante.setInserted((LocalDateTime) fabricanteObject.get(0)[3]);
             fabricante.setUpdated((LocalDateTime) fabricanteObject.get(0)[4]);
             fabricante.setDeleted((String) fabricanteObject.get(0)[5]);
+            dcbm.addElement(fabricante);
         }
 //        Fabricante f = dao.consultarFabricante(field, value);
         
-        dcbm.addElement(fabricante);
         return dcbm;
     }
 

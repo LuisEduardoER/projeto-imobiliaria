@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
-import modelo.Fornecedor;
+import modelo.Cadastro.Adminsitrativo.Fornecedor;
 import persistencia.exceptions.NonexistentEntityException;
 import util.ValidaCNPJ;
 
@@ -60,9 +60,9 @@ public class CadastroFornecedor extends javax.swing.JDialog {
             }
         });
 
+        jpControles.add(jbGravar);
         jpControles.add(jbBuscar);
         jpControles.add(jbExcluir);
-        jpControles.add(jbGravar);
 //jcbCNPJ.getToolkit().
 
     }
@@ -290,12 +290,12 @@ public class CadastroFornecedor extends javax.swing.JDialog {
                             return true;
                         } else {
                             m = new Mensagens();
-                            m.jopAviso("Nenhum fabricante encontrado.");
+                            m.jopAviso("Nenhum fornecedor encontrado.");
                             return false;
                         }
                     } else {
                         m = new Mensagens();
-                        m.jopAviso("Nenhum fabricante encontrado.");
+                        m.jopAviso("Nenhum fornecedor encontrado.");
                         return false;
                     }
                 } else if (!jtfFornecedorNome.getText().equals("")) {

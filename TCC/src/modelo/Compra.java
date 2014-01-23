@@ -4,6 +4,8 @@
  */
 package modelo;
 
+import modelo.Cadastro.Adminsitrativo.Produto;
+import modelo.Cadastro.Adminsitrativo.Fornecedor;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import java.io.Serializable;

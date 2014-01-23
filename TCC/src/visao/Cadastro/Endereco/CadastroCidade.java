@@ -63,7 +63,7 @@ public class CadastroCidade extends javax.swing.JDialog {
         jcbEstados.setModel(estadoController.listEstados());
         jcbEstados.updateUI();
         
-        jpControles.add(jbExcluir);
+//        jpControles.add(jbExcluir);
         jpControles.add(jbGravar);
 
     }

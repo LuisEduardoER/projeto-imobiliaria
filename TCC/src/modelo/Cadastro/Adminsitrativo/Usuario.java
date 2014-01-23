@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelo;
+package modelo.Cadastro.Adminsitrativo;
 
 import java.io.Serializable;
 import java.util.List;
@@ -20,12 +20,15 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import modelo.AberturaCaixa;
+import modelo.Caixa;
 import modelo.Endereco.Bairro;
 import modelo.Endereco.Cep;
 import modelo.Endereco.Cidade;
 import modelo.Endereco.Estado;
 import modelo.Endereco.Pais;
 import modelo.Endereco.Rua;
+import modelo.Movimento;
 import modelo.PerfisPermissoes.Perfil;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;

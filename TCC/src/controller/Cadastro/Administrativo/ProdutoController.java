@@ -4,7 +4,7 @@
  */
 package controller.Cadastro.Administrativo;
 
-import DAO.Cadastro.ProdutoDAO;
+import DAO.Cadastro.Administrativo.ProdutoDAO;
 import controller.Cadastro.EstoqueController;
 import controller.CompraController;
 import controller.Mensagens;
@@ -12,7 +12,7 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import modelo.Compra;
 import modelo.Estoque;
-import modelo.Produto;
+import modelo.Cadastro.Adminsitrativo.Produto;
 import persistencia.exceptions.NonexistentEntityException;
 import util.Datas;
 

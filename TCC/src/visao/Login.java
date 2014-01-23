@@ -10,7 +10,7 @@ import controller.LoginController;
 import controller.Mensagens;
 import modelo.AberturaCaixa;
 import modelo.Session;
-import modelo.Usuario;
+import modelo.Cadastro.Adminsitrativo.Usuario;
 
 /**
  *

@@ -50,7 +50,7 @@ public class CadastroPais extends javax.swing.JDialog {
         });
 
         
-        jpControles.add(jbExcluir);
+//        jpControles.add(jbExcluir);
         jpControles.add(jbGravar);
         
     }

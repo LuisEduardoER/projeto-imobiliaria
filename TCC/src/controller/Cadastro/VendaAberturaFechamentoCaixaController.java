@@ -10,7 +10,7 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import modelo.AberturaCaixa;
 import modelo.Caixa;
-import modelo.Usuario;
+import modelo.Cadastro.Adminsitrativo.Usuario;
 import util.Datas;
 
 /**

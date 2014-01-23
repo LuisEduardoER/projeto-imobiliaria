@@ -12,7 +12,7 @@ import javax.persistence.EntityManager;
 import modelo.Caixa;
 import modelo.AberturaCaixa;
 import modelo.Endereco.Pais;
-import modelo.Usuario;
+import modelo.Cadastro.Adminsitrativo.Usuario;
 import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.MatchMode;

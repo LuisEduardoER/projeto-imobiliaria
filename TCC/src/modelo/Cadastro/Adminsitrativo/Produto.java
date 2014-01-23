@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package modelo;
+package modelo.Cadastro.Adminsitrativo;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
@@ -18,11 +18,12 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+import modelo.Compra;
+import modelo.Estoque;
+import modelo.Itemvenda;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 
@@ -32,10 +33,15 @@ import org.joda.time.LocalDateTime;
  */
 @Entity
 @Table(name = "produto")
-@NamedQueries({
-    @NamedQuery(name = "Produto.findAll", query = "SELECT p FROM Produto p")})
+
 public class Produto implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "produto_id")
+    private Integer produto_id;
+    
     @Column(name = "inserted")
     @Type(type = "org.joda.time.contrib.hibernate.PersistentLocalDateTime")
     private LocalDateTime inserted;
@@ -55,11 +61,7 @@ public class Produto implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private Fabricante fabricanteId;
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "produto_id")
-    private Integer produto_id;
+    
     @Basic(optional = false)
     @Column(name = "produtoNome")
     private String produtoNome;
@@ -72,6 +74,8 @@ public class Produto implements Serializable {
     private Character deleted;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estqprodutoId", fetch = FetchType.LAZY)
     private List<Estoque> estoqueList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "grupoprodutoId", fetch = FetchType.LAZY)
+    private List<Grupoproduto> grupoProduto;
 
     public Produto() {
         this.deleted = 'f';
@@ -172,6 +176,14 @@ public class Produto implements Serializable {
 
     public void setEstoqueList(List<Estoque> estoqueList) {
         this.estoqueList = estoqueList;
+    }
+
+    public List<Grupoproduto> getGrupoProduto() {
+        return grupoProduto;
+    }
+
+    public void setGrupoProduto(List<Grupoproduto> grupoProduto) {
+        this.grupoProduto = grupoProduto;
     }
 
     @Override

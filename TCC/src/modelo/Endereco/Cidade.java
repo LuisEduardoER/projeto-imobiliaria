@@ -20,7 +20,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import modelo.Usuario;
+import modelo.Cadastro.Adminsitrativo.Usuario;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 

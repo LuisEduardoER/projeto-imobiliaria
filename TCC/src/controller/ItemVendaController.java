@@ -10,7 +10,7 @@ import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import modelo.Estoque;
 import modelo.Itemvenda;
-import modelo.Produto;
+import modelo.Cadastro.Adminsitrativo.Produto;
 import modelo.Venda;
 import persistencia.exceptions.NonexistentEntityException;
 import util.Datas;
