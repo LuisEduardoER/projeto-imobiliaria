@@ -74,8 +74,8 @@ public class Produto implements Serializable {
     private Character deleted;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estqprodutoId", fetch = FetchType.LAZY)
     private List<Estoque> estoqueList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "grupoprodutoId", fetch = FetchType.LAZY)
-    private List<Grupoproduto> grupoProduto;
+    @ManyToOne(fetch = FetchType.LAZY)
+    private Grupoproduto grupoProduto;
 
     public Produto() {
         this.deleted = 'f';
@@ -178,11 +178,11 @@ public class Produto implements Serializable {
         this.estoqueList = estoqueList;
     }
 
-    public List<Grupoproduto> getGrupoProduto() {
+    public Grupoproduto getGrupoProduto() {
         return grupoProduto;
     }
 
-    public void setGrupoProduto(List<Grupoproduto> grupoProduto) {
+    public void setGrupoProduto(Grupoproduto grupoProduto) {
         this.grupoProduto = grupoProduto;
     }
 

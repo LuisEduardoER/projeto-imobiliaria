@@ -8,6 +8,7 @@ import Componentes.Componentes;
 import Componentes.TableModelProduto;
 import controller.Cadastro.Administrativo.FabricanteController;
 import controller.Cadastro.Administrativo.FornecedorController;
+import controller.Cadastro.Administrativo.GrupoProdutoController;
 import controller.Mensagens;
 import controller.Cadastro.Administrativo.ProdutoController;
 import java.awt.Point;
@@ -25,6 +26,7 @@ import modelo.Compra;
 import modelo.Estoque;
 import modelo.Cadastro.Adminsitrativo.Fabricante;
 import modelo.Cadastro.Adminsitrativo.Fornecedor;
+import modelo.Cadastro.Adminsitrativo.Grupoproduto;
 import modelo.Cadastro.Adminsitrativo.Produto;
 import org.joda.time.LocalDate;
 import util.Datas;
@@ -47,6 +49,7 @@ public class CadastroProduto extends javax.swing.JDialog {
     FornecedorController fornecedorController;
     FabricanteController fabricanteController;
     ProdutoController produtoController;
+    GrupoProdutoController grupoProdutoController;
     String cnpj;
     Fornecedor fornecedor;
     Fabricante fabricante;
@@ -61,6 +64,7 @@ public class CadastroProduto extends javax.swing.JDialog {
         initComponents();
 
         produtoController = new ProdutoController();
+        grupoProdutoController = new GrupoProdutoController();
         jbGravar = c.criaBotaoGravar();
         jbBuscar = c.criaBotaoBuscar();
         jbExcluir = c.criaBotaoExcluir();
@@ -83,12 +87,15 @@ public class CadastroProduto extends javax.swing.JDialog {
                 jbBuscarActionPerformed(evt);
             }
         });
-        
+
         jbNovo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jbNovoActionPerformed(evt);
             }
         });
+
+        jcbGrupoProduto.setModel(grupoProdutoController.listGrupos());
+        jcbGrupoProduto.updateUI();
 
         jpControles.add(jbGravar);
 //        jpControles.add(jbBuscar);
@@ -100,7 +107,7 @@ public class CadastroProduto extends javax.swing.JDialog {
         modeloProduto.addListaDeProdutos(produtoList);
         jtProdutos.updateUI();
 
-        jtProdutos.setDefaultEditor(Object.class, null);  
+        jtProdutos.setDefaultEditor(Object.class, null);
         jtProdutos.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 jtProdutosMouseClicked(e);
@@ -453,6 +460,7 @@ public class CadastroProduto extends javax.swing.JDialog {
     private void jbBuscarActionPerformed(java.awt.event.ActionEvent evt) {
         //acaoBuscar();
     }
+
     private void jbNovoActionPerformed(java.awt.event.ActionEvent evt) {
         acaoNovo();
     }
@@ -551,38 +559,43 @@ public class CadastroProduto extends javax.swing.JDialog {
 
     public boolean validacampos() {
         m = new Mensagens();
-        String camposVazios = null;
-        try {
-            if (jtfProdNome.getText() == null || jtfProdNome.getText().equals("")) {
-                camposVazios = "Nome\n";
-                return false;
-            } else if (jcbFabricanteCNPJ.getSelectedItem().toString() == null || jcbFabricanteCNPJ.getSelectedItem().toString().equals("")) {
-                camposVazios = "Fabricante\n";
-                return false;
-            } else if (jcbFornecedorCNPJ.getSelectedItem().toString() == null && !jcbFornecedorCNPJ.getSelectedItem().toString().equals("")) {
-                camposVazios = "Fornecedor\n";
-                return false;
-            } else if (jtfValor.getText() == null && !jtfValor.getText().equals("")) {
-                camposVazios = "Valor\n";
-                return false;
-            } else if (jtfCodigoBarras.getText() == null && !jtfCodigoBarras.getText().equals("")) {
-                camposVazios = "Codigo de Barras\n";
-                return false;
-            } else if (jtfQuantidade.getText() == null && !jtfQuantidade.getText().equals("")) {
-                camposVazios = "Quantidade\n";
-                return false;
-            } else if (jtfValor.getText() == null && !jtfValor.getText().equals("")) {
-                camposVazios = "Valor\n";
-                return false;
-            } else {
-                return true;
-            }
-        } catch (Exception e) {
+        
+        StringBuilder camposVazios = new StringBuilder();
+
+        if (jtfProdNome.getText() == null || jtfProdNome.getText().equals("")) {
+            camposVazios.append("Nome\n");
+        }
+        if (jcbFabricanteCNPJ.getSelectedItem().toString() == null || jcbFabricanteCNPJ.getSelectedItem().toString().equals("")) {
+            camposVazios.append("Fabricante\n");
+        }
+        if (jcbGrupoProduto.getSelectedItem().toString() == null && !jcbGrupoProduto.getSelectedItem().toString().equals("")) {
+            camposVazios.append("Fornecedor\n");
+        }
+        if (jcbFornecedorCNPJ.getSelectedItem().toString() == null && !jcbFornecedorCNPJ.getSelectedItem().toString().equals("")) {
+            camposVazios.append("Fornecedor\n");
+        }
+        if (jtfValor.getText() == null && !jtfValor.getText().equals("")) {
+            camposVazios.append("Valor\n");
+        }
+        if (jtfCodigoBarras.getText() == null && !jtfCodigoBarras.getText().equals("")) {
+            camposVazios.append("Codigo de Barras\n");
+        }
+        if (jtfQuantidade.getText() == null && !jtfQuantidade.getText().equals("")) {
+            camposVazios.append("Quantidade\n");
+        }
+        if (jtfValor.getText() == null && !jtfValor.getText().equals("")) {
+            camposVazios.append("Valor\n");
+        }
+
+        if (!camposVazios.equals("")) {
             m.jopAlerta("O(s) seguinte(s) campo(s) encontran-se vazios:\n"
                     + camposVazios
                     + "\nMensagem do sistema: " + e);
             return false;
+        } else {
+            return true;
         }
+
     }
 
     private void acaoGravar() {
@@ -597,7 +610,8 @@ public class CadastroProduto extends javax.swing.JDialog {
             p.setFornecedorId(fornecedor);
             p.setProdutoCodigoBarras(jtfCodigoBarras.getText());
             p.setValor(Float.parseFloat(jtfValor.getText()));
-
+            p.setGrupoProduto((Grupoproduto) jcbGrupoProduto.getSelectedItem());
+            
             e.setFabricanteId(fabricante);
             e.setQuantidade(new Float(jtfQuantidade.getText()));
             e.setQuantidadeMIN(new Float(jtfQtdMinima.getText()));
@@ -605,7 +619,7 @@ public class CadastroProduto extends javax.swing.JDialog {
             compra.setFornecedorId(fornecedor);
 
             LocalDate dataCompra = new LocalDate();
-            try {   
+            try {
                 dataCompra = Datas.localDateParser(jtfDataCompra.getText());
             } catch (Exception ex) {
                 m.jopError("Data informada no padrão errado! \n" + ex);
@@ -758,23 +772,23 @@ public class CadastroProduto extends javax.swing.JDialog {
         gerenciaCampos(true);
         setAba(1);
     }
-    
-    private void gerenciaCampos(boolean abilitaDesabilita) {
-        jtfCodigoBarras.setEnabled(abilitaDesabilita);
-        jtfProdNome.setEnabled(abilitaDesabilita);
-        jtfQtdMinima.setEnabled(abilitaDesabilita);
-        jtfQuantidade.setEnabled(abilitaDesabilita);
-        jtfValor.setEnabled(abilitaDesabilita);
-        jtfValorCompra.setEnabled(abilitaDesabilita);
-        
-        jcbFabricanteCNPJ.setEnabled(abilitaDesabilita);
-        jcbFornecedorCNPJ.setEnabled(abilitaDesabilita);
-        jtfDataCompra.setEnabled(abilitaDesabilita);
-        jbGravar.setEnabled(abilitaDesabilita);
+
+    private void gerenciaCampos(boolean habilitaDesabilita) {
+        jtfCodigoBarras.setEnabled(habilitaDesabilita);
+        jtfProdNome.setEnabled(habilitaDesabilita);
+        jtfQtdMinima.setEnabled(habilitaDesabilita);
+        jtfQuantidade.setEnabled(habilitaDesabilita);
+        jtfValor.setEnabled(habilitaDesabilita);
+        jtfValorCompra.setEnabled(habilitaDesabilita);
+
+        jcbGrupoProduto.setEnabled(habilitaDesabilita);
+        jcbFabricanteCNPJ.setEnabled(habilitaDesabilita);
+        jcbFornecedorCNPJ.setEnabled(habilitaDesabilita);
+        jtfDataCompra.setEnabled(habilitaDesabilita);
+        jbGravar.setEnabled(habilitaDesabilita);
     }
 
     private void setAba(int i) {
         jtpAbas.setSelectedIndex(i);
     }
-
 }

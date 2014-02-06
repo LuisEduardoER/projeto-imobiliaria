@@ -39,6 +39,15 @@ public class GrupoProdutoController {
         return dcbm;
     }
 
+    public DefaultComboBoxModel<Grupoproduto> listGrupos() {
+        DefaultComboBoxModel<Grupoproduto> dcbm = new DefaultComboBoxModel<>();
+        List<Grupoproduto> lista = dao.consultarTodos();
+        for (Grupoproduto grupo : lista) {
+            dcbm.addElement(grupo);
+        }
+        return dcbm;
+    }
+    
     public DefaultComboBoxModel<Grupoproduto> listByField(String field, String value) {
         DefaultComboBoxModel<Grupoproduto> dcbm = new DefaultComboBoxModel<>();
         List<Grupoproduto> lista = dao.consultarTodos();

@@ -58,6 +58,8 @@ public class GrupoProdutoDAO implements Serializable {
     public List<Grupoproduto> consultarTodos() {
 //        Session session = (Session) em.getDelegate();
         select = session.createCriteria(Grupoproduto.class);
+        select.add(Restrictions.eq("grupoProtudo.deleted", "f"));
+        
         return select.list();
     }
 

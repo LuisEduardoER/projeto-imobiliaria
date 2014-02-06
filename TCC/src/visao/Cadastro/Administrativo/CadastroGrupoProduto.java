@@ -16,6 +16,10 @@ public class CadastroGrupoProduto extends javax.swing.JDialog {
     public CadastroGrupoProduto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        jchSugereValor.setSelected(false);
+        jtfGrupoValor.setEnabled(false);
+
     }
 
     /**
@@ -35,10 +39,10 @@ public class CadastroGrupoProduto extends javax.swing.JDialog {
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jlDescricao = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        jchSugereValor = new javax.swing.JCheckBox();
         jPanel5 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        jtfGrupoDescricao = new javax.swing.JTextField();
+        jtfGrupoValor = new javax.swing.JTextField();
         jpControles = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -83,26 +87,31 @@ public class CadastroGrupoProduto extends javax.swing.JDialog {
         jlDescricao.setText("Descrição:");
         jPanel4.add(jlDescricao);
 
-        jCheckBox1.setText("Sugere valor padrão");
-        jPanel4.add(jCheckBox1);
+        jchSugereValor.setText("Sugere valor padrão");
+        jchSugereValor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jchSugereValorActionPerformed(evt);
+            }
+        });
+        jPanel4.add(jchSugereValor);
 
-        jTextField2.setMaximumSize(new java.awt.Dimension(6, 15));
-        jTextField2.setMinimumSize(new java.awt.Dimension(6, 15));
-        jTextField2.setPreferredSize(new java.awt.Dimension(6, 15));
+        jtfGrupoValor.setMaximumSize(new java.awt.Dimension(6, 15));
+        jtfGrupoValor.setMinimumSize(new java.awt.Dimension(6, 15));
+        jtfGrupoValor.setPreferredSize(new java.awt.Dimension(6, 15));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
-            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jtfGrupoDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, 513, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jtfGrupoValor, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jtfGrupoDescricao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jtfGrupoValor, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -173,6 +182,13 @@ public class CadastroGrupoProduto extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jchSugereValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jchSugereValorActionPerformed
+        if (!jchSugereValor.isSelected()) {
+            jtfGrupoValor.setText("");
+        }
+        jtfGrupoValor.setEnabled(jchSugereValor.isSelected());
+    }//GEN-LAST:event_jchSugereValorActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -184,7 +200,7 @@ public class CadastroGrupoProduto extends javax.swing.JDialog {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Windows".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -215,7 +231,6 @@ public class CadastroGrupoProduto extends javax.swing.JDialog {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -223,10 +238,18 @@ public class CadastroGrupoProduto extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JCheckBox jchSugereValor;
     private javax.swing.JLabel jlDescricao;
     private javax.swing.JPanel jpControles;
+    private javax.swing.JTextField jtfGrupoDescricao;
+    private javax.swing.JTextField jtfGrupoValor;
     private javax.swing.JTabbedPane jtpAbas;
     // End of variables declaration//GEN-END:variables
+
+    private void gerenciaCampos(boolean habilitaDesabilita) {
+
+        jtfGrupoValor.setEnabled(habilitaDesabilita);
+        jtfGrupoDescricao.setEnabled(habilitaDesabilita);
+        jchSugereValor.setEnabled(habilitaDesabilita);
+    }
 }
