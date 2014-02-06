@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 import modelo.Itemvenda;
 import modelo.Movimento;
-import modelo.Produto;
+import modelo.Cadastro.Adminsitrativo.Produto;
 import modelo.Session;
 import modelo.Tipopagamento;
 import modelo.Venda;

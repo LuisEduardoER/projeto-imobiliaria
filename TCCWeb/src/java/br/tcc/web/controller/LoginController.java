@@ -15,7 +15,7 @@ import controller.Cadastro.Administrativo.UsuarioController;
 import controller.Cadastro.VendaAberturaFechamentoCaixaController;
 import modelo.AberturaCaixa;
 import modelo.Session;
-import modelo.Usuario;
+import modelo.Cadastro.Adminsitrativo.Usuario;
 
 /**
  *
